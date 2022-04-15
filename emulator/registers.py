@@ -4,8 +4,8 @@ from dataclasses import dataclass
 class Register:
     value: int = 0
 
-    def set(self, value: int):
-        self.value = value
+    def set(self, value: str):
+        self.value = int(value, 2)
 
     def get(self):
-        return self.value
+        return bin(self.value)[2:].zfill(16)
