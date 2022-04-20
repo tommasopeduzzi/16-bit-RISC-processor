@@ -49,14 +49,14 @@ class CPU:
             register = int(op0, 2)
             value = self.registers[register].get()
             memorylocation = int(op1, 2)
-            self.memory.set(memorylocation, value[:8])
-            self.memory.set(memorylocation+1, value[8:])
-        elif opcode == "00010001":  # Store less significant byte
+            self.memory.set(memorylocation, value[8:])
+            self.memory.set(memorylocation+1, value[:8])
+        elif opcode == "00100001":  # Store less significant byte
             register = int(op0, 2)
             value = self.registers[register].get()
             memorylocation = int(op1, 2)
-            self.memory.set(memorylocation, value[:8])        
-        elif opcode == "00010010":  # Store less significant byte
+            self.memory.set(memorylocation, value[8:])        
+        elif opcode == "00100010":  # Store most significant byte
             register = int(op0, 2)
             value = self.registers[register].get()
             memorylocation = int(op1, 2)
