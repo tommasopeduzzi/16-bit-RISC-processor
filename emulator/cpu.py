@@ -77,6 +77,32 @@ class CPU:
             value1 = self.registers[int(op0, 2)].get()
             value2 = self.registers[int(op1, 2)].get()
             self.alu.subtract(value1, value2)  
+        elif opcode == "01000100": # NOT
+            register = int(op0, 2)
+            value = self.registers[register].get()
+            result = bin(~int(value, 2) & 0xffff)[2:].zfill(16)
+            self.registers[register].set(result)
+        elif opcode == "01000101": # AND
+            register1 = int(op0, 2)
+            register2 = int(op1, 2)
+            value1 = self.registers[register1].get()
+            value2 = self.registers[register2].get()
+            result = bin(int(value1, 2) & int(value2, 2))[2:].zfill(16)
+            self.registers[register].set(result)
+        elif opcode == "010001110": # OR
+            register1 = int(op0, 2)
+            register2 = int(op1, 2)
+            value1 = self.registers[register1].get()
+            value2 = self.registers[register2].get()
+            result = bin(int(value1, 2) | int(value2, 2))[2:].zfill(16)
+            self.registers[register].set(result)
+        elif opcode == "01000111": # XOR
+            register1 = int(op0, 2)
+            register2 = int(op1, 2)
+            value1 = self.registers[register1].get()
+            value2 = self.registers[register2].get()
+            result = bin(int(value1, 2) ^ int(value2, 2))[2:].zfill(16)
+            self.registers[register].set(result)
         elif opcode == "01000000": # Jump
             address = int(op1, 2)
             self.pc = address

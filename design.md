@@ -79,6 +79,24 @@ Subtracts contents of register $O_1$ from contents of register $O_0$ and stores 
 
 Subtracts contents from registers $O_1$ from contents and discards the result, effectively just setting the flags. The opcode is $0011 0011$
 
+## **Logical Instructions**
+
+### **NOT**
+
+Performs NOT operation on contents of register $O_0$ and stores results into $O_0$. The opcode is $0011 0100$
+
+### **AND**
+
+Performs AND operation on contents of register $O_0$ and register $O_1$ and stores result into $0_0$. The opcode is $0100 0101$
+
+### **OR**
+
+Performs OR operation on contents of register $O_0$ and register $O_1$ and stores result into $0_0$. The opcode is $0100 0110$
+
+### **XOR**
+
+Performs XOR operation on contents of register $O_0$ and register $O_1$ and stores result into $0_0$. The opcode is $0100 0111$
+
 ### **Control flow Instructions**
 
 #### **Jump**
