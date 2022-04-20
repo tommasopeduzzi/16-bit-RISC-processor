@@ -65,6 +65,13 @@ Store the bottom 8 bits of register $O_0$ at the address in register $O_1$. The 
 #### **Store most significant byte**
 Store the top 8 bits of register $O_0$ at the address in register $O_1$. The opcode is $0010 0010$
 
+### **Stack Manipulation Instructions**
+#### **Push**
+Stores contents of register $O_0$ at location of the stack pointer and decreases stack pointer by 2. The opcode is $0010 0100$
+
+#### **Pop**
+Loads contents in memory location of the stack pointer into register $O_0$ and increases stack pointer by 2. The opcode is $0001 0100$
+
 ### **Numeric Instructions**
 
 #### **Addition**

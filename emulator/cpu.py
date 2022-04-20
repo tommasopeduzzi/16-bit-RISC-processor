@@ -7,6 +7,7 @@ class CPU:
     registers: list[Register]
     alu: Alu
     pc: int = 0
+    sp: int = 512
     halt: bool = False
 
     def __init__(self, memory_size=2**16):
@@ -60,7 +61,18 @@ class CPU:
             register = int(op0, 2)
             value = self.registers[register].get()
             memorylocation = int(op1, 2)
-            self.memory.set(memorylocation, value[8:])
+            self.memory.set(memorylocation, value[:8])
+        elif opcode == "00100100": # Push
+            register = int(op0, 2)
+            value = self.registers[register].get()
+            self.memory.set(sp-1, value[8:])
+            self.memory.set(sp, value[:8])
+            sp -= 2
+        elif opcode == "00010100": # Pop
+            register = int(op0, 2)
+            value = self.memory.get(sp+1)
+            value += self.memory.get(memorylocation)
+            sp += 2
         elif opcode == "00110001": # Addition
             register = int(op0, 2)
             value1 = self.registers[register].get()
