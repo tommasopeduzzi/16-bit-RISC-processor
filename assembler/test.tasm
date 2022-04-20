@@ -1,0 +1,4 @@
+test 1, 0x2
+test AH
+test 2, @0d123
+test 2, 0b010101
