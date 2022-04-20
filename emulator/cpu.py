@@ -34,8 +34,8 @@ class CPU:
         if opcode == "00010000": # Load 16 bits
             register = int(op0, 2)
             memorylocation = int(op1, 2)
-            value = self.memory.get(memorylocation)
-            value += self.memory.get(memorylocation+1)
+            value = self.memory.get(memorylocation+1)
+            value += self.memory.get(memorylocation)
             self.registers[register].set(value)
         elif opcode == "00010001": # Load 8 bits
             register = int(op0, 2)
@@ -49,14 +49,14 @@ class CPU:
             register = int(op0, 2)
             value = self.registers[register].get()
             memorylocation = int(op1, 2)
-            self.memory.set(memorylocation, value[:8])
-            self.memory.set(memorylocation+1, value[8:])
-        elif opcode == "00010001":  # Store less significant byte
+            self.memory.set(memorylocation, value[8:])
+            self.memory.set(memorylocation+1, value[:8])
+        elif opcode == "00100001":  # Store less significant byte
             register = int(op0, 2)
             value = self.registers[register].get()
             memorylocation = int(op1, 2)
-            self.memory.set(memorylocation, value[:8])        
-        elif opcode == "00010010":  # Store less significant byte
+            self.memory.set(memorylocation, value[8:])        
+        elif opcode == "00100010":  # Store most significant byte
             register = int(op0, 2)
             value = self.registers[register].get()
             memorylocation = int(op1, 2)
