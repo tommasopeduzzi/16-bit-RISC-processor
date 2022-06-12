@@ -26,7 +26,7 @@ TBD
 
 ### **General Layout**
 
-Each Instruction consists of 4 bytes:
+Each Instruction consists of 3 bytes:
 
 1. Byte: opcode
 2. Byte: First operand ($O_0$)
@@ -48,16 +48,19 @@ Does nothing. The opcode is $0000 0000$
 
 #### **Load 16 bits**
 
-Loads value stored at address $O_1$ in memory to less significant byte of register $O_0$ and value stored at address $0_1 + 1$ to the most signifcant byte of register $0_0$ The opcode is $0001 0000$
+Loads value stored at address in register $O_1$ in memory to less significant byte of register $O_0$ and value stored at address $O_1 + 1$ to the most signifcant byte of register $0_0$ The opcode is $0001 0000$
 
 #### **Load 8 bits**
 Loads byte stored at address in register $O_1$ in memory to less significant byte of the register $O_0$. The opcode is $0001 0001$
 
-#### **Load 16-bit Immediate***
-Loads 16-bit Immediate $O_1$ into register $O_0$. The opcode is $0001 0010$
+#### **Load 8-bit Immediate into least significant byte**
+Loads 8-bit Immediate $O_1$ into least significant byte of register $O_0$. The opcode is $0001 0010$
+
+#### **Load 8-bit Immediate into most significant byte**
+Loads 8-bit Immediate $O_1$ into most significant byte of register $O_0$. The opcode is $0001 0011$
 
 #### **Store 16 bits**
-Store the least significant of register $O_0$ at the address $O_1$ and most significant byte of register $O_0$ at address $O_1 + 1$. The opcode is $0010 0000$
+Store the least significant of register $O_0$ at the address in register $O_1$ and most significant byte of register $O_0$ at address in register $O_1$ $+1$. The opcode is $0010 0000$
 
 #### **Store less significant byte**
 Store the bottom 8 bits of register $O_0$ at the address in register $O_1$. The opcode is $0010 0001$
@@ -72,35 +75,35 @@ Stores contents of register $O_0$ at location of the stack pointer and decreases
 #### **Pop**
 Loads contents in memory location of the stack pointer into register $O_0$ and increases stack pointer by 2. The opcode is $0001 0100$
 
-### **Numeric Instructions**
+### **Arithmetic Instructions**
 
 #### **Addition**
 
-Adds contents of register $O_0$ and contents of register $O_1$ and stores them into register $O_0$. The opcode is $0011 0001$
+Adds contents of register $O_0$ and contents of register $O_1$ and stores them into register $O_0$. The opcode is $0011 0000$
 
 #### **Subtraction**
 
-Subtracts contents of register $O_1$ from contents of register $O_0$ and stores them into register $O_0$. The opcode is $0011 0010$
+Subtracts contents of register $O_1$ from contents of register $O_0$ and stores them into register $O_0$. The opcode is $0011 0001$
 
 #### **Compare**
 
-Subtracts contents from registers $O_1$ from contents and discards the result, effectively just setting the flags. The opcode is $0011 0011$
+Subtracts contents from registers $O_1$ from contents and discards the result, effectively just setting the flags. The opcode is $0011 0010$
 
-## **Logical Instructions**
+### **Logical Instructions**
 
-### **NOT**
+#### **NOT**
 
 Performs NOT operation on contents of register $O_0$ and stores results into $O_0$. The opcode is $0011 0100$
 
-### **AND**
+#### **AND**
 
 Performs AND operation on contents of register $O_0$ and register $O_1$ and stores result into $0_0$. The opcode is $0100 0101$
 
-### **OR**
+#### **OR**
 
 Performs OR operation on contents of register $O_0$ and register $O_1$ and stores result into $0_0$. The opcode is $0100 0110$
 
-### **XOR**
+#### **XOR**
 
 Performs XOR operation on contents of register $O_0$ and register $O_1$ and stores result into $0_0$. The opcode is $0100 0111$
 
