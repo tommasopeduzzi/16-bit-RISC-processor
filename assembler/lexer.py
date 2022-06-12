@@ -11,6 +11,7 @@ class TokenType(Enum):
     BINARY = 3
     DECIMAL = 4
     ADDRESS = 5
+    REGISTER = 6
 
 @dataclass
 class Token:
@@ -25,7 +26,7 @@ class Lexer:
     def lex(self, contents: str) -> List[Token]:
         self.tokens = []
         for line in contents.split('\n'):
-            words = line.split(" ")
+            words = line.split(' ')
             for word in words:
                 if word.endswith(':'):
                     self.tokens.append(Token(TokenType.LABEL, word))
@@ -37,6 +38,8 @@ class Lexer:
                     self.tokens.append(Token(TokenType.BINARY, word))
                 elif re.match(r'[0-9]+', word):
                     self.tokens.append(Token(TokenType.DECIMAL, word))
-                elif word.startswith("@"):
+                elif word.startswith('$'):
+                    self.tokens.append(Token(TokenType.REGISTER, word))
+                elif word.startswith('@'):
                     self.tokens.append(Token(TokenType.ADDRESS, word))
         return self.tokens
