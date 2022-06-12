@@ -28,7 +28,9 @@ class Lexer:
         for line in contents.split('\n'):
             words = line.split(' ')
             for word in words:
-                if word.endswith(':'):
+                if word.startswith(';'):
+                    break
+                elif word.endswith(':'):
                     self.tokens.append(Token(TokenType.LABEL, word))
                 elif re.match(r'[a-zA-Z]+', word):
                     self.tokens.append(Token(TokenType.WORD, word))
