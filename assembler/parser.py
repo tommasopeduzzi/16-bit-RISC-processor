@@ -9,6 +9,7 @@ class OperandType:
     REGISTER = 0
     IMMEDIATE = 1
     ADDRESS = 2
+    MACRO_ARGUMENT = 3
 
 @dataclass
 class Operand():
@@ -32,10 +33,11 @@ class Macro():
     instructions: List[Instruction]
 
 class Parser:
+    valid_operands = [TokenType.HEXADECIMAL, TokenType.BINARY, TokenType.DECIMAL, TokenType.ADDRESS, TokenType.REGISTER, TokenType.MACRO_ARGUMENT]
+
     def __init__(self):
         self.lexer = Lexer()
-        self.valid_operands = [TokenType.HEXADECIMAL, TokenType.BINARY, TokenType.DECIMAL, TokenType.ADDRESS, TokenType.REGISTER]
-
+        
     def parse_file(self, file):
         with open(file, 'r') as f:
             return self.parse(f.read())
@@ -50,28 +52,26 @@ class Parser:
         else:
             raise Exception("Invalid operand: {}".format(value))
 
-    def parse_operand(self, value):
+    def parse_operand(self, value, macro_definition = False):
         if value.startswith('$'):
             return Operand(OperandType.REGISTER, self.parse_number(value[1:]))
         elif value.startswith('@'):
             return Operand(OperandType.ADDRESS, self.parse_number(value[1:]))
+        elif value.startswith('%'):
+            if not macro_definition:
+                raise Exception("Macro argument found outside macro definition: {}".format(value))
+            return Operand(OperandType.MACRO_ARGUMENT, self.parse_number(value[1:]))
         else:
             return Operand(OperandType.IMMEDIATE, self.parse_number(value))
 
-    def parse_instruction(self, i):
-        if self.valid_operands.count(self.tokens[i+1].type) == 0:
-            instruction = Instruction(self.tokens[i].value, [])
+    def parse_instruction(self, i, macro_definition = False):
+        name = self.tokens[i].value
+        operands = []
+        i += 1
+        while i < len(self.tokens) and Parser.valid_operands.count(self.tokens[i].type):
+            operands.append(self.parse_operand(self.tokens[i].value, macro_definition))
             i += 1
-        elif self.valid_operands.count(self.tokens[i+2].type):
-            instruction = Instruction(self.tokens[i].value, 
-                [self.parse_operand(self.tokens[i+1].value), 
-                self.parse_operand(self.tokens[i+2].value)])
-            i += 3
-        else:
-            instruction = Instruction(self.tokens[i].value, 
-                            [self.parse_operand(self.tokens[i+1].value)])
-            i += 2
-        return (instruction, i)
+        return (Instruction(name, operands), i)
 
     def parse_macro(self, i):
         i+=1
@@ -81,13 +81,13 @@ class Parser:
         argument_types = []
         instructions = []
         i += 1
-        if self.tokens[i+1].type == TokenType.DECIMAL:
-            num_args = self.parse_number(self.tokens[i+1].value)
-            i += 2
+        if self.tokens[i].type == TokenType.DECIMAL:
+            num_args = self.parse_number(self.tokens[i].value)
+            i += 1
             for j in range(num_args):
-                if not self.tokens[i+j].type == TokenType.MACRO_ARGUMENT_TYPE:
+                if not self.tokens[i].type == TokenType.MACRO_ARGUMENT_TYPE:
                     raise Exception("Expected macro argument type, found {}".format(self.tokens[i+j].value))
-                match self.tokens[i+j].value:
+                match self.tokens[i].value:
                     case "imm":
                         argument_types.append(OperandType.IMMEDIATE)
                     case "addr":
@@ -98,9 +98,9 @@ class Parser:
                         raise Exception("Invalid macro argument type: {}".format(self.tokens[i+j].value))
                 i+= 1
         while self.tokens[i].type != TokenType.END_MACRO:
-            instruction, i = self.parse_instruction(i)
+            instruction, i = self.parse_instruction(i, True)
             instructions.append(instruction)
-        i+= 1
+        i+=1
         return (Macro(macro_name, argument_types, instructions), i)
 
     def parse(self, contents) -> Tuple[List[Instruction], List[Label], List[Macro]]:

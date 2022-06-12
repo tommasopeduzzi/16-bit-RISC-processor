@@ -7,8 +7,8 @@ opcode_map = {
     # Memory instructions
     ("load",           (OperandType.REGISTER, OperandType.REGISTER)):      0b00010000,
     ("load-<byte",     (OperandType.REGISTER, OperandType.REGISTER)):      0b00010001,
-    ("load-<imm",      (OperandType.REGISTER, OperandType.IMMEDIATE)):     0b00010010,
-    ("load->imm",      (OperandType.REGISTER, OperandType.IMMEDIATE)):     0b00010010,
+    ("load-<imm",      (OperandType.REGISTER, OperandType.IMMEDIATE)):     0b00010101,
+    ("load->imm",      (OperandType.REGISTER, OperandType.IMMEDIATE)):     0b00010110,
     ("store",          (OperandType.REGISTER, OperandType.REGISTER)):      0b00100000,
     ("store-<byte",    (OperandType.REGISTER, OperandType.REGISTER)):      0b00100001,
     ("store->byte",    (OperandType.REGISTER, OperandType.REGISTER)):      0b00100010,
@@ -42,14 +42,23 @@ class Assembler:
         
     def codegen_macro(self, instruction):
         macro = self.macros[instruction.opcode]
-        for macro_instruction in macro.instructions:
-            self.codegen_instruction(macro_instruction)
+        for i, operand in enumerate(instruction.operands):
+            if not operand.type == macro.argument_types[i]:
+                raise Exception("Macro argument type mismatch {} for macro {}".format(instruction.opcode, macro.name))
+        if not len(instruction.operands) == len(macro.argument_types):
+            raise Exception("Macro argument count mismatch for macro {}: Expected {} operands, but got {}".format(
+                macro.name, len(macro.argument_types), len(instruction.operands)))
 
-    def codegen_instruction(self, instruction, macro_arguments = []):
+        for macro_instruction in macro.instructions:
+            self.codegen_instruction(macro_instruction, instruction.operands, macro.argument_types)
+
+    def codegen_instruction(self, instruction, macro_arguments = [], macro_argument_types = []):
         if instruction.opcode in self.macros.keys():
             self.codegen_macro(instruction)
             return
-        operand_types = [operand.type for operand in instruction.operands] + [-1]*(2-len(instruction.operands))
+        operand_types = [operand.type if not operand.type == OperandType.MACRO_ARGUMENT else macro_argument_types[i]  
+            for i, operand in enumerate(instruction.operands)] 
+        operand_types += [-1]*(2-len(instruction.operands))
         concat_instruction = (instruction.opcode, tuple(operand_types))
         try:
             opcode = opcode_map[concat_instruction]
@@ -57,7 +66,10 @@ class Assembler:
             raise Exception("Unknown instruction: {}".format(instruction.opcode))
         self.binary.append(opcode)
         for operand in instruction.operands:
-            self.binary.append(operand.value)
+            if operand.type == OperandType.MACRO_ARGUMENT:
+                self.binary.append(macro_arguments[operand.value].value)
+            else:
+                self.binary.append(operand.value)
         for i in range(2-len(instruction.operands)):
             self.binary.append(0)
 

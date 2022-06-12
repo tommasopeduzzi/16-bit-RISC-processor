@@ -15,6 +15,7 @@ class TokenType(Enum):
     START_MACRO = 7
     END_MACRO = 8
     MACRO_ARGUMENT_TYPE = 9
+    MACRO_ARGUMENT = 10
 
 @dataclass
 class Token:
@@ -53,4 +54,6 @@ class Lexer:
                     self.tokens.append(Token(TokenType.REGISTER, word))
                 elif word.startswith('@'):
                     self.tokens.append(Token(TokenType.ADDRESS, word))
+                elif word.startswith('%'):
+                    self.tokens.append(Token(TokenType.MACRO_ARGUMENT, word))
         return self.tokens
