@@ -1,6 +1,7 @@
 ; Test program for assembler
 
-label:
+test
 
-add $1 $1
-load-<imm $1 255
+macro test
+    add $1 $1
+endmacro

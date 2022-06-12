@@ -10,4 +10,5 @@ if __name__ == "__main__":
     assembler.assemble(args.input)
     with open(args.output, "wb") as f:
         for byte in assembler.binary:
+            print(bin(byte)[2:].zfill(8))
             f.write(bytes([byte]))

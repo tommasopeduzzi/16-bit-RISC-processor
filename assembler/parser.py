@@ -14,7 +14,7 @@ class OperandType:
 class Operand():
     type: OperandType
     value: int
-    
+
 @dataclass
 class Instruction():
     opcode: str
@@ -24,6 +24,12 @@ class Instruction():
 class Label():
     name: str
     address: int
+
+@dataclass
+class Macro():
+    name: str
+    argument_types: List[OperandType]
+    instructions: List[Instruction]
 
 class Parser:
     def __init__(self):
@@ -39,8 +45,10 @@ class Parser:
             return int(value[2:], 16)
         elif value.startswith('0b'):
             return int(value[2:], 2)
-        else:
+        elif re.match(r'^[0-9]+$', value):
             return int(value)
+        else:
+            raise Exception("Invalid operand: {}".format(value))
 
     def parse_operand(self, value):
         if value.startswith('$'):
@@ -49,26 +57,72 @@ class Parser:
             return Operand(OperandType.ADDRESS, self.parse_number(value[1:]))
         else:
             return Operand(OperandType.IMMEDIATE, self.parse_number(value))
-    
-    def parse(self, contents) -> Tuple[List[Instruction], List[Label]]:
+
+    def parse_instruction(self, i):
+        if self.valid_operands.count(self.tokens[i+1].type) == 0:
+            instruction = Instruction(self.tokens[i].value, [])
+            i += 1
+        elif self.valid_operands.count(self.tokens[i+2].type):
+            instruction = Instruction(self.tokens[i].value, 
+                [self.parse_operand(self.tokens[i+1].value), 
+                self.parse_operand(self.tokens[i+2].value)])
+            i += 3
+        else:
+            instruction = Instruction(self.tokens[i].value, 
+                            [self.parse_operand(self.tokens[i+1].value)])
+            i += 2
+        return (instruction, i)
+
+    def parse_macro(self, i):
+        i+=1
+        if not self.tokens[i].type == TokenType.WORD:
+            raise Exception("Expected name after macro declaration, found {}".format(self.tokens[i+1].value))
+        macro_name = self.tokens[i].value
+        argument_types = []
+        instructions = []
+        i += 1
+        if self.tokens[i+1].type == TokenType.DECIMAL:
+            num_args = self.parse_number(self.tokens[i+1].value)
+            i += 2
+            for j in range(num_args):
+                if not self.tokens[i+j].type == TokenType.MACRO_ARGUMENT_TYPE:
+                    raise Exception("Expected macro argument type, found {}".format(self.tokens[i+j].value))
+                match self.tokens[i+j].value:
+                    case "imm":
+                        argument_types.append(OperandType.IMMEDIATE)
+                    case "addr":
+                        argument_types.append(OperandType.ADDRESS)
+                    case "reg":
+                        argument_types.append(OperandType.REGISTER)
+                    case _:
+                        raise Exception("Invalid macro argument type: {}".format(self.tokens[i+j].value))
+                i+= 1
+        while self.tokens[i].type != TokenType.END_MACRO:
+            instruction, i = self.parse_instruction(i)
+            instructions.append(instruction)
+        i+= 1
+        return (Macro(macro_name, argument_types, instructions), i)
+
+    def parse(self, contents) -> Tuple[List[Instruction], List[Label], List[Macro]]:
         instructions: List[Instruction] = []
-        labels: List[Label] = []
-        tokens = self.lexer.lex(contents)
-        for i in range(len(tokens)):
-            if tokens[i].type == TokenType.WORD: # Parse Instruction
-                if self.valid_operands.count(tokens[i+1].type) == 0:
-                    raise Exception("Invalid token sequence: {} {}".format(tokens[i].value, tokens[i+1].value))
-                if self.valid_operands.count(tokens[i+2].type):
-                    instruction = Instruction(tokens[i].value, 
-                        [self.parse_operand(tokens[i+1].value), 
-                        self.parse_operand(tokens[i+2].value)])
-                    i += 2
-                else:
-                    instruction = Instruction(tokens[i].value, 
-                                    [self.parse_operand(tokens[i+1].value)])
-                    i += 1
+        labels: List[Label] = {}
+        macros: List[Macro] = {}
+        self.tokens = self.lexer.lex(contents)
+        i = 0
+        while i < len(self.tokens):
+            if self.tokens[i].type == TokenType.WORD: # Parse Instruction
+                instruction, i = self.parse_instruction(i)
                 instructions.append(instruction)
-            elif tokens[i].type == TokenType.LABEL:
-                labels.append(Label(tokens[i].value, len(instructions)))
-        return (instructions, labels)
+            
+            elif self.tokens[i].type == TokenType.LABEL: # Parse Label
+                label = Label(self.tokens[i].value, len(instructions))
+                labels[label.name] = label
+            
+            elif self.tokens[i].type == TokenType.START_MACRO: # Parse Macro
+                macro, i = self.parse_macro(i)
+                macros[macro.name] = macro
+
+            else:
+                raise Exception("Invalid token: {}".format(self.tokens[i].value))
+        return (instructions, labels, macros)
 

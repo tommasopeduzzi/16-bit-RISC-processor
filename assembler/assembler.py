@@ -37,12 +37,19 @@ class Assembler:
         self.parser = Parser()
 
     def assemble(self, file):
-        self.instructions, self.labels = self.parser.parse_file(file)
+        self.instructions, self.labels, self.macros = self.parser.parse_file(file)
         self.codegen()
         
+    def codegen_macro(self, instruction):
+        macro = self.macros[instruction.opcode]
+        for macro_instruction in macro.instructions:
+            self.codegen_instruction(macro_instruction)
 
-    def codegen_instruction(self, instruction):
-        operand_types = [operand.type for operand in instruction.operands] + [0]*(2-len(instruction.operands))
+    def codegen_instruction(self, instruction, macro_arguments = []):
+        if instruction.opcode in self.macros.keys():
+            self.codegen_macro(instruction)
+            return
+        operand_types = [operand.type for operand in instruction.operands] + [-1]*(2-len(instruction.operands))
         concat_instruction = (instruction.opcode, tuple(operand_types))
         try:
             opcode = opcode_map[concat_instruction]

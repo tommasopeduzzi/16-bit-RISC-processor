@@ -12,6 +12,9 @@ class TokenType(Enum):
     DECIMAL = 4
     ADDRESS = 5
     REGISTER = 6
+    START_MACRO = 7
+    END_MACRO = 8
+    MACRO_ARGUMENT_TYPE = 9
 
 @dataclass
 class Token:
@@ -30,6 +33,12 @@ class Lexer:
             for word in words:
                 if word.startswith(';'):
                     break
+                if word == "macro":
+                    self.tokens.append(Token(TokenType.START_MACRO, word))
+                elif word == "endmacro":
+                    self.tokens.append(Token(TokenType.END_MACRO, word))
+                elif ["imm", "addr", "reg"].count(word) == 1:
+                    self.tokens.append(Token(TokenType.MACRO_ARGUMENT_TYPE, word))
                 elif word.endswith(':'):
                     self.tokens.append(Token(TokenType.LABEL, word))
                 elif re.match(r'[a-zA-Z]+', word):
