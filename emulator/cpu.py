@@ -14,6 +14,7 @@ class CPU:
         self.memory = Memory(memory_size)
         self.memory.load_bin("emulator/test.bin")
         self.registers = [Register() for _ in range(8)]
+        self.set = Register()
         self.alu = Alu
 
     def run(self, steps: int = -1):
@@ -25,8 +26,7 @@ class CPU:
         opcode = self.memory.get(self.pc)
         op0 = self.memory.get(self.pc+1)
         op1 = self.memory.get(self.pc+2) 
-        op1 += self.memory.get(self.pc+3)
-        self.pc += 4
+        self.pc += 3
         self.execute(opcode, op0, op1)
 
     def execute(self, opcode: str, op0: str, op1: str) -> None:
@@ -43,9 +43,10 @@ class CPU:
             memorylocation = int(op1, 2)
             value = self.memory.get(memorylocation).zfill(16)
             self.registers[register].set(value)
-        elif opcode == "00010010": # Load 16-bit Immediate
-            register = int(op0, 2)
-            self.registers[register].set(op1)
+        elif opcode == "00010010": # Set register
+            self.set.set(op0)
+        elif opcode == "00010011": # Load 16-bit Immediate
+            self.registers[int(self.set.get(),2)].set(op1+op0)
         elif opcode == "00100000": # Store 16-bit
             register = int(op0, 2)
             value = self.registers[register].get()
@@ -116,15 +117,15 @@ class CPU:
             result = bin(int(value1, 2) ^ int(value2, 2))[2:].zfill(16)
             self.registers[register].set(result)
         elif opcode == "01000000": # Jump
-            address = int(op1, 2)
+            address = int(op1+op0, 2)
             self.pc = address
         elif opcode == "01000001": # Jump if zero/Jump if equal
             if self.alu.flags.Z:
-                address = int(op1, 2)
+                address = int(op1+op0, 2)
                 self.pc = address
         elif opcode == "01000010": # Jump if less than zero
             if self.alu.flags.N:
-                address = int(op1, 2)
+                address = int(op1+op0, 2)
                 self.pc = address
         elif opcode == "11111111": # Halt
             self.halt = True

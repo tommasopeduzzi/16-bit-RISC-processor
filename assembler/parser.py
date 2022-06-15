@@ -54,15 +54,24 @@ class Parser:
 
     def parse_operand(self, value, macro_definition = False):
         if value.startswith('$'):
-            return Operand(OperandType.REGISTER, self.parse_number(value[1:]))
+            register = self.parse_number(value[1:])
+            if register < 0 or register > 7:
+                raise Exception("Invalid register: {}".format(value))
+            return Operand(OperandType.REGISTER, register)
         elif value.startswith('@'):
-            return Operand(OperandType.ADDRESS, self.parse_number(value[1:]))
+            address = self.parse_number(value[1:])
+            if address < 0 or address > 0xFFFF:
+                raise Exception("Invalid address: {}".format(address))
+            return Operand(OperandType.ADDRESS, value)
         elif value.startswith('%'):
             if not macro_definition:
                 raise Exception("Macro argument found outside macro definition: {}".format(value))
             return Operand(OperandType.MACRO_ARGUMENT, self.parse_number(value[1:]))
         else:
-            return Operand(OperandType.IMMEDIATE, self.parse_number(value))
+            immediate = self.parse_number(value)
+            if immediate < 0 or immediate > 0xFFFF:
+                raise Exception("Invalid immediate: {}".format(immediate))
+            return Operand(OperandType.IMMEDIATE, immediate)
 
     def parse_instruction(self, i, macro_definition = False):
         name = self.tokens[i].value

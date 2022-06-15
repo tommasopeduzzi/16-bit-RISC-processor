@@ -7,8 +7,8 @@ opcode_map = {
     # Memory instructions
     ("load",           (OperandType.REGISTER, OperandType.REGISTER)):      0b00010000,
     ("load-<byte",     (OperandType.REGISTER, OperandType.REGISTER)):      0b00010001,
-    ("load-<imm",      (OperandType.REGISTER, OperandType.IMMEDIATE)):     0b00010101,
-    ("load->imm",      (OperandType.REGISTER, OperandType.IMMEDIATE)):     0b00010110,
+    ("set",            (OperandType.REGISTER, OperandType.NONE)):          0b00010010,
+    ("load-imm",       (OperandType.IMMEDIATE, OperandType.NONE)):         0b00010011,
     ("store",          (OperandType.REGISTER, OperandType.REGISTER)):      0b00100000,
     ("store-<byte",    (OperandType.REGISTER, OperandType.REGISTER)):      0b00100001,
     ("store->byte",    (OperandType.REGISTER, OperandType.REGISTER)):      0b00100010,
@@ -26,8 +26,8 @@ opcode_map = {
     ("xor",            (OperandType.REGISTER, OperandType.REGISTER)):      0b00110111,
     # Control flow instructions
     ("jump",           (OperandType.ADDRESS, OperandType.NONE)):           0b01000000,
-    ("jump-if0",       (OperandType.ADDRESS, OperandType.NONE)):           0b01000001,
-    ("jump-if<0",      (OperandType.ADDRESS, OperandType.NONE)):           0b01000010,
+    ("jump-eq",        (OperandType.ADDRESS, OperandType.NONE)):           0b01000001,
+    ("jump-n",         (OperandType.ADDRESS, OperandType.NONE)):           0b01000010,
 }
 
 class Assembler:
@@ -67,11 +67,13 @@ class Assembler:
         self.binary.append(opcode)
         for operand in instruction.operands:
             if operand.type == OperandType.MACRO_ARGUMENT:
-                self.binary.append(macro_arguments[operand.value].value)
+                operand = macro_arguments[operand.value]
+            if operand.type == OperandType.REGISTER:
+                self.binary += operand.value.to_bytes(1, byteorder = 'little') 
             else:
-                self.binary.append(operand.value)
-        for i in range(2-len(instruction.operands)):
-            self.binary.append(0)
+                self.binary += operand.value.to_bytes(2, byteorder='little')
+        if len(self.operands) == 0:
+            self.binary += b'\x00\x00'
 
     def codegen(self):
         self.binary = bytearray()
