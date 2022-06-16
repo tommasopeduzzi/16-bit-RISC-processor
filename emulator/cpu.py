@@ -1,4 +1,5 @@
 from alu import Alu
+from device import Device
 from memory import Memory
 from registers import Register
 
@@ -14,6 +15,7 @@ class CPU:
         self.memory = Memory(memory_size)
         self.memory.load_bin("emulator/test.bin")
         self.registers = [Register() for _ in range(8)]
+        self.devices = [Device(self) for _ in range(8)]
         self.set = Register()
         self.alu = Alu
 
@@ -127,6 +129,16 @@ class CPU:
             if self.alu.flags.N:
                 address = int(op1+op0, 2)
                 self.pc = address
+        elif opcode == "10000000": # IN
+            register = int(op0, 2)
+            device = int(op1, 2)
+            value = self.devices[device].assert_bus()
+            self.registers[register].set(value)
+        elif opcode == "10000001": # OUT
+            register = int(op0, 2)
+            device = int(op1, 2)
+            value = self.registers[register].get()
+            self.devices[device].read_bus(value)
         elif opcode == "11111111": # Halt
             self.halt = True
         else:
