@@ -31,20 +31,22 @@ The system has 64kB of RAM. The first 32 kB are ROM, while the second 32 kB are 
 | 0x8000 - 0xFFFF | General purpose RAM, with stack at the top growing downwards. |
 
 ## **IO**
-Devices can  be connected to the main data bus. Using the IO-instructions they can be told to assert to and to read from the bus.
-TBD
+Devices are connected to the main data bus. Using the IO-instructions they can be told to assert to and to read from the bus.
+
+## **Interrupts**
+Devices can also be connected to the interrupt bus. The control logic will halt the processor, store the state and the return address to the stack and jump to the interrupt on the interrupt bus using the interrupt table at the beginning of memory. The interrupt bus has a width of 5 bits (1 bit for busy, which inhibits devices from requesting an interrupt, 1 bit of data to request an interrupt, and 4 bits for the number of the interrupt).
 
 ## **Instructions**
 
 ### **General Layout**
 
-Each Instruction consists of 4 bytes:
+Each Instruction consists of 3 bytes:
 
 1. Byte: opcode
-2. Byte: First operand ($O_0$)
-3. Second Operand ($O_1$) 
+2. Byte: First operand ($O_0$) (Possible type(s): *register*, *device*)
+3. Second Operand ($O_1$)  (Possible types(s): *register*, *device*)
 
-$O_2 = O_1 << 8 + O_0$
+$O_2 = O_1 << 8 + O_0$ (Possible type(s): *address*, *immediate*)
 
 I am planning to add more instructions as I progress and start programming with the emulator. I can then adapt this instruction set as I see fit (for example stack and calls).
 
@@ -64,13 +66,13 @@ Does nothing. The opcode is $0000 0000$ and the mnemonic is **nop**.
 
 Loads value stored at address in register $O_1$ in memory to less significant byte of register $O_0$ and value stored at address $O_1 + 1$ to the most signifcant byte of register $0_0$. The opcode is $0001 0000$ and the mnemonic and arguments are **load *register* *register***.
 
-#### **Load 8 bits**
+#### **Load into less significant byte**
 Loads byte stored at address in register $O_1$ in memory to less significant byte of the register $O_0$. The opcode is $0001 0001$ and the mnemonic and arguments are **load8 *register* *register***.
 
 #### **Set load register**
 Sets the register for the register load instruction to $O_0$. The opcode is $0001 0010$ and the mnemonic and arguments are **set *register***.
 
-#### **Load 16-bit Immediate into least significant byte**
+#### **Load 16-bit Immediate**
 Loads 16-bit Immediate $O_2$ into register in the register register. The opcode is $0001 0011$ and the mnemonic and arguments are **load *immediate***.
 
 #### **Store 16 bits**
@@ -134,3 +136,11 @@ Sets the program counter $O_2$ if $Z$-flag is. The opcode is $0100 0001$ and the
 #### **Jump If Less Than Zero**
 
 Sets the program counter to $O_2$ if $N$-flag is set. The opcode is $0100 0010$ and the mnemonic and arguments are **jump-n *address***.
+
+### **IO Instructions**
+
+#### **IN**
+Notifies device to output to the main bus and reads from the main bus and stores contents into register $0_0$. The opcode is $1000 0000$ and the mnemonic and arguments are **in *register* *device***.
+
+#### **OUT**
+Outputs contents of register $O_0$ onto the main bus and the device $O_1$ is notified to read from the main bus. The opcode is $1000 0001$ and the mnemonic and arguments are **out *register* *device***.
