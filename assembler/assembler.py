@@ -28,6 +28,9 @@ opcode_map = {
     ("jump",           (OperandType.ADDRESS, OperandType.NONE)):           0b01000000,
     ("jump-eq",        (OperandType.ADDRESS, OperandType.NONE)):           0b01000001,
     ("jump-n",         (OperandType.ADDRESS, OperandType.NONE)):           0b01000010,
+    # IO instructions
+    ("in",            (OperandType.REGISTER, OperandType.DEVICE)):         0b10000000,
+    ("out",           (OperandType.REGISTER, OperandType.DEVICE)):         0b10000001,
 }
 
 class Assembler:
@@ -68,11 +71,11 @@ class Assembler:
         for operand in instruction.operands:
             if operand.type == OperandType.MACRO_ARGUMENT:
                 operand = macro_arguments[operand.value]
-            if operand.type == OperandType.REGISTER:
+            if operand.type == OperandType.REGISTER or operand.type == OperandType.DEVICE:
                 self.binary += operand.value.to_bytes(1, byteorder = 'little') 
             else:
                 self.binary += operand.value.to_bytes(2, byteorder='little')
-        if len(self.operands) == 0:
+        if len(instruction.operands) == 0:
             self.binary += b'\x00\x00'
 
     def codegen(self):

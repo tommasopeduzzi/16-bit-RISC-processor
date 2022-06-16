@@ -1,7 +1,4 @@
 ; Test program for assembler
 
-test $1 $2
-
-macro test 2 reg reg
-    add %0 %1
-endmacro
+out $2 ?2
+in $2 ?2

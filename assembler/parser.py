@@ -10,6 +10,7 @@ class OperandType:
     IMMEDIATE = 1
     ADDRESS = 2
     MACRO_ARGUMENT = 3
+    DEVICE = 4
 
 @dataclass
 class Operand():
@@ -33,7 +34,15 @@ class Macro():
     instructions: List[Instruction]
 
 class Parser:
-    valid_operands = [TokenType.HEXADECIMAL, TokenType.BINARY, TokenType.DECIMAL, TokenType.ADDRESS, TokenType.REGISTER, TokenType.MACRO_ARGUMENT]
+    valid_operands = [
+        TokenType.HEXADECIMAL, 
+        TokenType.BINARY, 
+        TokenType.DECIMAL, 
+        TokenType.ADDRESS, 
+        TokenType.REGISTER, 
+        TokenType.MACRO_ARGUMENT, 
+        TokenType.DEVICE,
+    ]
 
     def __init__(self):
         self.lexer = Lexer()
@@ -58,6 +67,11 @@ class Parser:
             if register < 0 or register > 7:
                 raise Exception("Invalid register: {}".format(value))
             return Operand(OperandType.REGISTER, register)
+        elif value.startswith('?'):
+            device = self.parse_number(value[1:])
+            if device < 0 or device > 7:
+                raise Exception("Invalid device: {}".format(value))
+            return Operand(OperandType.DEVICE, device)
         elif value.startswith('@'):
             address = self.parse_number(value[1:])
             if address < 0 or address > 0xFFFF:
