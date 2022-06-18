@@ -84,7 +84,7 @@ class Assembler:
                 else:           # immediates or addresses take up 2 bytes
                     self.binary += operand.value.to_bytes(2, byteorder='little')
         else:
-            self.binary += opcode
+            self.binary += opcode.to_bytes(1, byteorder="little")  # no operands
 
     def codegen(self):
         self.binary = bytearray()
