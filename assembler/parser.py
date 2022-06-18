@@ -76,7 +76,7 @@ class Parser:
             address = self.parse_number(value[1:])
             if address < 0 or address > 0xFFFF:
                 raise Exception("Invalid address: {}".format(address))
-            return Operand(OperandType.ADDRESS, value)
+            return Operand(OperandType.ADDRESS, address)
         elif value.startswith('%'):
             if not macro_definition:
                 raise Exception("Macro argument found outside macro definition: {}".format(value))
