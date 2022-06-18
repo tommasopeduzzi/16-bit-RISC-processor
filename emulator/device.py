@@ -1,17 +1,9 @@
-from emulator.cpu import CPU
-
-
 class Device:
-
-    def __init__(self, cpu: CPU) -> None:
-        self.cpu = cpu
-        self.current_value = "00000000"
-
-    def request_interrupt(self, interrupt: int) -> None:
-        self.cpu.interrupt(interrupt)
+    def __init__(self) -> None:
+        self.current_value: int = 0
     
-    def assert_bus(self) -> str:
+    def assert_bus(self) -> int:
         return self.current_value
     
-    def read_bus(self, value: str) -> None:
+    def read_bus(self, value: int) -> None:
         self.current_value = value

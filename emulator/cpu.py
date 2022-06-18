@@ -1,7 +1,34 @@
 from alu import Alu
-from device import Device
+from interupt import Interrupt
 from memory import Memory
 from registers import Register
+from device import Device
+
+operands_count = {
+    0b00000: [],        # nop
+    0b11111: [],        # halt
+    0b00001: [0,1],     # load
+    0b00010: [0,1],     # load-<byte
+    0b00011: [0,2],     # load-imm
+    0b00100: [0,1],     # store
+    0b00101: [0,1],     # store-<byte
+    0b00110: [0,1],     # store->byte
+    0b00111: [0],       # push
+    0b01000: [0],       # pop
+    0b01001: [0,1],     # add
+    0b01010: [0,1],     # sub
+    0b01011: [0,1],     # cmp
+    0b01100: [0],       # not
+    0b01101: [0,1],     # and
+    0b01110: [0,1],     # or
+    0b01111: [0,1],     # xor
+    0b10000: [0],       # jump
+    0b10001: [0],       # jump-eq
+    0b10010: [0],       # jump-n
+    0b10011: [0,1],     # in
+    0b10100: [0,1],     # out
+}
+
 
 class CPU:
     memory: Memory
@@ -9,140 +36,144 @@ class CPU:
     alu: Alu
     pc: int = 0
     sp: int = 512
+    devices: list[Device]
     halt: bool = False
 
     def __init__(self, memory_size=2**16):
         self.memory = Memory(memory_size)
-        self.memory.load_bin("emulator/test.bin")
+        self.memory.load_bin("assembler/test.bin")
         self.registers = [Register() for _ in range(8)]
-        self.devices = [Device(self) for _ in range(8)]
-        self.set = Register()
-        self.alu = Alu
+        self.interrupt = Interrupt()
+        self.alu = Alu()
+        self.devices = [Device() for _ in range(8)]
 
     def run(self, steps: int = -1):
-        for i in range(steps, 0, -1):
+        n = 0
+        while n < steps or steps == -1:
+            if self.halt: return
             self.step()
+            n += 1
 
     def step(self) -> None:
         if self.halt: return
-        opcode = self.memory.get(self.pc)
-        op0 = self.memory.get(self.pc+1)
-        op1 = self.memory.get(self.pc+2) 
-        self.pc += 3
-        self.execute(opcode, op0, op1)
+        if self.interrupt.active:
+            for register in self.registers: # Push register values onto stack
+                value = register.get()
+                self.memory.set(self.sp-1, value[8:])
+                self.memory.set(self.pc, value[:8])
+                self.sp -= 2
+            
+            value = self.pc
+            self.memory.set(self.sp-1, value[8:])
+            self.memory.set(self.sp, value[:8])
+            self.sp -= 2
 
-    def execute(self, opcode: str, op0: str, op1: str) -> None:
-        if opcode == "00000000": # NOP
-            return
-        if opcode == "00010000": # Load 16 bits
-            register = int(op0, 2)
-            memorylocation = int(op1, 2)
-            value = self.memory.get(memorylocation+1)
-            value += self.memory.get(memorylocation)
-            self.registers[register].set(value)
-        elif opcode == "00010001": # Load 8 bits
-            register = int(op0, 2)
-            memorylocation = int(op1, 2)
-            value = self.memory.get(memorylocation).zfill(16)
-            self.registers[register].set(value)
-        elif opcode == "00010010": # Set register
-            self.set.set(op0)
-        elif opcode == "00010011": # Load 16-bit Immediate
-            self.registers[int(self.set.get(),2)].set(op1+op0)
-        elif opcode == "00100000": # Store 16-bit
-            register = int(op0, 2)
-            value = self.registers[register].get()
-            memorylocation = int(op1, 2)
-            self.memory.set(memorylocation, value[8:])
-            self.memory.set(memorylocation+1, value[:8])
-        elif opcode == "00100001":  # Store less significant byte
-            register = int(op0, 2)
-            value = self.registers[register].get()
-            memorylocation = int(op1, 2)
-            self.memory.set(memorylocation, value[8:])        
-        elif opcode == "00100010":  # Store most significant byte
-            register = int(op0, 2)
-            value = self.registers[register].get()
-            memorylocation = int(op1, 2)
-            self.memory.set(memorylocation, value[:8])
-        elif opcode == "00100100": # Push
-            register = int(op0, 2)
-            value = self.registers[register].get()
-            self.memory.set(sp-1, value[8:])
-            self.memory.set(sp, value[:8])
-            sp -= 2
-        elif opcode == "00010100": # Pop
-            register = int(op0, 2)
-            value = self.memory.get(sp+1)
-            value += self.memory.get(memorylocation)
-            sp += 2
-        elif opcode == "00110001": # Addition
-            register = int(op0, 2)
-            value1 = self.registers[register].get()
-            value2 = self.registers[int(op1, 2)].get()
-            result = self.alu.add(value1 + value2)
-            self.registers[register].set(result)
-        elif opcode == "00110010": # Subtraction
-            register = int(op0, 2)
-            value1 = self.registers[register].get()
-            value2 = self.registers[int(op1, 2)].get()
-            result = self.alu.subtract(value1, value2)
-            self.registers[register].set(result)
-        elif opcode == "00110011": # Compare
-            value1 = self.registers[int(op0, 2)].get()
-            value2 = self.registers[int(op1, 2)].get()
-            self.alu.subtract(value1, value2)  
-        elif opcode == "01000100": # NOT
-            register = int(op0, 2)
-            value = self.registers[register].get()
-            result = bin(~int(value, 2) & 0xffff)[2:].zfill(16)
-            self.registers[register].set(result)
-        elif opcode == "01000101": # AND
-            register1 = int(op0, 2)
-            register2 = int(op1, 2)
-            value1 = self.registers[register1].get()
-            value2 = self.registers[register2].get()
-            result = bin(int(value1, 2) & int(value2, 2))[2:].zfill(16)
-            self.registers[register].set(result)
-        elif opcode == "010001110": # OR
-            register1 = int(op0, 2)
-            register2 = int(op1, 2)
-            value1 = self.registers[register1].get()
-            value2 = self.registers[register2].get()
-            result = bin(int(value1, 2) | int(value2, 2))[2:].zfill(16)
-            self.registers[register].set(result)
-        elif opcode == "01000111": # XOR
-            register1 = int(op0, 2)
-            register2 = int(op1, 2)
-            value1 = self.registers[register1].get()
-            value2 = self.registers[register2].get()
-            result = bin(int(value1, 2) ^ int(value2, 2))[2:].zfill(16)
-            self.registers[register].set(result)
-        elif opcode == "01000000": # Jump
-            address = int(op1+op0, 2)
-            self.pc = address
-        elif opcode == "01000001": # Jump if zero/Jump if equal
-            if self.alu.flags.Z:
-                address = int(op1+op0, 2)
-                self.pc = address
-        elif opcode == "01000010": # Jump if less than zero
-            if self.alu.flags.N:
-                address = int(op1+op0, 2)
-                self.pc = address
-        elif opcode == "10000000": # IN
-            register = int(op0, 2)
-            device = int(op1, 2)
-            value = self.devices[device].assert_bus()
-            self.registers[register].set(value)
-        elif opcode == "10000001": # OUT
-            register = int(op0, 2)
-            device = int(op1, 2)
-            value = self.registers[register].get()
-            self.devices[device].read_bus(value)
-        elif opcode == "11111111": # Halt
-            self.halt = True
-        else:
-            assert False, f"Unknown opcode: {opcode}"
-        
+            interrupt_location = self.memory.get(self.interrupt.number)
+            self.pc = interrupt_location
+        byte = self.memory.get(self.pc)
+        self.pc += 1
+        opcode = byte >> 3
+        operands = []
+        operand_count = operands_count[opcode]
+        for n_bytes in operand_count:
+            if n_bytes == 0:
+                operands.append(byte & 7)
+            elif n_bytes == 1:
+                operands.append(self.memory.get(self.pc))
+                self.pc += 1
+            elif n_bytes == 2:
+                msb = self.memory.get(self.pc+1)
+                lsb = self.memory.get(self.pc)
+                operands.append(msb << 8 | lsb)
+                self.pc += 2
+        self.execute(opcode, operands)  
 
-
+    def execute(self, opcode: int, operands: list[int]) -> None:
+        match opcode:
+            case 0b00000:      # nop
+                return
+            case 0b11111:      # halt
+                self.halt = True
+            case 0b00001:      # load
+                value = self.memory.get(operands[1]) << 8 | self.memory.get(operands[1])
+                self.registers[operands[0]].set(value)
+            case 0b00010:      # load-<byte
+                value = self.memory.get(operands[1])
+                self.registers[operands[0]].set(value)
+            case 0b00011:      # load-imm
+                self.registers[operands[0]].set(operands[1])
+            case 0b00100:      # store
+                value = self.registers[operands[0]].get()
+                self.memory.set(operands[1], value & 0xFF)
+                self.memory.set(operands[1]+1, value >> 8)
+            case 0b00101:      # store-<byte
+                value = self.registers[operands[0]].get() & 0xFF
+                self.memory.set(operands[1], value)
+            case 0b00110:      # store->byte
+                value = self.registers[operands[0]].get() >> 8
+                self.memory.set(operands[1], value)
+            case 0b00111:      # push
+                value = self.registers[operands[0]].get()
+                self.memory.set(self.sp-1, value & 0xFF)
+                self.memory.set(self.sp-2, value >> 8)
+                self.sp -= 2
+            case 0b01000:      # pop
+                value = self.memory.get(self.sp) << 8 | self.memory.get(self.sp+1)
+                self.sp += 2
+            case 0b01001:      # add
+                lhs = self.registers[operands[0]].get()
+                rhs = self.registers[operands[1]].get()
+                self.alu.add(lhs, rhs)
+                self.registers[operands[0]].set(self.alu.result)
+            case 0b01010:      # sub
+                lhs = self.registers[operands[0]].get()
+                rhs = self.registers[operands[1]].get()
+                self.alu.sub(lhs, rhs)
+                self.registers[operands[0]].set(self.alu.result)
+            case 0b01011:      # cmp
+                lhs = self.registers[operands[0]].get()
+                rhs = self.registers[operands[1]].get()
+                self.alu.sub(lhs, rhs)
+            case 0b01100:      # not
+                value = self.registers[operands[0]].get()
+                self.registers[operands[0]].set(~value)
+            case 0b01101:      # and
+                lhs = self.registers[operands[0]].get()
+                rhs = self.registers[operands[1]].get()
+                self.alu.logical_and(lhs, rhs)
+                self.registers[operands[0]].set(self.alu.result)
+            case 0b01110:      # or
+                lhs = self.registers[operands[0]].get()
+                rhs = self.registers[operands[1]].get()
+                self.alu.logical_or(lhs, rhs)
+                self.registers[operands[0]].set(self.alu.result)
+            case 0b01111:      # xor
+                lhs = self.registers[operands[0]].get()
+                rhs = self.registers[operands[1]].get()
+                self.alu.logical_xor(lhs, rhs)
+                self.registers[operands[0]].set(self.alu.result)
+            case 0b10000:      # jump
+                self.pc = self.registers[operands[0]].get()
+            case 0b10001:      # jump-eq
+                if self.alu.flags.Z:
+                    self.pc = self.registers[operands[0]].get()
+            case 0b10010:      # jump-n
+                if self.alu.flags.N:
+                    self.pc = self.registers[operands[0]].get()
+            case 0b10011:      # in
+                value = self.devices[operands[1]].assert_bus()
+                self.registers[operands[0]].set(value)
+            case 0b10100:      # out
+                value = self.registers[operands[0]].get()
+                self.devices[operands[1]].read_bus(value)
+    
+    def dump(self):
+        print("Final state of CPU: ")
+        for i, register in enumerate(self.registers):
+            print("Register", i, ": \t", register.get())
+        print("PC: \t\t", self.pc)
+        print("SP: \t\t", self.sp)
+    
+        print("\nFinal state of devices: ")        
+        for i, register in enumerate(self.devices):
+            print("Device", i, ": \t", register.current_value)

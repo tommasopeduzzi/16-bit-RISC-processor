@@ -4,11 +4,11 @@ class Memory:
     def __init__(self, size=2**16):
         self.memory = [0 for _ in range(size)]
 
-    def set(self, address: int, value: str):
-        self.memory[address] = int(value, 2)
+    def set(self, address: int, value: int):
+        self.memory[address] = value
 
-    def get(self, address: int) -> str:
-        return bin(self.memory[address])[2:].zfill(8)
+    def get(self, address: int) -> int:
+        return self.memory[address]
     
     def load_bin(self, filename: str):
         with open(filename, "rb") as f:

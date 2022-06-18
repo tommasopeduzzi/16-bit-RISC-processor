@@ -5,6 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Emulator",
+            "type": "python",
+            "request": "launch",
+            "program": "./emulator/main.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [""],
+        },
+        {
             "name": "Assembler",
             "type": "python",
             "request": "launch",

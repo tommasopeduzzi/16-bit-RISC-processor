@@ -3,18 +3,34 @@ from flags import Flags
 class Alu:
     def __init__(self):
         self.flags = Flags()
+        self.result: int = 0
     
     def set_flags(self, result):
         self.flags.Z = result == 0
         self.flags.N = result < 0
-        self.flags.O = result > 2**15
+        self.flags.O = result > 2**16 -1
 
-    def add(self, value1, value2):
-        result = value1 + value2
+    def add(self, lhs, rhs) -> None:
+        result = lhs + rhs
         self.set_flags(result)
-        return result
+        self.result = result & 0xFFFF
     
-    def subtract(self, value1, value2):
-        result = value1 - value2
+    def sub(self, rhs, lhs) -> None:
+        result = rhs - lhs 
         self.set_flags(result)
-        return result
+        self.result = result & 0xFFFF
+    
+    def logical_and(self, lhs, rhs) -> None:
+        result = lhs & rhs
+        self.set_flags(result)
+        self.result = result
+    
+    def logical_or(self, lhs, rhs) -> None:
+        result = lhs | rhs
+        self.set_flags(result)
+        self.result = result
+    
+    def logical_xor(self, lhs, rhs) -> None:
+        result = lhs ^ rhs
+        self.set_flags(result)
+        self.result = result
