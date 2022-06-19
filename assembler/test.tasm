@@ -1,4 +1,9 @@
 ; Test program for assembler
 
-out $2 ?2
-in $2 ?2
+nop
+nop
+test:
+load-imm $1 @test
+jump $1
+out $0 ?0
+halt

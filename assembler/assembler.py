@@ -1,4 +1,5 @@
-from parser import OperandType, Parser
+from typing import Dict, List
+from parser import Instruction, Label, OperandType, Parser
 
 opcode_map = {
     # General instructions
@@ -39,10 +40,10 @@ class Assembler:
 
     def __init__(self):
         self.parser = Parser()
+        self.address = 0
 
     def assemble(self, file):
-        self.instructions, self.labels, self.macros = self.parser.parse_file(
-            file)
+        self.stream, self.macros = self.parser.parse_file(file)
         self.codegen()
 
     def codegen_macro(self, instruction):
@@ -59,13 +60,16 @@ class Assembler:
             self.codegen_instruction(
                 macro_instruction, instruction.operands, macro.argument_types)
 
-    def codegen_instruction(self, instruction, macro_arguments=[], macro_argument_types=[]):
+    def codegen_instruction(self, instruction: Instruction, macro_arguments=[], macro_argument_types=[]):
         if instruction.opcode in self.macros.keys():
             self.codegen_macro(instruction)
             return
-        operand_types = [operand.type if not operand.type == OperandType.MACRO_ARGUMENT else macro_argument_types[i]
+        operand_types = [operand.type if not operand.type == 5 else OperandType.ADDRESS if not operand.type == OperandType.MACRO_ARGUMENT else macro_argument_types[i]
                          for i, operand in enumerate(instruction.operands)]
-        concat_instruction = (instruction.opcode, tuple(operand_types))
+        if not len(operand_types) == 0:
+            concat_instruction = (instruction.opcode, tuple(operand_types) if len(operand_types) > 1 else operand_types[0])
+        else: 
+            concat_instruction = (instruction.opcode, ())
         try:
             opcode = opcode_map[concat_instruction] << 3
         except KeyError:
@@ -81,6 +85,13 @@ class Assembler:
                         self.binary += (opcode | operand.value).to_bytes(1, byteorder="little")
                     else:       # has it's own byte
                         self.binary += operand.value.to_bytes(1, byteorder='little')
+                elif operand.type == OperandType.LABEL:
+                    try:
+                        address = self.labels[operand.value]
+                    except KeyError:
+                        raise Exception(
+                            "Label not found: {}".format(operand.value))
+                    self.binary += address.to_bytes(2, byteorder="little")
                 else:           # immediates or addresses take up 2 bytes
                     self.binary += operand.value.to_bytes(2, byteorder='little')
         else:
@@ -88,5 +99,21 @@ class Assembler:
 
     def codegen(self):
         self.binary = bytearray()
-        for instruction in self.instructions:
+        self.instructions: List[Instruction] = []
+        self.labels: Dict[Label] = {}
+        self.address = 1
+
+        for item in self.stream: # Collect label addresses
+            if isinstance(item, Label):
+                self.labels[item.name] = self.address
+            elif type(item) == Instruction:
+                if len(item.operands) < 2:
+                    self.address += 1
+                elif len(item.operands) == 2 and item.operands[1].type == OperandType.REGISTER:
+                    self.address += 2
+                elif len(item.operands) == 2 and item.operands[1].type == OperandType.ADDRESS or item.operands[1].type == OperandType.ADDRESS:
+                    self.address += 3
+                self.instructions.append(item)
+    
+        for instruction in self.instructions: # Codegen instructions
             self.codegen_instruction(instruction)

@@ -41,7 +41,7 @@ class Lexer:
                     self.tokens.append(Token(TokenType.END_MACRO, word))
                 elif ["imm", "addr", "reg"].count(word) == 1:
                     self.tokens.append(Token(TokenType.MACRO_ARGUMENT_TYPE, word))
-                elif word.endswith(':'):
+                elif re.match(r'[a-zA-Z]+:', word):
                     self.tokens.append(Token(TokenType.LABEL, word))
                 elif re.match(r'[a-zA-Z]+', word):
                     self.tokens.append(Token(TokenType.WORD, word))

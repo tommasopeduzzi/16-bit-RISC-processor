@@ -11,11 +11,12 @@ class OperandType:
     ADDRESS = 2
     MACRO_ARGUMENT = 3
     DEVICE = 4
+    LABEL = 5
 
 @dataclass
 class Operand():
     type: OperandType
-    value: int
+    value: int | str
 
 @dataclass
 class Instruction():
@@ -25,7 +26,6 @@ class Instruction():
 @dataclass
 class Label():
     name: str
-    address: int
 
 @dataclass
 class Macro():
@@ -52,7 +52,7 @@ class Parser:
         with open(file, 'r') as f:
             return self.parse(f.read())
     
-    def parse_number(self, value):
+    def parse_number(self, value) -> int:
         if value.startswith('0x'):
             return int(value[2:], 16)
         elif value.startswith('0b'):
@@ -60,9 +60,9 @@ class Parser:
         elif re.match(r'^[0-9]+$', value):
             return int(value)
         else:
-            raise Exception("Invalid operand: {}".format(value))
+            raise Exception("Invalid number: {}".format(value))
 
-    def parse_operand(self, token: Token, macro_definition = False):
+    def parse_operand(self, token: Token, macro_definition = False) -> Operand:
         match token.type:
             case TokenType.REGISTER:
                 register = self.parse_number(token.value[1:])
@@ -75,7 +75,10 @@ class Parser:
                     raise Exception("Invalid device: {}".format(token.value))
                 return Operand(OperandType.DEVICE, device)
             case TokenType.ADDRESS:
-                address = self.parse_number(token.value[1:])
+                if re.match(r'[a-zA-Z]+', token.value[1:]):
+                    return Operand(OperandType.LABEL, token.value[1:])
+                else:
+                    address = self.parse_number(token.value[1:])
                 if address < 0 or address > 0xFFFF:
                     raise Exception("Invalid address: {}".format(address))
                 return Operand(OperandType.ADDRESS, address)
@@ -89,7 +92,7 @@ class Parser:
                     raise Exception("Invalid immediate: {}".format(immediate))
                 return Operand(OperandType.IMMEDIATE, immediate)
 
-    def parse_instruction(self, macro_definition = False):
+    def parse_instruction(self, macro_definition = False) -> Instruction:
         name = self.tokens[0].value
         operands = []
         self.tokens.pop(0)
@@ -98,7 +101,7 @@ class Parser:
             self.tokens.pop(0)
         return Instruction(name, operands)
 
-    def parse_macro(self):
+    def parse_macro(self) -> Macro:
         self.tokens.pop(0)
         if not self.tokens[0].type == TokenType.WORD:
             raise Exception("Expected name after macro declaration, found {}".format(self.tokens[0].value))
@@ -129,21 +132,20 @@ class Parser:
         return Macro(macro_name, argument_types, instructions)
 
     def parse(self, contents) -> Tuple[List[Instruction], List[Label], List[Macro]]:
-        instructions: List[Instruction] = []
-        labels: List[Label] = {}
-        macros: List[Macro] = {}
+        self.instructions: List[Instruction] = []
+        self.macros: List[Macro] = {}
+        self.stream: List [Label | Instruction] = []
         self.tokens = self.lexer.lex(contents)
         while len(self.tokens) > 0:
             if self.tokens[0].type == TokenType.WORD: # Parse Instruction
                 instruction = self.parse_instruction()
-                instructions.append(instruction)            
+                self.stream.append(instruction)            
             elif self.tokens[0].type == TokenType.LABEL: # Parse Label
-                label = Label(self.tokens[0].value, len(instructions))
-                labels[label.name] = label
+                self.stream.append(Label(self.tokens[0].value[:-1]))
+                self.tokens.pop(0)
             elif self.tokens[0].type == TokenType.START_MACRO: # Parse Macro
-                macro = self.parse_macro(0)
-                macros[macro.name] = macro
+                macro: Macro = self.parse_macro(0)
+                self.macros[macro.name] = macro
             else:
                 raise Exception("Invalid token: {}".format(self.tokens[0].value))
-        return (instructions, labels, macros)
-
+        return (self.stream, self.macros)
