@@ -47,15 +47,12 @@ class CPU:
         self.alu = Alu()
         self.devices = [Device() for _ in range(8)]
 
-    def run(self, steps: int = -1):
-        n = 0
-        while n < steps or steps == -1:
+    def run(self, steps: int) -> None:
+        for _ in range(steps):
             if self.halt: return
             self.step()
-            n += 1
 
     def step(self) -> None:
-        if self.halt: return
         if self.interrupt.active:
             for register in self.registers: # Push register values onto stack
                 value = register.get()
@@ -70,6 +67,7 @@ class CPU:
 
             interrupt_location = self.memory.get(self.interrupt.number)
             self.pc = interrupt_location
+            
         byte = self.memory.get(self.pc)
         self.pc += 1
         opcode = byte >> 3
