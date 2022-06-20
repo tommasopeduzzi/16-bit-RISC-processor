@@ -12,6 +12,18 @@ class OperandType:
     MACRO_ARGUMENT = 3
     DEVICE = 4
     LABEL = 5
+    def to_string(type):
+        match type:
+            case OperandType.REGISTER:
+                return "register"
+            case OperandType.IMMEDIATE:
+                return "immediate"
+            case OperandType.ADDRESS:
+                return "address"
+            case OperandType.DEVICE:
+                return "device"
+            case _:
+                return ""
 
 @dataclass
 class Operand():
@@ -43,14 +55,6 @@ class Data():
     operands: List[DataItem]
 
 class Parser:
-    valid_operands = [
-        TokenType.IMMEDIATE, 
-        TokenType.ADDRESS, 
-        TokenType.REGISTER, 
-        TokenType.MACRO_ARGUMENT, 
-        TokenType.DEVICE,
-    ]
-
     def __init__(self):
         self.lexer = Lexer()
         self.tokens = []
@@ -103,7 +107,7 @@ class Parser:
         name = self.tokens[0].value
         operands = []
         self.tokens.pop(0)
-        while len(self.tokens) > 0 and Parser.valid_operands.count(self.tokens[0].type):
+        while len(self.tokens) > 0 and OperandType.valid_operands.count(self.tokens[0].type):
             operands.append(self.parse_operand(self.tokens[0], macro_definition))
             self.tokens.pop(0)
         return Instruction(name, operands)
