@@ -35,7 +35,7 @@ class CPU:
     registers: list[Register]
     alu: Alu
     pc: int = 0
-    sp: int = 512
+    sp: int = 0xFFFF
     devices: list[Device]
     halt: bool = False
 
@@ -93,7 +93,7 @@ class CPU:
             case 0b11111:      # halt
                 self.halt = True
             case 0b00001:      # load
-                value = self.memory.get(operands[1]) << 8 | self.memory.get(operands[1])
+                value = self.memory.get(self.registers[operands[1]].get()+1) << 8 | self.memory.get(self.registers[operands[1]].get())
                 self.registers[operands[0]].set(value)
             case 0b00010:      # load-<byte
                 value = self.memory.get(operands[1])
