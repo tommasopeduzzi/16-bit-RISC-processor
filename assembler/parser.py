@@ -16,7 +16,7 @@ class OperandType:
 @dataclass
 class Operand():
     type: OperandType
-    value: int | str
+    value: int
 
 @dataclass
 class Instruction():
@@ -33,11 +33,18 @@ class Macro():
     argument_types: List[OperandType]
     instructions: List[Instruction]
 
+@dataclass
+class DataItem():
+    type: OperandType
+    value: int
+
+@dataclass
+class Data():
+    operands: List[DataItem]
+
 class Parser:
     valid_operands = [
-        TokenType.HEXADECIMAL, 
-        TokenType.BINARY, 
-        TokenType.DECIMAL, 
+        TokenType.IMMEDIATE, 
         TokenType.ADDRESS, 
         TokenType.REGISTER, 
         TokenType.MACRO_ARGUMENT, 
@@ -52,7 +59,7 @@ class Parser:
         with open(file, 'r') as f:
             return self.parse(f.read())
     
-    def parse_number(self, value) -> int:
+    def parse_immediate(self, value: str) -> int:
         if value.startswith('0x'):
             return int(value[2:], 16)
         elif value.startswith('0b'):
@@ -65,12 +72,12 @@ class Parser:
     def parse_operand(self, token: Token, macro_definition = False) -> Operand:
         match token.type:
             case TokenType.REGISTER:
-                register = self.parse_number(token.value[1:])
+                register = self.parse_immediate(token.value[1:])
                 if register < 0 or register > 7:
                     raise Exception("Invalid register: {}".format(token.value))
                 return Operand(OperandType.REGISTER, register)
             case TokenType.DEVICE:
-                device = self.parse_number(token.value[1:])
+                device = self.parse_immediate(token.value[1:])
                 if device < 0 or device > 7:
                     raise Exception("Invalid device: {}".format(token.value))
                 return Operand(OperandType.DEVICE, device)
@@ -78,16 +85,16 @@ class Parser:
                 if re.match(r'[a-zA-Z]+', token.value[1:]):
                     return Operand(OperandType.LABEL, token.value[1:])
                 else:
-                    address = self.parse_number(token.value[1:])
+                    address = self.parse_immediate(token.value[1:])
                 if address < 0 or address > 0xFFFF:
                     raise Exception("Invalid address: {}".format(address))
                 return Operand(OperandType.ADDRESS, address)
             case TokenType.MACRO_ARGUMENT:
                 if not macro_definition:
                     raise Exception("Macro argument found outside macro definition: {}".format(token.value))
-                return Operand(OperandType.MACRO_ARGUMENT, self.parse_number(token.value[1:]))
-            case _:
-                immediate = self.parse_number(token.value)
+                return Operand(OperandType.MACRO_ARGUMENT, self.parse_immediate(token.value[1:]))
+            case TokenType.IMMEDIATE:
+                immediate = self.parse_immediate(token.value)
                 if immediate < 0 or immediate > 0xFFFF:
                     raise Exception("Invalid immediate: {}".format(immediate))
                 return Operand(OperandType.IMMEDIATE, immediate)
@@ -109,8 +116,8 @@ class Parser:
         argument_types = []
         instructions = []
         self.tokens.pop(0)
-        if self.tokens[0].type == TokenType.DECIMAL:
-            num_args = self.parse_number(self.tokens[0].value)
+        if self.tokens[0].type == TokenType.IMMEDIATE:
+            num_args = self.parse_immediate(self.tokens[0].value)
             self.tokens.pop(0)
             for _ in range(num_args):
                 if not self.tokens[0].type == TokenType.MACRO_ARGUMENT_TYPE:
@@ -125,27 +132,49 @@ class Parser:
                     case _:
                         raise Exception("Invalid macro argument type: {}".format(self.tokens[0].value))
                 self.tokens.pop(0)
+        else: 
+            raise Exception("Expected number of macro arguments, found {}".format(self.tokens[0].value))
         while self.tokens[0].type != TokenType.END_MACRO:
             instruction = self.parse_instruction(macro_definition=True)
             instructions.append(instruction)
         self.tokens.pop(0)
         return Macro(macro_name, argument_types, instructions)
 
-    def parse(self, contents) -> Tuple[List[Instruction], List[Label], List[Macro]]:
+    def parse_data(self) -> Data:
+        self.tokens.pop(0)
+        operands = []
+        while len(self.tokens) > 0:
+            if self.tokens[0].type == TokenType.IMMEDIATE:
+                operands.append(DataItem(OperandType.IMMEDIATE, self.parse_immediate(self.tokens[0].value)))
+            elif self.tokens[0].type == TokenType.ADDRESS:
+                try:
+                    operands.append(DataItem(OperandType.ADDRESS, self.parse_immediate(self.tokens[0].value[1:])))
+                except:
+                    operands.append(DataItem(OperandType.ADDRESS, self.tokens[0].value[1:]))
+            else:
+                break
+            self.tokens.pop(0)
+
+        return Data(operands)
+
+    def parse(self, contents) -> List[Instruction | Label | Macro | Data]:
         self.instructions: List[Instruction] = []
-        self.macros: List[Macro] = {}
-        self.stream: List [Label | Instruction] = []
+        self.stream: List [Label | Instruction | Macro] = []
         self.tokens = self.lexer.lex(contents)
         while len(self.tokens) > 0:
-            if self.tokens[0].type == TokenType.WORD: # Parse Instruction
-                instruction = self.parse_instruction()
-                self.stream.append(instruction)            
-            elif self.tokens[0].type == TokenType.LABEL: # Parse Label
-                self.stream.append(Label(self.tokens[0].value[:-1]))
-                self.tokens.pop(0)
-            elif self.tokens[0].type == TokenType.START_MACRO: # Parse Macro
-                macro: Macro = self.parse_macro(0)
-                self.macros[macro.name] = macro
-            else:
-                raise Exception("Invalid token: {}".format(self.tokens[0].value))
-        return (self.stream, self.macros)
+            match self.tokens[0].type:
+                case TokenType.WORD:
+                    instruction = self.parse_instruction()
+                    self.stream.append(instruction) 
+                case TokenType.LABEL:
+                    self.stream.append(Label(self.tokens[0].value[:-1]))
+                    self.tokens.pop(0)
+                case TokenType.START_MACRO:
+                    macro: Macro = self.parse_macro()
+                    self.stream.append(macro)
+                case TokenType.DATA:
+                    data: Data = self.parse_data()
+                    self.stream.append(data)
+                case _:
+                    raise Exception("Invalid token: {}".format(self.tokens[0].value))
+        return self.stream

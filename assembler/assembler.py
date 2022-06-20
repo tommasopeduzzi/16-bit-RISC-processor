@@ -1,5 +1,5 @@
 from typing import Dict, List
-from parser import Instruction, Label, OperandType, Parser
+from parser import Data, Instruction, Label, Macro, OperandType, Parser
 
 opcode_map = {
     # General instructions
@@ -41,9 +41,13 @@ class Assembler:
     def __init__(self):
         self.parser = Parser()
         self.address = 0
+        self.binary = bytearray()
+        self.operations: List[Instruction] = []
+        self.labels: Dict[Label] = {}
+        self.macros: Dict[Macro] = {}
 
     def assemble(self, file):
-        self.stream, self.macros = self.parser.parse_file(file)
+        self.stream = self.parser.parse_file(file)
         self.codegen()
 
     def codegen_macro(self, instruction):
@@ -60,9 +64,19 @@ class Assembler:
             self.codegen_instruction(
                 macro_instruction, instruction.operands, macro.argument_types)
 
+    def codegen_data(self, data):
+        for operand in data.operands:
+            if operand.type == OperandType.IMMEDIATE or operand.type == OperandType.ADDRESS:
+                self.binary += operand.value.to_bytes(2, byteorder="little")
+            elif operand.type == OperandType.LABEL:
+                self.binary += self.labels[operand.value].to_bytes(2, byteorder="little")
+
     def codegen_instruction(self, instruction: Instruction, macro_arguments=[], macro_argument_types=[]):
         if instruction.opcode in self.macros.keys():
             self.codegen_macro(instruction)
+            return
+        elif instruction.opcode == "data":
+            self.codegen_data(instruction)
             return
         operand_types = [operand.type if not operand.type == 5 else OperandType.ADDRESS if not operand.type == OperandType.MACRO_ARGUMENT else macro_argument_types[i]
                          for i, operand in enumerate(instruction.operands)]
@@ -98,22 +112,25 @@ class Assembler:
             self.binary += opcode.to_bytes(1, byteorder="little")  # no operands
 
     def codegen(self):
-        self.binary = bytearray()
-        self.instructions: List[Instruction] = []
-        self.labels: Dict[Label] = {}
-        self.address = 1
-
         for item in self.stream: # Collect label addresses
             if isinstance(item, Label):
                 self.labels[item.name] = self.address
-            elif type(item) == Instruction:
-                if len(item.operands) < 2:
-                    self.address += 1
-                elif len(item.operands) == 2 and item.operands[1].type == OperandType.REGISTER:
-                    self.address += 2
-                elif len(item.operands) == 2 and item.operands[1].type == OperandType.ADDRESS or item.operands[1].type == OperandType.ADDRESS:
-                    self.address += 3
-                self.instructions.append(item)
+            elif isinstance(item, Instruction):
+                self.address += 1
+                for i, operand in enumerate(item.operands):
+                    if [OperandType.REGISTER, OperandType.DEVICE].count(operand.type) > 0 and not i == 0:
+                        self.address += 1
+                    elif [OperandType.ADDRESS, OperandType.LABEL, OperandType.IMMEDIATE].count(operand.type) > 0:
+                        self.address += 2
+                self.operations.append(item)
+            elif isinstance(item, Data):
+                self.address += 2*len(item.operands)
+                self.operations.append(item)
+            elif isinstance(item, Macro):
+                self.macros[item.name] = item
     
-        for instruction in self.instructions: # Codegen instructions
-            self.codegen_instruction(instruction)
+        for operation in self.operations: # Codegen instructions
+            if isinstance(operation, Instruction):
+                self.codegen_instruction(operation)
+            elif isinstance(operation, Data):
+                self.codegen_data(operation)

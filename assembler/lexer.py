@@ -7,16 +7,15 @@ from attr import dataclass
 class TokenType(Enum):
     LABEL = 0
     WORD = 1
-    HEXADECIMAL = 2
-    BINARY = 3
-    DECIMAL = 4
-    ADDRESS = 5
-    REGISTER = 6
-    START_MACRO = 7
-    END_MACRO = 8
-    MACRO_ARGUMENT_TYPE = 9
-    MACRO_ARGUMENT = 10
-    DEVICE = 11
+    IMMEDIATE = 2
+    ADDRESS = 3
+    REGISTER = 4
+    START_MACRO = 5
+    END_MACRO = 6
+    MACRO_ARGUMENT_TYPE = 7
+    MACRO_ARGUMENT = 8
+    DEVICE = 9
+    DATA = 10
 
 @dataclass
 class Token:
@@ -41,16 +40,18 @@ class Lexer:
                     self.tokens.append(Token(TokenType.END_MACRO, word))
                 elif ["imm", "addr", "reg"].count(word) == 1:
                     self.tokens.append(Token(TokenType.MACRO_ARGUMENT_TYPE, word))
+                elif word == "data":
+                    self.tokens.append(Token(TokenType.DATA, word))
                 elif re.match(r'[a-zA-Z]+:', word):
                     self.tokens.append(Token(TokenType.LABEL, word))
                 elif re.match(r'[a-zA-Z]+', word):
                     self.tokens.append(Token(TokenType.WORD, word))
                 elif re.match(r'0x[0-9a-fA-F]+', word):
-                    self.tokens.append(Token(TokenType.HEXADECIMAL, word))
+                    self.tokens.append(Token(TokenType.IMMEDIATE, word))
                 elif re.match(r'0b[01]+', word):
-                    self.tokens.append(Token(TokenType.BINARY, word))
+                    self.tokens.append(Token(TokenType.IMMEDIATE, word))
                 elif re.match(r'[0-9]+', word):
-                    self.tokens.append(Token(TokenType.DECIMAL, word))
+                    self.tokens.append(Token(TokenType.IMMEDIATE, word))
                 elif word.startswith('$'):
                     self.tokens.append(Token(TokenType.REGISTER, word))
                 elif word.startswith('?'):
