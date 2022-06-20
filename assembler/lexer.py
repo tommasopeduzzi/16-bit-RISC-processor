@@ -16,6 +16,7 @@ class TokenType(Enum):
     MACRO_ARGUMENT = 8
     DEVICE = 9
     DATA = 10
+    INCLUDE = 11
 
 @dataclass
 class Token:
@@ -42,6 +43,8 @@ class Lexer:
                     self.tokens.append(Token(TokenType.MACRO_ARGUMENT_TYPE, word))
                 elif word == "data":
                     self.tokens.append(Token(TokenType.DATA, word))
+                elif word == "include":
+                    self.tokens.append(Token(TokenType.INCLUDE, word))
                 elif re.match(r'[a-zA-Z]+:', word):
                     self.tokens.append(Token(TokenType.LABEL, word))
                 elif re.match(r'[a-zA-Z]+', word):

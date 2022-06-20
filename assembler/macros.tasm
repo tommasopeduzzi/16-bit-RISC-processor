@@ -1,0 +1,4 @@
+macro inc 1 reg
+    load-imm $7 1
+    add %0 $7
+endmacro

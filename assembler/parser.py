@@ -1,11 +1,18 @@
+from enum import Enum
 import re
 from typing import List, Tuple
 
 from attr import dataclass
 from lexer import Lexer, Token, TokenType
 
-class OperandType:
-    NONE = -1
+class OperandType():
+    valid_operands = [
+        TokenType.IMMEDIATE, 
+        TokenType.ADDRESS, 
+        TokenType.REGISTER, 
+        TokenType.MACRO_ARGUMENT, 
+        TokenType.DEVICE,
+    ]
     REGISTER = 0
     IMMEDIATE = 1
     ADDRESS = 2
@@ -179,6 +186,13 @@ class Parser:
                 case TokenType.DATA:
                     data: Data = self.parse_data()
                     self.stream.append(data)
+                case TokenType.INCLUDE:
+                    self.tokens.pop(0)
+                    if not self.tokens[0].type == TokenType.WORD:
+                        raise Exception("Expected filename after include, got: {}".format(self.tokens[0].value))
+                    parser = Parser()
+                    self.stream += parser.parse_file(self.tokens[0].value)
+                    self.tokens.pop(0)
                 case _:
                     raise Exception("Invalid token: {}".format(self.tokens[0].value))
         return self.stream
