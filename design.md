@@ -1,24 +1,26 @@
-# **Design Document for a 16-bit RISC processor**
+# **TDP-11**
+## Design  Document
 
 ## **WARNING: This is the first time that I am doing anything like this, so this design document is going to change as the project progresses!**
 
 ## **General Info**
 
 - 16 bit
-- losely based around RISC principles 
+- load-store architecture with variably-sized instructions 
 - little endian
 
 ## **Registers and Flags**
 
-The CPU has 8 general purpose registers numbered 0-7. Additionally, it has the stack pointer (SP), the program counter (PC), and the address register and the 8-bit "register register", which holds the register that a load function will be performed on.
+The CPU has 8 general purpose registers numbered 0-7. Additionally, it has the stack pointer (SP), the program counter (PC).
 
 The CPU has these flags:
 
 | Flag | Value |
 | ---- | ----- |
 | Z | 1 if the last operation of the ALU resulted in zero, 0 if the last ALU operation didn't result in zero. |
+| G | 1 if the last operation of the ALU resulted in a positive number, 0 if the last operation of the ALU didn't result in a positive number | 
 | N | 1 if the last operation of the ALU resulted in a negative number, 0 if the last operation of the ALU didn't result in a negative result |
-| O | 1 if the last operation of the ALU resulted in a overflow, 0 if it didn't result in an overflow |
+| C | 1 if the last operation of the ALU resulted in a carry, 0 if it didn't result in an overflow |
 
 ## **Memory Map**
 
@@ -26,7 +28,7 @@ The system has 64kB of RAM. The first 32 kB are ROM, while the second 32 kB are 
 
 | Range | What |
 |-------|------|
-| 0x0000 - 0x000F | Interrupt Vector Table (in total 16 possible interrupts) |
+| 0x0000 - 0x001F | Interrupt Vector Table (in total 16 possible interrupts) |
 | 0x0010 - 0x7FFF | Code and constant data ROM |
 | 0x8000 - 0xFFFF | General purpose RAM, with stack at the top growing downwards. |
 
@@ -58,90 +60,106 @@ I am planning to add more instructions as I progress and start programming with 
 
 #### **Halt**
 
-Halts the CPU. The opcode is $11111$ and the mnemonic is **halt**.
+Halts the CPU. The mnemonic is **halt**.
 
 #### **NOP**
 
-Does nothing. The opcode is $00000$ and the mnemonic is **nop**.
+Does nothing. The mnemonic is **nop**.
 
 ### **Memory Instructions**
 
 #### **Load 16 bits**
 
-Loads value stored at address in register $O_1$ in memory to less significant byte of register $O_0$ and value stored at address $O_1 + 1$ to the most signifcant byte of register $0_0$. The opcode is $00001$ and the mnemonic and arguments are **load *register* *register***.
+Loads value stored at address in register $O_1$ or at address $0_1$ in memory to less significant byte of register $O_0$ and value stored at address $O_1 + 1$ to the most signifcant byte of register $0_0$. The mnemonic and arguments are **load *register* *register*** or **load *register* *address***.
 
 #### **Load into less significant byte**
-Loads byte stored at address in register $O_1$ in memory to less significant byte of the register $O_0$. The opcode is $00010$ and the mnemonic and arguments are **load8 *register* *register***.
+Loads byte stored at address in register $O_1$ or at address $0_1$ in memory to less significant byte of the register $O_0$. The mnemonic and arguments are **load8 *register* *register***
 
 #### **Load 16-bit Immediate**
-Loads 16-bit Immediate $O_2$ into register in the register register. The opcode is $00011$ and the mnemonic and arguments are **load *register* *immediate*** or **load *register* *address***.
+Loads 16-bit Immediate $O_2$ into register in the register register. The mnemonic and arguments are **load-imm *register* *immediate*** or **load-addr *register* *address***.
 
 #### **Store 16 bits**
-Store the least significant of register $O_0$ at the address in register $O_1$ and most significant byte of register $O_0$ at address in register $O_1+1$. The opcode is $00100$ and the mnemonic and arguments are **store *register* *register***.
+Store the least significant of register $O_0$ at the address in register $O_1$ or at address $O_1$ and most significant byte of register $O_0$ at address in register $O_1+1$ or at address $O_1+1 $. The mnemonic and arguments are **store *register* *register***.
 
 #### **Store less significant byte**
-Store the bottom 8 bits of register $O_0$ at the address in register $O_1$. The opcode is $00101$ and the mnemonic and arguments are **store< *register* *register***.
+Store the bottom 8 bits of register $O_0$ at the address in register $O_1$ or at address $O_1$. The mnemonic and arguments are **store< *register* *register***.
 
 #### **Store most significant byte**
-Store the top 8 bits of register $O_0$ at the address in register $O_1$. The opcode is $00110$ and the mnemonic and arguments are **store> *register* *register***.
+Store the top 8 bits of register $O_0$ at the address in register $O_1$ or at address $O_1$. The mnemonic and arguments are **store> *register* *register***.
 
 ### **Stack Manipulation Instructions**
 #### **Push**
-Stores contents of register $O_0$ at location of the stack pointer and decreases stack pointer by 2. The opcode is $00111$ and the mnemonic and arguments are **push *register***.
+Stores contents of register $O_0$ at location of the stack pointer and decreases stack pointer by 2. The mnemonic and arguments are **push *register***.
 
 #### **Pop**
-Loads contents in memory location of the stack pointer into register $O_0$ and increases stack pointer by 2. The opcode is $01000$ and the mnemonic and arguments are **pop *register***.
+Loads contents in memory location of the stack pointer into register $O_0$ and increases stack pointer by 2. The mnemonic and arguments are **pop *register***.
 
 ### **Arithmetic Instructions**
 
 #### **Addition**
 
-Adds contents of register $O_0$ and contents of register $O_1$ and stores them into register $O_0$. The opcode is $01001$ and the mnemonic and arguments are **add *register* *register***.
+Adds contents of register $O_0$ and contents of register $O_1$ and stores them into register $O_0$. The mnemonic and arguments are **add *register* *register***.
 
 #### **Subtraction**
 
-Subtracts contents of register $O_1$ from contents of register $O_0$ and stores them into register $O_0$. The opcode is $01010$ and the mnemonic and arguments are **sub *register* *register***.
+Subtracts contents of register $O_1$ from contents of register $O_0$ and stores them into register $O_0$. The mnemonic and arguments are **sub *register* *register***.
 
 #### **Compare**
 
-Subtracts contents from registers $O_1$ from contents and discards the result, effectively just setting the flags. The opcode is $01011$ and the mnemonic and arguments are **cmp *register* *register***.
+Subtracts contents from registers $O_1$ from contents and discards the result, effectively just setting the flags. The mnemonic and arguments are **cmp *register* *register***.
 
 ### **Logical Instructions**
 
 #### **NOT**
 
-Performs NOT operation on contents of register $O_0$ and stores results into $O_0$. The opcode is $01100$ and the mnemonic and arguments are **not *register***.
+Performs NOT operation on contents of register $O_0$ and stores results into $O_0$. The mnemonic and arguments are **not *register***.
+
+#### **Shift left**
+
+Shifts value of register $O_0$ left by one bit, stores overflown bit in $C$-Flag and stores result back into $O_0$. The mnemonic and arguments are **shiftl *register***.
+
+#### **Shift right**
+
+Shifts value of register $O_0$ right by one bit, stores overflown bit in $C$-Flag and stores result back into $O_0$. The mnemonic and arguments are **shiftr *register***.
 
 #### **AND**
 
-Performs AND operation on contents of register $O_0$ and register $O_1$ and stores result into $0_0$. The opcode is $01101$ and the mnemonic and arguments are **and *register* *register***.
+Performs AND operation on contents of register $O_0$ and register $O_1$ and stores result into $0_0$. The mnemonic and arguments are **and *register* *register***.
 
 #### **OR**
 
-Performs OR operation on contents of register $O_0$ and register $O_1$ and stores result into $0_0$. The opcode is $01110$ and the mnemonic and arguments are **or *register* *register***.
+Performs OR operation on contents of register $O_0$ and register $O_1$ and stores result into $0_0$. The mnemonic and arguments are **or *register* *register***.
 
 #### **XOR**
 
-Performs XOR operation on contents of register $O_0$ and register $O_1$ and stores result into $0_0$. The opcode is $01111$ and the mnemonic and arguments are **xor *register* *register***.
+Performs XOR operation on contents of register $O_0$ and register $O_1$ and stores result into $0_0$. The mnemonic and arguments are **xor *register* *register***.
 
 ### **Control flow Instructions**
 
 #### **Jump**
 
-Sets the program counter to address in register $O_0$. The opcode is $10000$ and the mnemonic and arguments are **jump *register***.
+Sets the program counter to address $O_0$. The mnemonic and arguments are **jump *address***.
 
-#### **Jump If Zero/Jump If Equal**
+#### **Jump If Zero**
 
-Sets the program counter to address in register $O_0$ if $Z$-flag is. The opcode is $10001$ and the mnemonic and arguments are **jump-eq *register***.
+Sets the program counter to address $O_0$ if $Z$-flag is. The mnemonic and arguments are **jump== *address***.
 
 #### **Jump If Less Than Zero**
 
-Sets the program counter to address in register $O_0$ if $N$-flag is set. The opcode is $10010$ and the mnemonic and arguments are **jump-n *register***.
+Sets the program counter to address $O_0$ if $N$-flag is set. The mnemonic and arguments are **jump< *address***.
+
+#### **Jump If Greater Than Zero**
+
+Sets the program counter to address $O_0$ if $G$-flag is set. The mnemonic and arguments are **jump> *address***.
+
+#### **Jump If Carry**
+
+Sets the program counter to address $O_0$ if $C$-flag is set. The mnemonic and arguments are **jumpc *address***.
 
 ### **IO Instructions**
 
 #### **IN**
-Notifies device to output to the main bus and reads from the main bus and stores contents into register $0_0$. The opcode is $10011$ and the mnemonic and arguments are **in *register* *device***.
+Notifies device to output to the main bus and reads from the main bus and stores contents into register $0_0$. The mnemonic and arguments are **in *register* *device***.
 
 #### **OUT**
-Outputs contents of register $O_0$ onto the main bus and the device $O_1$ is notified to read from the main bus. The opcode is $10100$ and the mnemonic and arguments are **out *register* *device***.
+Outputs contents of register $O_0$ onto the main bus and the device $O_1$ is notified to read from the main bus. The mnemonic and arguments are **out *register* *device***.

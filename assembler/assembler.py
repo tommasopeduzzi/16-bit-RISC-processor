@@ -3,35 +3,44 @@ from parser import Data, Instruction, Label, Macro, OperandType, Parser
 
 opcode_map = {
     # General instructions
-    ("nop",            ()):                                                0b00000,
     ("halt",           ()):                                                0b11111,
+    ("nop",            ()):                                                0b00000,
     # Memory instructions
     ("load",           (OperandType.REGISTER, OperandType.REGISTER)):      0b00001,
-    ("load-<byte",     (OperandType.REGISTER, OperandType.REGISTER)):      0b00010,
-    ("load-imm",       (OperandType.REGISTER, OperandType.IMMEDIATE)):     0b00011,
-    ("load-imm",       (OperandType.REGISTER, OperandType.ADDRESS)):       0b00011,
-    ("store",          (OperandType.REGISTER, OperandType.REGISTER)):      0b00100,
-    ("store-<byte",    (OperandType.REGISTER, OperandType.REGISTER)):      0b00101,
-    ("store->byte",    (OperandType.REGISTER, OperandType.REGISTER)):      0b00110,
+    ("load8",          (OperandType.REGISTER, OperandType.REGISTER)):      0b00010,
+    ("load",           (OperandType.REGISTER, OperandType.ADDRESS)):       0b00011,
+    ("load8",          (OperandType.REGISTER, OperandType.ADDRESS)):       0b00100,
+    ("load-imm",       (OperandType.REGISTER, OperandType.IMMEDIATE)):     0b00101,
+    ("load-addr",      (OperandType.REGISTER, OperandType.ADDRESS)):       0b00101,
+    ("store",          (OperandType.REGISTER, OperandType.REGISTER)):      0b00110,
+    ("store<",         (OperandType.REGISTER, OperandType.REGISTER)):      0b00111,
+    ("store>",         (OperandType.REGISTER, OperandType.REGISTER)):      0b01000,
+    ("store",          (OperandType.REGISTER, OperandType.ADDRESS)):       0b01001,
+    ("store<",         (OperandType.REGISTER, OperandType.ADDRESS)):       0b01010,
+    ("store>",         (OperandType.REGISTER, OperandType.ADDRESS)):       0b01011,
     # Stack manipulation instructions
-    ("push",           (OperandType.REGISTER)):                            0b00111,
-    ("pop",            (OperandType.REGISTER)):                            0b01000,
+    ("push",           (OperandType.REGISTER)):                            0b01100,
+    ("pop",            (OperandType.REGISTER)):                            0b01101,
     # Arithmetic instructions
-    ("add",            (OperandType.REGISTER, OperandType.REGISTER)):      0b01001,
-    ("sub",            (OperandType.REGISTER, OperandType.REGISTER)):      0b01010,
-    ("cmp",            (OperandType.REGISTER, OperandType.REGISTER)):      0b01011,
-    # Bitwise instrucctions
-    ("not",            (OperandType.REGISTER)):                            0b01100,
-    ("and",            (OperandType.REGISTER, OperandType.REGISTER)):      0b01101,
-    ("or",             (OperandType.REGISTER, OperandType.REGISTER)):      0b01110,
-    ("xor",            (OperandType.REGISTER, OperandType.REGISTER)):      0b01111,
+    ("add",            (OperandType.REGISTER, OperandType.REGISTER)):      0b01110,
+    ("sub",            (OperandType.REGISTER, OperandType.REGISTER)):      0b01111,
+    ("cmp",            (OperandType.REGISTER, OperandType.REGISTER)):      0b10000,
+    # Bitwise instructions
+    ("not",            (OperandType.REGISTER)):                            0b10001,
+    ("shiftl",         (OperandType.REGISTER)):                            0b10010,
+    ("shiftr",         (OperandType.REGISTER)):                            0b10011,
+    ("and",            (OperandType.REGISTER, OperandType.REGISTER)):      0b10100,
+    ("or",             (OperandType.REGISTER, OperandType.REGISTER)):      0b10101,
+    ("xor",            (OperandType.REGISTER, OperandType.REGISTER)):      0b10110,
     # Control flow instructions
-    ("jump",           (OperandType.REGISTER)):                            0b10000,
-    ("jump-eq",        (OperandType.REGISTER)):                            0b10001,
-    ("jump-n",         (OperandType.REGISTER)):                            0b10010,
+    ("jump",           (OperandType.ADDRESS)):                             0b10111,
+    ("jump==",         (OperandType.ADDRESS)):                             0b11000,
+    ("jump<",          (OperandType.ADDRESS)):                             0b11001,
+    ("jump>",          (OperandType.ADDRESS)):                             0b11010,
+    ("jumpc",          (OperandType.ADDRESS)):                             0b11011,
     # IO instructions
-    ("in",            (OperandType.REGISTER, OperandType.DEVICE)):         0b10011,
-    ("out",           (OperandType.REGISTER, OperandType.DEVICE)):         0b10100,
+    ("in",             (OperandType.REGISTER, OperandType.DEVICE)):        0b11100,
+    ("out",            (OperandType.REGISTER, OperandType.DEVICE)):        0b11101,
 }
 
 
@@ -78,7 +87,7 @@ class Assembler:
         elif instruction.opcode == "data":
             self.codegen_data(instruction)
             return
-        operand_types = [operand.type if not operand.type == 5 else OperandType.ADDRESS if not operand.type == OperandType.MACRO_ARGUMENT else macro_argument_types[i]
+        operand_types = [operand.type if not operand.type == OperandType.LABEL else OperandType.ADDRESS if not operand.type == OperandType.MACRO_ARGUMENT else macro_argument_types[i]
                          for i, operand in enumerate(instruction.operands)]
         if not len(operand_types) == 0:
             concat_instruction = (instruction.opcode, tuple(operand_types) if len(operand_types) > 1 else operand_types[0])
@@ -89,28 +98,31 @@ class Assembler:
         except KeyError:
             raise Exception(
                 "Unknown instruction: {}".format(instruction.opcode))
-                
-        if len(instruction.operands) > 0:
-            for i, operand in enumerate(instruction.operands):
-                if operand.type == OperandType.MACRO_ARGUMENT:
-                    operand= macro_arguments[operand.value]
-                if operand.type == OperandType.REGISTER or operand.type == OperandType.DEVICE:
-                    if i == 0:  # shares byte with opcode
-                        self.binary += (opcode | operand.value).to_bytes(1, byteorder="little")
-                    else:       # has it's own byte
-                        self.binary += operand.value.to_bytes(1, byteorder='little')
-                elif operand.type == OperandType.LABEL:
-                    try:
-                        address = self.labels[operand.value]
-                    except KeyError:
-                        raise Exception(
-                            "Label not found: {}".format(operand.value))
-                    self.binary += address.to_bytes(2, byteorder="little")
-                else:           # immediates or addresses take up 2 bytes
-                    self.binary += operand.value.to_bytes(2, byteorder='little')
-        else:
-            self.binary += opcode.to_bytes(1, byteorder="little")  # no operands
 
+        if len(instruction.operands) >= 1:
+            if not operand_types[0] == OperandType.REGISTER and not operand_types[0] == OperandType.DEVICE:
+                self.binary += opcode.to_bytes(1, byteorder="little")
+        elif len(instruction.operands) == 0:
+            self.binary += opcode.to_bytes(1, byteorder="little")
+
+        for i, operand in enumerate(instruction.operands):
+            if operand.type == OperandType.MACRO_ARGUMENT:
+                operand= macro_arguments[operand.value]
+            if operand.type == OperandType.REGISTER or operand.type == OperandType.DEVICE:
+                if i == 0:  # shares byte with opcode
+                    self.binary += (opcode | operand.value).to_bytes(1, byteorder="little")
+                else:       # has it's own byte
+                    self.binary += operand.value.to_bytes(1, byteorder='little')
+            elif operand.type == OperandType.LABEL:
+                try:
+                    address = self.labels[operand.value]
+                except KeyError:
+                    raise Exception(
+                        "Label not found: {}".format(operand.value))
+                self.binary += address.to_bytes(2, byteorder="little")
+            else:           # immediates or addresses take up 2 bytes
+                self.binary += operand.value.to_bytes(2, byteorder='little')
+    
     def codegen(self):
         for item in self.stream: # Collect label addresses
             if isinstance(item, Label):

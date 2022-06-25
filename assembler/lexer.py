@@ -2,7 +2,7 @@ from enum import Enum
 import re
 from typing import List
 
-from attr import dataclass
+from dataclasses import dataclass
 
 class TokenType(Enum):
     LABEL = 0
