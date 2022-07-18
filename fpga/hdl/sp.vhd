@@ -1,0 +1,48 @@
+--------------------------------------------------------------------------------
+-- File: sp.vhd
+--
+-- Description: 
+--
+-- Stack pointer component for the CPU.
+--
+-- Targeted device: <Family::Fusion> <Die::AFS600> <Package::256 FBGA>
+-- Author: Tommaso Peduzzi
+--
+--------------------------------------------------------------------------------
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity sp is
+port (
+    clk : in std_logic; -- clock
+    rst : in std_logic; -- reset
+	inc : IN  std_logic; -- increment
+	decr : IN  std_logic; -- decrement
+    oe : IN  std_logic; -- output enable
+    output : OUT std_logic_vector(15 downto 0)  -- output
+);
+end sp;
+architecture architecture_sp of sp is
+	signal value : natural := 2**16;
+begin
+    process (clk, rst) begin
+        if rst = '1' then
+            value <= 2**16;
+        end if;
+        if rising_edge(clk) then
+            if oe = '1' then 
+                output <=  std_logic_vector(to_unsigned(value, 16));
+            else
+                output <= (others => 'Z');
+            end if;
+            if inc = '1' then
+                value <= value + 1;
+            elsif decr = '1' then
+                value <= value - 1;
+            end if;
+        end if;    
+    end process;
+end architecture_sp;
