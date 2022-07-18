@@ -19,7 +19,7 @@ The CPU has these flags:
 | ---- | ----- |
 | Z | 1 if the last operation of the ALU resulted in zero, 0 if the last ALU operation didn't result in zero. |
 | G | 1 if the last operation of the ALU resulted in a positive number, 0 if the last operation of the ALU didn't result in a positive number | 
-| N | 1 if the last operation of the ALU resulted in a negative number, 0 if the last operation of the ALU didn't result in a negative result |
+| L | 1 if the last operation of the ALU resulted in a negative number, 0 if the last operation of the ALU didn't result in a negative result |
 | C | 1 if the last operation of the ALU resulted in a carry, 0 if it didn't result in an overflow |
 
 ## **Memory Map**
@@ -146,7 +146,7 @@ Sets the program counter to address $O_0$ if $Z$-flag is. The mnemonic and argum
 
 #### **Jump If Less Than Zero**
 
-Sets the program counter to address $O_0$ if $N$-flag is set. The mnemonic and arguments are **jump< *address***.
+Sets the program counter to address $O_0$ if $L$-flag is set. The mnemonic and arguments are **jump< *address***.
 
 #### **Jump If Greater Than Zero**
 
