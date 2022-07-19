@@ -21,23 +21,18 @@ port (
     rst : in std_logic; -- reset
 	inc : IN  std_logic; -- increment
 	decr : IN  std_logic; -- decrement
-    oe : IN  std_logic; -- output enable
     output : OUT std_logic_vector(15 downto 0)  -- output
 );
 end sp;
 architecture architecture_sp of sp is
-	signal value : natural := 2**16;
+	signal value : unsigned;
 begin
     process (clk, rst) begin
         if rst = '1' then
-            value <= 2**16;
+            value <= to_unsigned(0, 16);
         end if;
         if rising_edge(clk) then
-            if oe = '1' then 
-                output <=  std_logic_vector(to_unsigned(value, 16));
-            else
-                output <= (others => 'Z');
-            end if;
+            output <=  std_logic_vector(value);
             if inc = '1' then
                 value <= value + 1;
             elsif decr = '1' then
