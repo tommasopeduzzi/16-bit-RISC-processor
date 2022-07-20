@@ -55,3 +55,4 @@ Design Entry;HDL Check||(null)||Checking HDL syntax of 'main_bus.vhd'||(null);(n
 Design Entry;HDL Check||(null)||Checking HDL syntax of 'main_bus.vhd'||(null);(null)||(null);(null)
 Design Entry;HDL Check||(null)||Checking HDL syntax of 'alu_bus.vhd'||(null);(null)||(null);(null)
 Design Entry;HDL Check||(null)||Checking HDL syntax of 'address_bus.vhd'||(null);(null)||(null);(null)
+Design Entry;HDL Check||(null)||Checking HDL syntax of 'control.vhd'||(null);(null)||(null);(null)
