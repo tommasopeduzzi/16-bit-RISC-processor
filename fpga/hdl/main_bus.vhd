@@ -1,15 +1,9 @@
 --------------------------------------------------------------------------------
--- Company: <Name>
---
 -- File: main_bus.vhd
--- File history:
---      <Revision number>: <Date>: <Comments>
---      <Revision number>: <Date>: <Comments>
---      <Revision number>: <Date>: <Comments>
 --
 -- Description: 
 --
--- <Description here>
+-- Main Bus control logic for the CPU.
 --
 -- Targeted device: <Family::Fusion> <Die::AFS600> <Package::256 FBGA>
 -- Author: <Name>
@@ -19,6 +13,7 @@
 library IEEE;
 
 use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
 
 entity main_bus is
 port (
@@ -30,7 +25,6 @@ port (
     reg_sel_m : IN std_logic_vector(2 downto 0);
     mem_sel : IN std_logic;
     alu_sel : IN std_logic;
-    control_sel : IN std_logic;
 
     -- inputs
     r0 : IN std_logic_vector(15 downto 0);
@@ -49,11 +43,49 @@ port (
 );
 end main_bus;
 architecture architecture_main_bus of main_bus is
-   -- signal, component etc. declarations
-	signal signal_name1 : std_logic; -- example
-	signal signal_name2 : std_logic_vector(1 downto 0) ; -- example
-
 begin
-
-   -- architecture body
+    process (clk) begin
+        if rising_edge(clk) then
+            if mem_sel = '1' then
+                output <= (7 downto 0 => mem, others => '0');
+            elsif alu_sel = '1' then
+                output <= alu;
+            else
+                if not reg_sel = "XXX" then 
+                    case to_integer(unsigned(reg_sel)) is
+                        when 0 => output <= r0;
+                        when 1 => output <= r1;
+                        when 2 => output <= r2;
+                        when 3 => output <= r3;
+                        when 4 => output <= r4;
+                        when 5 => output <= r5;
+                        when 6 => output <= r6;
+                        when 7 => output <= r7;
+                    end case;
+                elsif not reg_sel_l = "XXX" then
+                    case to_integer(unsigned(reg_sel_l)) is
+                        when 0 => output <= (7 downto 0 => r0(7 downto 0), others => '0');
+                        when 1 => output <= (7 downto 0 => r1(7 downto 0), others => '0');
+                        when 2 => output <= (7 downto 0 => r2(7 downto 0), others => '0');
+                        when 3 => output <= (7 downto 0 => r3(7 downto 0), others => '0');
+                        when 4 => output <= (7 downto 0 => r4(7 downto 0), others => '0');
+                        when 5 => output <= (7 downto 0 => r5(7 downto 0), others => '0');
+                        when 6 => output <= (7 downto 0 => r6(7 downto 0), others => '0');
+                        when 7 => output <= (7 downto 0 => r7(7 downto 0), others => '0');
+                    end case;
+                    elsif not reg_sel_m = "XXX" then
+                        case to_integer(unsigned(reg_sel_l)) is
+                            when 0 => output <= (7 downto 0 => r0(15 downto 8), others => '0');
+                            when 1 => output <= (7 downto 0 => r1(15 downto 8), others => '0');
+                            when 2 => output <= (7 downto 0 => r2(15 downto 8), others => '0');
+                            when 3 => output <= (7 downto 0 => r3(15 downto 8), others => '0');
+                            when 4 => output <= (7 downto 0 => r4(15 downto 8), others => '0');
+                            when 5 => output <= (7 downto 0 => r5(15 downto 8), others => '0');
+                            when 6 => output <= (7 downto 0 => r6(15 downto 8), others => '0');
+                            when 7 => output <= (7 downto 0 => r7(15 downto 8), others => '0');
+                        end case;
+                end if;
+            end if;
+        end if;
+    end process;
 end architecture_main_bus;

@@ -47,3 +47,11 @@ Design Entry;SmartDesign Check||(null)||Error: Unconnected input pin register_7:
 Design Entry;SmartDesign Check||(null)||Error: Unconnected input pin rhs:reg_sel[2:0]||(null);(null)||Undriven Pin;liberoaction://cross_probe/smartdesign/cpu/pins/rhs:reg_sel
 Design Entry;SmartDesign Check||(null)||Error: Unconnected input pin sp:inc||(null);(null)||Undriven Pin;liberoaction://cross_probe/smartdesign/cpu/pins/sp:inc
 Design Entry;SmartDesign Check||(null)||Error: Unconnected input pin sp:decr||(null);(null)||Undriven Pin;liberoaction://cross_probe/smartdesign/cpu/pins/sp:decr
+Design Entry;HDL Check||(null)||Checking HDL syntax of 'main_bus.vhd'||(null);(null)||(null);(null)
+Design Entry;HDL Check||(null)||Checking HDL syntax of 'main_bus.vhd'||(null);(null)||(null);(null)
+Design Entry;HDL Check||(null)||Checking HDL syntax of 'main_bus.vhd'||(null);(null)||(null);(null)
+Design Entry;HDL Check||(null)||Checking HDL syntax of 'main_bus.vhd'||(null);(null)||(null);(null)
+Design Entry;HDL Check||(null)||Checking HDL syntax of 'main_bus.vhd'||(null);(null)||(null);(null)
+Design Entry;HDL Check||(null)||Checking HDL syntax of 'main_bus.vhd'||(null);(null)||(null);(null)
+Design Entry;HDL Check||(null)||Checking HDL syntax of 'alu_bus.vhd'||(null);(null)||(null);(null)
+Design Entry;HDL Check||(null)||Checking HDL syntax of 'address_bus.vhd'||(null);(null)||(null);(null)
