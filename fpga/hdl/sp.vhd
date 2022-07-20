@@ -25,13 +25,12 @@ port (
 );
 end sp;
 architecture architecture_sp of sp is
-	signal value : unsigned;
+	signal value : unsigned(15 downto 0);
 begin
     process (clk, rst) begin
         if rst = '1' then
             value <= to_unsigned(0, 16);
-        end if;
-        if rising_edge(clk) then
+        elsif rising_edge(clk) then
             output <=  std_logic_vector(value);
             if inc = '1' then
                 value <= value + 1;

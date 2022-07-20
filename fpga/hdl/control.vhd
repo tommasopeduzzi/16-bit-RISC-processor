@@ -77,8 +77,8 @@ begin
             step <= 0;
         elsif falling_edge(clk) then
             if latch_opcode_op1 = '1' then
-                opcode <= input(7 downto 4);
-                op1 <= input(3 downto 0);
+                opcode <= input(7 downto 3);
+                op1 <= input(2 downto 0);
             end if;
             if latch_op2 = '1' then
                 op2 <= input(7 downto 0);

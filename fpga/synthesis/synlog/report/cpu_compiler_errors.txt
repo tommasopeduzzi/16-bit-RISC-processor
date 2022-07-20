@@ -1,0 +1,2 @@
+@E: CL123 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\sp.vhd":34:8:34:9|Logic for value_6(15 downto 0) does not match a standard flip-flop
+

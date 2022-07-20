@@ -1,0 +1,2 @@
+
+: 0 work.cpu "C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\component\work\cpu\cpu.vhd" 17 7 work.demultiplexor work.sp work.reg work.pc work.memory work.main_bus work.alu_bus work.control work.alu work.address_bus 

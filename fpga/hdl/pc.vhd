@@ -28,13 +28,12 @@ port (
 );
 end pc;
 architecture architecture_pc of pc is
-	signal value : unsigned; 
+	signal value : unsigned(15 downto 0); 
 begin
     process (clk) begin
         if rst = '1' then
             value <= to_unsigned(0, 16);
-        end if;
-        if rising_edge(clk) then
+        elsif rising_edge(clk) then
             if inc = '1' then 
                 value <= value + 1;
             end if;

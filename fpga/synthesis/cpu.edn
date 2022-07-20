@@ -1,0 +1,68 @@
+(edif cpu
+  (edifVersion 2 0 0)
+  (edifLevel 0)
+  (keywordMap (keywordLevel 0))
+  (status
+    (written
+      (timeStamp 2022 7 20 14 53 10)
+      (author "Synopsys, Inc.")
+      (program "Synplify Pro" (version "L-2016.09M-SP1-5, mapper mapact, Build 2172R"))
+     )
+   )
+  (library fusion
+    (edifLevel 0)
+    (technology (numberDefinition ))
+    (cell VCC (cellType GENERIC)
+      (property dont_touch (string "false"))
+       (view prim (viewType NETLIST)
+         (interface
+           (port Y (direction OUTPUT)
+           (property function (string "1"))
+ )
+         )
+        (property is_pwr (integer 1))
+       )
+    )
+    (cell GND (cellType GENERIC)
+      (property dont_touch (string "false"))
+       (view prim (viewType NETLIST)
+         (interface
+           (port Y (direction OUTPUT)
+           (property function (string "0"))
+ )
+         )
+        (property is_pwr (integer 1))
+       )
+    )
+  )
+  (library work
+    (edifLevel 0)
+    (technology (numberDefinition ))
+    (cell cpu (cellType GENERIC)
+       (view rtl (viewType NETLIST)
+         (interface
+           (port clk (direction INPUT))
+           (port rst (direction INPUT))
+         )
+         (contents
+          (instance VCC_i (viewRef prim (cellRef VCC (libraryRef fusion)))          )
+          (instance GND_i (viewRef prim (cellRef GND (libraryRef fusion)))          )
+          (net clk (joined
+           (portRef clk)
+          ))
+          (net rst (joined
+           (portRef rst)
+          ))
+          (net GND (joined
+           (portRef Y (instanceRef GND_i))
+          ))
+          (net VCC (joined
+           (portRef Y (instanceRef VCC_i))
+          ))
+         )
+        (property orig_inst_of (string "cpu"))
+       )
+    )
+  )
+  (design cpu (cellRef cpu (libraryRef work)))
+)
