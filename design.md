@@ -44,15 +44,15 @@ Devices can also be connected to the interrupt bus. The control logic will halt 
 
 Instructions have variable length. The possible configurations are:
 
-- Instruction with no operand: 5 bits opcode (1 byte total length) 
+The instructions starts with a byte encoding the operation (6 less significant bits) and the number of bytes that the operands use (2 more significant bits).
 
-- Instruction with 1 operand (*register*): 5 bits opcode + 3 bits operand (1 byte total length)
+The operands are stored like follows:
 
-- Instruction with 2 operands (*register*/*device*, *register*/*device*): 5 bits opcode + 3 bits first operand + 8 bits second operand (2 bytes total length)
+- Instruction with 1 operand (*register*): 4 more significant bits of one byte are the operand $O_0$: $O_0O_0O_0O_0----$
 
-- Instruction with two operands (*register*/*device*, *immediate*/*address*): 5 bits opcode + 3 bits first operand + 16 bits second operand (3 bytes total length)
+- Instruction with 2 operands (*register*/*device*, *register*/*device*): 4 more significant bytes of one byte are the first operand $O_0$, 4 less significant bits of the same byte are the second operand $O_1$: $O_0O_0O_0O_0O_1O_1O_1O_1$
 
-The operands are referred to as $O_0$ and $O_1$ respectively.
+- Instruction with two operands (*register*/*device*, *immediate*/*address*): 4 more significant bits of one byte are the first operand $O_0$, the following two bytes are the second operand $O_1$: $O_0O_0O_0O_0----\text{  }O_1O_1O_1O_1O_1O_1O_1O_1\text{  }O_1O_1O_1O_1O_1O_1O_1O_1$
 
 I am planning to add more instructions as I progress and start programming with the emulator. I can then adapt this instruction set as I see fit (for example stack and calls).
 

@@ -6,11 +6,9 @@ data:
     data 0xFFFD 1
 
 start:
-    load $1 @data
-    load-imm $4 2
-    add $3 $4
-    load-addr $4 @data
-    load-imm $5 2
-    add $4 $5
-    load $2 $4
+    load-addr $0 @data
+    load $2 $0
+    load-imm $1 2
+    add $0 $1
+    load $3 $0
     halt

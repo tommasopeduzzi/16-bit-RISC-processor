@@ -20,7 +20,7 @@ class Operand():
 
 @dataclass
 class Instruction():
-    opcode: str
+    mnemonic: str
     operands: List[Operand]
 
 @dataclass
