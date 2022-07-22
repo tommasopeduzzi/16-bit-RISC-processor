@@ -22,11 +22,13 @@ port (
     -- control lines
     pc_sel : IN std_logic;
     sp_sel : IN std_logic;
+    control_sel : IN std_logic;
     reg_sel : IN std_logic_vector(2 downto 0);
 
     -- inputs
     pc : IN std_logic_vector(15 downto 0);
     sp : IN std_logic_vector(15 downto 0);
+    control : IN std_logic_vector(15 downto 0);
     r0 : IN std_logic_vector(15 downto 0);
     r1 : IN std_logic_vector(15 downto 0);
     r2 : IN std_logic_vector(15 downto 0);
@@ -48,6 +50,8 @@ begin
                 output <= pc;
             elsif sp_sel  = '1' then
                 output <= sp;
+            elsif control_sel = '1' then
+                output <= control;
             else
                 if not reg_sel = "XXX" then 
                     case to_integer(unsigned(reg_sel)) is
@@ -59,6 +63,7 @@ begin
                         when 5 => output <= r5;
                         when 6 => output <= r6;
                         when 7 => output <= r7;
+                        when others => output <= (others => 'X');
                     end case;
                 end if;
             end if;

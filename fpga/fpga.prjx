@@ -43,8 +43,24 @@ ENDLIST
 LIST FileManager
 VALUE "<project>\component\work\cpu\cpu.cxf,actgen_cxf"
 STATE="utd"
-TIME="1658158710"
-SIZE="1900"
+TIME="1658321825"
+SIZE="2492"
+ENDFILE
+VALUE "<project>\component\work\cpu\cpu.vhd,hdl"
+STATE="utd"
+TIME="1658321825"
+SIZE="23399"
+PARENT="<project>\component\work\cpu\cpu.cxf"
+ENDFILE
+VALUE "<project>\component\work\DESIGN_FIRMWARE\DESIGN_FIRMWARE.cxf,actgen_cxf"
+STATE="utd"
+TIME="1658321320"
+SIZE="437"
+ENDFILE
+VALUE "<project>\component\work\DESIGN_IO\DESIGN_IO.cxf,actgen_cxf"
+STATE="utd"
+TIME="1658321320"
+SIZE="413"
 ENDFILE
 VALUE "<project>\designer\impl1\cpu.ide_des,ide_des"
 STATE="utd"
@@ -56,10 +72,35 @@ STATE="utd"
 TIME="1658156499"
 SIZE="433"
 ENDFILE
+VALUE "<project>\hdl\address_bus.vhd,hdl"
+STATE="utd"
+TIME="1658314453"
+SIZE="2085"
+ENDFILE
 VALUE "<project>\hdl\alu.vhd,hdl"
 STATE="utd"
-TIME="1658085474"
-SIZE="2606"
+TIME="1658223262"
+SIZE="2461"
+ENDFILE
+VALUE "<project>\hdl\alu_bus.vhd,hdl"
+STATE="utd"
+TIME="1658315051"
+SIZE="1708"
+ENDFILE
+VALUE "<project>\hdl\control.vhd,hdl"
+STATE="utd"
+TIME="1658321464"
+SIZE="3452"
+ENDFILE
+VALUE "<project>\hdl\demultiplexor.vhd,hdl"
+STATE="utd"
+TIME="1658234438"
+SIZE="1432"
+ENDFILE
+VALUE "<project>\hdl\main_bus.vhd,hdl"
+STATE="utd"
+TIME="1658315286"
+SIZE="4011"
 ENDFILE
 VALUE "<project>\hdl\memory.vhd,hdl"
 STATE="utd"
@@ -68,33 +109,64 @@ SIZE="1248"
 ENDFILE
 VALUE "<project>\hdl\pc.vhd,hdl"
 STATE="utd"
-TIME="1658071193"
-SIZE="1705"
+TIME="1658321573"
+SIZE="1497"
 ENDFILE
 VALUE "<project>\hdl\register.vhd,hdl"
 STATE="utd"
-TIME="1658156507"
-SIZE="2527"
+TIME="1658227289"
+SIZE="1477"
 ENDFILE
 VALUE "<project>\hdl\sp.vhd,hdl"
 STATE="utd"
-TIME="1658154511"
-SIZE="1335"
+TIME="1658321585"
+SIZE="1162"
+ENDFILE
+VALUE "<project>\synthesis\cpu.edn,syn_edn"
+STATE="utd"
+TIME="1658321590"
+SIZE="1849"
 ENDFILE
 VALUE "<project>\synthesis\cpu.so,so"
 STATE="utd"
-TIME="1657303492"
+TIME="1658321590"
 SIZE="244"
+ENDFILE
+VALUE "<project>\synthesis\cpu_sdc.sdc,syn_sdc"
+STATE="utd"
+TIME="1658321590"
+SIZE="310"
+ENDFILE
+VALUE "<project>\synthesis\cpu_syn.prj,prj"
+STATE="utd"
+TIME="1658321591"
+SIZE="2853"
 ENDFILE
 VALUE "<project>\synthesis\synwork\layer0.so,so"
 STATE="utd"
-TIME="1656242932"
+TIME="1658321576"
 SIZE="159"
 ENDFILE
 ENDLIST
 LIST UsedFile
 ENDLIST
 LIST NewModulesInfo
+LIST "cpu::work"
+FILE "<project>\component\work\cpu\cpu.vhd,hdl"
+LIST ProjectState5.1
+LIST Impl1
+LiberoState=Post_Synthesis
+ideSYNTHESIS(<project>\synthesis\cpu.edn,syn_edn)=StateSuccess
+LIST FlowOptions
+UsePhySynth=FALSE
+UseSynth=TRUE
+UseFhbAutoInst=FALSE
+ENDLIST
+Used_File_List
+ENDUsed_File_List
+ENDLIST
+ENDLIST
+ENDLIST
 ENDLIST
 LIST AssociatedStimulus
 ENDLIST
@@ -200,6 +272,19 @@ IS32BIT="1"
 EndProfile
 ENDLIST
 LIST ProjectState5.1
+LIST "cpu::work"
+LIST Impl1
+LiberoState=Post_Synthesis
+ideSYNTHESIS(<project>\synthesis\cpu.edn,syn_edn)=StateSuccess
+LIST FlowOptions
+UsePhySynth=FALSE
+UseSynth=TRUE
+UseFhbAutoInst=FALSE
+ENDLIST
+Used_File_List
+ENDUsed_File_List
+ENDLIST
+ENDLIST
 ENDLIST
 LIST ExcludePackageForSimulation
 ENDLIST
@@ -217,17 +302,33 @@ StartPage;StartPage;0
 ACTIVEVIEW;StartPage
 ENDLIST
 LIST ModuleSubBlockList
+LIST "address_bus::work","hdl\address_bus.vhd","FALSE","FALSE"
+ENDLIST
 LIST "alu::work","hdl\alu.vhd","FALSE","FALSE"
 ENDLIST
-LIST "control::work","","FALSE","FALSE"
+LIST "alu_bus::work","hdl\alu_bus.vhd","FALSE","FALSE"
 ENDLIST
-LIST "cpu::work","component\work\cpu\cpu.cxf","TRUE","FALSE"
+LIST "control::work","hdl\control.vhd","FALSE","FALSE"
+ENDLIST
+LIST "cpu::work","component\work\cpu\cpu.vhd","TRUE","FALSE"
+SUBBLOCK "address_bus::work","hdl\address_bus.vhd","FALSE","FALSE"
 SUBBLOCK "alu::work","hdl\alu.vhd","FALSE","FALSE"
-SUBBLOCK "control::work","","FALSE","FALSE"
+SUBBLOCK "alu_bus::work","hdl\alu_bus.vhd","FALSE","FALSE"
+SUBBLOCK "control::work","hdl\control.vhd","FALSE","FALSE"
+SUBBLOCK "demultiplexor::work","hdl\demultiplexor.vhd","FALSE","FALSE"
+SUBBLOCK "main_bus::work","hdl\main_bus.vhd","FALSE","FALSE"
 SUBBLOCK "memory::work","hdl\memory.vhd","FALSE","FALSE"
 SUBBLOCK "pc::work","hdl\pc.vhd","FALSE","FALSE"
 SUBBLOCK "reg::work","hdl\register.vhd","FALSE","FALSE"
 SUBBLOCK "sp::work","hdl\sp.vhd","FALSE","FALSE"
+ENDLIST
+LIST "demultiplexor::work","hdl\demultiplexor.vhd","FALSE","FALSE"
+ENDLIST
+LIST "DESIGN_FIRMWARE::work","component\work\DESIGN_FIRMWARE\DESIGN_FIRMWARE.cxf","TRUE","FALSE"
+ENDLIST
+LIST "DESIGN_IO::work","component\work\DESIGN_IO\DESIGN_IO.cxf","TRUE","FALSE"
+ENDLIST
+LIST "main_bus::work","hdl\main_bus.vhd","FALSE","FALSE"
 ENDLIST
 LIST "memory::work","hdl\memory.vhd","FALSE","FALSE"
 ENDLIST
