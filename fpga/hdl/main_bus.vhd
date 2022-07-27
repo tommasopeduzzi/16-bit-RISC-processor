@@ -65,6 +65,7 @@ begin
                         when 5 => output <= r5;
                         when 6 => output <= r6;
                         when 7 => output <= r7;
+                        when others => output <= (others => 'X');
                     end case;
                 elsif not reg_sel_l = "XXX" then
                     case to_integer(unsigned(reg_sel_l)) is
@@ -76,6 +77,7 @@ begin
                         when 5 => output <= (7 downto 0 => r5(7 downto 0), others => '0');
                         when 6 => output <= (7 downto 0 => r6(7 downto 0), others => '0');
                         when 7 => output <= (7 downto 0 => r7(7 downto 0), others => '0');
+                        when others => output <= (others => 'X');
                     end case;
                 elsif not reg_sel_m = "XXX" then
                     case to_integer(unsigned(reg_sel_l)) is
@@ -87,6 +89,7 @@ begin
                         when 5 => output <= (7 downto 0 => r5(15 downto 8), others => '0');
                         when 6 => output <= (7 downto 0 => r6(15 downto 8), others => '0');
                         when 7 => output <= (7 downto 0 => r7(15 downto 8), others => '0');
+                        when others => output <= (others => 'X');
                     end case;
                 else 
                     output <= (others => 'X');

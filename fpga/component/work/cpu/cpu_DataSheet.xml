@@ -12,7 +12,7 @@
     <project-description>
     </project-description>
     <location>C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/component/work/cpu</location>
-    <state>GENERATED ( Wed Jul 20 14:48:40 2022 )</state>
+    <state>GENERATED ( Fri Jul 22 15:48:37 2022 )</state>
     <swide-toolchain>SoftConsole workspace has not been generated</swide-toolchain>
   </project-settings>
   <site-map>
@@ -30,15 +30,52 @@
     <file>C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\pc.vhd</file>
     <file>C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\register.vhd</file>
     <file>C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\sp.vhd</file>
+    <file>C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\smartgen\clock\clock.vhd</file>
   </fileset>
   <io>
-    <port-name>rst</port-name>
+    <port-name>current_opcode[2]</port-name>
+    <direction>OUT</direction>
+    <pin-number>-</pin-number>
+    <io-standard>LVTTL</io-standard>
+  </io>
+  <io>
+    <port-name>current_opcode[4]</port-name>
+    <direction>OUT</direction>
+    <pin-number>-</pin-number>
+    <io-standard>LVTTL</io-standard>
+  </io>
+  <io>
+    <port-name>CLKA</port-name>
     <direction>IN</direction>
     <pin-number>-</pin-number>
     <io-standard>LVTTL</io-standard>
   </io>
   <io>
-    <port-name>clk</port-name>
+    <port-name>current_opcode[0]</port-name>
+    <direction>OUT</direction>
+    <pin-number>-</pin-number>
+    <io-standard>LVTTL</io-standard>
+  </io>
+  <io>
+    <port-name>current_opcode[5]</port-name>
+    <direction>OUT</direction>
+    <pin-number>-</pin-number>
+    <io-standard>LVTTL</io-standard>
+  </io>
+  <io>
+    <port-name>current_opcode[1]</port-name>
+    <direction>OUT</direction>
+    <pin-number>-</pin-number>
+    <io-standard>LVTTL</io-standard>
+  </io>
+  <io>
+    <port-name>current_opcode[3]</port-name>
+    <direction>OUT</direction>
+    <pin-number>-</pin-number>
+    <io-standard>LVTTL</io-standard>
+  </io>
+  <io>
+    <port-name>rst</port-name>
     <direction>IN</direction>
     <pin-number>-</pin-number>
     <io-standard>LVTTL</io-standard>
@@ -54,6 +91,17 @@
     <core-exttype>alu</core-exttype>
     <core-location>hdl\alu.vhd</core-location>
     <core-name>alu</core-name>
+  </core>
+  <core type="AdlibModule">
+    <core-type>AdlibModule</core-type>
+    <core-exttype>AND2</core-exttype>
+    <core-name>AND2_0</core-name>
+  </core>
+  <core type="ComponentModule">
+    <core-type>ComponentModule</core-type>
+    <core-exttype>SmartGen</core-exttype>
+    <core-location>C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/smartgen/clock</core-location>
+    <core-name>clock_0</core-name>
   </core>
   <core type="HdlModule">
     <core-type>HdlModule</core-type>

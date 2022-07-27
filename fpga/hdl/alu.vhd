@@ -42,6 +42,7 @@ begin
                 when "0110" => output <= std_logic_vector(lhs sll 1);    -- shift left
                 when "0111" => output <= std_logic_vector(lhs srl 1);    -- shift right
                 when "1000" => output <= std_logic_vector(not lhs);         -- not
+                when others => output <= (others => 'X');
             end case;
             if signed(output) > 2**15-1 or signed(output) < -2**15-1 then
                 c <= '1';

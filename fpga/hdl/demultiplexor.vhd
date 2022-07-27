@@ -35,6 +35,7 @@ begin
                 when "101" => output <= (5 => '1', others => '0');
                 when "110" => output <= (6 => '1', others => '0');
                 when "111" => output <= (7 => '1', others => '0');
+                when others => output <= (others => 'X');
             end case;
         end if;
     end process;

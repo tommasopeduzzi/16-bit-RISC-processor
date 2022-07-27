@@ -7,7 +7,6 @@ Design Entry;HDL Check||(null)||Checking HDL syntax of 'main_bus.vhd'||(null);(n
 Design Entry;HDL Check||(null)||Checking HDL syntax of 'alu_bus.vhd'||(null);(null)||(null);(null)
 Design Entry;HDL Check||(null)||Checking HDL syntax of 'address_bus.vhd'||(null);(null)||(null);(null)
 Design Entry;HDL Check||(null)||Checking HDL syntax of 'control.vhd'||(null);(null)||(null);(null)
-Design Entry;SmartDesign Check||(null)||'cpu' was generated successfully||Open datasheet;liberoaction://open_report/file/cpu_DataSheet.xml||(null);(null)
 HelpInfo,C:\Microsemi\Libero_SoC_v11.9\SynplifyPro\lib\html,fpgahelp.qhc,errormessages.mp,C:\Microsemi\Libero_SoC_v11.9\SynplifyPro\bin\mbin\assistant
 Implementation;Synthesis;RootName:cpu
 Implementation;Synthesis|| CD645 ||@W:Ignoring undefined library fusion||cpu.srr(20);liberoaction://cross_probe/hdl/file/'C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\synthesis\cpu.srr'/linenumber/20||cpu.vhd(12);liberoaction://cross_probe/hdl/file/'C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\component\work\cpu\cpu.vhd'/linenumber/12

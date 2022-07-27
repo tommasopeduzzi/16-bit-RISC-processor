@@ -50,6 +50,7 @@ begin
                     when 5 => output <= r5;
                     when 6 => output <= r6;
                     when 7 => output <= r7;
+                    when others => output <= (others => 'X');
                 end case;
             end if;
         end if;

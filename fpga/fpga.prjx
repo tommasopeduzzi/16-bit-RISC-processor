@@ -41,16 +41,55 @@ VALUE="Impl1",NUM=1
 CURREV=1
 ENDLIST
 LIST FileManager
+VALUE "<project>\component\Actel\Simulation\CLK_GEN\1.0.1\CLK_GEN.cxf,actgen_cxf"
+STATE="utd"
+TIME="1658497730"
+SIZE="467"
+PARENT="<project>\component\work\cpu_test\cpu_test.cxf"
+ENDFILE
+VALUE "<project>\component\Actel\Simulation\CLK_GEN\1.0.1\CLK_GEN.vhd,tb_hdl"
+STATE="utd"
+TIME="1658491024"
+SIZE="504"
+PARENT="<project>\component\Actel\Simulation\CLK_GEN\1.0.1\CLK_GEN.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>\component\Actel\Simulation\RESET_GEN\1.0.1\RESET_GEN.cxf,actgen_cxf"
+STATE="utd"
+TIME="1658497730"
+SIZE="471"
+PARENT="<project>\component\work\cpu_test\cpu_test.cxf"
+ENDFILE
+VALUE "<project>\component\Actel\Simulation\RESET_GEN\1.0.1\RESET_GEN.vhd,tb_hdl"
+STATE="utd"
+TIME="1658491024"
+SIZE="538"
+PARENT="<project>\component\Actel\Simulation\RESET_GEN\1.0.1\RESET_GEN.cxf"
+IS_READONLY="TRUE"
+ENDFILE
 VALUE "<project>\component\work\cpu\cpu.cxf,actgen_cxf"
 STATE="utd"
-TIME="1658321825"
-SIZE="2492"
+TIME="1658497718"
+SIZE="2766"
 ENDFILE
 VALUE "<project>\component\work\cpu\cpu.vhd,hdl"
 STATE="utd"
-TIME="1658321825"
-SIZE="23399"
+TIME="1658497717"
+SIZE="24693"
 PARENT="<project>\component\work\cpu\cpu.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>\component\work\cpu_test\cpu_test.cxf,actgen_cxf"
+STATE="utd"
+TIME="1658497731"
+SIZE="2122"
+ENDFILE
+VALUE "<project>\component\work\cpu_test\cpu_test.vhd,tb_hdl"
+STATE="utd"
+TIME="1658497730"
+SIZE="3589"
+PARENT="<project>\component\work\cpu_test\cpu_test.cxf"
+IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\work\DESIGN_FIRMWARE\DESIGN_FIRMWARE.cxf,actgen_cxf"
 STATE="utd"
@@ -74,38 +113,38 @@ SIZE="433"
 ENDFILE
 VALUE "<project>\hdl\address_bus.vhd,hdl"
 STATE="utd"
-TIME="1658314453"
-SIZE="2085"
+TIME="1658483237"
+SIZE="2312"
 ENDFILE
 VALUE "<project>\hdl\alu.vhd,hdl"
 STATE="utd"
-TIME="1658223262"
-SIZE="2461"
+TIME="1658496465"
+SIZE="2520"
 ENDFILE
 VALUE "<project>\hdl\alu_bus.vhd,hdl"
 STATE="utd"
-TIME="1658315051"
-SIZE="1708"
+TIME="1658495420"
+SIZE="1771"
 ENDFILE
 VALUE "<project>\hdl\control.vhd,hdl"
 STATE="utd"
-TIME="1658321464"
-SIZE="3452"
+TIME="1658497596"
+SIZE="9892"
 ENDFILE
 VALUE "<project>\hdl\demultiplexor.vhd,hdl"
 STATE="utd"
-TIME="1658234438"
-SIZE="1432"
+TIME="1658495496"
+SIZE="1491"
 ENDFILE
 VALUE "<project>\hdl\main_bus.vhd,hdl"
 STATE="utd"
-TIME="1658315286"
-SIZE="4011"
+TIME="1658495528"
+SIZE="4400"
 ENDFILE
 VALUE "<project>\hdl\memory.vhd,hdl"
 STATE="utd"
-TIME="1658083871"
-SIZE="1248"
+TIME="1658512541"
+SIZE="1287"
 ENDFILE
 VALUE "<project>\hdl\pc.vhd,hdl"
 STATE="utd"
@@ -119,11 +158,42 @@ SIZE="1477"
 ENDFILE
 VALUE "<project>\hdl\sp.vhd,hdl"
 STATE="utd"
-TIME="1658321585"
+TIME="1658322548"
 SIZE="1162"
 ENDFILE
-VALUE "<project>\synthesis\cpu.edn,syn_edn"
+VALUE "<project>\simulation\run.do,do"
 STATE="utd"
+TIME="1658497772"
+SIZE="1695"
+ENDFILE
+VALUE "<project>\smartgen\clock\clock.cxf,actgen_cxf"
+STATE="utd"
+TIME="1658485845"
+SIZE="1622"
+ENDFILE
+VALUE "<project>\smartgen\clock\clock.gen,gen"
+STATE="utd"
+TIME="1658485844"
+SIZE="571"
+PARENT="<project>\smartgen\clock\clock.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>\smartgen\clock\clock.log,log"
+STATE="utd"
+TIME="1658485845"
+SIZE="3269"
+PARENT="<project>\smartgen\clock\clock.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>\smartgen\clock\clock.vhd,hdl"
+STATE="utd"
+TIME="1658485845"
+SIZE="7548"
+PARENT="<project>\smartgen\clock\clock.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>\synthesis\cpu.edn,syn_edn"
+STATE="ood"
 TIME="1658321590"
 SIZE="1849"
 ENDFILE
@@ -133,7 +203,7 @@ TIME="1658321590"
 SIZE="244"
 ENDFILE
 VALUE "<project>\synthesis\cpu_sdc.sdc,syn_sdc"
-STATE="utd"
+STATE="ood"
 TIME="1658321590"
 SIZE="310"
 ENDFILE
@@ -153,10 +223,14 @@ ENDLIST
 LIST NewModulesInfo
 LIST "cpu::work"
 FILE "<project>\component\work\cpu\cpu.vhd,hdl"
+LIST AssociatedStimulus
+VALUE "<project>\component\Actel\Simulation\CLK_GEN\1.0.1\CLK_GEN.vhd,tb_hdl"
+VALUE "<project>\component\Actel\Simulation\RESET_GEN\1.0.1\RESET_GEN.vhd,tb_hdl"
+VALUE "<project>\component\work\cpu_test\cpu_test.vhd,tb_hdl"
+ENDLIST
 LIST ProjectState5.1
 LIST Impl1
-LiberoState=Post_Synthesis
-ideSYNTHESIS(<project>\synthesis\cpu.edn,syn_edn)=StateSuccess
+ideSTIMULUS=StateSuccess
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -169,6 +243,11 @@ ENDLIST
 ENDLIST
 ENDLIST
 LIST AssociatedStimulus
+LIST cpu
+VALUE "<project>\component\Actel\Simulation\CLK_GEN\1.0.1\CLK_GEN.vhd,tb_hdl"
+VALUE "<project>\component\Actel\Simulation\RESET_GEN\1.0.1\RESET_GEN.vhd,tb_hdl"
+VALUE "<project>\component\work\cpu_test\cpu_test.vhd,tb_hdl"
+ENDLIST
 ENDLIST
 LIST Other_Association
 ENDLIST
@@ -179,13 +258,13 @@ Type=max
 RunTime=1000ns
 Resolution=1ps
 VsimOpt=
-EntityName=test
+EntityName=cpu_test
 TopInstanceName=<top>_0
 DoFileName=
 DoFileName2=wave.do
 DoFileParams=
 DisplayDUTWave=false
-LogAllSignals=false
+LogAllSignals=true
 DisablePulseFiltering=false
 DumpVCD=false
 VCDFileName=power.vcd
@@ -274,8 +353,7 @@ ENDLIST
 LIST ProjectState5.1
 LIST "cpu::work"
 LIST Impl1
-LiberoState=Post_Synthesis
-ideSYNTHESIS(<project>\synthesis\cpu.edn,syn_edn)=StateSuccess
+ideSTIMULUS=StateSuccess
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -308,12 +386,15 @@ LIST "alu::work","hdl\alu.vhd","FALSE","FALSE"
 ENDLIST
 LIST "alu_bus::work","hdl\alu_bus.vhd","FALSE","FALSE"
 ENDLIST
+LIST "clock::work","smartgen\clock\clock.vhd","TRUE","FALSE"
+ENDLIST
 LIST "control::work","hdl\control.vhd","FALSE","FALSE"
 ENDLIST
 LIST "cpu::work","component\work\cpu\cpu.vhd","TRUE","FALSE"
 SUBBLOCK "address_bus::work","hdl\address_bus.vhd","FALSE","FALSE"
 SUBBLOCK "alu::work","hdl\alu.vhd","FALSE","FALSE"
 SUBBLOCK "alu_bus::work","hdl\alu_bus.vhd","FALSE","FALSE"
+SUBBLOCK "clock::work","smartgen\clock\clock.vhd","TRUE","FALSE"
 SUBBLOCK "control::work","hdl\control.vhd","FALSE","FALSE"
 SUBBLOCK "demultiplexor::work","hdl\demultiplexor.vhd","FALSE","FALSE"
 SUBBLOCK "main_bus::work","hdl\main_bus.vhd","FALSE","FALSE"
@@ -337,6 +418,15 @@ ENDLIST
 LIST "reg::work","hdl\register.vhd","FALSE","FALSE"
 ENDLIST
 LIST "sp::work","hdl\sp.vhd","FALSE","FALSE"
+ENDLIST
+LIST "CLK_GEN::work","component\Actel\Simulation\CLK_GEN\1.0.1\CLK_GEN.vhd","FALSE","TRUE"
+ENDLIST
+LIST "cpu_test::work","component\work\cpu_test\cpu_test.vhd","TRUE","TRUE"
+SUBBLOCK "CLK_GEN::work","component\Actel\Simulation\CLK_GEN\1.0.1\CLK_GEN.vhd","FALSE","TRUE"
+SUBBLOCK "RESET_GEN::work","component\Actel\Simulation\RESET_GEN\1.0.1\RESET_GEN.vhd","FALSE","TRUE"
+SUBBLOCK "cpu::work","component\work\cpu\cpu.vhd","TRUE","FALSE"
+ENDLIST
+LIST "RESET_GEN::work","component\Actel\Simulation\RESET_GEN\1.0.1\RESET_GEN.vhd","FALSE","TRUE"
 ENDLIST
 ENDLIST
 LIST ActiveTestBenchList
