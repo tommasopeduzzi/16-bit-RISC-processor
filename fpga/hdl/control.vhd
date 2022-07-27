@@ -57,7 +57,8 @@ port (
     alu_lhs_sel : OUT std_logic_vector(2 downto 0);  -- lhs select
 
     -- immediate output
-    output_imm : OUT std_logic_vector(15 downto 0) -- immediate output
+    output_imm : OUT std_logic_vector(15 downto 0); -- immediate output
+    current_opcode : OUT std_logic_vector(5 downto 0) -- current opcode for debugging
 );
 end control;
 architecture architecture_control of control is
@@ -75,20 +76,187 @@ begin
             op2 <= (others => '0');
             imm <= (others => '0');
         elsif falling_edge(clk) then
-            end if;
-            if latch_lsb_imm = '1' then
-                imm(7 downto 0) <= input;
-            end if;
-            if latch_msb_imm = '1' then
-                imm(15 downto 8) <= input;
+            -- reset control lines
+            mem_we <= 0;
+            pc_inc <= 0;
+            pc_load <= 0;
+            sp_inc <= 0;
+            sp_decr <= 0;
+            alu_op <= (others => 0);
+            reg_we <= (others => 0);
+            reg_we_l <= (others => 0);
+            reg_we_m <= (others => 0);
+            main_alu_sel <= 0;
+            main_mem_sel <= 0;
+            main_control_sel <= 0;
+            main_reg_sel <= (others => 0);
+            main_reg_l_sel <= (others => 0);
+            main_reg_m_sel <= (others => 0);
+            addr_pc_sel <= 0;
+            addr_sp_sel <= 0;
+            addr_control_sel <= 0;
+            addr_reg_sel <= (others => 0);
+            alu_rhs_sel <= (others => 0);
+            alu_lhs_sel <= (others => 0);
+            
+            -- set appropriate control lines
+            if opcode = "111111" then        -- halt
+                case step is
                     when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "000000" then     -- nop
+                case step is
+                    when 0 =>   
+                    when others =>   
+                end case;
+            elsif opcode = "000001" then     -- load reg reg
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "000010" then     -- load8 reg reg
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "000011" then     -- load reg addr
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "000100" then     -- load8 reg addr
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "000101" then     -- load-imm/load-addr reg imm
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "000110" then     -- store reg reg
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "000111" then     -- store< reg reg
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "001000" then     -- store> reg reg
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "001001" then     -- store reg addr
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "001010" then     -- store reg addr
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "001011" then     -- store reg addr
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "001100" then     -- push reg
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "001101" then     -- pop reg
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "001110" then     -- add reg reg
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "001111" then     -- sub reg reg
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "010000" then     -- cmp reg reg
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "010001" then     -- not reg
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "010010" then     -- shiftl reg
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "010011" then     -- shiftr reg
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "010100" then     -- and reg reg
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "010101" then     -- or reg reg
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "010110" then     -- xor reg reg
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "010111" then     -- jump addr 
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "011000" then     -- jump== addr
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "011001" then     -- jump< addr
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "011010" then     -- jump> addr
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "011011" then     -- jumpc addr
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = "011100" then     -- in reg dev
+                case step is
+                    when 0 => 
+                    when others => 
                 end case;
             elsif opcode = "011101" then     -- out reg dev
                 case step is
                     when 0 => 
+                    when others => 
                 end case;
             end if;
-
+            current_opcode <= opcode;
             step <= step + 1;
         end if;
     end process;
