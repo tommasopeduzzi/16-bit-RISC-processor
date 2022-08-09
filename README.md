@@ -1,10 +1,11 @@
-# Custom 16-bit RISC CPU
+# TDP-11
 
-The goal for this project is to create a custom 16-bit RISC CPU. 
-The specifications are yet to be done, but the rough outline for the project will be:
-1. Research and specification design
-2. Make an emulator for the architecture
-3. Make an assembler for the architecture
-4. Create a circuit in a logic simulator
-5. (Create a schematic for assembly)
-6. (Order and assemble the processor)
+The goal for this project is to create a custom 16-bit CPU. You can find the design specs in [design.md](design.md).
+
+Here is a rough roadmap for the project:
+- [x] Research and design specification 
+- [x] Make an emulator for the architecture
+- [x] Make an assembler for the architecture
+- [ ] Program the design into an FPGA
+- [ ] (Create a schematic for assembly)
+- [ ] (Order and assemble the processor)

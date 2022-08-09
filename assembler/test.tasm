@@ -1,8 +1,14 @@
 ; Test program for assembler
 
-include assembler/macros.tasm
+jump @start 
+
+data:
+    data 0xFFFD 1
 
 start:
-    load-imm $0 0xFFFE
-    inc $0 
+    load-addr $0 @data
+    load $2 $0
+    load-imm $1 2
+    add $0 $1
+    load $3 $0
     halt

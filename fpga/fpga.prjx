@@ -1,0 +1,441 @@
+KEY LIBERO "11.9"
+KEY CAPTURE "11.9.6.7"
+KEY DEFAULT_IMPORT_LOC ""
+KEY DEFAULT_OPEN_LOC ""
+KEY ProjectID "0"
+KEY HDLTechnology "VHDL"
+KEY VERILOGMODE "VERILOG2001"
+KEY VHDLMODE "VHDL2008"
+KEY UseConstraintFlowTechnology "FALSE"
+KEY VendorTechnology_Family "Fusion"
+KEY VendorTechnology_Die "IR6X6M2"
+KEY VendorTechnology_Package "fg256"
+KEY VendorTechnology_Speed "STD"
+KEY VendorTechnology_DieVoltage "1.5"
+KEY VendorTechnology_PART_RANGE "COM"
+KEY VendorTechnology_DSW_VCCA_VOLTAGE_RAMP_RATE ""
+KEY VendorTechnology_IO_DEFT_STD "LVTTL"
+KEY VendorTechnology_OPCONR ""
+KEY VendorTechnology_PLL_SUPPLY ""
+KEY VendorTechnology_RAD_EXPOSURE ""
+KEY VendorTechnology_RESERVEMIGRATIONPINS "1"
+KEY VendorTechnology_RESTRICTPROBEPINS "1"
+KEY VendorTechnology_RESTRICTSPIPINS "0"
+KEY VendorTechnology_SYSTEM_CONTROLLER_SUSPEND_MODE ""
+KEY VendorTechnology_TARGETDEVICESFORMIGRATION "IR6X6M2"
+KEY VendorTechnology_TEMPR "COM"
+KEY VendorTechnology_UNUSED_MSS_IO_RESISTOR_PULL "None"
+KEY VendorTechnology_VCCI_1.5_VOLTR "COM"
+KEY VendorTechnology_VCCI_1.8_VOLTR "COM"
+KEY VendorTechnology_VCCI_2.5_VOLTR "COM"
+KEY VendorTechnology_VCCI_3.3_VOLTR "COM"
+KEY VendorTechnology_VOLTR "COM"
+KEY ProjectLocation "C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga"
+KEY ProjectDescription ""
+KEY Pa4PeripheralNewSeq "GOOD"
+KEY SimulationType "VHDL"
+KEY Vendor "Actel"
+KEY ActiveRoot "cpu::work"
+LIST REVISIONS
+VALUE="Impl1",NUM=1
+CURREV=1
+ENDLIST
+LIST FileManager
+VALUE "<project>\component\Actel\Simulation\CLK_GEN\1.0.1\CLK_GEN.cxf,actgen_cxf"
+STATE="utd"
+TIME="1658497730"
+SIZE="467"
+PARENT="<project>\component\work\cpu_test\cpu_test.cxf"
+ENDFILE
+VALUE "<project>\component\Actel\Simulation\CLK_GEN\1.0.1\CLK_GEN.vhd,tb_hdl"
+STATE="utd"
+TIME="1658491024"
+SIZE="504"
+PARENT="<project>\component\Actel\Simulation\CLK_GEN\1.0.1\CLK_GEN.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>\component\Actel\Simulation\RESET_GEN\1.0.1\RESET_GEN.cxf,actgen_cxf"
+STATE="utd"
+TIME="1658497730"
+SIZE="471"
+PARENT="<project>\component\work\cpu_test\cpu_test.cxf"
+ENDFILE
+VALUE "<project>\component\Actel\Simulation\RESET_GEN\1.0.1\RESET_GEN.vhd,tb_hdl"
+STATE="utd"
+TIME="1658491024"
+SIZE="538"
+PARENT="<project>\component\Actel\Simulation\RESET_GEN\1.0.1\RESET_GEN.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>\component\work\cpu\cpu.cxf,actgen_cxf"
+STATE="utd"
+TIME="1658497718"
+SIZE="2766"
+ENDFILE
+VALUE "<project>\component\work\cpu\cpu.vhd,hdl"
+STATE="utd"
+TIME="1658497717"
+SIZE="24693"
+PARENT="<project>\component\work\cpu\cpu.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>\component\work\cpu_test\cpu_test.cxf,actgen_cxf"
+STATE="utd"
+TIME="1658497731"
+SIZE="2122"
+ENDFILE
+VALUE "<project>\component\work\cpu_test\cpu_test.vhd,tb_hdl"
+STATE="utd"
+TIME="1658497730"
+SIZE="3589"
+PARENT="<project>\component\work\cpu_test\cpu_test.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>\component\work\DESIGN_FIRMWARE\DESIGN_FIRMWARE.cxf,actgen_cxf"
+STATE="utd"
+TIME="1658321320"
+SIZE="437"
+ENDFILE
+VALUE "<project>\component\work\DESIGN_IO\DESIGN_IO.cxf,actgen_cxf"
+STATE="utd"
+TIME="1658321320"
+SIZE="413"
+ENDFILE
+VALUE "<project>\designer\impl1\cpu.ide_des,ide_des"
+STATE="utd"
+TIME="1658156474"
+SIZE="223"
+ENDFILE
+VALUE "<project>\designer\impl1\cpu_1.ide_des,ide_des"
+STATE="utd"
+TIME="1658156499"
+SIZE="433"
+ENDFILE
+VALUE "<project>\hdl\address_bus.vhd,hdl"
+STATE="utd"
+TIME="1658483237"
+SIZE="2312"
+ENDFILE
+VALUE "<project>\hdl\alu.vhd,hdl"
+STATE="utd"
+TIME="1658496465"
+SIZE="2520"
+ENDFILE
+VALUE "<project>\hdl\alu_bus.vhd,hdl"
+STATE="utd"
+TIME="1658495420"
+SIZE="1771"
+ENDFILE
+VALUE "<project>\hdl\control.vhd,hdl"
+STATE="utd"
+TIME="1658497596"
+SIZE="9892"
+ENDFILE
+VALUE "<project>\hdl\demultiplexor.vhd,hdl"
+STATE="utd"
+TIME="1658495496"
+SIZE="1491"
+ENDFILE
+VALUE "<project>\hdl\main_bus.vhd,hdl"
+STATE="utd"
+TIME="1658495528"
+SIZE="4400"
+ENDFILE
+VALUE "<project>\hdl\memory.vhd,hdl"
+STATE="utd"
+TIME="1658512541"
+SIZE="1287"
+ENDFILE
+VALUE "<project>\hdl\pc.vhd,hdl"
+STATE="utd"
+TIME="1658321573"
+SIZE="1497"
+ENDFILE
+VALUE "<project>\hdl\register.vhd,hdl"
+STATE="utd"
+TIME="1658227289"
+SIZE="1477"
+ENDFILE
+VALUE "<project>\hdl\sp.vhd,hdl"
+STATE="utd"
+TIME="1658322548"
+SIZE="1162"
+ENDFILE
+VALUE "<project>\simulation\run.do,do"
+STATE="utd"
+TIME="1658497772"
+SIZE="1695"
+ENDFILE
+VALUE "<project>\smartgen\clock\clock.cxf,actgen_cxf"
+STATE="utd"
+TIME="1658485845"
+SIZE="1622"
+ENDFILE
+VALUE "<project>\smartgen\clock\clock.gen,gen"
+STATE="utd"
+TIME="1658485844"
+SIZE="571"
+PARENT="<project>\smartgen\clock\clock.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>\smartgen\clock\clock.log,log"
+STATE="utd"
+TIME="1658485845"
+SIZE="3269"
+PARENT="<project>\smartgen\clock\clock.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>\smartgen\clock\clock.vhd,hdl"
+STATE="utd"
+TIME="1658485845"
+SIZE="7548"
+PARENT="<project>\smartgen\clock\clock.cxf"
+IS_READONLY="TRUE"
+ENDFILE
+VALUE "<project>\synthesis\cpu.edn,syn_edn"
+STATE="ood"
+TIME="1658321590"
+SIZE="1849"
+ENDFILE
+VALUE "<project>\synthesis\cpu.so,so"
+STATE="utd"
+TIME="1658321590"
+SIZE="244"
+ENDFILE
+VALUE "<project>\synthesis\cpu_sdc.sdc,syn_sdc"
+STATE="ood"
+TIME="1658321590"
+SIZE="310"
+ENDFILE
+VALUE "<project>\synthesis\cpu_syn.prj,prj"
+STATE="utd"
+TIME="1658321591"
+SIZE="2853"
+ENDFILE
+VALUE "<project>\synthesis\synwork\layer0.so,so"
+STATE="utd"
+TIME="1658321576"
+SIZE="159"
+ENDFILE
+ENDLIST
+LIST UsedFile
+ENDLIST
+LIST NewModulesInfo
+LIST "cpu::work"
+FILE "<project>\component\work\cpu\cpu.vhd,hdl"
+LIST AssociatedStimulus
+VALUE "<project>\component\Actel\Simulation\CLK_GEN\1.0.1\CLK_GEN.vhd,tb_hdl"
+VALUE "<project>\component\Actel\Simulation\RESET_GEN\1.0.1\RESET_GEN.vhd,tb_hdl"
+VALUE "<project>\component\work\cpu_test\cpu_test.vhd,tb_hdl"
+ENDLIST
+LIST ProjectState5.1
+LIST Impl1
+ideSTIMULUS=StateSuccess
+LIST FlowOptions
+UsePhySynth=FALSE
+UseSynth=TRUE
+UseFhbAutoInst=FALSE
+ENDLIST
+Used_File_List
+ENDUsed_File_List
+ENDLIST
+ENDLIST
+ENDLIST
+ENDLIST
+LIST AssociatedStimulus
+LIST cpu
+VALUE "<project>\component\Actel\Simulation\CLK_GEN\1.0.1\CLK_GEN.vhd,tb_hdl"
+VALUE "<project>\component\Actel\Simulation\RESET_GEN\1.0.1\RESET_GEN.vhd,tb_hdl"
+VALUE "<project>\component\work\cpu_test\cpu_test.vhd,tb_hdl"
+ENDLIST
+ENDLIST
+LIST Other_Association
+ENDLIST
+LIST SimulationOptions
+UseAutomaticDoFile=true
+IncludeWaveDo=false
+Type=max
+RunTime=1000ns
+Resolution=1ps
+VsimOpt=
+EntityName=cpu_test
+TopInstanceName=<top>_0
+DoFileName=
+DoFileName2=wave.do
+DoFileParams=
+DisplayDUTWave=false
+LogAllSignals=true
+DisablePulseFiltering=false
+DumpVCD=false
+VCDFileName=power.vcd
+VHDL2008=false
+Verilog2001=false
+SystemVerilog=false
+TimeUnit=1
+TimeUnitBase=ns
+Precision=100
+PrecisionBase=ps
+ENDLIST
+LIST ModelSimLibPath
+UseCustomPath=FALSE
+LibraryPath=
+ENDLIST
+LIST GlobalFlowOptions
+GenerateHDLAfterSynthesis=FALSE
+GenerateHDLAfterPhySynthesis=FALSE
+RunDRCAfterSynthesis=TRUE
+AutoCheckConstraints=TRUE
+UpdateModelSimIni=TRUE
+NoIOMode=FALSE
+PeriInitStandalone=FALSE
+EnableViewDraw=FALSE
+UpdateViewDrawIni=TRUE
+GenerateHDLFromSchematic=TRUE
+VmNetlistFlowOn=FALSE
+EnableDesignSeparationOn=FALSE
+EnableSETMitigationOn=FALSE
+DisplayFanoutLimit=10
+AbortFlowOnPDCErrorsOn=TRUE
+AbortFlowOnSDCErrorsOn=TRUE
+InstantiateInSmartDesign=TRUE
+FlashProInputFile=pdb
+SmartGenCompileReport=T
+ENDLIST
+LIST PhySynthesisOptions
+ENDLIST
+LIST Profiles
+NAME="SoftConsole"
+FUNCTION="SoftwareIDE"
+TOOL="SoftConsole"
+LOCATION="eclipse.exe"
+PARAM=""
+BATCH=0
+LICENSE=""
+IS32BIT="1"
+EndProfile
+NAME="Synplify Pro ME"
+FUNCTION="Synthesis"
+TOOL="Synplify Pro ME"
+LOCATION="C:\Microsemi\Libero_SoC_v11.9\SynplifyPro\bin\synplify_pro.exe"
+PARAM=""
+BATCH=0
+LICENSE=""
+IS32BIT="1"
+EndProfile
+NAME="ModelSim ME"
+FUNCTION="Simulation"
+TOOL="ModelSim"
+LOCATION="C:\Microsemi\Libero_SoC_v11.9\Modelsim\win32acoem\modelsim.exe"
+PARAM=""
+BATCH=0
+LICENSE=""
+IS32BIT="1"
+EndProfile
+NAME="FPExpress"
+FUNCTION="Program"
+TOOL="FlashPro"
+LOCATION="C:\Microsemi\Libero_SoC_v11.9\Designer\bin\FPExpress.exe"
+PARAM=""
+BATCH=0
+LICENSE=""
+IS32BIT="1"
+EndProfile
+NAME="Identify Debugger"
+FUNCTION="IdentifyDebugger"
+TOOL="Identify Debugger"
+LOCATION="C:\Microsemi\Libero_SoC_v11.9\Identify\bin\identify_debugger.exe"
+PARAM=""
+BATCH=0
+LICENSE=""
+IS32BIT="1"
+EndProfile
+ENDLIST
+LIST ProjectState5.1
+LIST "cpu::work"
+LIST Impl1
+ideSTIMULUS=StateSuccess
+LIST FlowOptions
+UsePhySynth=FALSE
+UseSynth=TRUE
+UseFhbAutoInst=FALSE
+ENDLIST
+Used_File_List
+ENDUsed_File_List
+ENDLIST
+ENDLIST
+ENDLIST
+LIST ExcludePackageForSimulation
+ENDLIST
+LIST ExcludePackageForSynthesis
+ENDLIST
+LIST IncludeModuleForSimulation
+ENDLIST
+LIST CDBOrder
+ENDLIST
+LIST UserCustomizedFileList
+ENDLIST
+LIST OpenedFileList
+ORIENTATION;HORIZONTAL
+StartPage;StartPage;0
+ACTIVEVIEW;StartPage
+ENDLIST
+LIST ModuleSubBlockList
+LIST "address_bus::work","hdl\address_bus.vhd","FALSE","FALSE"
+ENDLIST
+LIST "alu::work","hdl\alu.vhd","FALSE","FALSE"
+ENDLIST
+LIST "alu_bus::work","hdl\alu_bus.vhd","FALSE","FALSE"
+ENDLIST
+LIST "clock::work","smartgen\clock\clock.vhd","TRUE","FALSE"
+ENDLIST
+LIST "control::work","hdl\control.vhd","FALSE","FALSE"
+ENDLIST
+LIST "cpu::work","component\work\cpu\cpu.vhd","TRUE","FALSE"
+SUBBLOCK "address_bus::work","hdl\address_bus.vhd","FALSE","FALSE"
+SUBBLOCK "alu::work","hdl\alu.vhd","FALSE","FALSE"
+SUBBLOCK "alu_bus::work","hdl\alu_bus.vhd","FALSE","FALSE"
+SUBBLOCK "clock::work","smartgen\clock\clock.vhd","TRUE","FALSE"
+SUBBLOCK "control::work","hdl\control.vhd","FALSE","FALSE"
+SUBBLOCK "demultiplexor::work","hdl\demultiplexor.vhd","FALSE","FALSE"
+SUBBLOCK "main_bus::work","hdl\main_bus.vhd","FALSE","FALSE"
+SUBBLOCK "memory::work","hdl\memory.vhd","FALSE","FALSE"
+SUBBLOCK "pc::work","hdl\pc.vhd","FALSE","FALSE"
+SUBBLOCK "reg::work","hdl\register.vhd","FALSE","FALSE"
+SUBBLOCK "sp::work","hdl\sp.vhd","FALSE","FALSE"
+ENDLIST
+LIST "demultiplexor::work","hdl\demultiplexor.vhd","FALSE","FALSE"
+ENDLIST
+LIST "DESIGN_FIRMWARE::work","component\work\DESIGN_FIRMWARE\DESIGN_FIRMWARE.cxf","TRUE","FALSE"
+ENDLIST
+LIST "DESIGN_IO::work","component\work\DESIGN_IO\DESIGN_IO.cxf","TRUE","FALSE"
+ENDLIST
+LIST "main_bus::work","hdl\main_bus.vhd","FALSE","FALSE"
+ENDLIST
+LIST "memory::work","hdl\memory.vhd","FALSE","FALSE"
+ENDLIST
+LIST "pc::work","hdl\pc.vhd","FALSE","FALSE"
+ENDLIST
+LIST "reg::work","hdl\register.vhd","FALSE","FALSE"
+ENDLIST
+LIST "sp::work","hdl\sp.vhd","FALSE","FALSE"
+ENDLIST
+LIST "CLK_GEN::work","component\Actel\Simulation\CLK_GEN\1.0.1\CLK_GEN.vhd","FALSE","TRUE"
+ENDLIST
+LIST "cpu_test::work","component\work\cpu_test\cpu_test.vhd","TRUE","TRUE"
+SUBBLOCK "CLK_GEN::work","component\Actel\Simulation\CLK_GEN\1.0.1\CLK_GEN.vhd","FALSE","TRUE"
+SUBBLOCK "RESET_GEN::work","component\Actel\Simulation\RESET_GEN\1.0.1\RESET_GEN.vhd","FALSE","TRUE"
+SUBBLOCK "cpu::work","component\work\cpu\cpu.vhd","TRUE","FALSE"
+ENDLIST
+LIST "RESET_GEN::work","component\Actel\Simulation\RESET_GEN\1.0.1\RESET_GEN.vhd","FALSE","TRUE"
+ENDLIST
+ENDLIST
+LIST ActiveTestBenchList
+ENDLIST
+LIST IOTabList
+ENDLIST
+LIST FPTabList
+ENDLIST
+LIST TimingTabList
+ENDLIST
+LIST FDCTabList
+ENDLIST

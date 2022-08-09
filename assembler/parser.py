@@ -1,8 +1,8 @@
 from enum import Enum
 import re
-from typing import List, Tuple
+from typing import List
 
-from attr import dataclass
+from dataclasses import dataclass
 from lexer import Lexer, Token, TokenType
 
 class OperandType():
@@ -39,7 +39,7 @@ class Operand():
 
 @dataclass
 class Instruction():
-    opcode: str
+    mnemonic: str
     operands: List[Operand]
 
 @dataclass

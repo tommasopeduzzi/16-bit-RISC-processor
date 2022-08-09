@@ -1,0 +1,24 @@
+Target Part: AFS600_PQFP208_STD
+Report for cell cpu.rtl
+  Core Cell usage:
+              cell count     area count*area
+               GND     1      0.0        0.0
+               VCC     1      0.0        0.0
+
+
+                   -----          ----------
+             TOTAL     2                 0.0
+
+
+  IO Cell usage:
+              cell count
+                   -----
+             TOTAL     0
+
+
+Core Cells         : 0 of 13824 (0%)
+IO Cells           : 0
+
+  RAM/ROM Usage Summary
+Block Rams : 0 of 24 (0%)
+

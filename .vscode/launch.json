@@ -20,7 +20,7 @@
             "program": "./assembler/main.py",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["assembler/test.tasm", "assembler/test.bin"],
+            "args": ["assembler/test.tasm", "assembler/test.bin", "--extend_binary"],
         }
     ]
 }

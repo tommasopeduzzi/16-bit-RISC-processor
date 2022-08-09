@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml-stylesheet type="text/xsl" href="datasheet.xsl"?>
+<datasheet>
+  <header>cpu</header>
+  <project-settings>
+    <fam>Fusion</fam>
+    <die>AFS600</die>
+    <package>256 FBGA</package>
+    <speed-grade>STD</speed-grade>
+    <voltage>1.5</voltage>
+    <hdl-type>VHDL</hdl-type>
+    <project-description>
+    </project-description>
+    <location>C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/component/work/cpu</location>
+    <state>GENERATED ( Fri Jul 22 15:48:37 2022 )</state>
+    <swide-toolchain>SoftConsole workspace has not been generated</swide-toolchain>
+  </project-settings>
+  <site-map>
+  </site-map>
+  <fileset>
+    <name>HDL File(s)</name>
+    <file>C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\component\work\cpu\cpu.vhd</file>
+    <file>C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\address_bus.vhd</file>
+    <file>C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\alu.vhd</file>
+    <file>C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\alu_bus.vhd</file>
+    <file>C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\control.vhd</file>
+    <file>C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\demultiplexor.vhd</file>
+    <file>C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\main_bus.vhd</file>
+    <file>C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\memory.vhd</file>
+    <file>C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\pc.vhd</file>
+    <file>C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\register.vhd</file>
+    <file>C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\sp.vhd</file>
+    <file>C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\smartgen\clock\clock.vhd</file>
+  </fileset>
+  <io>
+    <port-name>current_opcode[2]</port-name>
+    <direction>OUT</direction>
+    <pin-number>-</pin-number>
+    <io-standard>LVTTL</io-standard>
+  </io>
+  <io>
+    <port-name>current_opcode[4]</port-name>
+    <direction>OUT</direction>
+    <pin-number>-</pin-number>
+    <io-standard>LVTTL</io-standard>
+  </io>
+  <io>
+    <port-name>CLKA</port-name>
+    <direction>IN</direction>
+    <pin-number>-</pin-number>
+    <io-standard>LVTTL</io-standard>
+  </io>
+  <io>
+    <port-name>current_opcode[0]</port-name>
+    <direction>OUT</direction>
+    <pin-number>-</pin-number>
+    <io-standard>LVTTL</io-standard>
+  </io>
+  <io>
+    <port-name>current_opcode[5]</port-name>
+    <direction>OUT</direction>
+    <pin-number>-</pin-number>
+    <io-standard>LVTTL</io-standard>
+  </io>
+  <io>
+    <port-name>current_opcode[1]</port-name>
+    <direction>OUT</direction>
+    <pin-number>-</pin-number>
+    <io-standard>LVTTL</io-standard>
+  </io>
+  <io>
+    <port-name>current_opcode[3]</port-name>
+    <direction>OUT</direction>
+    <pin-number>-</pin-number>
+    <io-standard>LVTTL</io-standard>
+  </io>
+  <io>
+    <port-name>rst</port-name>
+    <direction>IN</direction>
+    <pin-number>-</pin-number>
+    <io-standard>LVTTL</io-standard>
+  </io>
+  <core type="HdlModule">
+    <core-type>HdlModule</core-type>
+    <core-exttype>address_bus</core-exttype>
+    <core-location>hdl\address_bus.vhd</core-location>
+    <core-name>address_bus</core-name>
+  </core>
+  <core type="HdlModule">
+    <core-type>HdlModule</core-type>
+    <core-exttype>alu</core-exttype>
+    <core-location>hdl\alu.vhd</core-location>
+    <core-name>alu</core-name>
+  </core>
+  <core type="AdlibModule">
+    <core-type>AdlibModule</core-type>
+    <core-exttype>AND2</core-exttype>
+    <core-name>AND2_0</core-name>
+  </core>
+  <core type="ComponentModule">
+    <core-type>ComponentModule</core-type>
+    <core-exttype>SmartGen</core-exttype>
+    <core-location>C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/smartgen/clock</core-location>
+    <core-name>clock_0</core-name>
+  </core>
+  <core type="HdlModule">
+    <core-type>HdlModule</core-type>
+    <core-exttype>control</core-exttype>
+    <core-location>hdl\control.vhd</core-location>
+    <core-name>control</core-name>
+  </core>
+  <core type="HdlModule">
+    <core-type>HdlModule</core-type>
+    <core-exttype>alu_bus</core-exttype>
+    <core-location>hdl\alu_bus.vhd</core-location>
+    <core-name>lhs</core-name>
+  </core>
+  <core type="HdlModule">
+    <core-type>HdlModule</core-type>
+    <core-exttype>main_bus</core-exttype>
+    <core-location>hdl\main_bus.vhd</core-location>
+    <core-name>main_bus</core-name>
+  </core>
+  <core type="HdlModule">
+    <core-type>HdlModule</core-type>
+    <core-exttype>memory</core-exttype>
+    <core-location>hdl\memory.vhd</core-location>
+    <core-name>memory</core-name>
+  </core>
+  <core type="HdlModule">
+    <core-type>HdlModule</core-type>
+    <core-exttype>pc</core-exttype>
+    <core-location>hdl\pc.vhd</core-location>
+    <core-name>pc</core-name>
+  </core>
+  <core type="HdlModule">
+    <core-type>HdlModule</core-type>
+    <core-exttype>reg</core-exttype>
+    <core-location>hdl\register.vhd</core-location>
+    <core-name>register_0</core-name>
+  </core>
+  <core type="HdlModule">
+    <core-type>HdlModule</core-type>
+    <core-exttype>reg</core-exttype>
+    <core-location>hdl\register.vhd</core-location>
+    <core-name>register_1</core-name>
+  </core>
+  <core type="HdlModule">
+    <core-type>HdlModule</core-type>
+    <core-exttype>reg</core-exttype>
+    <core-location>hdl\register.vhd</core-location>
+    <core-name>register_2</core-name>
+  </core>
+  <core type="HdlModule">
+    <core-type>HdlModule</core-type>
+    <core-exttype>reg</core-exttype>
+    <core-location>hdl\register.vhd</core-location>
+    <core-name>register_3</core-name>
+  </core>
+  <core type="HdlModule">
+    <core-type>HdlModule</core-type>
+    <core-exttype>reg</core-exttype>
+    <core-location>hdl\register.vhd</core-location>
+    <core-name>register_4</core-name>
+  </core>
+  <core type="HdlModule">
+    <core-type>HdlModule</core-type>
+    <core-exttype>reg</core-exttype>
+    <core-location>hdl\register.vhd</core-location>
+    <core-name>register_5</core-name>
+  </core>
+  <core type="HdlModule">
+    <core-type>HdlModule</core-type>
+    <core-exttype>reg</core-exttype>
+    <core-location>hdl\register.vhd</core-location>
+    <core-name>register_6</core-name>
+  </core>
+  <core type="HdlModule">
+    <core-type>HdlModule</core-type>
+    <core-exttype>reg</core-exttype>
+    <core-location>hdl\register.vhd</core-location>
+    <core-name>register_7</core-name>
+  </core>
+  <core type="HdlModule">
+    <core-type>HdlModule</core-type>
+    <core-exttype>alu_bus</core-exttype>
+    <core-location>hdl\alu_bus.vhd</core-location>
+    <core-name>rhs</core-name>
+  </core>
+  <core type="HdlModule">
+    <core-type>HdlModule</core-type>
+    <core-exttype>sp</core-exttype>
+    <core-location>hdl\sp.vhd</core-location>
+    <core-name>sp</core-name>
+  </core>
+  <core type="HdlModule">
+    <core-type>HdlModule</core-type>
+    <core-exttype>demultiplexor</core-exttype>
+    <core-location>hdl\demultiplexor.vhd</core-location>
+    <core-name>we</core-name>
+  </core>
+  <core type="HdlModule">
+    <core-type>HdlModule</core-type>
+    <core-exttype>demultiplexor</core-exttype>
+    <core-location>hdl\demultiplexor.vhd</core-location>
+    <core-name>we_l</core-name>
+  </core>
+  <core type="HdlModule">
+    <core-type>HdlModule</core-type>
+    <core-exttype>demultiplexor</core-exttype>
+    <core-location>hdl\demultiplexor.vhd</core-location>
+    <core-name>we_m</core-name>
+  </core>
+  <memorysystem>
+    <title>Memory Map for cpu</title>
+    <description>The project does not contain any subsystems.</description>
+  </memorysystem>
+</datasheet>

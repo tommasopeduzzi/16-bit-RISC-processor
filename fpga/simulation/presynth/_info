@@ -1,0 +1,613 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/simulation
+Eaddress_bus
+Z1 w1658483237
+Z2 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z3 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z4 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+R0
+Z5 8C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/address_bus.vhd
+Z6 FC:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/address_bus.vhd
+l0
+L18
+VYhN_M=R]QeH0k]k0n_CFi2
+!s100 OCAUG^dnE`7Qk]zoe4K<J3
+Z7 OW;C;10.5c;63
+33
+Z8 !s110 1658933979
+!i10b 1
+Z9 !s108 1658933979.000000
+Z10 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/address_bus.vhd|
+Z11 !s107 C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/address_bus.vhd|
+!i113 1
+Z12 o-2008 -explicit -work presynth -O0
+Z13 tCvgOpt 0
+Aarchitecture_address_bus
+R2
+R3
+R4
+DEx4 work 11 address_bus 0 22 YhN_M=R]QeH0k]k0n_CFi2
+l46
+L45
+Vj<TloHdCiL1P@PGSL8cB43
+!s100 hGL?OmfV4IEiEfXEdSU>c2
+R7
+33
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Ealu
+Z14 w1658496465
+R2
+R3
+R4
+R0
+Z15 8C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/alu.vhd
+Z16 FC:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/alu.vhd
+l0
+L18
+V?hSc@50PSk=aJ2z2gYP<D2
+!s100 dGVf^eMGT1zjWn;9TR>=e3
+R7
+33
+R8
+!i10b 1
+R9
+Z17 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/alu.vhd|
+Z18 !s107 C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/alu.vhd|
+!i113 1
+R12
+R13
+Aarchitecture_alu
+R2
+R3
+R4
+DEx4 work 3 alu 0 22 ?hSc@50PSk=aJ2z2gYP<D2
+l32
+L31
+VLBmk3l:RDCBYFId8JT1a`1
+!s100 90MnO[4NeQhF1>gkkXUe=1
+R7
+33
+R8
+!i10b 1
+R9
+R17
+R18
+!i113 1
+R12
+R13
+Ealu_bus
+Z19 w1658495420
+R2
+R3
+R4
+R0
+Z20 8C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/alu_bus.vhd
+Z21 FC:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/alu_bus.vhd
+l0
+L18
+VTb8cZF8n[R8aXA_`g<Am]1
+!s100 9z:kYjg=>21ziE8Hn52Vh3
+R7
+33
+R8
+!i10b 1
+R9
+Z22 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/alu_bus.vhd|
+Z23 !s107 C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/alu_bus.vhd|
+!i113 1
+R12
+R13
+Aarchitecture_alu_bus
+R2
+R3
+R4
+DEx4 work 7 alu_bus 0 22 Tb8cZF8n[R8aXA_`g<Am]1
+l40
+L39
+VfE6_:]ZzOfEGTNW?cfR033
+!s100 chSPBC:=O[XehNVkoJ[ba1
+R7
+33
+R8
+!i10b 1
+R9
+R22
+R23
+!i113 1
+R12
+R13
+Eclk_gen
+Z24 w1658491024
+Z25 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+R3
+R4
+R0
+Z26 8C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/component/Actel/Simulation/CLK_GEN/1.0.1/CLK_GEN.vhd
+Z27 FC:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/component/Actel/Simulation/CLK_GEN/1.0.1/CLK_GEN.vhd
+l0
+L5
+VZlR8oL^BRl0Rm=:LN7zz^3
+!s100 TV:NWKJRE3m4P0WUjKKgN1
+R7
+33
+Z28 !s110 1658497778
+!i10b 1
+Z29 !s108 1658497778.000000
+Z30 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/component/Actel/Simulation/CLK_GEN/1.0.1/CLK_GEN.vhd|
+Z31 !s107 C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/component/Actel/Simulation/CLK_GEN/1.0.1/CLK_GEN.vhd|
+!i113 1
+R12
+R13
+Abehave
+R25
+R3
+R4
+DEx4 work 7 clk_gen 0 22 ZlR8oL^BRl0Rm=:LN7zz^3
+l14
+L11
+V6k=:;7j2A?;;dQ>lE=YIE3
+!s100 T@OO_dfA07HeV5=cETY0d2
+R7
+33
+R28
+!i10b 1
+R29
+R30
+R31
+!i113 1
+R12
+R13
+Eclock
+Z32 w1658485845
+R3
+R4
+R0
+Z33 8C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/smartgen/clock/clock.vhd
+Z34 FC:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/smartgen/clock/clock.vhd
+l0
+L8
+V?h<DkiX444hUiA9_5<MRo1
+!s100 XX`]hMD9>aA8E:T`T_U9:3
+R7
+33
+R8
+!i10b 1
+R9
+Z35 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/smartgen/clock/clock.vhd|
+Z36 !s107 C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/smartgen/clock/clock.vhd|
+!i113 1
+R12
+R13
+Adef_arch
+R3
+R4
+DEx4 work 5 clock 0 22 ?h<DkiX444hUiA9_5<MRo1
+l124
+L19
+VG2;1SRUeoHK2KO:G9:6`=1
+!s100 ]OGJGSb7XOdIB7Gm5OOm72
+R7
+33
+R8
+!i10b 1
+R9
+R35
+R36
+!i113 1
+R12
+R13
+Econtrol
+Z37 w1658497596
+R3
+R4
+R0
+Z38 8C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/control.vhd
+Z39 FC:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/control.vhd
+l0
+L17
+VP4fm[=najlz]>h4CPE07@3
+!s100 ncG]eHPDX?0V>:bCBD@ch0
+R7
+33
+Z40 !s110 1658933980
+!i10b 1
+R9
+Z41 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/control.vhd|
+Z42 !s107 C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/control.vhd|
+!i113 1
+R12
+R13
+Aarchitecture_control
+R3
+R4
+DEx4 work 7 control 0 22 P4fm[=najlz]>h4CPE07@3
+l70
+L64
+VMmP9@;?lZL07mmQRlYXL:2
+!s100 G@eP5]S]6N9:V^M6WX`Re1
+R7
+33
+R40
+!i10b 1
+R9
+R41
+R42
+!i113 1
+R12
+R13
+Ecpu
+Z43 w1658497717
+R3
+R4
+R0
+Z44 8C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/component/work/cpu/cpu.vhd
+Z45 FC:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/component/work/cpu/cpu.vhd
+l0
+L17
+VBoGVkWGHI31Yi`iS^m[l33
+!s100 o>6Pmo_=5BR;9FDB4SPOQ2
+R7
+33
+R28
+!i10b 1
+R29
+Z46 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/component/work/cpu/cpu.vhd|
+Z47 !s107 C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/component/work/cpu/cpu.vhd|
+!i113 1
+R12
+R13
+Artl
+R3
+R4
+DEx4 work 3 cpu 0 22 BoGVkWGHI31Yi`iS^m[l33
+l334
+L30
+VfZb9dI9:T8ge8b2Ub0c5D3
+!s100 [Im9NTRzP=kiPXYhWj@2V1
+R7
+33
+R28
+!i10b 1
+R29
+R46
+R47
+!i113 1
+R12
+R13
+Ecpu_test
+Z48 w1658497730
+R3
+R4
+R0
+Z49 8C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/component/work/cpu_test/cpu_test.vhd
+Z50 FC:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/component/work/cpu_test/cpu_test.vhd
+l0
+L17
+VzKl_dnj[W86ZjB=MdENlG1
+!s100 P8nI7NjRSAJXkfFca1hiL1
+R7
+33
+R28
+!i10b 1
+R29
+Z51 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/component/work/cpu_test/cpu_test.vhd|
+Z52 !s107 C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/component/work/cpu_test/cpu_test.vhd|
+!i113 1
+R12
+R13
+Artl
+R3
+R4
+DEx4 work 8 cpu_test 0 22 zKl_dnj[W86ZjB=MdENlG1
+l74
+L27
+VDNX@bmE6dXk5IV@@=E1?O0
+!s100 <BKd[:ALzcOP6?3aJfGSg1
+R7
+33
+R28
+!i10b 1
+R29
+R51
+R52
+!i113 1
+R12
+R13
+Edemultiplexor
+Z53 w1658495496
+R3
+R4
+R0
+Z54 8C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/demultiplexor.vhd
+Z55 FC:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/demultiplexor.vhd
+l0
+L17
+Vlf[M4WRF]13a7U2GazG4V3
+!s100 De=oH=hAH4F9eP3]lR>B^1
+R7
+33
+R40
+!i10b 1
+Z56 !s108 1658933980.000000
+Z57 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/demultiplexor.vhd|
+Z58 !s107 C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/demultiplexor.vhd|
+!i113 1
+R12
+R13
+Aarchitecture_demultiplexor
+R3
+R4
+DEx4 work 13 demultiplexor 0 22 lf[M4WRF]13a7U2GazG4V3
+l25
+L24
+V3g0X]`XX@a?a5zIQdJS4^0
+!s100 eCTEek`CUCB4oY:I42D9R1
+R7
+33
+R40
+!i10b 1
+R56
+R57
+R58
+!i113 1
+R12
+R13
+Emain_bus
+Z59 w1658495528
+R2
+R3
+R4
+R0
+Z60 8C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/main_bus.vhd
+Z61 FC:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/main_bus.vhd
+l0
+L18
+V;Ujcg<EDh]GB6M0Dz>4:l3
+!s100 IK5SJm_gQ0AU>>D^YLhh32
+R7
+33
+R40
+!i10b 1
+R56
+Z62 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/main_bus.vhd|
+Z63 !s107 C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/main_bus.vhd|
+!i113 1
+R12
+R13
+Aarchitecture_main_bus
+R2
+R3
+R4
+DEx4 work 8 main_bus 0 22 ;Ujcg<EDh]GB6M0Dz>4:l3
+l48
+L47
+V25FMYk;3VQ:742zEOX5Bj2
+!s100 Wk@zfTS?3LT?Pf[`gN0Uf1
+R7
+33
+R40
+!i10b 1
+R56
+R62
+R63
+!i113 1
+R12
+R13
+Ememory
+Z64 w1658512541
+R2
+R3
+R4
+R0
+Z65 8C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/memory.vhd
+Z66 FC:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/memory.vhd
+l0
+L19
+VcCUgiEnSM>n]LK_YM^HRS1
+!s100 7DdjDgz^G6c7]_@?<5_EZ2
+R7
+33
+R40
+!i10b 1
+R56
+Z67 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/memory.vhd|
+!s107 C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/memory.vhd|
+!i113 1
+R12
+R13
+Aarchitecture_memory
+R2
+R3
+R4
+DEx4 work 6 memory 0 22 cCUgiEnSM>n]LK_YM^HRS1
+l31
+L28
+V62_03i?AW1LUM9mo^9G5b2
+!s100 oOzNXZPzKeKEYY=VW[PhO1
+R7
+33
+R28
+!i10b 1
+R29
+R67
+!s107 C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/memory.vhd|
+!i113 1
+R12
+R13
+Epc
+Z68 w1658321573
+R2
+R3
+R4
+R0
+Z69 8C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/pc.vhd
+Z70 FC:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/pc.vhd
+l0
+L20
+V8jKSNjE7X_VS>PWR9>cS60
+!s100 KnAheVei^eFGB;TZlfc0z3
+R7
+33
+R28
+!i10b 1
+R29
+Z71 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/pc.vhd|
+Z72 !s107 C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/pc.vhd|
+!i113 1
+R12
+R13
+Aarchitecture_pc
+R2
+R3
+R4
+DEx4 work 2 pc 0 22 8jKSNjE7X_VS>PWR9>cS60
+l32
+L30
+VEh2W;`QFK7Rc9EZC[O@Yh2
+!s100 ;>Fh3:;[I1:Zi_iTfzQJM0
+R7
+33
+R28
+!i10b 1
+R29
+R71
+R72
+!i113 1
+R12
+R13
+Ereg
+Z73 w1658227289
+R3
+R4
+R0
+Z74 8C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/register.vhd
+Z75 FC:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/register.vhd
+l0
+L17
+VF2UB:aF11GC_4eezIZ;Qo3
+!s100 FQ_O:>2aGb02>7F50FiZT1
+R7
+33
+R28
+!i10b 1
+R29
+Z76 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/register.vhd|
+Z77 !s107 C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/register.vhd|
+!i113 1
+R12
+R13
+Aarchitecture_reg
+R3
+R4
+DEx4 work 3 reg 0 22 F2UB:aF11GC_4eezIZ;Qo3
+l30
+L28
+V<JDAzm7>FoH@YCTn>j7DW2
+!s100 cP59i4^2zQBYnC_NI_9@O1
+R7
+33
+R28
+!i10b 1
+R29
+R76
+R77
+!i113 1
+R12
+R13
+Ereset_gen
+R24
+R25
+R3
+R4
+R0
+Z78 8C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/component/Actel/Simulation/RESET_GEN/1.0.1/RESET_GEN.vhd
+Z79 FC:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/component/Actel/Simulation/RESET_GEN/1.0.1/RESET_GEN.vhd
+l0
+L6
+VW>AUoBjPWAfPIU2UaJBG90
+!s100 0jRfW2VYR_aXV?WNA0W3E0
+R7
+33
+R28
+!i10b 1
+R29
+Z80 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/component/Actel/Simulation/RESET_GEN/1.0.1/RESET_GEN.vhd|
+Z81 !s107 C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/component/Actel/Simulation/RESET_GEN/1.0.1/RESET_GEN.vhd|
+!i113 1
+R12
+R13
+Abehavior
+R25
+R3
+R4
+DEx4 work 9 reset_gen 0 22 W>AUoBjPWAfPIU2UaJBG90
+l15
+L13
+Vdnl2E_]ZJzfV4fTlA`QM;3
+!s100 @N`d4IjGGGkBd7`@DPi6j1
+R7
+33
+R28
+!i10b 1
+R29
+R80
+R81
+!i113 1
+R12
+R13
+Esp
+Z82 w1658322548
+R2
+R3
+R4
+R0
+Z83 8C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/sp.vhd
+Z84 FC:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/sp.vhd
+l0
+L18
+V:jP62?jGeNLL;mik6JK=X2
+!s100 4W?eWIc1@W:CUO[:>RoX42
+R7
+33
+R28
+!i10b 1
+R29
+Z85 !s90 -reportprogress|300|-2008|-explicit|-work|presynth|C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/sp.vhd|
+Z86 !s107 C:/Users/Tommaso Peduzzi/Documents/GitHub/16-bit-RISC-processor/fpga/hdl/sp.vhd|
+!i113 1
+R12
+R13
+Aarchitecture_sp
+R2
+R3
+R4
+DEx4 work 2 sp 0 22 :jP62?jGeNLL;mik6JK=X2
+l29
+L27
+V<5d^gj;i8^jFHR3NefJ`h3
+!s100 VNXd=W6m@oD[9VBY`FzSg3
+R7
+33
+R28
+!i10b 1
+R29
+R85
+R86
+!i113 1
+R12
+R13

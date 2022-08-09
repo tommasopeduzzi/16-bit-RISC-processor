@@ -1,0 +1,65 @@
+@N|Running in 64-bit mode
+@N|Running in 64-bit mode
+@N: CD720 :"C:\Microsemi\Libero_SoC_v11.9\SynplifyPro\lib\vhd2008\std.vhd":146:18:146:21|Setting time resolution to ps
+@N:"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\component\work\cpu\cpu.vhd":17:7:17:9|Top entity is set to cpu.
+@N: CD231 :"C:\Microsemi\Libero_SoC_v11.9\SynplifyPro\lib\vhd2008\std1164.vhd":890:16:890:17|Using onehot encoding for type mvl9plus. For example, enumeration 'U' is mapped to "1000000000".
+@N: CD630 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\component\work\cpu\cpu.vhd":17:7:17:9|Synthesizing work.cpu.rtl.
+@N: CD630 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\demultiplexor.vhd":17:7:17:19|Synthesizing work.demultiplexor.architecture_demultiplexor.
+@N: CD630 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\sp.vhd":18:7:18:8|Synthesizing work.sp.architecture_sp.
+@N: CD630 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\alu_bus.vhd":18:7:18:13|Synthesizing work.alu_bus.architecture_alu_bus.
+@N: CD630 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\register.vhd":17:7:17:9|Synthesizing work.reg.architecture_reg.
+@N: CD630 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\pc.vhd":20:7:20:8|Synthesizing work.pc.architecture_pc.
+@N: CD630 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\memory.vhd":18:7:18:12|Synthesizing work.memory.architecture_memory.
+@N: CL134 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\memory.vhd":29:11:29:13|Found RAM ram, depth=65536, width=8
+@N: CD630 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\main_bus.vhd":18:7:18:14|Synthesizing work.main_bus.architecture_main_bus.
+@N: CD630 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\control.vhd":17:7:17:13|Synthesizing work.control.architecture_control.
+@N: CD630 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\alu.vhd":18:7:18:9|Synthesizing work.alu.architecture_alu.
+@N: CL189 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\alu.vhd":34:8:34:9|Register bit c is always 0.
+@N: CD630 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\address_bus.vhd":18:7:18:17|Synthesizing work.address_bus.architecture_address_bus.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\address_bus.vhd":25:4:25:10|Input reg_sel is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\address_bus.vhd":30:4:30:5|Input r0 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\address_bus.vhd":31:4:31:5|Input r1 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\address_bus.vhd":32:4:32:5|Input r2 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\address_bus.vhd":33:4:33:5|Input r3 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\address_bus.vhd":34:4:34:5|Input r4 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\address_bus.vhd":35:4:35:5|Input r5 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\address_bus.vhd":36:4:36:5|Input r6 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\address_bus.vhd":37:4:37:5|Input r7 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\control.vhd":19:1:19:3|Input clk is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\control.vhd":20:4:20:6|Input rst is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\control.vhd":21:4:21:8|Input input is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\control.vhd":22:4:22:4|Input z is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\control.vhd":23:4:23:4|Input g is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\control.vhd":24:4:24:4|Input l is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\control.vhd":25:4:25:4|Input c is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\control.vhd":26:4:26:19|Input latch_opcode_op1 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\control.vhd":27:4:27:12|Input latch_op2 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\control.vhd":28:4:28:16|Input latch_lsb_imm is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\control.vhd":29:4:29:16|Input latch_msb_imm is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\main_bus.vhd":23:1:23:7|Input reg_sel is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\main_bus.vhd":24:4:24:12|Input reg_sel_l is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\main_bus.vhd":25:4:25:12|Input reg_sel_m is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\main_bus.vhd":30:4:30:5|Input r0 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\main_bus.vhd":31:4:31:5|Input r1 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\main_bus.vhd":32:4:32:5|Input r2 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\main_bus.vhd":33:4:33:5|Input r3 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\main_bus.vhd":34:4:34:5|Input r4 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\main_bus.vhd":35:4:35:5|Input r5 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\main_bus.vhd":36:4:36:5|Input r6 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\main_bus.vhd":37:4:37:5|Input r7 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\alu_bus.vhd":20:4:20:6|Input clk is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\alu_bus.vhd":23:4:23:10|Input reg_sel is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\alu_bus.vhd":26:4:26:5|Input r0 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\alu_bus.vhd":27:4:27:5|Input r1 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\alu_bus.vhd":28:4:28:5|Input r2 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\alu_bus.vhd":29:4:29:5|Input r3 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\alu_bus.vhd":30:4:30:5|Input r4 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\alu_bus.vhd":31:4:31:5|Input r5 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\alu_bus.vhd":32:4:32:5|Input r6 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\hdl\alu_bus.vhd":33:4:33:5|Input r7 is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\component\work\cpu\cpu.vhd":21:8:21:10|Input clk is unused.
+@N: CL159 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\component\work\cpu\cpu.vhd":22:8:22:10|Input rst is unused.
+@N|Running in 64-bit mode
+@N: NF107 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\component\work\cpu\cpu.vhd":17:7:17:9|Selected library: work cell: cpu view rtl as top level
+@N: NF107 :"C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\component\work\cpu\cpu.vhd":17:7:17:9|Selected library: work cell: cpu view rtl as top level
+

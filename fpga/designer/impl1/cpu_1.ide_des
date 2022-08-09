@@ -1,0 +1,10 @@
+KEY IDE_DES_TOOL "Ide"
+KEY IDE_DES_ADB_PATH "C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\designer\impl1\cpu_1.adb"
+LIST SOURCE_FILES
+VALUE "C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\synthesis\cpu.edn;edn"
+ENDLIST
+LIST OPTIONAL_FILES
+VALUE "C:\Users\Tommaso Peduzzi\Documents\GitHub\16-bit-RISC-processor\fpga\synthesis\cpu_sdc.sdc;Skipped"
+ENDLIST
+LIST VCD_FILES
+ENDLIST

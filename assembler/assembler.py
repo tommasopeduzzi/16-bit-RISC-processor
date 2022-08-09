@@ -1,37 +1,49 @@
+from cgitb import small
+from math import ceil
+from textwrap import wrap
 from typing import Dict, List
 from parser import Data, Instruction, Label, Macro, OperandType, Parser
 
 opcode_map = {
     # General instructions
-    ("nop",            ()):                                                0b00000,
-    ("halt",           ()):                                                0b11111,
+    ("halt",           ()):                                                0b111111,
+    ("nop",            ()):                                                0b000000,
     # Memory instructions
-    ("load",           (OperandType.REGISTER, OperandType.REGISTER)):      0b00001,
-    ("load-<byte",     (OperandType.REGISTER, OperandType.REGISTER)):      0b00010,
-    ("load-imm",       (OperandType.REGISTER, OperandType.IMMEDIATE)):     0b00011,
-    ("load-imm",       (OperandType.REGISTER, OperandType.ADDRESS)):       0b00011,
-    ("store",          (OperandType.REGISTER, OperandType.REGISTER)):      0b00100,
-    ("store-<byte",    (OperandType.REGISTER, OperandType.REGISTER)):      0b00101,
-    ("store->byte",    (OperandType.REGISTER, OperandType.REGISTER)):      0b00110,
+    ("load",           (OperandType.REGISTER, OperandType.REGISTER)):      0b000001,
+    ("load8",          (OperandType.REGISTER, OperandType.REGISTER)):      0b000010,
+    ("load",           (OperandType.REGISTER, OperandType.ADDRESS)):       0b000011,
+    ("load8",          (OperandType.REGISTER, OperandType.ADDRESS)):       0b000100,
+    ("load-imm",       (OperandType.REGISTER, OperandType.IMMEDIATE)):     0b000101,
+    ("load-addr",      (OperandType.REGISTER, OperandType.ADDRESS)):       0b000101,
+    ("store",          (OperandType.REGISTER, OperandType.REGISTER)):      0b000110,
+    ("store<",         (OperandType.REGISTER, OperandType.REGISTER)):      0b000111,
+    ("store>",         (OperandType.REGISTER, OperandType.REGISTER)):      0b001000,
+    ("store",          (OperandType.REGISTER, OperandType.ADDRESS)):       0b001001,
+    ("store<",         (OperandType.REGISTER, OperandType.ADDRESS)):       0b001010,
+    ("store>",         (OperandType.REGISTER, OperandType.ADDRESS)):       0b001011,
     # Stack manipulation instructions
-    ("push",           (OperandType.REGISTER,)):                            0b00111,
-    ("pop",            (OperandType.REGISTER,)):                            0b01000,
+    ("push",           (OperandType.REGISTER,)):                           0b001100,
+    ("pop",            (OperandType.REGISTER,)):                           0b001101,
     # Arithmetic instructions
-    ("add",            (OperandType.REGISTER, OperandType.REGISTER)):      0b01001,
-    ("sub",            (OperandType.REGISTER, OperandType.REGISTER)):      0b01010,
-    ("cmp",            (OperandType.REGISTER, OperandType.REGISTER)):      0b01011,
-    # Bitwise instrucctions
-    ("not",            (OperandType.REGISTER,)):                            0b01100,
-    ("and",            (OperandType.REGISTER, OperandType.REGISTER)):      0b01101,
-    ("or",             (OperandType.REGISTER, OperandType.REGISTER)):      0b01110,
-    ("xor",            (OperandType.REGISTER, OperandType.REGISTER)):      0b01111,
+    ("add",            (OperandType.REGISTER, OperandType.REGISTER)):      0b001110,
+    ("sub",            (OperandType.REGISTER, OperandType.REGISTER)):      0b001111,
+    ("cmp",            (OperandType.REGISTER, OperandType.REGISTER)):      0b010000,
+    # Bitwise instructions
+    ("not",            (OperandType.REGISTER,)):                           0b010001,
+    ("shiftl",         (OperandType.REGISTER,)):                           0b010010,
+    ("shiftr",         (OperandType.REGISTER,)):                           0b010011,
+    ("and",            (OperandType.REGISTER, OperandType.REGISTER)):      0b010100,
+    ("or",             (OperandType.REGISTER, OperandType.REGISTER)):      0b010101,
+    ("xor",            (OperandType.REGISTER, OperandType.REGISTER)):      0b010110,
     # Control flow instructions
-    ("jump",           (OperandType.REGISTER,)):                            0b10000,
-    ("jump-eq",        (OperandType.REGISTER,)):                            0b10001,
-    ("jump-n",         (OperandType.REGISTER,)):                            0b10010,
+    ("jump",           (OperandType.ADDRESS,)):                            0b010111,
+    ("jump==",         (OperandType.ADDRESS,)):                            0b011000,
+    ("jump<",          (OperandType.ADDRESS,)):                            0b011001,
+    ("jump>",          (OperandType.ADDRESS,)):                            0b011010,
+    ("jumpc",          (OperandType.ADDRESS,)):                            0b011011,
     # IO instructions
-    ("in",            (OperandType.REGISTER, OperandType.DEVICE)):         0b10011,
-    ("out",           (OperandType.REGISTER, OperandType.DEVICE)):         0b10100,
+    ("in",             (OperandType.REGISTER, OperandType.DEVICE)):        0b011100,
+    ("out",            (OperandType.REGISTER, OperandType.DEVICE)):        0b011101,
 }
 
 
@@ -50,6 +62,20 @@ class Assembler:
         self.stream = self.parser.parse_file(file)
         self.codegen()
 
+    def codegen_macro(self, instruction):
+        macro = self.macros[instruction.opcode]
+        for i, operand in enumerate(instruction.operands):
+            if not operand.type == macro.argument_types[i]:
+                raise Exception("Macro argument type mismatch {} for macro {}".format(
+                    instruction.opcode, macro.name))
+        if not len(instruction.operands) == len(macro.argument_types):
+            raise Exception("Macro argument count mismatch for macro {}: Expected {} operands, but got {}".format(
+                macro.name, len(macro.argument_types), len(instruction.operands)))
+
+        for macro_instruction in macro.instructions:
+            self.codegen_instruction(
+                macro_instruction, instruction.operands, macro.argument_types)
+
     def codegen_data(self, data):
         for operand in data.operands:
             if operand.type == OperandType.IMMEDIATE or operand.type == OperandType.ADDRESS:
@@ -58,56 +84,55 @@ class Assembler:
                 self.binary += self.labels[operand.value].to_bytes(2, byteorder="little")
 
     def codegen_instruction(self, instruction: Instruction, macro_arguments=[], macro_argument_types=[]):
-        operand_types = []
+        if instruction.mnemonic in self.macros.keys():
+            self.codegen_macro(instruction)
+            return
+        elif instruction.mnemonic == "data":
+            self.codegen_data(instruction)
+            return
+        
+        # expand macros and labels
         for operand in instruction.operands:
+            # TODO: Refactor support for macros
             if operand.type == OperandType.MACRO_ARGUMENT:
-                if operand.value >= len(macro_arguments):
-                    raise Exception("Invalid macro argument: {}".format("%"+operand.value))
-                operand_types.append(macro_argument_types[operand.value])
-            elif operand.type == OperandType.LABEL:
-                operand_types.append(OperandType.ADDRESS)
-            else:
-                operand_types.append(operand.type)
-        operand_types = tuple(operand_types)
+                operand.value = macro_arguments[operand.value]
+                operand.type = macro_argument_types[operand.value]
+            if operand.type == OperandType.LABEL:
+                try:
+                    operand.value = self.labels[operand.value]
+                    operand.type = OperandType.ADDRESS
+                except KeyError:
+                    raise Exception(
+                        "Label not found: {}".format(operand.value))
 
-        if (instruction.opcode, operand_types) in self.macros:
-            macro = self.macros[(instruction.opcode, operand_types)]
-            for i, operand in enumerate(instruction.operands):
-                if not operand.type == macro.argument_types[i]:
-                    raise Exception("Macro argument type mismatch {} for macro {}".format(
-                        instruction.opcode, macro.name))
-            if not len(instruction.operands) == len(macro.argument_types):
-                raise Exception("Macro argument count mismatch for macro {}: Expected {} operands, but got {}".format(
-                    macro.name, len(macro.argument_types), len(instruction.operands)))
+        # get opcode
+        try:
+            key = (instruction.mnemonic, tuple(operand.type for operand in instruction.operands))
+            opcode = opcode_map[(instruction.mnemonic, tuple(operand.type for operand in instruction.operands))]
+        except KeyError:
+            raise Exception(
+                "Unknown instruction: {}".format(instruction.mnemonic))
+        
+        # calculate number of bytes needed to store operands
+        number_of_bytes = 0
+        for i, operand in enumerate(instruction.operands):
+            if operand.type == OperandType.REGISTER or operand.type == OperandType.DEVICE:
+                number_of_bytes += 0.5
+            else: 
+                number_of_bytes += 2
+        number_of_bytes = ceil(number_of_bytes)
+        self.binary += (number_of_bytes << 6 | opcode).to_bytes(1, byteorder="little")
 
-            for macro_instruction in macro.instructions:
-                self.codegen_instruction(
-                    macro_instruction, instruction.operands, macro.argument_types)
-            return 
-        elif (instruction.opcode, operand_types) in opcode_map:
-            opcode = opcode_map[(instruction.opcode, operand_types)] << 3                
-            if len(instruction.operands) > 0:
-                for i, operand in enumerate(instruction.operands):
-                    if operand.type == OperandType.MACRO_ARGUMENT:
-                        operand= macro_arguments[operand.value]
-                    if operand.type == OperandType.REGISTER or operand.type == OperandType.DEVICE:
-                        if i == 0:  # shares byte with opcode
-                            self.binary += (opcode | operand.value).to_bytes(1, byteorder="little")
-                        else:       # has it's own byte
-                            self.binary += operand.value.to_bytes(1, byteorder='little')
-                    elif operand.type == OperandType.LABEL:
-                        try:
-                            address = self.labels[operand.value]
-                        except KeyError:
-                            raise Exception(
-                                "Label not found: {}".format(operand.value))
-                        self.binary += address.to_bytes(2, byteorder="little")
-                    else:           # immediates or addresses take up 2 bytes
-                        self.binary += operand.value.to_bytes(2, byteorder='little')
+        # store operands
+        bits = ""
+        for operand in instruction.operands:
+            if operand.type == OperandType.REGISTER or operand.type == OperandType.DEVICE:
+                bits += bin(operand.value)[2:].zfill(4)
             else:
-                self.binary += opcode.to_bytes(1, byteorder="little")  # no operands
-        else:
-            raise Exception("Unknown instruction or macro: {}".format(instruction.opcode + " " + " ".join([OperandType.to_string(type) for type in operand_types])))
+                if not len(bits) % 8 == 0:
+                    bits += "0" * (8 - len(bits) % 8)
+                bits += "".join(wrap(bin(operand.value)[2:].zfill(16), 8)[::-1])
+        self.binary += bytes([int(byte, 2) for byte in wrap(bits, 8)])
 
     def codegen(self):
         for item in self.stream: # Collect label addresses
@@ -125,9 +150,9 @@ class Assembler:
                 self.address += 2*len(item.operands)
                 self.operations.append(item)
             elif isinstance(item, Macro):
-                self.macros[(item.name, tuple(item.argument_types))] = item
+                self.macros[item.name] = item
     
-        for operation in self.operations: # Codegen instructions and data in order
+        for operation in self.operations: # Codegen instructions
             if isinstance(operation, Instruction):
                 self.codegen_instruction(operation)
             elif isinstance(operation, Data):
