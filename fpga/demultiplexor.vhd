@@ -5,7 +5,6 @@
 --
 -- Demultiplexor for the control lines to the registers.
 --
-
 -- Author: Tommaso Peduzzi
 --
 --------------------------------------------------------------------------------
@@ -18,7 +17,14 @@ entity demultiplexor is
 port (
     clk : IN std_logic; -- Clock
 	input : IN  std_logic_vector(2 downto 0); -- input
-    output : OUT std_logic_vector(7 downto 0)  -- output
+    r0 : OUT std_logic; -- output
+    r1 : OUT std_logic; -- output
+    r2 : OUT std_logic; -- output
+    r3 : OUT std_logic; -- output
+    r4 : OUT std_logic; -- output
+    r5 : OUT std_logic; -- output
+    r6 : OUT std_logic; -- output
+    r7 : OUT std_logic -- output
 );
 end demultiplexor;
 architecture architecture_demultiplexor of demultiplexor is

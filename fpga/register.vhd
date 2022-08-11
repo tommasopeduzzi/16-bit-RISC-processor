@@ -23,6 +23,7 @@ port (
     we_l : IN  std_logic; -- write enable less significant byte of bus to less significant byte of register (for memdata)
     input : IN  std_logic_vector(15 downto 0); -- input
     output : OUT std_logic_vector(15 downto 0)  -- output
+    
 );
 end reg;
 architecture architecture_reg of reg is
