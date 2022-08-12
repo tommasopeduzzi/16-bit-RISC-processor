@@ -2,6 +2,7 @@ from cpu import CPU
 
 if __name__ == "__main__":
     cpu = CPU()
+    cpu.parse_instruction_definitions(["instructions/core.instr"])
     interrupts = [
 
     ]
