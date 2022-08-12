@@ -6,39 +6,6 @@ from memory import Memory
 from registers import Register
 from device import Device
 
-operands_count = {
-    0b00000: [],        # nop
-    0b11111: [],        # halt
-    0b00001: [0,1],     # load register register
-    0b00010: [0,1],     # load8 register register
-    0b00011: [0,2],     # load register address
-    0b00100: [0,2],     # load8 register address
-    0b00101: [0,2],     # load-imm immediate or load-addr address 
-    0b00110: [0,1],     # store register register
-    0b00111: [0,1],     # store< register register 
-    0b01000: [0,1],     # store> register register
-    0b01001: [0,2],     # store register address
-    0b01010: [0,2],     # store< register address
-    0b01011: [0,2],     # store> register address
-    0b01100: [0],       # push register
-    0b01101: [0],       # pop register
-    0b01110: [0,1],     # add register register
-    0b01111: [0,1],     # sub register register
-    0b10000: [0,1],     # cmp register register
-    0b10001: [0],       # not register
-    0b10010: [0],       # shiftl register
-    0b10011: [0],       # shiftr register
-    0b10100: [0,1],     # and register register
-    0b10101: [0,1],     # or register register
-    0b10110: [0,1],     # xor register register
-    0b10111: [2],       # jump address
-    0b11000: [2],       # jump== address
-    0b11001: [2],       # jump< address
-    0b11010: [2],       # jump> address
-    0b10011: [2],       # jumpc address
-    0b11100: [0,1],     # in register device
-    0b11101: [0,1],     # out register device
-}
 
 @dataclass
 class Operands:
@@ -69,17 +36,18 @@ class CPU:
 
     def run(self, steps: int) -> None:
         for _ in range(steps):
-            if self.halt: return
+            if self.halt:
+                return
             self.step()
 
     def step(self) -> None:
         if self.interrupt.active:
-            for register in self.registers: # Push register values onto stack
+            for register in self.registers:  # Push register values onto stack
                 value = register.get()
                 self.memory.set(self.sp-1, value[8:])
                 self.memory.set(self.pc, value[:8])
                 self.sp -= 2
-            
+
             value = self.pc
             self.memory.set(self.sp-1, value[8:])
             self.memory.set(self.sp, value[:8])
@@ -87,7 +55,7 @@ class CPU:
 
             interrupt_location = self.memory.get(self.interrupt.number)
             self.pc = interrupt_location
-            
+
         byte = self.memory.get(self.pc)
         self.pc += 1
 
@@ -101,133 +69,159 @@ class CPU:
                 instruction.operands.registers[0] = byte >> 4
                 instruction.operands.registers[1] = byte & 0b1111
                 self.pc += 1
-            else: 
+            else:
                 byte = self.memory.get(self.pc)
-                instruction.operands.immediate = byte <<  8*immediate_byte | instruction.operands.immediate 
+                instruction.operands.immediate = byte << 8 * \
+                    immediate_byte | instruction.operands.immediate
                 immediate_byte += 1
                 self.pc += 1
-        self.execute(instruction)  
+        self.execute(instruction)
 
     def execute(self, instruction: Instruction) -> None:
         registers = instruction.operands.registers
         immediate = instruction.operands.immediate
-        match instruction.opcode:
-            case 0b00000:      # nop
+        mnemonic = self.instruction_definitions[instruction.opcode]
+        match mnemonic:
+            case "nop":      # nop
                 return
-            case 0b111111:      # halt
+            case "halt":      # halt
                 self.halt = True
-            case 0b00001:      # load
-                value = self.memory.get(self.registers[registers[1]].get()+1) << 8 | self.memory.get(self.registers[registers[1]].get())
+            case "load reg reg":      # load
+                value = self.memory.get(self.registers[registers[1]].get(
+                )+1) << 8 | self.memory.get(self.registers[registers[1]].get())
                 self.registers[registers[0]].set(value)
-            case 0b00010:      # load8
+            case "load8 reg reg":      # load8
                 value = self.memory.get(self.registers[registers[1]].get())
                 self.registers[registers[0]].set(value)
-            case 0b00011:      # load
-                value = self.memory.get(immediate + 1) << 8 | self.memory.get(immediate + 1) 
+            case "load reg addr":      # load
+                value = self.memory.get(
+                    immediate + 1) << 8 | self.memory.get(immediate + 1)
                 self.registers[registers[0]].set(value)
-            case 0b00100:      # load8
+            case "load reg addr":      # load8
                 value = self.memory.get(immediate)
-                self.registers[registers[0]].set(value)                
-            case 0b00101:      # load-imm or load-addr
+                self.registers[registers[0]].set(value)
+            case "load-imm reg imm":      # load-imm or load-addr
                 self.registers[registers[0]].set(immediate)
-            case 0b00110:      # store
+            case "load-addr reg addr":
+                self.registers[registers[0]].set(immediate)
+            case "store reg reg":      # store
                 value = self.registers[registers[0]].get()
-                self.memory.set(self.registers[registers[1]].get(), value & 0xFF)
-                self.memory.set(self.registers[registers[1]].get()+1, value >> 8)
-            case 0b00111:      # store<
+                self.memory.set(
+                    self.registers[registers[1]].get(), value & 0xFF)
+                self.memory.set(
+                    self.registers[registers[1]].get()+1, value >> 8)
+            case "store< reg reg":      # store<
                 value = self.registers[registers[0]].get() & 0xFF
                 self.memory.set(self.registers[registers[1]].get(), value)
-            case 0b01000:      # store>
+            case "store> reg reg":      # store>
                 value = self.registers[registers[0]].get() >> 8
                 self.memory.set(self.registers[registers[1]].get(), value)
-            case 0b01001:      # store
+            case "store reg addr":      # store
                 value = self.registers[registers[0]].get()
                 self.memory.set(immediate, value & 0xFF)
                 self.memory.set(immediate+1, value >> 8)
-            case 0b01010:      # store<
+            case "store< reg addr":      # store<
                 value = self.registers[registers[0]].get() & 0xFF
                 self.memory.set(immediate, value)
-            case 0b01011:      # store>
+            case "store> reg addr":      # store>
                 value = self.registers[registers[0]].get() >> 8
                 self.memory.set(immediate, value)
-            case 0b01100:      # push
+            case "push reg":      # push
                 value = self.registers[registers[0]].get()
                 self.memory.set(self.sp-1, value & 0xFF)
                 self.memory.set(self.sp-2, value >> 8)
                 self.sp -= 2
-            case 0b01101:      # pop
-                value = self.memory.get(self.sp) << 8 | self.memory.get(self.sp+1)
+            case "pop reg":      # pop
+                value = self.memory.get(
+                    self.sp) << 8 | self.memory.get(self.sp+1)
                 self.registers[registers[0]].set(value)
                 self.sp += 2
-            case 0b01110:      # add
+            case "add reg reg":      # add
                 lhs = self.registers[registers[0]].get()
                 rhs = self.registers[registers[1]].get()
                 self.alu.add(lhs, rhs)
                 self.registers[registers[0]].set(self.alu.result)
-            case 0b01111:      # sub
+            case "sub reg reg":      # sub
                 lhs = self.registers[registers[0]].get()
                 rhs = self.registers[registers[1]].get()
                 self.alu.sub(lhs, rhs)
                 self.registers[registers[0]].set(self.alu.result)
-            case 0b10000:      # cmp
+            case "cmp reg reg":      # cmp
                 lhs = self.registers[registers[0]].get()
                 rhs = self.registers[registers[1]].get()
                 self.alu.sub(lhs, rhs)
-            case 0b10001:      # not
+            case "not reg":      # not
                 value = self.registers[registers[0]].get()
                 self.alu.logical_not(value)
                 self.registers[registers[0]].set(self.alu.result)
-            case 0b10010:      # shiftl
+            case "shiftl reg":      # shiftl
                 value = self.registers[registers[0]].get()
                 self.alu.shiftl(value)
                 self.registers[registers[0]].set(self.alu.result)
-            case 0b10011:      # shiftr
+            case "shiftr reg":      # shiftr
                 value = self.registers[registers[0]].get()
                 self.alu.shiftr(value)
                 self.registers[registers[0]].set(self.alu.result)
-            case 0b10100:      # and
+            case "and reg reg":      # and
                 lhs = self.registers[registers[0]].get()
                 rhs = self.registers[registers[1]].get()
                 self.alu.logical_and(lhs, rhs)
                 self.registers[registers[0]].set(self.alu.result)
-            case 0b10101:      # or
+            case "or reg reg":      # or
                 lhs = self.registers[registers[0]].get()
                 rhs = self.registers[registers[1]].get()
                 self.alu.logical_or(lhs, rhs)
                 self.registers[registers[0]].set(self.alu.result)
-            case 0b10110:      # xor
+            case "xor reg reg":      # xor
                 lhs = self.registers[registers[0]].get()
                 rhs = self.registers[registers[1]].get()
                 self.alu.logical_xor(lhs, rhs)
                 self.registers[registers[0]].set(self.alu.result)
-            case 0b10111:      # jump
+            case "jump addr":      # jump
                 self.pc = immediate
-            case 0b11000:      # jump==
+            case "jump== addr":      # jump==
                 if self.alu.flags.Z:
                     self.pc = immediate
-            case 0b11001:      # jump<
+            case "jump< addr":      # jump<
                 if self.alu.flags.N:
                     self.pc = immediate
-            case 0b11010:      # jump>
+            case "jump> addr":      # jump>
                 if self.alu.flags.G:
                     self.pc = immediate
-            case 0b11011:      # jumpc
+            case "jumpc addr":      # jumpc
                 if self.alu.flags.C:
                     self.pc = immediate
-            case 0b11100:      # in
+            case "in reg dev":      # in
                 value = self.devices[registers[1]].assert_bus()
                 self.registers[registers[0]].set(value)
-            case 0b11101:      # out
+            case "out reg dev":      # out
                 value = self.registers[registers[0]].get()
                 self.devices[registers[1]].read_bus(value)
-    
+
     def dump(self):
         print("Final state of CPU: ")
         for i, register in enumerate(self.registers):
             print("Register", i, ": \t", register.get())
         print("PC: \t\t", self.pc)
         print("SP: \t\t", self.sp)
-    
-        print("\nFinal state of devices: ")        
+        print("\nFinal state of devices: ")
         for i, register in enumerate(self.devices):
             print("Device", i, ": \t", register.current_value)
+
+    def parse_instruction_definitions(self, files: list[str]):
+        self.instruction_definitions = {}
+        for file in files:
+            with open(file, "r") as f:
+                lines = f.readlines()
+                for line in lines:
+                    if line.startswith("#"):
+                        continue
+                    parts = line.split()
+                    if parts[0] == "nop":
+                        self.instruction_definitions[0] = "nop"
+                        continue
+                    elif parts[0] == "halt":
+                        self.instruction_definitions[0b111111] = "halt"
+                        continue
+                    instruction = " ".join(parts)
+                    self.instruction_definitions[len(self.instruction_definitions)+1] = instruction

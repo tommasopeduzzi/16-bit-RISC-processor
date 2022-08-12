@@ -1,0 +1,38 @@
+halt                                           
+nop                                            
+# Memory instructions
+load           reg reg  
+load8          reg reg  
+load           reg addr   
+load8          reg addr   
+load-imm       reg imm
+load-addr      reg addr   
+store          reg reg  
+store<         reg reg  
+store>         reg reg  
+store          reg addr   
+store<         reg addr   
+store>         reg addr   
+# Stack manipulation instructions
+push           reg                   
+pop            reg                   
+# Arithmetic instructions
+add            reg reg  
+sub            reg reg  
+cmp            reg reg  
+# Bitwise instructions
+not            reg                   
+shiftl         reg                   
+shiftr         reg                   
+and            reg reg  
+or             reg reg  
+xor            reg reg  
+# Control flow instructions
+jump           addr                       
+jump==         addr                       
+jump<          addr                       
+jump>          addr                       
+jumpc          addr                       
+# IO instructions
+in             reg dev    
+out            reg dev    
