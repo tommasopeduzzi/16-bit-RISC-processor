@@ -2,9 +2,6 @@
 
 jump @start 
 
-data:
-    data 0xFFFD 1
-
 start:
     load-addr $0 @data
     load $2 $0
@@ -12,3 +9,6 @@ start:
     add $0 $1
     load $3 $0
     halt
+
+data:
+    data 0xFFFD 1
