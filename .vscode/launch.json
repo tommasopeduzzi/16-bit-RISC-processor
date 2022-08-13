@@ -20,7 +20,16 @@
             "program": "./assembler/main.py",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["assembler/test.tasm", "assembler/test.bin", "--extend_binary"],
+            "args": ["assembler/test.tasm", "assembler/test.bin"],
+        },
+        {
+            "name": "Disasssembler",
+            "type": "python",
+            "request": "launch",
+            "program": "./disassembler/main.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": ["assembler/test.bin"],
         }
     ]
 }
