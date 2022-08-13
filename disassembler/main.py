@@ -25,12 +25,12 @@ def parse_instruction_definitions(files: list[str]):
 def disassemble(binary: bytearray, instructions):
     output = ""
     while len(binary) > 0:
-        opcode = binary.pop(0)
-        opcode &= 0b111111
+        byte = binary.pop(0)
+        opcode = byte & 0b111111
         try:
             instruction = instructions[opcode].split()
         except KeyError:
-            output += f"data {str(opcode|(binary.pop(0)<<8))}\n"
+            output += f"data {str(byte|(binary.pop(0)<<8))}\n"
             continue
 
         mnemonic = instruction.pop(0)
