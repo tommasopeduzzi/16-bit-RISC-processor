@@ -10,12 +10,6 @@ operand_types = {
     "imm": OperandType.IMMEDIATE,
     "dev": OperandType.DEVICE
 }
-operand_types = {
-    "reg": OperandType.REGISTER,
-    "addr": OperandType.ADDRESS,
-    "imm": OperandType.IMMEDIATE,
-    "dev": OperandType.DEVICE
-}
 
 
 class Assembler:
