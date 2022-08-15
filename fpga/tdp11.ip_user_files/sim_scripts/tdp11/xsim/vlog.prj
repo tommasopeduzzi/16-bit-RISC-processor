@@ -1,0 +1,8 @@
+verilog xil_defaultlib --include "../../../../tdp11.gen/sources_1/bd/tdp11/ipshared/4e49" \
+"../../../bd/tdp11/ip/tdp11_xlslice_0_0/sim/tdp11_xlslice_0_0.v" \
+"../../../bd/tdp11/ip/tdp11_clk_wiz_0_0/tdp11_clk_wiz_0_0_clk_wiz.v" \
+"../../../bd/tdp11/ip/tdp11_clk_wiz_0_0/tdp11_clk_wiz_0_0.v" \
+
+verilog xil_defaultlib "glbl.v"
+
+nosort

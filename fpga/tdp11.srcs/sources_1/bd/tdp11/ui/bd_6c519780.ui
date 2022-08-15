@@ -2,107 +2,109 @@
    "ActiveEmotionalView":"Default View",
    "Addressing View_ScaleFactor":"1.0",
    "Addressing View_TopLeft":"-861,-254",
-   "Default View_ScaleFactor":"1.01531",
-   "Default View_TopLeft":"-22,176",
+   "Default View_ScaleFactor":"0.499112",
+   "Default View_TopLeft":"-900,1635",
    "ExpandedHierarchyInLayout":"",
    "Interfaces View_ScaleFactor":"1.0",
    "Interfaces View_TopLeft":"-911,-254",
    "guistr":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
 #  -string -flagsOSRD
-preplace port port-id_rst -pg 1 -lvl 1 -x 200 -y -20 -defaultsOSRD -top
-preplace inst control -pg 1 -lvl 2 -x 710 -y 290 -defaultsOSRD
-preplace inst we -pg 1 -lvl 1 -x 130 -y 1400 -defaultsOSRD
-preplace inst we_l -pg 1 -lvl 1 -x 130 -y 1920 -defaultsOSRD
-preplace inst we_m -pg 1 -lvl 1 -x 130 -y 1640 -defaultsOSRD
-preplace inst main_bus -pg 1 -lvl 3 -x 1490 -y 1940 -defaultsOSRD
-preplace inst reg_0 -pg 1 -lvl 2 -x 710 -y 1040 -defaultsOSRD
-preplace inst reg_1 -pg 1 -lvl 2 -x 710 -y 1240 -defaultsOSRD
-preplace inst reg_2 -pg 1 -lvl 2 -x 710 -y 1440 -defaultsOSRD
-preplace inst reg_3 -pg 1 -lvl 2 -x 710 -y 1640 -defaultsOSRD
-preplace inst reg_4 -pg 1 -lvl 2 -x 710 -y 1940 -defaultsOSRD
-preplace inst reg_5 -pg 1 -lvl 2 -x 710 -y 2140 -defaultsOSRD
-preplace inst reg_6 -pg 1 -lvl 2 -x 710 -y 2340 -defaultsOSRD
-preplace inst reg_7 -pg 1 -lvl 2 -x 710 -y 2540 -defaultsOSRD
-preplace inst lhs -pg 1 -lvl 3 -x 1490 -y 1530 -defaultsOSRD
-preplace inst rhs -pg 1 -lvl 3 -x 1490 -y 1230 -defaultsOSRD
-preplace inst alu -pg 1 -lvl 4 -x 1810 -y 1520 -defaultsOSRD
-preplace inst sp_0 -pg 1 -lvl 2 -x 710 -y 860 -defaultsOSRD
-preplace inst pc_0 -pg 1 -lvl 2 -x 710 -y 690 -defaultsOSRD
-preplace inst address_bus -pg 1 -lvl 3 -x 1490 -y 890 -defaultsOSRD
-preplace inst memory -pg 1 -lvl 4 -x 1810 -y 880 -defaultsOSRD
-preplace inst slice -pg 1 -lvl 4 -x 1810 -y 1760 -defaultsOSRD
-preplace inst clk -pg 1 -lvl 1 -x 130 -y 370 -defaultsOSRD
-preplace netloc alu_0_output 1 2 3 1160 2170 NJ 2170 1980
-preplace netloc control_output_imm 1 2 1 930 490n
-preplace netloc lhs_output 1 3 1 N 1530
-preplace netloc main_bus_0_output 1 1 3 510 1830 900J 1710 1650
-preplace netloc pc_0_output 1 2 1 950 690n
-preplace netloc reg_0_output 1 2 1 1090 900n
-preplace netloc reg_1_output 1 2 1 1100 920n
-preplace netloc reg_2_output 1 2 1 880 940n
-preplace netloc reg_3_output 1 2 1 1110 960n
-preplace netloc reg_4_output 1 2 1 1120 980n
-preplace netloc reg_5_output 1 2 1 1000 1000n
-preplace netloc reg_6_output 1 2 1 1030 1020n
-preplace netloc reg_7_output 1 2 1 1130 1040n
-preplace netloc rhs_output 1 3 1 1640 1230n
-preplace netloc sp_0_output 1 2 1 N 860
-preplace netloc we_l_r0 1 1 1 330 1070n
-preplace netloc we_l_r1 1 1 1 400 1270n
-preplace netloc we_l_r2 1 1 1 290 1470n
-preplace netloc we_l_r3 1 1 1 310 1670n
-preplace netloc we_l_r4 1 1 1 290 1930n
-preplace netloc we_l_r5 1 1 1 260 1950n
-preplace netloc we_l_r6 1 1 1 240 1970n
-preplace netloc we_l_r7 1 1 1 230 1990n
-preplace netloc we_m_r0 1 1 1 300 1050n
-preplace netloc we_m_r1 1 1 1 350 1250n
-preplace netloc we_m_r2 1 1 1 370 1450n
-preplace netloc we_m_r3 1 1 1 410 1630n
-preplace netloc we_m_r4 1 1 1 390 1650n
-preplace netloc we_m_r5 1 1 1 300 1670n
-preplace netloc we_m_r6 1 1 1 270 1690n
-preplace netloc we_m_r7 1 1 1 250 1710n
-preplace netloc we_r0 1 1 1 280 1030n
-preplace netloc we_r1 1 1 1 320 1230n
-preplace netloc we_r2 1 1 1 450 1370n
-preplace netloc we_r3 1 1 1 420 1390n
-preplace netloc we_r4 1 1 1 320 1410n
-preplace netloc we_r5 1 1 1 440 1430n
-preplace netloc we_r6 1 1 1 360 1450n
-preplace netloc we_r7 1 1 1 280 1470n
-preplace netloc xlslice_0_Dout 1 3 2 1670 970 1990
-preplace netloc address_bus_0_output 1 3 1 N 890
-preplace netloc memory_0_output 1 1 4 460 2650 1150 2180 NJ 2180 2000
-preplace netloc control_alu_lhs_sel 1 2 1 960 470n
-preplace netloc control_alu_rhs_sel 1 2 1 970 450n
-preplace netloc control_addr_control_sel 1 2 1 1050 430n
-preplace netloc control_addr_sp_sel 1 2 1 1150 390n
-preplace netloc control_addr_reg_sel 1 2 1 1060 410n
-preplace netloc control_addr_pc_sel 1 2 1 1160 370n
-preplace netloc control_main_reg_m_sel 1 2 1 1010 350n
-preplace netloc control_main_reg_l_sel 1 2 1 1040 330n
-preplace netloc control_main_reg_sel 1 2 1 1140 310n
-preplace netloc control_main_control_sel 1 2 1 1020 290n
-preplace netloc control_main_mem_sel 1 2 1 1070 270n
-preplace netloc control_main_alu_sel 1 2 1 1080 250n
-preplace netloc control_reg_we_m 1 0 3 20 1770 NJ 1770 870
-preplace netloc control_reg_we_l 1 0 3 20 1790 340J 1800 890
-preplace netloc control_reg_we 1 0 3 10 1780 350J 1810 920
-preplace netloc control_alu_op 1 2 2 NJ 170 1650
-preplace netloc control_mem_we 1 2 2 NJ 70 1670
-preplace netloc control_pc_inc 1 1 2 510 10 870
-preplace netloc control_pc_load 1 1 2 530 570 900
-preplace netloc control_sp_inc 1 1 2 540 590 910
-preplace netloc control_sp_decr 1 1 2 520 580 880
-preplace netloc alu_c 1 1 4 500 1780 970J 1380 NJ 1380 1960
-preplace netloc alu_l 1 1 4 490 1760 980J 1680 NJ 1680 1940
-preplace netloc alu_g 1 1 4 480 1750 990J 1690 1660J 1670 1950
-preplace netloc alu_z 1 1 4 470 1790 1060J 1700 NJ 1700 1970
-preplace netloc clk_clk_out1 1 0 4 0 2050 430J 1820 940J 680 1660
-preplace netloc rst_1 1 0 2 0 250 380
-levelinfo -pg 1 -20 130 710 1490 1810 2020
-pagesize -pg 1 -db -bbox -sgen -20 -90 2020 2660
+preplace port port-id_rst -pg 1 -lvl 1 -x 210 -y 80 -defaultsOSRD -top
+preplace port port-id_clock -pg 1 -lvl 1 -x 80 -y 80 -defaultsOSRD -top
+preplace inst reg_0 -pg 1 -lvl 2 -x 680 -y 1150 -defaultsOSRD
+preplace inst reg_1 -pg 1 -lvl 2 -x 680 -y 1350 -defaultsOSRD
+preplace inst reg_2 -pg 1 -lvl 2 -x 680 -y 1550 -defaultsOSRD
+preplace inst reg_3 -pg 1 -lvl 2 -x 680 -y 1750 -defaultsOSRD
+preplace inst reg_4 -pg 1 -lvl 2 -x 680 -y 2050 -defaultsOSRD
+preplace inst reg_5 -pg 1 -lvl 2 -x 680 -y 2250 -defaultsOSRD
+preplace inst reg_6 -pg 1 -lvl 2 -x 680 -y 2450 -defaultsOSRD
+preplace inst reg_7 -pg 1 -lvl 2 -x 680 -y 2650 -defaultsOSRD
+preplace inst lhs -pg 1 -lvl 3 -x 1270 -y 1690 -defaultsOSRD
+preplace inst rhs -pg 1 -lvl 3 -x 1270 -y 1390 -defaultsOSRD
+preplace inst sp_0 -pg 1 -lvl 2 -x 680 -y 970 -defaultsOSRD
+preplace inst address_bus -pg 1 -lvl 3 -x 1270 -y 1050 -defaultsOSRD
+preplace inst memory -pg 1 -lvl 4 -x 1590 -y 1040 -defaultsOSRD
+preplace inst slice -pg 1 -lvl 4 -x 1590 -y 1920 -defaultsOSRD
+preplace inst clk -pg 1 -lvl 1 -x 140 -y 340 -defaultsOSRD
+preplace inst main_bus -pg 1 -lvl 3 -x 1270 -y 2100 -defaultsOSRD
+preplace inst pc_0 -pg 1 -lvl 2 -x 680 -y 800 -defaultsOSRD
+preplace inst we -pg 1 -lvl 1 -x 140 -y 1540 -defaultsOSRD
+preplace inst we_l -pg 1 -lvl 1 -x 140 -y 2060 -defaultsOSRD
+preplace inst we_m -pg 1 -lvl 1 -x 140 -y 1780 -defaultsOSRD
+preplace inst control -pg 1 -lvl 2 -x 680 -y 400 -defaultsOSRD
+preplace inst alu -pg 1 -lvl 4 -x 1590 -y 1680 -defaultsOSRD
+preplace netloc address_bus_0_output 1 3 1 N 1050
+preplace netloc alu_0_output 1 2 3 1100 2330 NJ 2330 1760
+preplace netloc alu_c 1 1 4 500 1860 910J 1540 NJ 1540 1750
+preplace netloc alu_g 1 1 4 460 1870 920J 1840 NJ 1840 1720
+preplace netloc alu_l 1 1 4 470 1880 990J 1860 NJ 1860 1730
+preplace netloc alu_z 1 1 4 450 1890 980J 1850 NJ 1850 1740
+preplace netloc clk_clk_out1 1 0 4 20 1910 370J 1940 900J 840 1440
+preplace netloc clock_1 1 0 1 10 90n
+preplace netloc control_addr_control_sel 1 2 1 1060 540n
+preplace netloc control_addr_pc_sel 1 2 1 1100 480n
+preplace netloc control_addr_reg_sel 1 2 1 1070 520n
+preplace netloc control_addr_sp_sel 1 2 1 1090 500n
+preplace netloc control_alu_lhs_sel 1 2 1 920 580n
+preplace netloc control_alu_op 1 2 2 NJ 280 1430
+preplace netloc control_alu_rhs_sel 1 2 1 940 560n
+preplace netloc control_main_alu_sel 1 2 1 1020 360n
+preplace netloc control_main_control_sel 1 2 1 960 400n
+preplace netloc control_main_mem_sel 1 2 1 1010 380n
+preplace netloc control_main_reg_l_sel 1 2 1 1000 440n
+preplace netloc control_main_reg_m_sel 1 2 1 950 460n
+preplace netloc control_main_reg_sel 1 2 1 1080 420n
+preplace netloc control_mem_we 1 2 2 NJ 180 1450
+preplace netloc control_output_imm 1 2 1 890 600n
+preplace netloc control_pc_inc 1 1 2 480 110 1100
+preplace netloc control_pc_load 1 1 2 490 120 840
+preplace netloc control_reg_we 1 0 3 30 1930 NJ 1930 870
+preplace netloc control_reg_we_l 1 0 3 10 680 NJ 680 840
+preplace netloc control_reg_we_m 1 0 3 40 1920 NJ 1920 850
+preplace netloc control_sp_decr 1 1 2 510 690 860
+preplace netloc control_sp_inc 1 1 2 520 700 880
+preplace netloc lhs_output 1 3 1 N 1690
+preplace netloc main_bus_0_output 1 1 3 490 1900 1100J 1870 1440
+preplace netloc memory_0_output 1 1 4 440 1910 880 2340 NJ 2340 1780
+preplace netloc pc_0_output 1 2 1 930 800n
+preplace netloc reg_0_output 1 2 1 1030 1060n
+preplace netloc reg_1_output 1 2 1 1040 1080n
+preplace netloc reg_2_output 1 2 1 1050 1100n
+preplace netloc reg_3_output 1 2 1 1060 1120n
+preplace netloc reg_4_output 1 2 1 860 1140n
+preplace netloc reg_5_output 1 2 1 840 1160n
+preplace netloc reg_6_output 1 2 1 970 1180n
+preplace netloc reg_7_output 1 2 1 1070 1200n
+preplace netloc rhs_output 1 3 1 1420 1390n
+preplace netloc rst_1 1 0 2 40 270 340
+preplace netloc sp_0_output 1 2 1 910 970n
+preplace netloc we_l_r0 1 1 1 300 1180n
+preplace netloc we_l_r1 1 1 1 350 1380n
+preplace netloc we_l_r2 1 1 1 400 1580n
+preplace netloc we_l_r3 1 1 1 430 1780n
+preplace netloc we_l_r4 1 1 1 300 2070n
+preplace netloc we_l_r5 1 1 1 270 2090n
+preplace netloc we_l_r6 1 1 1 260 2110n
+preplace netloc we_l_r7 1 1 1 240 2130n
+preplace netloc we_m_r0 1 1 1 250 1160n
+preplace netloc we_m_r1 1 1 1 290 1360n
+preplace netloc we_m_r2 1 1 1 330 1560n
+preplace netloc we_m_r3 1 1 1 380 1760n
+preplace netloc we_m_r4 1 1 1 360 1790n
+preplace netloc we_m_r5 1 1 1 310 1810n
+preplace netloc we_m_r6 1 1 1 290 1830n
+preplace netloc we_m_r7 1 1 1 250 1850n
+preplace netloc we_r0 1 1 1 240 1140n
+preplace netloc we_r1 1 1 1 280 1340n
+preplace netloc we_r2 1 1 1 430 1510n
+preplace netloc we_r3 1 1 1 420 1530n
+preplace netloc we_r4 1 1 1 410 1550n
+preplace netloc we_r5 1 1 1 390 1570n
+preplace netloc we_r6 1 1 1 320 1590n
+preplace netloc we_r7 1 1 1 280 1610n
+preplace netloc xlslice_0_Dout 1 3 2 1460 950 1770
+levelinfo -pg 1 -10 140 680 1270 1590 1800
+pagesize -pg 1 -db -bbox -sgen -10 0 1800 2760
 "
 }
 {

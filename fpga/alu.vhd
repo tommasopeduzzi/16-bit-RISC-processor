@@ -29,37 +29,39 @@ port (
 );
 end alu;
 architecture architecture_alu of alu is
+signal result: std_logic_vector (15 downto 0);
 begin
     process (clk) begin
         if rising_edge(clk) then
             case op is
-                when "0000" => output <= std_logic_vector(signed(lhs) + signed(rhs));  -- add
-                when "0001" => output <= std_logic_vector(signed(lhs) - signed(rhs));  -- subtract
-                when "0010" => output <= std_logic_vector(signed(lhs) - signed(rhs));  -- compare 
-                when "0011" => output <= std_logic_vector(lhs and rhs);    -- and
-                when "0100" => output <= std_logic_vector(lhs or rhs);    -- or
-                when "0101" => output <= std_logic_vector(lhs xor rhs);    -- xor
-                when "0110" => output <= std_logic_vector(lhs sll 1);    -- shift left
-                when "0111" => output <= std_logic_vector(lhs srl 1);    -- shift right
-                when "1000" => output <= std_logic_vector(not lhs);         -- not
-                when others => output <= (others => 'X');
+                when "0000" => result <= std_logic_vector(signed(lhs) + signed(rhs));  -- add
+                when "0001" => result <= std_logic_vector(signed(lhs) - signed(rhs));  -- subtract
+                when "0010" => result <= std_logic_vector(signed(lhs) - signed(rhs));  -- compare 
+                when "0011" => result <= std_logic_vector(lhs and rhs);    -- and
+                when "0100" => result <= std_logic_vector(lhs or rhs);    -- or
+                when "0101" => result <= std_logic_vector(lhs xor rhs);    -- xor
+                when "0110" => result <= lhs(14 downto 0) & '0';    -- shift left
+                when "0111" => result <= '0' & lhs(15 downto 1);    -- shift right
+                when "1000" => result <= std_logic_vector(not lhs);         -- not
+                when others => result <= (others => 'X');
             end case;
-            if signed(output) > 2**15-1 or signed(output) < -2**15-1 then
+            output <= result;
+            if signed(result) > 2**15-1 or signed(result) < -2**15-1 then
                 c <= '1';
             else
                 c <= '0';
             end if;
-            if signed(output) = 0 then
+            if signed(result) = 0 then
                 z <= '1';
             else
                 z <= '0';
             end if;
-            if signed(output) > 0 then
+            if signed(result) > 0 then
                 g <= '1';
             else
                 g <= '0';
             end if;
-            if signed(output) < 0 then
+            if signed(result) < 0 then
                 l <= '1';
             else
                 l <= '0';

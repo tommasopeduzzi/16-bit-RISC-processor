@@ -32,16 +32,23 @@ begin
     process (clk)
     begin
         if falling_edge(clk) then
+            r0 <= '0';
+            r1 <= '0';
+            r2 <= '0';
+            r3 <= '0';
+            r4 <= '0';
+            r5 <= '0';
+            r6 <= '0';
+            r7 <= '0'; 
             case input is
-                when "000" => output <= (0 => '1', others => '0');
-                when "001" => output <= (1 => '1', others => '0');
-                when "010" => output <= (2 => '1', others => '0');
-                when "011" => output <= (3 => '1', others => '0');
-                when "100" => output <= (4 => '1', others => '0');
-                when "101" => output <= (5 => '1', others => '0');
-                when "110" => output <= (6 => '1', others => '0');
-                when "111" => output <= (7 => '1', others => '0');
-                when others => output <= (others => 'X');
+                when "000" => r0 <= '1';
+                when "001" => r1 <= '1';
+                when "010" => r2 <= '1';
+                when "011" => r3 <= '1';
+                when "100" => r4 <= '1';
+                when "101" => r5 <= '1';
+                when "110" => r6 <= '1';
+                when "111" => r7 <= '1';
             end case;
         end if;
     end process;

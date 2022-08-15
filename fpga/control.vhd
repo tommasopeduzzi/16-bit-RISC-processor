@@ -77,27 +77,27 @@ begin
             imm <= (others => '0');
         elsif falling_edge(clk) then
             -- reset control lines
-            mem_we <= 0;
-            pc_inc <= 0;
-            pc_load <= 0;
-            sp_inc <= 0;
-            sp_decr <= 0;
-            alu_op <= (others => 0);
-            reg_we <= (others => 0);
-            reg_we_l <= (others => 0);
-            reg_we_m <= (others => 0);
-            main_alu_sel <= 0;
-            main_mem_sel <= 0;
-            main_control_sel <= 0;
-            main_reg_sel <= (others => 0);
-            main_reg_l_sel <= (others => 0);
-            main_reg_m_sel <= (others => 0);
-            addr_pc_sel <= 0;
-            addr_sp_sel <= 0;
-            addr_control_sel <= 0;
-            addr_reg_sel <= (others => 0);
-            alu_rhs_sel <= (others => 0);
-            alu_lhs_sel <= (others => 0);
+            mem_we <= '0';
+            pc_inc <= '0';
+            pc_load <= '0';
+            sp_inc <= '0';
+            sp_decr <= '0';
+            alu_op <= (others => '0');
+            reg_we <= (others => '0');
+            reg_we_l <= (others => '0');
+            reg_we_m <= (others => '0');
+            main_alu_sel <= '0';
+            main_mem_sel <= '0';
+            main_control_sel <= '0';
+            main_reg_sel <= (others => '0');
+            main_reg_l_sel <= (others => '0');
+            main_reg_m_sel <= (others => '0');
+            addr_pc_sel <= '0';
+            addr_sp_sel <= '0';
+            addr_control_sel <= '0';
+            addr_reg_sel <= (others => '0');
+            alu_rhs_sel <= (others => '0');
+            alu_lhs_sel <= (others => '0');
             
             -- set appropriate control lines
             if opcode = "111111" then        -- halt
