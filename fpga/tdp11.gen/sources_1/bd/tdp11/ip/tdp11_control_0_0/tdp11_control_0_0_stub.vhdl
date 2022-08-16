@@ -1,7 +1,7 @@
 -- Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2022.1 (lin64) Build 3526262 Mon Apr 18 15:47:01 MDT 2022
--- Date        : Mon Aug 15 21:12:20 2022
+-- Date        : Tue Aug 16 16:07:14 2022
 -- Host        : framework running 64-bit unknown
 -- Command     : write_vhdl -force -mode synth_stub
 --               /home/tommasopeduzzi/Documents/16-bit-RISC-processor/fpga/tdp11.gen/sources_1/bd/tdp11/ip/tdp11_control_0_0/tdp11_control_0_0_stub.vhdl

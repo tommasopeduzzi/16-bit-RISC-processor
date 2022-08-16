@@ -3,8 +3,8 @@
 -- Tool Version: Vivado v.2022.1 (lin64) Build 3526262 Mon Apr 18 15:47:01 MDT 2022
 -- Date        : Mon Aug 15 20:56:25 2022
 -- Host        : framework running 64-bit unknown
--- Command     : write_vhdl -force -mode funcsim
---               /home/tommasopeduzzi/Documents/16-bit-RISC-processor/fpga/tdp11.gen/sources_1/bd/tdp11/ip/tdp11_address_bus_0_0/tdp11_address_bus_0_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top tdp11_address_bus_0_0 -prefix
+--               tdp11_address_bus_0_0_ tdp11_address_bus_0_0_sim_netlist.vhdl
 -- Design      : tdp11_address_bus_0_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -34,8 +34,6 @@ entity tdp11_address_bus_0_0_address_bus is
     r5 : in STD_LOGIC_VECTOR ( 15 downto 0 );
     r4 : in STD_LOGIC_VECTOR ( 15 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of tdp11_address_bus_0_0_address_bus : entity is "address_bus";
 end tdp11_address_bus_0_0_address_bus;
 
 architecture STRUCTURE of tdp11_address_bus_0_0_address_bus is

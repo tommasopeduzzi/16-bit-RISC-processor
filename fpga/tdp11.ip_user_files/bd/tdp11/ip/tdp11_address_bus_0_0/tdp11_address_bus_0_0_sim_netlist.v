@@ -3,8 +3,8 @@
 // Tool Version: Vivado v.2022.1 (lin64) Build 3526262 Mon Apr 18 15:47:01 MDT 2022
 // Date        : Mon Aug 15 20:56:25 2022
 // Host        : framework running 64-bit unknown
-// Command     : write_verilog -force -mode funcsim
-//               /home/tommasopeduzzi/Documents/16-bit-RISC-processor/fpga/tdp11.gen/sources_1/bd/tdp11/ip/tdp11_address_bus_0_0/tdp11_address_bus_0_0_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top tdp11_address_bus_0_0 -prefix
+//               tdp11_address_bus_0_0_ tdp11_address_bus_0_0_sim_netlist.v
 // Design      : tdp11_address_bus_0_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -12,84 +12,6 @@
 // --------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CHECK_LICENSE_TYPE = "tdp11_address_bus_0_0,address_bus,{}" *) (* downgradeipidentifiedwarnings = "yes" *) (* ip_definition_source = "module_ref" *) 
-(* x_core_info = "address_bus,Vivado 2022.1" *) 
-(* NotValidForBitStream *)
-module tdp11_address_bus_0_0
-   (clk,
-    pc_sel,
-    sp_sel,
-    control_sel,
-    reg_sel,
-    pc,
-    sp,
-    control,
-    r0,
-    r1,
-    r2,
-    r3,
-    r4,
-    r5,
-    r6,
-    r7,
-    \output );
-  (* x_interface_info = "xilinx.com:signal:clock:1.0 clk CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME clk, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN /clk_clk_out1, INSERT_VIP 0" *) input clk;
-  input pc_sel;
-  input sp_sel;
-  input control_sel;
-  input [2:0]reg_sel;
-  input [15:0]pc;
-  input [15:0]sp;
-  input [15:0]control;
-  input [15:0]r0;
-  input [15:0]r1;
-  input [15:0]r2;
-  input [15:0]r3;
-  input [15:0]r4;
-  input [15:0]r5;
-  input [15:0]r6;
-  input [15:0]r7;
-  output [15:0]\output ;
-
-  wire clk;
-  wire [15:0]control;
-  wire control_sel;
-  wire [15:0]\output ;
-  wire [15:0]pc;
-  wire pc_sel;
-  wire [15:0]r0;
-  wire [15:0]r1;
-  wire [15:0]r2;
-  wire [15:0]r3;
-  wire [15:0]r4;
-  wire [15:0]r5;
-  wire [15:0]r6;
-  wire [15:0]r7;
-  wire [2:0]reg_sel;
-  wire [15:0]sp;
-  wire sp_sel;
-
-  tdp11_address_bus_0_0_address_bus U0
-       (.clk(clk),
-        .control(control),
-        .control_sel(control_sel),
-        .\output (\output ),
-        .pc(pc),
-        .pc_sel(pc_sel),
-        .r0(r0),
-        .r1(r1),
-        .r2(r2),
-        .r3(r3),
-        .r4(r4),
-        .r5(r5),
-        .r6(r6),
-        .r7(r7),
-        .reg_sel(reg_sel),
-        .sp(sp),
-        .sp_sel(sp_sel));
-endmodule
-
-(* ORIG_REF_NAME = "address_bus" *) 
 module tdp11_address_bus_0_0_address_bus
    (\output ,
     clk,
@@ -897,6 +819,83 @@ module tdp11_address_bus_0_0_address_bus
         .D(p_0_in[9]),
         .Q(\output [9]),
         .R(1'b0));
+endmodule
+
+(* CHECK_LICENSE_TYPE = "tdp11_address_bus_0_0,address_bus,{}" *) (* downgradeipidentifiedwarnings = "yes" *) (* ip_definition_source = "module_ref" *) 
+(* x_core_info = "address_bus,Vivado 2022.1" *) 
+(* NotValidForBitStream *)
+module tdp11_address_bus_0_0
+   (clk,
+    pc_sel,
+    sp_sel,
+    control_sel,
+    reg_sel,
+    pc,
+    sp,
+    control,
+    r0,
+    r1,
+    r2,
+    r3,
+    r4,
+    r5,
+    r6,
+    r7,
+    \output );
+  (* x_interface_info = "xilinx.com:signal:clock:1.0 clk CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME clk, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN /clk_clk_out1, INSERT_VIP 0" *) input clk;
+  input pc_sel;
+  input sp_sel;
+  input control_sel;
+  input [2:0]reg_sel;
+  input [15:0]pc;
+  input [15:0]sp;
+  input [15:0]control;
+  input [15:0]r0;
+  input [15:0]r1;
+  input [15:0]r2;
+  input [15:0]r3;
+  input [15:0]r4;
+  input [15:0]r5;
+  input [15:0]r6;
+  input [15:0]r7;
+  output [15:0]\output ;
+
+  wire clk;
+  wire [15:0]control;
+  wire control_sel;
+  wire [15:0]\output ;
+  wire [15:0]pc;
+  wire pc_sel;
+  wire [15:0]r0;
+  wire [15:0]r1;
+  wire [15:0]r2;
+  wire [15:0]r3;
+  wire [15:0]r4;
+  wire [15:0]r5;
+  wire [15:0]r6;
+  wire [15:0]r7;
+  wire [2:0]reg_sel;
+  wire [15:0]sp;
+  wire sp_sel;
+
+  tdp11_address_bus_0_0_address_bus U0
+       (.clk(clk),
+        .control(control),
+        .control_sel(control_sel),
+        .\output (\output ),
+        .pc(pc),
+        .pc_sel(pc_sel),
+        .r0(r0),
+        .r1(r1),
+        .r2(r2),
+        .r3(r3),
+        .r4(r4),
+        .r5(r5),
+        .r6(r6),
+        .r7(r7),
+        .reg_sel(reg_sel),
+        .sp(sp),
+        .sp_sel(sp_sel));
 endmodule
 `ifndef GLBL
 `define GLBL

@@ -98,6 +98,7 @@ begin
             addr_reg_sel <= (others => '0');
             alu_rhs_sel <= (others => '0');
             alu_lhs_sel <= (others => '0');
+            output_imm <= (others => '0');
             
             -- set appropriate control lines
             if opcode = "111111" then        -- halt
