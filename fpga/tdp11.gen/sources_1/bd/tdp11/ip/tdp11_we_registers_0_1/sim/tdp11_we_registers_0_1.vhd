@@ -46,61 +46,115 @@
 -- 
 -- DO NOT MODIFY THIS FILE.
 
--- IP VLNV: xilinx.com:module_ref:demultiplexor:1.0
+-- IP VLNV: xilinx.com:module_ref:we_registers:1.0
 -- IP Revision: 1
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY tdp11_demultiplexor_0_0 IS
+ENTITY tdp11_we_registers_0_1 IS
   PORT (
     clk : IN STD_LOGIC;
-    input : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
+    we : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
+    we_l : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
+    we_m : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
     r0 : OUT STD_LOGIC;
+    r0_m : OUT STD_LOGIC;
+    r0_l : OUT STD_LOGIC;
     r1 : OUT STD_LOGIC;
+    r1_m : OUT STD_LOGIC;
+    r1_l : OUT STD_LOGIC;
     r2 : OUT STD_LOGIC;
+    r2_m : OUT STD_LOGIC;
+    r2_l : OUT STD_LOGIC;
     r3 : OUT STD_LOGIC;
+    r3_m : OUT STD_LOGIC;
+    r3_l : OUT STD_LOGIC;
     r4 : OUT STD_LOGIC;
+    r4_m : OUT STD_LOGIC;
+    r4_l : OUT STD_LOGIC;
     r5 : OUT STD_LOGIC;
+    r5_m : OUT STD_LOGIC;
+    r5_l : OUT STD_LOGIC;
     r6 : OUT STD_LOGIC;
-    r7 : OUT STD_LOGIC
+    r6_m : OUT STD_LOGIC;
+    r6_l : OUT STD_LOGIC;
+    r7 : OUT STD_LOGIC;
+    r7_m : OUT STD_LOGIC;
+    r7_l : OUT STD_LOGIC
   );
-END tdp11_demultiplexor_0_0;
+END tdp11_we_registers_0_1;
 
-ARCHITECTURE tdp11_demultiplexor_0_0_arch OF tdp11_demultiplexor_0_0 IS
+ARCHITECTURE tdp11_we_registers_0_1_arch OF tdp11_we_registers_0_1 IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings : STRING;
-  ATTRIBUTE DowngradeIPIdentifiedWarnings OF tdp11_demultiplexor_0_0_arch: ARCHITECTURE IS "yes";
-  COMPONENT demultiplexor IS
+  ATTRIBUTE DowngradeIPIdentifiedWarnings OF tdp11_we_registers_0_1_arch: ARCHITECTURE IS "yes";
+  COMPONENT we_registers IS
     PORT (
       clk : IN STD_LOGIC;
-      input : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
+      we : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
+      we_l : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
+      we_m : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
       r0 : OUT STD_LOGIC;
+      r0_m : OUT STD_LOGIC;
+      r0_l : OUT STD_LOGIC;
       r1 : OUT STD_LOGIC;
+      r1_m : OUT STD_LOGIC;
+      r1_l : OUT STD_LOGIC;
       r2 : OUT STD_LOGIC;
+      r2_m : OUT STD_LOGIC;
+      r2_l : OUT STD_LOGIC;
       r3 : OUT STD_LOGIC;
+      r3_m : OUT STD_LOGIC;
+      r3_l : OUT STD_LOGIC;
       r4 : OUT STD_LOGIC;
+      r4_m : OUT STD_LOGIC;
+      r4_l : OUT STD_LOGIC;
       r5 : OUT STD_LOGIC;
+      r5_m : OUT STD_LOGIC;
+      r5_l : OUT STD_LOGIC;
       r6 : OUT STD_LOGIC;
-      r7 : OUT STD_LOGIC
+      r6_m : OUT STD_LOGIC;
+      r6_l : OUT STD_LOGIC;
+      r7 : OUT STD_LOGIC;
+      r7_m : OUT STD_LOGIC;
+      r7_l : OUT STD_LOGIC
     );
-  END COMPONENT demultiplexor;
+  END COMPONENT we_registers;
   ATTRIBUTE X_INTERFACE_INFO : STRING;
   ATTRIBUTE X_INTERFACE_PARAMETER : STRING;
   ATTRIBUTE X_INTERFACE_PARAMETER OF clk: SIGNAL IS "XIL_INTERFACENAME clk, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN /clk_clk_out1, INSERT_VIP 0";
   ATTRIBUTE X_INTERFACE_INFO OF clk: SIGNAL IS "xilinx.com:signal:clock:1.0 clk CLK";
 BEGIN
-  U0 : demultiplexor
+  U0 : we_registers
     PORT MAP (
       clk => clk,
-      input => input,
+      we => we,
+      we_l => we_l,
+      we_m => we_m,
       r0 => r0,
+      r0_m => r0_m,
+      r0_l => r0_l,
       r1 => r1,
+      r1_m => r1_m,
+      r1_l => r1_l,
       r2 => r2,
+      r2_m => r2_m,
+      r2_l => r2_l,
       r3 => r3,
+      r3_m => r3_m,
+      r3_l => r3_l,
       r4 => r4,
+      r4_m => r4_m,
+      r4_l => r4_l,
       r5 => r5,
+      r5_m => r5_m,
+      r5_l => r5_l,
       r6 => r6,
-      r7 => r7
+      r6_m => r6_m,
+      r6_l => r6_l,
+      r7 => r7,
+      r7_m => r7_m,
+      r7_l => r7_l
     );
-END tdp11_demultiplexor_0_0_arch;
+END tdp11_we_registers_0_1_arch;

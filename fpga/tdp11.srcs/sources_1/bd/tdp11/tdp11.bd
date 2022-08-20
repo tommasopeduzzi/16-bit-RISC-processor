@@ -7,7 +7,8 @@
       "name": "tdp11",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
       "synth_flow_mode": "Hierarchical",
-      "tool_version": "2022.1"
+      "tool_version": "2022.1",
+      "validated": "true"
     },
     "design_tree": {
       "reg_3": "",
@@ -27,9 +28,9 @@
       "main_bus": "",
       "alu": "",
       "address_bus": "",
-      "control": "",
+      "we_registers_0": "",
       "pc_0": "",
-      "we_registers_0": ""
+      "control": ""
     },
     "ports": {
       "rst": {
@@ -112,8 +113,20 @@
           "ASSOCIATED_RESET": {
             "value": "reset"
           },
+          "CLK_DOMAIN": {
+            "value": "tdp11_sys_clock",
+            "value_src": "default"
+          },
           "FREQ_HZ": {
             "value": "100000000"
+          },
+          "FREQ_TOLERANCE_HZ": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
           },
           "PHASE": {
             "value": "0.0"
@@ -1167,6 +1180,179 @@
           }
         }
       },
+      "we_registers_0": {
+        "vlnv": "xilinx.com:module_ref:we_registers:1.0",
+        "xci_name": "tdp11_we_registers_0_1",
+        "xci_path": "ip/tdp11_we_registers_0_1/tdp11_we_registers_0_1.xci",
+        "inst_hier_path": "we_registers_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "we_registers",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "FREQ_HZ": {
+                "value": "100000000",
+                "value_src": "ip_prop"
+              },
+              "PHASE": {
+                "value": "0.0",
+                "value_src": "ip_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "/clk_clk_out1",
+                "value_src": "ip_prop"
+              }
+            }
+          },
+          "we": {
+            "direction": "I",
+            "left": "2",
+            "right": "0"
+          },
+          "we_l": {
+            "direction": "I",
+            "left": "2",
+            "right": "0"
+          },
+          "we_m": {
+            "direction": "I",
+            "left": "2",
+            "right": "0"
+          },
+          "r0": {
+            "direction": "O"
+          },
+          "r0_m": {
+            "direction": "O"
+          },
+          "r0_l": {
+            "direction": "O"
+          },
+          "r1": {
+            "direction": "O"
+          },
+          "r1_m": {
+            "direction": "O"
+          },
+          "r1_l": {
+            "direction": "O"
+          },
+          "r2": {
+            "direction": "O"
+          },
+          "r2_m": {
+            "direction": "O"
+          },
+          "r2_l": {
+            "direction": "O"
+          },
+          "r3": {
+            "direction": "O"
+          },
+          "r3_m": {
+            "direction": "O"
+          },
+          "r3_l": {
+            "direction": "O"
+          },
+          "r4": {
+            "direction": "O"
+          },
+          "r4_m": {
+            "direction": "O"
+          },
+          "r4_l": {
+            "direction": "O"
+          },
+          "r5": {
+            "direction": "O"
+          },
+          "r5_m": {
+            "direction": "O"
+          },
+          "r5_l": {
+            "direction": "O"
+          },
+          "r6": {
+            "direction": "O"
+          },
+          "r6_m": {
+            "direction": "O"
+          },
+          "r6_l": {
+            "direction": "O"
+          },
+          "r7": {
+            "direction": "O"
+          },
+          "r7_m": {
+            "direction": "O"
+          },
+          "r7_l": {
+            "direction": "O"
+          }
+        }
+      },
+      "pc_0": {
+        "vlnv": "xilinx.com:module_ref:pc:1.0",
+        "xci_name": "tdp11_pc_0_0",
+        "xci_path": "ip/tdp11_pc_0_0/tdp11_pc_0_0.xci",
+        "inst_hier_path": "pc_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "pc",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "rst",
+                "value_src": "constant"
+              },
+              "FREQ_HZ": {
+                "value": "100000000",
+                "value_src": "ip_prop"
+              },
+              "PHASE": {
+                "value": "0.0",
+                "value_src": "ip_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "/clk_clk_out1",
+                "value_src": "ip_prop"
+              }
+            }
+          },
+          "rst": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "inc": {
+            "direction": "I"
+          },
+          "load": {
+            "direction": "I"
+          },
+          "input": {
+            "direction": "I",
+            "left": "15",
+            "right": "0"
+          },
+          "output": {
+            "direction": "O",
+            "left": "15",
+            "right": "0"
+          }
+        }
+      },
       "control": {
         "vlnv": "xilinx.com:module_ref:control:1.0",
         "xci_name": "tdp11_control_0_0",
@@ -1315,165 +1501,6 @@
             "right": "0"
           }
         }
-      },
-      "pc_0": {
-        "vlnv": "xilinx.com:module_ref:pc:1.0",
-        "xci_name": "tdp11_pc_0_0",
-        "xci_path": "ip/tdp11_pc_0_0/tdp11_pc_0_0.xci",
-        "inst_hier_path": "pc_0",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "pc",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk": {
-            "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "ASSOCIATED_RESET": {
-                "value": "rst",
-                "value_src": "constant"
-              },
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "/clk_clk_out1",
-                "value_src": "ip_prop"
-              }
-            }
-          },
-          "rst": {
-            "type": "rst",
-            "direction": "I"
-          },
-          "inc": {
-            "direction": "I"
-          },
-          "load": {
-            "direction": "I"
-          },
-          "input": {
-            "direction": "I",
-            "left": "15",
-            "right": "0"
-          },
-          "output": {
-            "direction": "O",
-            "left": "15",
-            "right": "0"
-          }
-        }
-      },
-      "we_registers_0": {
-        "vlnv": "xilinx.com:module_ref:we_registers:1.0",
-        "xci_name": "tdp11_we_registers_0_1",
-        "xci_path": "ip/tdp11_we_registers_0_1/tdp11_we_registers_0_1.xci",
-        "inst_hier_path": "we_registers_0",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "we_registers",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk": {
-            "type": "clk",
-            "direction": "I"
-          },
-          "we": {
-            "direction": "I",
-            "left": "2",
-            "right": "0"
-          },
-          "we_l": {
-            "direction": "I",
-            "left": "2",
-            "right": "0"
-          },
-          "we_m": {
-            "direction": "I",
-            "left": "2",
-            "right": "0"
-          },
-          "r0": {
-            "direction": "O"
-          },
-          "r0_m": {
-            "direction": "O"
-          },
-          "r0_l": {
-            "direction": "O"
-          },
-          "r1": {
-            "direction": "O"
-          },
-          "r1_m": {
-            "direction": "O"
-          },
-          "r1_l": {
-            "direction": "O"
-          },
-          "r2": {
-            "direction": "O"
-          },
-          "r2_m": {
-            "direction": "O"
-          },
-          "r2_l": {
-            "direction": "O"
-          },
-          "r3": {
-            "direction": "O"
-          },
-          "r3_m": {
-            "direction": "O"
-          },
-          "r3_l": {
-            "direction": "O"
-          },
-          "r4": {
-            "direction": "O"
-          },
-          "r4_m": {
-            "direction": "O"
-          },
-          "r4_l": {
-            "direction": "O"
-          },
-          "r5": {
-            "direction": "O"
-          },
-          "r5_m": {
-            "direction": "O"
-          },
-          "r5_l": {
-            "direction": "O"
-          },
-          "r6": {
-            "direction": "O"
-          },
-          "r6_m": {
-            "direction": "O"
-          },
-          "r6_l": {
-            "direction": "O"
-          },
-          "r7": {
-            "direction": "O"
-          },
-          "r7_m": {
-            "direction": "O"
-          },
-          "r7_l": {
-            "direction": "O"
-          }
-        }
       }
     },
     "nets": {
@@ -1534,9 +1561,9 @@
           "main_bus/clk",
           "alu/clk",
           "address_bus/clk",
-          "control/clk",
+          "we_registers_0/clk",
           "pc_0/clk",
-          "we_registers_0/clk"
+          "control/clk"
         ]
       },
       "control_addr_control_sel": {
@@ -1697,8 +1724,8 @@
         "ports": [
           "memory/output",
           "main_bus/mem",
-          "control/input",
-          "memory_debug"
+          "memory_debug",
+          "control/input"
         ]
       },
       "pc_0_output": {
@@ -1806,9 +1833,9 @@
           "reg_1/rst",
           "reg_3/rst",
           "sp_0/rst",
-          "control/rst",
           "clk/reset",
-          "pc_0/rst"
+          "pc_0/rst",
+          "control/rst"
         ]
       },
       "sp_0_output": {

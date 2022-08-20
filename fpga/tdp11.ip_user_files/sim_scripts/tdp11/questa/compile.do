@@ -27,7 +27,6 @@ vcom -work xil_defaultlib -64 -93 \
 "../../../bd/tdp11/ip/tdp11_alu_bus_0_0/sim/tdp11_alu_bus_0_0.vhd" \
 "../../../bd/tdp11/ip/tdp11_alu_bus_1_0/sim/tdp11_alu_bus_1_0.vhd" \
 "../../../bd/tdp11/ip/tdp11_sp_0_0/sim/tdp11_sp_0_0.vhd" \
-"../../../bd/tdp11/ip/tdp11_address_bus_0_0/sim/tdp11_address_bus_0_0.vhd" \
 "../../../bd/tdp11/ip/tdp11_memory_0_0/sim/tdp11_memory_0_0.vhd" \
 
 vlog -work xlslice_v1_0_2 -64 -incr -mfcu "+incdir+../../../../tdp11.gen/sources_1/bd/tdp11/ipshared/4e49" \
@@ -40,12 +39,11 @@ vlog -work xil_defaultlib -64 -incr -mfcu "+incdir+../../../../tdp11.gen/sources
 
 vcom -work xil_defaultlib -64 -93 \
 "../../../bd/tdp11/ip/tdp11_main_bus_0_1/sim/tdp11_main_bus_0_1.vhd" \
-"../../../bd/tdp11/ip/tdp11_pc_0_0/sim/tdp11_pc_0_0.vhd" \
-"../../../bd/tdp11/ip/tdp11_demultiplexor_0_0/sim/tdp11_demultiplexor_0_0.vhd" \
-"../../../bd/tdp11/ip/tdp11_demultiplexor_0_1/sim/tdp11_demultiplexor_0_1.vhd" \
-"../../../bd/tdp11/ip/tdp11_demultiplexor_0_2/sim/tdp11_demultiplexor_0_2.vhd" \
-"../../../bd/tdp11/ip/tdp11_control_0_0/sim/tdp11_control_0_0.vhd" \
 "../../../bd/tdp11/ip/tdp11_alu_0_0/sim/tdp11_alu_0_0.vhd" \
+"../../../bd/tdp11/ip/tdp11_address_bus_0_0/sim/tdp11_address_bus_0_0.vhd" \
+"../../../bd/tdp11/ip/tdp11_control_0_0/sim/tdp11_control_0_0.vhd" \
+"../../../bd/tdp11/ip/tdp11_pc_0_0/sim/tdp11_pc_0_0.vhd" \
+"../../../bd/tdp11/ip/tdp11_we_registers_0_1/sim/tdp11_we_registers_0_1.vhd" \
 "../../../bd/tdp11/sim/tdp11.vhd" \
 
 vlog -work xil_defaultlib \

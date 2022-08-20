@@ -36,8 +36,7 @@ begin
         elsif rising_edge(clk) then
             if inc = '1' then 
                 value <= value + 1;
-            end if;
-            if load = '1' then
+            elsif load = '1' then
                 value <= unsigned(input);
             end if;
             output <= std_logic_vector(value);

@@ -1,7 +1,7 @@
 --Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2022.1 (lin64) Build 3526262 Mon Apr 18 15:47:01 MDT 2022
---Date        : Tue Aug 16 18:57:24 2022
+--Date        : Sat Aug 20 11:33:52 2022
 --Host        : framework running 64-bit unknown
 --Command     : generate_target tdp11_wrapper.bd
 --Design      : tdp11_wrapper

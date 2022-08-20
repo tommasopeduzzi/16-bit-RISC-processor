@@ -58,7 +58,7 @@ begin
             r5 <= '0';
             r6 <= '0';
             r7 <= '0'; 
-            case input is
+            case we is
                 when "000" => r0 <= '1';
                 when "001" => r1 <= '1';
                 when "010" => r2 <= '1';
@@ -68,6 +68,28 @@ begin
                 when "110" => r6 <= '1';
                 when "111" => r7 <= '1';
                 when others => r0 <= '0';
+            end case;
+            case we_l is
+                when "000" => r0_l <= '1';
+                when "001" => r1_l <= '1';
+                when "010" => r2_l <= '1';
+                when "011" => r3_l <= '1';
+                when "100" => r4_l <= '1';
+                when "101" => r5_l <= '1';
+                when "110" => r6_l <= '1';
+                when "111" => r7_l <= '1';
+                when others => r0_l <= '0';                
+            end case;
+            case we_m is
+                when "000" => r0_m <= '1';
+                when "001" => r1_m <= '1';
+                when "010" => r2_m <= '1';
+                when "011" => r3_m <= '1';
+                when "100" => r4_m <= '1';
+                when "101" => r5_m <= '1';
+                when "110" => r6_m <= '1';
+                when "111" => r7_m <= '1';
+                when others => r0_m <= '0';                
             end case;
         end if;
     end process;

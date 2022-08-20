@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tdp11_wrapper_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tdp11_wrapper" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="83.693 ns"></ZoomStartTime>
+      <ZoomEndTime time="159.972 ns"></ZoomEndTime>
+      <Cursor1Time time="800.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="266"></NameColumnWidth>
+      <ValueColumnWidth column_width="122"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="17" />
+   <wvobject type="logic" fp_name="/tdp11_wrapper/sys_clock">
+      <obj_property name="ElementShortName">sys_clock</obj_property>
+      <obj_property name="ObjectShortName">sys_clock</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tdp11_wrapper/rst">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tdp11_wrapper/address_bus_debug">
+      <obj_property name="ElementShortName">address_bus_debug[15:0]</obj_property>
+      <obj_property name="ObjectShortName">address_bus_debug[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tdp11_wrapper/alu_debug">
+      <obj_property name="ElementShortName">alu_debug[15:0]</obj_property>
+      <obj_property name="ObjectShortName">alu_debug[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tdp11_wrapper/main_bus_debug">
+      <obj_property name="ElementShortName">main_bus_debug[15:0]</obj_property>
+      <obj_property name="ObjectShortName">main_bus_debug[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tdp11_wrapper/memory_debug">
+      <obj_property name="ElementShortName">memory_debug[7:0]</obj_property>
+      <obj_property name="ObjectShortName">memory_debug[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tdp11_wrapper/reg_0_debug">
+      <obj_property name="ElementShortName">reg_0_debug[15:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_0_debug[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tdp11_wrapper/reg_1_debug">
+      <obj_property name="ElementShortName">reg_1_debug[15:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_1_debug[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tdp11_wrapper/reg_2_debug">
+      <obj_property name="ElementShortName">reg_2_debug[15:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_2_debug[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tdp11_wrapper/reg_3_debug">
+      <obj_property name="ElementShortName">reg_3_debug[15:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_3_debug[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tdp11_wrapper/reg_4_debug">
+      <obj_property name="ElementShortName">reg_4_debug[15:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_4_debug[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tdp11_wrapper/reg_5_debug">
+      <obj_property name="ElementShortName">reg_5_debug[15:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_5_debug[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tdp11_wrapper/reg_6_debug">
+      <obj_property name="ElementShortName">reg_6_debug[15:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_6_debug[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tdp11_wrapper/reg_7_debug">
+      <obj_property name="ElementShortName">reg_7_debug[15:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_7_debug[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tdp11_wrapper/sp_debug">
+      <obj_property name="ElementShortName">sp_debug[15:0]</obj_property>
+      <obj_property name="ObjectShortName">sp_debug[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tdp11_wrapper/pc_debug">
+      <obj_property name="ElementShortName">pc_debug[15:0]</obj_property>
+      <obj_property name="ObjectShortName">pc_debug[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tdp11_wrapper/tdp11_i/control/pc_inc">
+      <obj_property name="ElementShortName">pc_inc</obj_property>
+      <obj_property name="ObjectShortName">pc_inc</obj_property>
+   </wvobject>
+</wave_config>

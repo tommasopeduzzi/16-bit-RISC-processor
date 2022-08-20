@@ -75,7 +75,7 @@ begin
             op1 <= (others => '0');
             op2 <= (others => '0');
             imm <= (others => '0');
-        elsif falling_edge(clk) then
+        elsif rising_edge(clk) then
             -- reset control lines
             mem_we <= '0';
             pc_inc <= '0';
@@ -108,7 +108,7 @@ begin
                 end case;
             elsif opcode = "000000" then     -- nop
                 case step is
-                    when 0 =>   
+                    when 0 =>   pc_inc <= '1';
                     when others =>   
                 end case;
             elsif opcode = "000001" then     -- load reg reg

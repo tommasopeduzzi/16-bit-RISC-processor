@@ -1,7 +1,7 @@
 -- Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2022.1 (lin64) Build 3526262 Mon Apr 18 15:47:01 MDT 2022
--- Date        : Mon Aug 15 20:56:26 2022
+-- Date        : Sat Aug 20 09:43:02 2022
 -- Host        : framework running 64-bit unknown
 -- Command     : write_vhdl -force -mode funcsim
 --               /home/tommasopeduzzi/Documents/16-bit-RISC-processor/fpga/tdp11.gen/sources_1/bd/tdp11/ip/tdp11_clk_wiz_0_0/tdp11_clk_wiz_0_0_sim_netlist.vhdl
