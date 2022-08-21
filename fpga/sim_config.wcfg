@@ -11,18 +11,22 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="83.693 ns"></ZoomStartTime>
-      <ZoomEndTime time="159.972 ns"></ZoomEndTime>
-      <Cursor1Time time="800.000 ns"></Cursor1Time>
+      <ZoomStartTime time="93.628 ns"></ZoomStartTime>
+      <ZoomEndTime time="241.129 ns"></ZoomEndTime>
+      <Cursor1Time time="167.128 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="266"></NameColumnWidth>
-      <ValueColumnWidth column_width="122"></ValueColumnWidth>
+      <ValueColumnWidth column_width="110"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="17" />
-   <wvobject type="logic" fp_name="/tdp11_wrapper/sys_clock">
-      <obj_property name="ElementShortName">sys_clock</obj_property>
-      <obj_property name="ObjectShortName">sys_clock</obj_property>
+   <wvobject type="logic" fp_name="/tdp11_wrapper/clock">
+      <obj_property name="ElementShortName">clock</obj_property>
+      <obj_property name="ObjectShortName">clock</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tdp11_wrapper/tdp11_i/control/pc_inc">
+      <obj_property name="ElementShortName">pc_inc</obj_property>
+      <obj_property name="ObjectShortName">pc_inc</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/tdp11_wrapper/rst">
       <obj_property name="ElementShortName">rst</obj_property>
@@ -83,9 +87,5 @@
    <wvobject type="array" fp_name="/tdp11_wrapper/pc_debug">
       <obj_property name="ElementShortName">pc_debug[15:0]</obj_property>
       <obj_property name="ObjectShortName">pc_debug[15:0]</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/tdp11_wrapper/tdp11_i/control/pc_inc">
-      <obj_property name="ElementShortName">pc_inc</obj_property>
-      <obj_property name="ObjectShortName">pc_inc</obj_property>
    </wvobject>
 </wave_config>

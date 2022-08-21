@@ -32,14 +32,16 @@ architecture architecture_pc of pc is
 begin
     process (clk, rst) begin
         if rst = '1' then
-            value <= to_unsigned(0, 16);
+            value <= (others => '0');
+            output <= (others => '0');
         elsif rising_edge(clk) then
             if inc = '1' then 
+                output <= std_logic_vector(value + 1);
                 value <= value + 1;
             elsif load = '1' then
                 value <= unsigned(input);
+                output <= std_logic_vector(value);
             end if;
-            output <= std_logic_vector(value);
         end if;
     end process;
 end architecture_pc;

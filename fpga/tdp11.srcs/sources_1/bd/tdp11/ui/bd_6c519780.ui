@@ -2,8 +2,8 @@
    "ActiveEmotionalView":"Default View",
    "Addressing View_ScaleFactor":"1.0",
    "Addressing View_TopLeft":"-861,-254",
-   "Default View_ScaleFactor":"0.188526",
-   "Default View_TopLeft":"-4371,37",
+   "Default View_ScaleFactor":"0.306261",
+   "Default View_TopLeft":"-1949,-85",
    "ExpandedHierarchyInLayout":"",
    "Interfaces View_ScaleFactor":"1.0",
    "Interfaces View_TopLeft":"-911,-254",
@@ -48,7 +48,7 @@ Registers",
    "guistr":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
 #  -string -flagsOSRD
 preplace port port-id_rst -pg 1 -lvl 2 -x -100 -y -400 -defaultsOSRD -top
-preplace port port-id_sys_clock -pg 1 -lvl 0 -x -490 -y 350 -defaultsOSRD
+preplace port port-id_clock -pg 1 -lvl 0 -x -490 -y 200 -defaultsOSRD
 preplace portBus main_bus_debug -pg 1 -lvl 9 -x 2780 -y 2730 -defaultsOSRD
 preplace portBus address_bus_debug -pg 1 -lvl 9 -x 2780 -y 2510 -defaultsOSRD
 preplace portBus reg_0_debug -pg 1 -lvl 9 -x 2780 -y 2810 -defaultsOSRD
@@ -76,20 +76,19 @@ preplace inst rhs -pg 1 -lvl 6 -x 1620 -y 1250 -defaultsOSRD
 preplace inst sp_0 -pg 1 -lvl 3 -x 220 -y 1150 -defaultsOSRD
 preplace inst memory -pg 1 -lvl 8 -x 2230 -y 2600 -defaultsOSRD
 preplace inst slice -pg 1 -lvl 7 -x 1940 -y 2350 -defaultsOSRD
-preplace inst clk -pg 1 -lvl 1 -x -370 -y 340 -defaultsOSRD
 preplace inst main_bus -pg 1 -lvl 5 -x 1220 -y 2050 -defaultsOSRD
 preplace inst alu -pg 1 -lvl 8 -x 2230 -y 1440 -defaultsOSRD
 preplace inst address_bus -pg 1 -lvl 5 -x 1220 -y 2540 -defaultsOSRD
 preplace inst we_registers_0 -pg 1 -lvl 3 -x 220 -y 1860 -defaultsOSRD
-preplace inst pc_0 -pg 1 -lvl 3 -x 220 -y 940 -defaultsOSRD
 preplace inst control -pg 1 -lvl 3 -x 220 -y 540 -defaultsOSRD
+preplace inst pc_0 -pg 1 -lvl 3 -x 220 -y 940 -defaultsOSRD
 preplace netloc address_bus_0_output 1 2 7 20 2760 N 2760 N 2760 1380 2540 N 2540 2070 2510 N
 preplace netloc alu_0_output 1 4 5 1040 2280 1390 2260 N 2260 N 2260 2420
 preplace netloc alu_c 1 2 7 60 820 NJ 820 N 820 N 820 N 820 N 820 2410
 preplace netloc alu_g 1 2 7 50 840 NJ 840 N 840 N 840 N 840 N 840 2370
 preplace netloc alu_l 1 2 7 30 1040 380J 1020 N 1020 N 1020 N 1020 N 1020 2360
 preplace netloc alu_z 1 2 7 40 830 NJ 830 N 830 N 830 N 830 N 830 2390
-preplace netloc clk_clk_out1 1 1 7 -270 480 -60J 1240 480J 2650 890 1800 1370 1800 N 1800 2090
+preplace netloc clk_clk_out1 1 0 8 N 200 -350 480 -60J 1240 480J 2650 890 1800 1370 1800 N 1800 2090
 preplace netloc control_addr_control_sel 1 3 2 N 680 900
 preplace netloc control_addr_pc_sel 1 3 2 N 620 950
 preplace netloc control_addr_reg_sel 1 3 2 N 660 910
@@ -125,9 +124,8 @@ preplace netloc reg_5_output 1 4 5 990 2290 1400 2280 N 2280 N 2280 2380
 preplace netloc reg_6_output 1 4 5 1000 2310 1420 2290 N 2290 N 2290 2370
 preplace netloc reg_7_output 1 4 5 920 1540 1470 2230 N 2230 N 2230 2410
 preplace netloc rhs_output 1 6 2 N 1250 2070
-preplace netloc rst_1 1 0 4 -470 410 -260 490 -70 1060 490
+preplace netloc rst_1 1 2 2 -70 1060 490
 preplace netloc sp_0_output 1 3 6 390 1030 840 2910 N 2910 N 2910 N 2910 N
-preplace netloc sys_clock_1 1 0 1 N 350
 preplace netloc we_registers_0_r0 1 3 1 400 1130n
 preplace netloc we_registers_0_r0_l 1 3 1 420 1170n
 preplace netloc we_registers_0_r0_m 1 3 1 410 1150n
@@ -166,13 +164,13 @@ preplace cgraphic comment_10 place bot 1497 -1019 textcolor 4 linecolor 3 linewi
 preplace cgraphic comment_9 place top 1538 1569 textcolor 4 linecolor 3 linewidth 1 fillcolor V,6,1
 preplace cgraphic comment_8 place bot 1212 -1543 textcolor 4 linecolor 3 linewidth 2 fillcolor V,6,1
 levelinfo -pg 1 -490 -370 -170 220 700 1220 1620 1940 2230 2780
-pagesize -pg 1 -db -bbox -sgen -610 -470 3020 3350
+pagesize -pg 1 -db -bbox -sgen -580 -470 3020 3350
 ",
    "linecolor_comment_3":"",
    "textcolor_comment_3":""
 }
 {
-   """"da_clkrst_cnt"""":"1"
+   """"""""da_clkrst_cnt"""""""":"1"
 }
 {
    "/comment_0":"comment_0",

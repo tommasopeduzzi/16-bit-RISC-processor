@@ -75,7 +75,7 @@ begin
             op1 <= (others => '0');
             op2 <= (others => '0');
             imm <= (others => '0');
-        elsif rising_edge(clk) then
+        elsif falling_edge(clk) then
             -- reset control lines
             mem_we <= '0';
             pc_inc <= '0';

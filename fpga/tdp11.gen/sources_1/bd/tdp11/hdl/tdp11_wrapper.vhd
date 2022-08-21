@@ -1,7 +1,7 @@
 --Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2022.1 (lin64) Build 3526262 Mon Apr 18 15:47:01 MDT 2022
---Date        : Sat Aug 20 11:33:52 2022
+--Date        : Sun Aug 21 18:03:49 2022
 --Host        : framework running 64-bit unknown
 --Command     : generate_target tdp11_wrapper.bd
 --Design      : tdp11_wrapper
@@ -15,6 +15,7 @@ entity tdp11_wrapper is
   port (
     address_bus_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
     alu_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    clock : in STD_LOGIC;
     main_bus_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
     memory_debug : out STD_LOGIC_VECTOR ( 7 downto 0 );
     pc_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
@@ -27,8 +28,7 @@ entity tdp11_wrapper is
     reg_6_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
     reg_7_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
     rst : in STD_LOGIC;
-    sp_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    sys_clock : in STD_LOGIC
+    sp_debug : out STD_LOGIC_VECTOR ( 15 downto 0 )
   );
 end tdp11_wrapper;
 
@@ -50,7 +50,7 @@ architecture STRUCTURE of tdp11_wrapper is
     sp_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
     memory_debug : out STD_LOGIC_VECTOR ( 7 downto 0 );
     alu_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    sys_clock : in STD_LOGIC
+    clock : in STD_LOGIC
   );
   end component tdp11;
 begin
@@ -58,6 +58,7 @@ tdp11_i: component tdp11
      port map (
       address_bus_debug(15 downto 0) => address_bus_debug(15 downto 0),
       alu_debug(15 downto 0) => alu_debug(15 downto 0),
+      clock => clock,
       main_bus_debug(15 downto 0) => main_bus_debug(15 downto 0),
       memory_debug(7 downto 0) => memory_debug(7 downto 0),
       pc_debug(15 downto 0) => pc_debug(15 downto 0),
@@ -70,7 +71,6 @@ tdp11_i: component tdp11
       reg_6_debug(15 downto 0) => reg_6_debug(15 downto 0),
       reg_7_debug(15 downto 0) => reg_7_debug(15 downto 0),
       rst => rst,
-      sp_debug(15 downto 0) => sp_debug(15 downto 0),
-      sys_clock => sys_clock
+      sp_debug(15 downto 0) => sp_debug(15 downto 0)
     );
 end STRUCTURE;

@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0xBBC355814CB1DEEA",
+      "boundary_crc": "0x317F88B74DF3E913",
       "device": "xc7a35tcpg236-1",
       "gen_directory": "../../../../tdp11.gen/sources_1/bd/tdp11",
       "name": "tdp11",
@@ -24,13 +24,12 @@
       "sp_0": "",
       "memory": "",
       "slice": "",
-      "clk": "",
       "main_bus": "",
       "alu": "",
       "address_bus": "",
       "we_registers_0": "",
-      "pc_0": "",
-      "control": ""
+      "control": "",
+      "pc_0": ""
     },
     "ports": {
       "rst": {
@@ -106,32 +105,8 @@
         "left": "15",
         "right": "0"
       },
-      "sys_clock": {
-        "type": "clk",
-        "direction": "I",
-        "parameters": {
-          "ASSOCIATED_RESET": {
-            "value": "reset"
-          },
-          "CLK_DOMAIN": {
-            "value": "tdp11_sys_clock",
-            "value_src": "default"
-          },
-          "FREQ_HZ": {
-            "value": "100000000"
-          },
-          "FREQ_TOLERANCE_HZ": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "INSERT_VIP": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "PHASE": {
-            "value": "0.0"
-          }
-        }
+      "clock": {
+        "direction": "I"
       }
     },
     "components": {
@@ -153,18 +128,6 @@
               "ASSOCIATED_RESET": {
                 "value": "rst",
                 "value_src": "constant"
-              },
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "/clk_clk_out1",
-                "value_src": "ip_prop"
               }
             }
           },
@@ -211,18 +174,6 @@
               "ASSOCIATED_RESET": {
                 "value": "rst",
                 "value_src": "constant"
-              },
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "/clk_clk_out1",
-                "value_src": "ip_prop"
               }
             }
           },
@@ -269,18 +220,6 @@
               "ASSOCIATED_RESET": {
                 "value": "rst",
                 "value_src": "constant"
-              },
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "/clk_clk_out1",
-                "value_src": "ip_prop"
               }
             }
           },
@@ -327,18 +266,6 @@
               "ASSOCIATED_RESET": {
                 "value": "rst",
                 "value_src": "constant"
-              },
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "/clk_clk_out1",
-                "value_src": "ip_prop"
               }
             }
           },
@@ -385,18 +312,6 @@
               "ASSOCIATED_RESET": {
                 "value": "rst",
                 "value_src": "constant"
-              },
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "/clk_clk_out1",
-                "value_src": "ip_prop"
               }
             }
           },
@@ -443,18 +358,6 @@
               "ASSOCIATED_RESET": {
                 "value": "rst",
                 "value_src": "constant"
-              },
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "/clk_clk_out1",
-                "value_src": "ip_prop"
               }
             }
           },
@@ -501,18 +404,6 @@
               "ASSOCIATED_RESET": {
                 "value": "rst",
                 "value_src": "constant"
-              },
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "/clk_clk_out1",
-                "value_src": "ip_prop"
               }
             }
           },
@@ -559,18 +450,6 @@
               "ASSOCIATED_RESET": {
                 "value": "rst",
                 "value_src": "constant"
-              },
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "/clk_clk_out1",
-                "value_src": "ip_prop"
               }
             }
           },
@@ -612,21 +491,7 @@
         "ports": {
           "clk": {
             "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "/clk_clk_out1",
-                "value_src": "ip_prop"
-              }
-            }
+            "direction": "I"
           },
           "reg_sel": {
             "direction": "I",
@@ -693,21 +558,7 @@
         "ports": {
           "clk": {
             "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "/clk_clk_out1",
-                "value_src": "ip_prop"
-              }
-            }
+            "direction": "I"
           },
           "reg_sel": {
             "direction": "I",
@@ -779,18 +630,6 @@
               "ASSOCIATED_RESET": {
                 "value": "rst",
                 "value_src": "constant"
-              },
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "/clk_clk_out1",
-                "value_src": "ip_prop"
               }
             }
           },
@@ -824,21 +663,7 @@
         "ports": {
           "clk": {
             "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "/clk_clk_out1",
-                "value_src": "ip_prop"
-              }
-            }
+            "direction": "I"
           },
           "we": {
             "direction": "I"
@@ -877,26 +702,6 @@
           }
         }
       },
-      "clk": {
-        "vlnv": "xilinx.com:ip:clk_wiz:6.0",
-        "xci_name": "tdp11_clk_wiz_0_0",
-        "xci_path": "ip/tdp11_clk_wiz_0_0/tdp11_clk_wiz_0_0.xci",
-        "inst_hier_path": "clk",
-        "parameters": {
-          "CLK_IN1_BOARD_INTERFACE": {
-            "value": "sys_clock"
-          },
-          "RESET_BOARD_INTERFACE": {
-            "value": "reset"
-          },
-          "USE_BOARD_FLOW": {
-            "value": "true"
-          },
-          "USE_LOCKED": {
-            "value": "false"
-          }
-        }
-      },
       "main_bus": {
         "vlnv": "xilinx.com:module_ref:main_bus:1.0",
         "xci_name": "tdp11_main_bus_0_1",
@@ -910,21 +715,7 @@
         "ports": {
           "clk": {
             "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "/clk_clk_out1",
-                "value_src": "ip_prop"
-              }
-            }
+            "direction": "I"
           },
           "reg_sel": {
             "direction": "I",
@@ -1025,21 +816,7 @@
         "ports": {
           "clk": {
             "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "/clk_clk_out1",
-                "value_src": "ip_prop"
-              }
-            }
+            "direction": "I"
           },
           "rhs": {
             "direction": "I",
@@ -1088,21 +865,7 @@
         "ports": {
           "clk": {
             "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "/clk_clk_out1",
-                "value_src": "ip_prop"
-              }
-            }
+            "direction": "I"
           },
           "pc_sel": {
             "direction": "I"
@@ -1193,21 +956,7 @@
         "ports": {
           "clk": {
             "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "/clk_clk_out1",
-                "value_src": "ip_prop"
-              }
-            }
+            "direction": "I"
           },
           "we": {
             "direction": "I",
@@ -1298,61 +1047,6 @@
           }
         }
       },
-      "pc_0": {
-        "vlnv": "xilinx.com:module_ref:pc:1.0",
-        "xci_name": "tdp11_pc_0_0",
-        "xci_path": "ip/tdp11_pc_0_0/tdp11_pc_0_0.xci",
-        "inst_hier_path": "pc_0",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "pc",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk": {
-            "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "ASSOCIATED_RESET": {
-                "value": "rst",
-                "value_src": "constant"
-              },
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "/clk_clk_out1",
-                "value_src": "ip_prop"
-              }
-            }
-          },
-          "rst": {
-            "type": "rst",
-            "direction": "I"
-          },
-          "inc": {
-            "direction": "I"
-          },
-          "load": {
-            "direction": "I"
-          },
-          "input": {
-            "direction": "I",
-            "left": "15",
-            "right": "0"
-          },
-          "output": {
-            "direction": "O",
-            "left": "15",
-            "right": "0"
-          }
-        }
-      },
       "control": {
         "vlnv": "xilinx.com:module_ref:control:1.0",
         "xci_name": "tdp11_control_0_0",
@@ -1371,18 +1065,6 @@
               "ASSOCIATED_RESET": {
                 "value": "rst",
                 "value_src": "constant"
-              },
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "ip_prop"
-              },
-              "PHASE": {
-                "value": "0.0",
-                "value_src": "ip_prop"
-              },
-              "CLK_DOMAIN": {
-                "value": "/clk_clk_out1",
-                "value_src": "ip_prop"
               }
             }
           },
@@ -1501,6 +1183,49 @@
             "right": "0"
           }
         }
+      },
+      "pc_0": {
+        "vlnv": "xilinx.com:module_ref:pc:1.0",
+        "xci_name": "tdp11_pc_0_0",
+        "xci_path": "ip/tdp11_pc_0_0/tdp11_pc_0_0.xci",
+        "inst_hier_path": "pc_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "pc",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "rst",
+                "value_src": "constant"
+              }
+            }
+          },
+          "rst": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "inc": {
+            "direction": "I"
+          },
+          "load": {
+            "direction": "I"
+          },
+          "input": {
+            "direction": "I",
+            "left": "15",
+            "right": "0"
+          },
+          "output": {
+            "direction": "O",
+            "left": "15",
+            "right": "0"
+          }
+        }
       }
     },
     "nets": {
@@ -1545,7 +1270,7 @@
       },
       "clk_clk_out1": {
         "ports": [
-          "clk/clk_out1",
+          "clock",
           "memory/clk",
           "sp_0/clk",
           "reg_3/clk",
@@ -1562,8 +1287,8 @@
           "alu/clk",
           "address_bus/clk",
           "we_registers_0/clk",
-          "pc_0/clk",
-          "control/clk"
+          "control/clk",
+          "pc_0/clk"
         ]
       },
       "control_addr_control_sel": {
@@ -1833,9 +1558,8 @@
           "reg_1/rst",
           "reg_3/rst",
           "sp_0/rst",
-          "clk/reset",
-          "pc_0/rst",
-          "control/rst"
+          "control/rst",
+          "pc_0/rst"
         ]
       },
       "sp_0_output": {
@@ -1843,12 +1567,6 @@
           "sp_0/output",
           "address_bus/sp",
           "sp_debug"
-        ]
-      },
-      "sys_clock_1": {
-        "ports": [
-          "sys_clock",
-          "clk/clk_in1"
         ]
       },
       "we_registers_0_r0": {

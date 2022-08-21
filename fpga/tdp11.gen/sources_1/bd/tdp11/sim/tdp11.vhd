@@ -1,7 +1,7 @@
 --Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2022.1 (lin64) Build 3526262 Mon Apr 18 15:47:01 MDT 2022
---Date        : Sat Aug 20 11:33:52 2022
+--Date        : Sun Aug 21 18:03:49 2022
 --Host        : framework running 64-bit unknown
 --Command     : generate_target tdp11.bd
 --Design      : tdp11
@@ -28,6 +28,7 @@ use UNISIM.VCOMPONENTS.ALL;
   port (
     address_bus_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
     alu_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    clock : in STD_LOGIC;
     main_bus_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
     memory_debug : out STD_LOGIC_VECTOR ( 7 downto 0 );
     pc_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
@@ -40,11 +41,10 @@ use UNISIM.VCOMPONENTS.ALL;
     reg_6_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
     reg_7_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
     rst : in STD_LOGIC;
-    sp_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    sys_clock : in STD_LOGIC
+    sp_debug : out STD_LOGIC_VECTOR ( 15 downto 0 )
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of tdp11 : entity is "tdp11,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=tdp11,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=20,numReposBlks=20,numNonXlnxBlks=0,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=18,numPkgbdBlks=0,bdsource=USER,""""""da_clkrst_cnt""""""=1,synth_mode=OOC_per_IP}";
+  attribute CORE_GENERATION_INFO of tdp11 : entity is "tdp11,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=tdp11,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=19,numReposBlks=19,numNonXlnxBlks=0,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=18,numPkgbdBlks=0,bdsource=USER,""""""""""""""da_clkrst_cnt""""""""""""""=1,synth_mode=OOC_per_IP}";
   attribute HW_HANDOFF : string;
   attribute HW_HANDOFF of tdp11 : entity is "tdp11.hwdef";
 end tdp11;
@@ -192,13 +192,6 @@ architecture STRUCTURE of tdp11 is
     Dout : out STD_LOGIC_VECTOR ( 7 downto 0 )
   );
   end component tdp11_xlslice_0_0;
-  component tdp11_clk_wiz_0_0 is
-  port (
-    reset : in STD_LOGIC;
-    clk_in1 : in STD_LOGIC;
-    clk_out1 : out STD_LOGIC
-  );
-  end component tdp11_clk_wiz_0_0;
   component tdp11_main_bus_0_1 is
   port (
     clk : in STD_LOGIC;
@@ -288,16 +281,6 @@ architecture STRUCTURE of tdp11 is
     r7_l : out STD_LOGIC
   );
   end component tdp11_we_registers_0_1;
-  component tdp11_pc_0_0 is
-  port (
-    clk : in STD_LOGIC;
-    rst : in STD_LOGIC;
-    inc : in STD_LOGIC;
-    load : in STD_LOGIC;
-    input : in STD_LOGIC_VECTOR ( 15 downto 0 );
-    output : out STD_LOGIC_VECTOR ( 15 downto 0 )
-  );
-  end component tdp11_pc_0_0;
   component tdp11_control_0_0 is
   port (
     clk : in STD_LOGIC;
@@ -332,6 +315,16 @@ architecture STRUCTURE of tdp11 is
     current_opcode : out STD_LOGIC_VECTOR ( 5 downto 0 )
   );
   end component tdp11_control_0_0;
+  component tdp11_pc_0_0 is
+  port (
+    clk : in STD_LOGIC;
+    rst : in STD_LOGIC;
+    inc : in STD_LOGIC;
+    load : in STD_LOGIC;
+    input : in STD_LOGIC_VECTOR ( 15 downto 0 );
+    output : out STD_LOGIC_VECTOR ( 15 downto 0 )
+  );
+  end component tdp11_pc_0_0;
   signal address_bus_0_output : STD_LOGIC_VECTOR ( 15 downto 0 );
   signal alu_0_output : STD_LOGIC_VECTOR ( 15 downto 0 );
   signal alu_c : STD_LOGIC;
@@ -376,7 +369,6 @@ architecture STRUCTURE of tdp11 is
   signal rhs_output : STD_LOGIC_VECTOR ( 15 downto 0 );
   signal rst_1 : STD_LOGIC;
   signal sp_0_output : STD_LOGIC_VECTOR ( 15 downto 0 );
-  signal sys_clock_1 : STD_LOGIC;
   signal we_registers_0_r0 : STD_LOGIC;
   signal we_registers_0_r0_l : STD_LOGIC;
   signal we_registers_0_r0_m : STD_LOGIC;
@@ -403,13 +395,10 @@ architecture STRUCTURE of tdp11 is
   signal we_registers_0_r7_m : STD_LOGIC;
   signal xlslice_0_Dout : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal NLW_control_current_opcode_UNCONNECTED : STD_LOGIC_VECTOR ( 5 downto 0 );
-  attribute X_INTERFACE_INFO : string;
-  attribute X_INTERFACE_INFO of sys_clock : signal is "xilinx.com:signal:clock:1.0 CLK.SYS_CLOCK CLK";
-  attribute X_INTERFACE_PARAMETER : string;
-  attribute X_INTERFACE_PARAMETER of sys_clock : signal is "XIL_INTERFACENAME CLK.SYS_CLOCK, ASSOCIATED_RESET reset, CLK_DOMAIN tdp11_sys_clock, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
 begin
   address_bus_debug(15 downto 0) <= address_bus_0_output(15 downto 0);
   alu_debug(15 downto 0) <= alu_0_output(15 downto 0);
+  clk_clk_out1 <= clock;
   main_bus_debug(15 downto 0) <= main_bus_0_output(15 downto 0);
   memory_debug(7 downto 0) <= memory_0_output(7 downto 0);
   pc_debug(15 downto 0) <= pc_0_output(15 downto 0);
@@ -423,7 +412,6 @@ begin
   reg_7_debug(15 downto 0) <= reg_7_output(15 downto 0);
   rst_1 <= rst;
   sp_debug(15 downto 0) <= sp_0_output(15 downto 0);
-  sys_clock_1 <= sys_clock;
 address_bus: component tdp11_address_bus_0_0
      port map (
       clk => clk_clk_out1,
@@ -455,12 +443,6 @@ alu: component tdp11_alu_0_0
       output(15 downto 0) => alu_0_output(15 downto 0),
       rhs(15 downto 0) => rhs_output(15 downto 0),
       z => alu_z
-    );
-clk: component tdp11_clk_wiz_0_0
-     port map (
-      clk_in1 => sys_clock_1,
-      clk_out1 => clk_clk_out1,
-      reset => rst_1
     );
 control: component tdp11_control_0_0
      port map (
