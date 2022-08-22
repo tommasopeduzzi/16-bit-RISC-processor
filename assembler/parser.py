@@ -19,6 +19,7 @@ class OperandType():
     MACRO_ARGUMENT = 3
     DEVICE = 4
     LABEL = 5
+    STRING = 6
     def to_string(type):
         match type:
             case OperandType.REGISTER:
@@ -161,7 +162,9 @@ class Parser:
                 try:
                     operands.append(DataItem(OperandType.ADDRESS, self.parse_immediate(self.tokens[0].value[1:])))
                 except:
-                    operands.append(DataItem(OperandType.ADDRESS, self.tokens[0].value[1:]))
+                    operands.append(DataItem(OperandType.LABEL, self.tokens[0].value[1:]))
+            elif self.tokens[0].type == TokenType.STRING:
+                operands.append(DataItem(OperandType.STRING, self.tokens[0].value))
             else:
                 break
             self.tokens.pop(0)

@@ -17,6 +17,7 @@ class TokenType(Enum):
     DEVICE = 9
     DATA = 10
     INCLUDE = 11
+    STRING = 12
 
 @dataclass
 class Token:
@@ -27,15 +28,34 @@ class Token:
 class Lexer:
     def __init__(self) -> None:
         pass
+    
+    def split_line(line: str) -> List[str]:
+        items: List[str] = [""]
+        currently_string = False
+        for char in line:
+            if char == "\"":
+                if currently_string:
+                    items[-1] += char
+                    items.append("")
+                else:
+                    items.append("")
+                    items[-1] += char
+                currently_string = not currently_string
+            elif char == " " and not currently_string:
+                items.append("")
+            else:
+                items[-1] += char
+        return [item.strip() for item in items if not item == ""]
+
 
     def lex(self, contents: str) -> List[Token]:
         self.tokens = []
         for line in contents.split('\n'):
-            words = line.split(' ')
+            words = Lexer.split_line(line)
             for word in words:
                 if word.startswith(';'):
                     break
-                if word == "macro":
+                elif word == "macro":
                     self.tokens.append(Token(TokenType.START_MACRO, word))
                 elif word == "endmacro":
                     self.tokens.append(Token(TokenType.END_MACRO, word))
@@ -63,4 +83,6 @@ class Lexer:
                     self.tokens.append(Token(TokenType.ADDRESS, word))
                 elif word.startswith('%'):
                     self.tokens.append(Token(TokenType.MACRO_ARGUMENT, word))
+                elif word.startswith('"'):
+                    self.tokens.append(Token(TokenType.STRING, word[1:-1]))
         return self.tokens

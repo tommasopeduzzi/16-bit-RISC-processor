@@ -71,6 +71,9 @@ class Assembler:
         for operand in data.operands:
             if operand.type == OperandType.IMMEDIATE or operand.type == OperandType.ADDRESS:
                 self.binary += operand.value.to_bytes(2, byteorder="little")
+            elif operand.type == OperandType.STRING:
+                for char in operand.value:
+                    self.binary += ord(char).to_bytes(1, byteorder="little")
             elif operand.type == OperandType.LABEL:
                 self.binary += self.labels[operand.value].to_bytes(
                     2, byteorder="little")

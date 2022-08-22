@@ -11,4 +11,4 @@ start:
     halt
 
 data:
-    data 0xFFFD 1
+    data 0xFFFD 1 "Hello World!"
