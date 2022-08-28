@@ -11,8 +11,10 @@
 --------------------------------------------------------------------------------
 
 library IEEE;
+library work;
 
 use IEEE.std_logic_1164.all;
+use work.instructions.all;
 
 entity control is
 port (
@@ -106,152 +108,157 @@ begin
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "000000" then     -- nop
+            elsif opcode = nop then     -- nop
                 case step is
                     when 0 =>   pc_inc <= '1';
                     when others =>   
                 end case;
-            elsif opcode = "000001" then     -- load reg reg
+            elsif opcode = load_reg_reg then     -- load reg reg
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "000010" then     -- load8 reg reg
+            elsif opcode = load8_reg_reg then     -- load8 reg reg
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "000011" then     -- load reg addr
+            elsif opcode = load_reg_addr then     -- load reg addr
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "000100" then     -- load8 reg addr
+            elsif opcode = load8_reg_addr then     -- load8 reg addr
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "000101" then     -- load-imm/load-addr reg imm
+            elsif opcode = loadaddr_reg_addr then     -- load-imm/load-addr reg imm
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "000110" then     -- store reg reg
+            elsif opcode = loadimm_reg_imm then     -- load-imm/load-addr reg imm
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "000111" then     -- store< reg reg
+            elsif opcode = store_reg_reg then     -- store reg reg
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "001000" then     -- store> reg reg
+            elsif opcode = storel_reg_reg then     -- store< reg reg
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "001001" then     -- store reg addr
+            elsif opcode = storeg_reg_reg then     -- store> reg reg
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "001010" then     -- store reg addr
+            elsif opcode = store_reg_addr then     -- store reg addr
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "001011" then     -- store reg addr
+            elsif opcode = storel_reg_addr then     -- store< reg addr
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "001100" then     -- push reg
+            elsif opcode = storeg_reg_addr then     -- store> reg addr
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "001101" then     -- pop reg
+            elsif opcode = push_reg then     -- push reg
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "001110" then     -- add reg reg
+            elsif opcode = pop_reg then     -- pop reg
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "001111" then     -- sub reg reg
+            elsif opcode = add_reg_reg then     -- add reg reg
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "010000" then     -- cmp reg reg
+            elsif opcode = sub_reg_reg then     -- sub reg reg
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "010001" then     -- not reg
+            elsif opcode = cmp_reg_reg then     -- cmp reg reg
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "010010" then     -- shiftl reg
+            elsif opcode = not_reg then     -- not reg
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "010011" then     -- shiftr reg
+            elsif opcode = shiftl_reg then     -- shiftl reg
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "010100" then     -- and reg reg
+            elsif opcode = shiftr_reg then     -- shiftr reg
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "010101" then     -- or reg reg
+            elsif opcode = and_reg_reg then     -- and reg reg
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "010110" then     -- xor reg reg
+            elsif opcode = or_reg_reg then     -- or reg reg
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "010111" then     -- jump addr 
+            elsif opcode = xor_reg_reg then     -- xor reg reg
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "011000" then     -- jump== addr
+            elsif opcode = jump_addr then     -- jump addr 
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "011001" then     -- jump< addr
+            elsif opcode = jumpeq_addr then     -- jump== addr
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "011010" then     -- jump> addr
+            elsif opcode = jumpl_addr then     -- jump< addr
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "011011" then     -- jumpc addr
+            elsif opcode = jumpg_addr then     -- jump> addr
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "011100" then     -- in reg dev
+            elsif opcode = jumpc_addr then     -- jumpc addr
                 case step is
                     when 0 => 
                     when others => 
                 end case;
-            elsif opcode = "011101" then     -- out reg dev
+            elsif opcode = in_reg_dev then     -- in reg dev
+                case step is
+                    when 0 => 
+                    when others => 
+                end case;
+            elsif opcode = out_reg_dev  then     -- out reg dev
                 case step is
                     when 0 => 
                     when others => 
