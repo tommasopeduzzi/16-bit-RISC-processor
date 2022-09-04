@@ -46,54 +46,59 @@
 -- 
 -- DO NOT MODIFY THIS FILE.
 
--- IP VLNV: xilinx.com:module_ref:memory:1.0
+-- IP VLNV: xilinx.com:module_ref:pc:1.0
 -- IP Revision: 1
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY tdp11_memory_0_0 IS
+ENTITY tdp11_pc_0_0 IS
   PORT (
     clk : IN STD_LOGIC;
-    we : IN STD_LOGIC;
-    addr : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-    data : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-    output : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+    rst : IN STD_LOGIC;
+    inc : IN STD_LOGIC;
+    load : IN STD_LOGIC;
+    input : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+    output : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
   );
-END tdp11_memory_0_0;
+END tdp11_pc_0_0;
 
-ARCHITECTURE tdp11_memory_0_0_arch OF tdp11_memory_0_0 IS
+ARCHITECTURE tdp11_pc_0_0_arch OF tdp11_pc_0_0 IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings : STRING;
-  ATTRIBUTE DowngradeIPIdentifiedWarnings OF tdp11_memory_0_0_arch: ARCHITECTURE IS "yes";
-  COMPONENT memory IS
+  ATTRIBUTE DowngradeIPIdentifiedWarnings OF tdp11_pc_0_0_arch: ARCHITECTURE IS "yes";
+  COMPONENT pc IS
     PORT (
       clk : IN STD_LOGIC;
-      we : IN STD_LOGIC;
-      addr : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-      data : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-      output : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+      rst : IN STD_LOGIC;
+      inc : IN STD_LOGIC;
+      load : IN STD_LOGIC;
+      input : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+      output : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
     );
-  END COMPONENT memory;
+  END COMPONENT pc;
   ATTRIBUTE X_CORE_INFO : STRING;
-  ATTRIBUTE X_CORE_INFO OF tdp11_memory_0_0_arch: ARCHITECTURE IS "memory,Vivado 2022.1";
+  ATTRIBUTE X_CORE_INFO OF tdp11_pc_0_0_arch: ARCHITECTURE IS "pc,Vivado 2022.1";
   ATTRIBUTE CHECK_LICENSE_TYPE : STRING;
-  ATTRIBUTE CHECK_LICENSE_TYPE OF tdp11_memory_0_0_arch : ARCHITECTURE IS "tdp11_memory_0_0,memory,{}";
+  ATTRIBUTE CHECK_LICENSE_TYPE OF tdp11_pc_0_0_arch : ARCHITECTURE IS "tdp11_pc_0_0,pc,{}";
   ATTRIBUTE CORE_GENERATION_INFO : STRING;
-  ATTRIBUTE CORE_GENERATION_INFO OF tdp11_memory_0_0_arch: ARCHITECTURE IS "tdp11_memory_0_0,memory,{x_ipProduct=Vivado 2022.1,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=memory,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VHDL,x_ipSimLanguage=MIXED}";
+  ATTRIBUTE CORE_GENERATION_INFO OF tdp11_pc_0_0_arch: ARCHITECTURE IS "tdp11_pc_0_0,pc,{x_ipProduct=Vivado 2022.1,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=pc,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VHDL,x_ipSimLanguage=MIXED}";
   ATTRIBUTE IP_DEFINITION_SOURCE : STRING;
-  ATTRIBUTE IP_DEFINITION_SOURCE OF tdp11_memory_0_0_arch: ARCHITECTURE IS "module_ref";
+  ATTRIBUTE IP_DEFINITION_SOURCE OF tdp11_pc_0_0_arch: ARCHITECTURE IS "module_ref";
   ATTRIBUTE X_INTERFACE_INFO : STRING;
   ATTRIBUTE X_INTERFACE_PARAMETER : STRING;
-  ATTRIBUTE X_INTERFACE_PARAMETER OF clk: SIGNAL IS "XIL_INTERFACENAME clk, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN /clk_clk_out1, INSERT_VIP 0";
+  ATTRIBUTE X_INTERFACE_PARAMETER OF clk: SIGNAL IS "XIL_INTERFACENAME clk, ASSOCIATED_RESET rst, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, INSERT_VIP 0";
   ATTRIBUTE X_INTERFACE_INFO OF clk: SIGNAL IS "xilinx.com:signal:clock:1.0 clk CLK";
+  ATTRIBUTE X_INTERFACE_PARAMETER OF rst: SIGNAL IS "XIL_INTERFACENAME rst, POLARITY ACTIVE_LOW, INSERT_VIP 0";
+  ATTRIBUTE X_INTERFACE_INFO OF rst: SIGNAL IS "xilinx.com:signal:reset:1.0 rst RST";
 BEGIN
-  U0 : memory
+  U0 : pc
     PORT MAP (
       clk => clk,
-      we => we,
-      addr => addr,
-      data => data,
+      rst => rst,
+      inc => inc,
+      load => load,
+      input => input,
       output => output
     );
-END tdp11_memory_0_0_arch;
+END tdp11_pc_0_0_arch;

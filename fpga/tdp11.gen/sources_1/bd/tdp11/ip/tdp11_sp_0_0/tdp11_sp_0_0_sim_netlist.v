@@ -1,7 +1,7 @@
 // Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2022.1 (lin64) Build 3526262 Mon Apr 18 15:47:01 MDT 2022
-// Date        : Mon Aug 15 20:55:24 2022
+// Date        : Sun Aug 28 20:20:42 2022
 // Host        : framework running 64-bit unknown
 // Command     : write_verilog -force -mode funcsim
 //               /home/tommasopeduzzi/Documents/16-bit-RISC-processor/fpga/tdp11.gen/sources_1/bd/tdp11/ip/tdp11_sp_0_0/tdp11_sp_0_0_sim_netlist.v
@@ -21,7 +21,7 @@ module tdp11_sp_0_0
     inc,
     decr,
     \output );
-  (* x_interface_info = "xilinx.com:signal:clock:1.0 clk CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME clk, ASSOCIATED_RESET rst, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN /clk_clk_out1, INSERT_VIP 0" *) input clk;
+  (* x_interface_info = "xilinx.com:signal:clock:1.0 clk CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME clk, ASSOCIATED_RESET rst, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, INSERT_VIP 0" *) input clk;
   (* x_interface_info = "xilinx.com:signal:reset:1.0 rst RST" *) (* x_interface_parameter = "XIL_INTERFACENAME rst, POLARITY ACTIVE_LOW, INSERT_VIP 0" *) input rst;
   input inc;
   input decr;
@@ -44,397 +44,195 @@ endmodule
 (* ORIG_REF_NAME = "sp" *) 
 module tdp11_sp_0_0_sp
    (\output ,
-    inc,
     clk,
     rst,
+    inc,
     decr);
   output [15:0]\output ;
-  input inc;
   input clk;
   input rst;
+  input inc;
   input decr;
 
   wire clk;
   wire decr;
   wire inc;
   wire [15:0]\output ;
-  wire p_0_in;
+  wire \output[3]_i_2_n_0 ;
+  wire \output_reg[11]_i_1_n_0 ;
+  wire \output_reg[11]_i_1_n_1 ;
+  wire \output_reg[11]_i_1_n_2 ;
+  wire \output_reg[11]_i_1_n_3 ;
+  wire \output_reg[11]_i_1_n_4 ;
+  wire \output_reg[11]_i_1_n_5 ;
+  wire \output_reg[11]_i_1_n_6 ;
+  wire \output_reg[11]_i_1_n_7 ;
+  wire \output_reg[15]_i_2_n_1 ;
+  wire \output_reg[15]_i_2_n_2 ;
+  wire \output_reg[15]_i_2_n_3 ;
+  wire \output_reg[15]_i_2_n_4 ;
+  wire \output_reg[15]_i_2_n_5 ;
+  wire \output_reg[15]_i_2_n_6 ;
+  wire \output_reg[15]_i_2_n_7 ;
+  wire \output_reg[3]_i_1_n_0 ;
+  wire \output_reg[3]_i_1_n_1 ;
+  wire \output_reg[3]_i_1_n_2 ;
+  wire \output_reg[3]_i_1_n_3 ;
+  wire \output_reg[3]_i_1_n_4 ;
+  wire \output_reg[3]_i_1_n_5 ;
+  wire \output_reg[3]_i_1_n_6 ;
+  wire \output_reg[3]_i_1_n_7 ;
+  wire \output_reg[7]_i_1_n_0 ;
+  wire \output_reg[7]_i_1_n_1 ;
+  wire \output_reg[7]_i_1_n_2 ;
+  wire \output_reg[7]_i_1_n_3 ;
+  wire \output_reg[7]_i_1_n_4 ;
+  wire \output_reg[7]_i_1_n_5 ;
+  wire \output_reg[7]_i_1_n_6 ;
+  wire \output_reg[7]_i_1_n_7 ;
   wire rst;
-  wire \value[0]_i_1_n_0 ;
-  wire \value[0]_i_3_n_0 ;
-  wire \value[0]_i_4_n_0 ;
-  wire \value[0]_i_5_n_0 ;
-  wire \value[12]_i_2_n_0 ;
-  wire \value[12]_i_3_n_0 ;
-  wire \value[12]_i_4_n_0 ;
-  wire \value[12]_i_5_n_0 ;
-  wire \value[4]_i_2_n_0 ;
-  wire \value[4]_i_3_n_0 ;
-  wire \value[4]_i_4_n_0 ;
-  wire \value[4]_i_5_n_0 ;
-  wire \value[8]_i_2_n_0 ;
-  wire \value[8]_i_3_n_0 ;
-  wire \value[8]_i_4_n_0 ;
-  wire \value[8]_i_5_n_0 ;
-  wire [15:0]value_reg;
-  wire \value_reg[0]_i_2_n_0 ;
-  wire \value_reg[0]_i_2_n_1 ;
-  wire \value_reg[0]_i_2_n_2 ;
-  wire \value_reg[0]_i_2_n_3 ;
-  wire \value_reg[0]_i_2_n_4 ;
-  wire \value_reg[0]_i_2_n_5 ;
-  wire \value_reg[0]_i_2_n_6 ;
-  wire \value_reg[0]_i_2_n_7 ;
-  wire \value_reg[12]_i_1_n_1 ;
-  wire \value_reg[12]_i_1_n_2 ;
-  wire \value_reg[12]_i_1_n_3 ;
-  wire \value_reg[12]_i_1_n_4 ;
-  wire \value_reg[12]_i_1_n_5 ;
-  wire \value_reg[12]_i_1_n_6 ;
-  wire \value_reg[12]_i_1_n_7 ;
-  wire \value_reg[4]_i_1_n_0 ;
-  wire \value_reg[4]_i_1_n_1 ;
-  wire \value_reg[4]_i_1_n_2 ;
-  wire \value_reg[4]_i_1_n_3 ;
-  wire \value_reg[4]_i_1_n_4 ;
-  wire \value_reg[4]_i_1_n_5 ;
-  wire \value_reg[4]_i_1_n_6 ;
-  wire \value_reg[4]_i_1_n_7 ;
-  wire \value_reg[8]_i_1_n_0 ;
-  wire \value_reg[8]_i_1_n_1 ;
-  wire \value_reg[8]_i_1_n_2 ;
-  wire \value_reg[8]_i_1_n_3 ;
-  wire \value_reg[8]_i_1_n_4 ;
-  wire \value_reg[8]_i_1_n_5 ;
-  wire \value_reg[8]_i_1_n_6 ;
-  wire \value_reg[8]_i_1_n_7 ;
-  wire [3:3]\NLW_value_reg[12]_i_1_CO_UNCONNECTED ;
+  wire value;
+  wire [3:3]\NLW_output_reg[15]_i_2_CO_UNCONNECTED ;
 
-  LUT1 #(
-    .INIT(2'h1)) 
-    \output[15]_i_1 
-       (.I0(rst),
-        .O(p_0_in));
-  FDRE \output_reg[0] 
-       (.C(clk),
-        .CE(p_0_in),
-        .D(value_reg[0]),
-        .Q(\output [0]),
-        .R(1'b0));
-  FDRE \output_reg[10] 
-       (.C(clk),
-        .CE(p_0_in),
-        .D(value_reg[10]),
-        .Q(\output [10]),
-        .R(1'b0));
-  FDRE \output_reg[11] 
-       (.C(clk),
-        .CE(p_0_in),
-        .D(value_reg[11]),
-        .Q(\output [11]),
-        .R(1'b0));
-  FDRE \output_reg[12] 
-       (.C(clk),
-        .CE(p_0_in),
-        .D(value_reg[12]),
-        .Q(\output [12]),
-        .R(1'b0));
-  FDRE \output_reg[13] 
-       (.C(clk),
-        .CE(p_0_in),
-        .D(value_reg[13]),
-        .Q(\output [13]),
-        .R(1'b0));
-  FDRE \output_reg[14] 
-       (.C(clk),
-        .CE(p_0_in),
-        .D(value_reg[14]),
-        .Q(\output [14]),
-        .R(1'b0));
-  FDRE \output_reg[15] 
-       (.C(clk),
-        .CE(p_0_in),
-        .D(value_reg[15]),
-        .Q(\output [15]),
-        .R(1'b0));
-  FDRE \output_reg[1] 
-       (.C(clk),
-        .CE(p_0_in),
-        .D(value_reg[1]),
-        .Q(\output [1]),
-        .R(1'b0));
-  FDRE \output_reg[2] 
-       (.C(clk),
-        .CE(p_0_in),
-        .D(value_reg[2]),
-        .Q(\output [2]),
-        .R(1'b0));
-  FDRE \output_reg[3] 
-       (.C(clk),
-        .CE(p_0_in),
-        .D(value_reg[3]),
-        .Q(\output [3]),
-        .R(1'b0));
-  FDRE \output_reg[4] 
-       (.C(clk),
-        .CE(p_0_in),
-        .D(value_reg[4]),
-        .Q(\output [4]),
-        .R(1'b0));
-  FDRE \output_reg[5] 
-       (.C(clk),
-        .CE(p_0_in),
-        .D(value_reg[5]),
-        .Q(\output [5]),
-        .R(1'b0));
-  FDRE \output_reg[6] 
-       (.C(clk),
-        .CE(p_0_in),
-        .D(value_reg[6]),
-        .Q(\output [6]),
-        .R(1'b0));
-  FDRE \output_reg[7] 
-       (.C(clk),
-        .CE(p_0_in),
-        .D(value_reg[7]),
-        .Q(\output [7]),
-        .R(1'b0));
-  FDRE \output_reg[8] 
-       (.C(clk),
-        .CE(p_0_in),
-        .D(value_reg[8]),
-        .Q(\output [8]),
-        .R(1'b0));
-  FDRE \output_reg[9] 
-       (.C(clk),
-        .CE(p_0_in),
-        .D(value_reg[9]),
-        .Q(\output [9]),
-        .R(1'b0));
   LUT2 #(
     .INIT(4'hE)) 
-    \value[0]_i_1 
+    \output[15]_i_1 
        (.I0(inc),
         .I1(decr),
-        .O(\value[0]_i_1_n_0 ));
-  LUT2 #(
-    .INIT(4'h9)) 
-    \value[0]_i_3 
-       (.I0(inc),
-        .I1(value_reg[3]),
-        .O(\value[0]_i_3_n_0 ));
-  LUT2 #(
-    .INIT(4'h9)) 
-    \value[0]_i_4 
-       (.I0(inc),
-        .I1(value_reg[2]),
-        .O(\value[0]_i_4_n_0 ));
-  LUT2 #(
-    .INIT(4'h9)) 
-    \value[0]_i_5 
-       (.I0(inc),
-        .I1(value_reg[1]),
-        .O(\value[0]_i_5_n_0 ));
-  LUT2 #(
-    .INIT(4'h9)) 
-    \value[12]_i_2 
-       (.I0(inc),
-        .I1(value_reg[15]),
-        .O(\value[12]_i_2_n_0 ));
-  LUT2 #(
-    .INIT(4'h9)) 
-    \value[12]_i_3 
-       (.I0(inc),
-        .I1(value_reg[14]),
-        .O(\value[12]_i_3_n_0 ));
-  LUT2 #(
-    .INIT(4'h9)) 
-    \value[12]_i_4 
-       (.I0(inc),
-        .I1(value_reg[13]),
-        .O(\value[12]_i_4_n_0 ));
-  LUT2 #(
-    .INIT(4'h9)) 
-    \value[12]_i_5 
-       (.I0(inc),
-        .I1(value_reg[12]),
-        .O(\value[12]_i_5_n_0 ));
-  LUT2 #(
-    .INIT(4'h9)) 
-    \value[4]_i_2 
-       (.I0(inc),
-        .I1(value_reg[7]),
-        .O(\value[4]_i_2_n_0 ));
-  LUT2 #(
-    .INIT(4'h9)) 
-    \value[4]_i_3 
-       (.I0(inc),
-        .I1(value_reg[6]),
-        .O(\value[4]_i_3_n_0 ));
-  LUT2 #(
-    .INIT(4'h9)) 
-    \value[4]_i_4 
-       (.I0(inc),
-        .I1(value_reg[5]),
-        .O(\value[4]_i_4_n_0 ));
-  LUT2 #(
-    .INIT(4'h9)) 
-    \value[4]_i_5 
-       (.I0(inc),
-        .I1(value_reg[4]),
-        .O(\value[4]_i_5_n_0 ));
-  LUT2 #(
-    .INIT(4'h9)) 
-    \value[8]_i_2 
-       (.I0(inc),
-        .I1(value_reg[11]),
-        .O(\value[8]_i_2_n_0 ));
-  LUT2 #(
-    .INIT(4'h9)) 
-    \value[8]_i_3 
-       (.I0(inc),
-        .I1(value_reg[10]),
-        .O(\value[8]_i_3_n_0 ));
-  LUT2 #(
-    .INIT(4'h9)) 
-    \value[8]_i_4 
-       (.I0(inc),
-        .I1(value_reg[9]),
-        .O(\value[8]_i_4_n_0 ));
-  LUT2 #(
-    .INIT(4'h9)) 
-    \value[8]_i_5 
-       (.I0(inc),
-        .I1(value_reg[8]),
-        .O(\value[8]_i_5_n_0 ));
-  FDCE \value_reg[0] 
+        .O(value));
+  LUT1 #(
+    .INIT(2'h1)) 
+    \output[3]_i_2 
+       (.I0(\output [0]),
+        .O(\output[3]_i_2_n_0 ));
+  FDCE \output_reg[0] 
        (.C(clk),
-        .CE(\value[0]_i_1_n_0 ),
+        .CE(value),
         .CLR(rst),
-        .D(\value_reg[0]_i_2_n_7 ),
-        .Q(value_reg[0]));
+        .D(\output_reg[3]_i_1_n_7 ),
+        .Q(\output [0]));
+  FDCE \output_reg[10] 
+       (.C(clk),
+        .CE(value),
+        .CLR(rst),
+        .D(\output_reg[11]_i_1_n_5 ),
+        .Q(\output [10]));
+  FDCE \output_reg[11] 
+       (.C(clk),
+        .CE(value),
+        .CLR(rst),
+        .D(\output_reg[11]_i_1_n_4 ),
+        .Q(\output [11]));
   (* ADDER_THRESHOLD = "11" *) 
-  CARRY4 \value_reg[0]_i_2 
+  CARRY4 \output_reg[11]_i_1 
+       (.CI(\output_reg[7]_i_1_n_0 ),
+        .CO({\output_reg[11]_i_1_n_0 ,\output_reg[11]_i_1_n_1 ,\output_reg[11]_i_1_n_2 ,\output_reg[11]_i_1_n_3 }),
+        .CYINIT(1'b0),
+        .DI({1'b0,1'b0,1'b0,1'b0}),
+        .O({\output_reg[11]_i_1_n_4 ,\output_reg[11]_i_1_n_5 ,\output_reg[11]_i_1_n_6 ,\output_reg[11]_i_1_n_7 }),
+        .S(\output [11:8]));
+  FDCE \output_reg[12] 
+       (.C(clk),
+        .CE(value),
+        .CLR(rst),
+        .D(\output_reg[15]_i_2_n_7 ),
+        .Q(\output [12]));
+  FDCE \output_reg[13] 
+       (.C(clk),
+        .CE(value),
+        .CLR(rst),
+        .D(\output_reg[15]_i_2_n_6 ),
+        .Q(\output [13]));
+  FDCE \output_reg[14] 
+       (.C(clk),
+        .CE(value),
+        .CLR(rst),
+        .D(\output_reg[15]_i_2_n_5 ),
+        .Q(\output [14]));
+  FDCE \output_reg[15] 
+       (.C(clk),
+        .CE(value),
+        .CLR(rst),
+        .D(\output_reg[15]_i_2_n_4 ),
+        .Q(\output [15]));
+  (* ADDER_THRESHOLD = "11" *) 
+  CARRY4 \output_reg[15]_i_2 
+       (.CI(\output_reg[11]_i_1_n_0 ),
+        .CO({\NLW_output_reg[15]_i_2_CO_UNCONNECTED [3],\output_reg[15]_i_2_n_1 ,\output_reg[15]_i_2_n_2 ,\output_reg[15]_i_2_n_3 }),
+        .CYINIT(1'b0),
+        .DI({1'b0,1'b0,1'b0,1'b0}),
+        .O({\output_reg[15]_i_2_n_4 ,\output_reg[15]_i_2_n_5 ,\output_reg[15]_i_2_n_6 ,\output_reg[15]_i_2_n_7 }),
+        .S(\output [15:12]));
+  FDCE \output_reg[1] 
+       (.C(clk),
+        .CE(value),
+        .CLR(rst),
+        .D(\output_reg[3]_i_1_n_6 ),
+        .Q(\output [1]));
+  FDCE \output_reg[2] 
+       (.C(clk),
+        .CE(value),
+        .CLR(rst),
+        .D(\output_reg[3]_i_1_n_5 ),
+        .Q(\output [2]));
+  FDCE \output_reg[3] 
+       (.C(clk),
+        .CE(value),
+        .CLR(rst),
+        .D(\output_reg[3]_i_1_n_4 ),
+        .Q(\output [3]));
+  (* ADDER_THRESHOLD = "11" *) 
+  CARRY4 \output_reg[3]_i_1 
        (.CI(1'b0),
-        .CO({\value_reg[0]_i_2_n_0 ,\value_reg[0]_i_2_n_1 ,\value_reg[0]_i_2_n_2 ,\value_reg[0]_i_2_n_3 }),
-        .CYINIT(1'b1),
-        .DI({value_reg[3:1],1'b0}),
-        .O({\value_reg[0]_i_2_n_4 ,\value_reg[0]_i_2_n_5 ,\value_reg[0]_i_2_n_6 ,\value_reg[0]_i_2_n_7 }),
-        .S({\value[0]_i_3_n_0 ,\value[0]_i_4_n_0 ,\value[0]_i_5_n_0 ,value_reg[0]}));
-  FDCE \value_reg[10] 
-       (.C(clk),
-        .CE(\value[0]_i_1_n_0 ),
-        .CLR(rst),
-        .D(\value_reg[8]_i_1_n_5 ),
-        .Q(value_reg[10]));
-  FDCE \value_reg[11] 
-       (.C(clk),
-        .CE(\value[0]_i_1_n_0 ),
-        .CLR(rst),
-        .D(\value_reg[8]_i_1_n_4 ),
-        .Q(value_reg[11]));
-  FDCE \value_reg[12] 
-       (.C(clk),
-        .CE(\value[0]_i_1_n_0 ),
-        .CLR(rst),
-        .D(\value_reg[12]_i_1_n_7 ),
-        .Q(value_reg[12]));
-  (* ADDER_THRESHOLD = "11" *) 
-  CARRY4 \value_reg[12]_i_1 
-       (.CI(\value_reg[8]_i_1_n_0 ),
-        .CO({\NLW_value_reg[12]_i_1_CO_UNCONNECTED [3],\value_reg[12]_i_1_n_1 ,\value_reg[12]_i_1_n_2 ,\value_reg[12]_i_1_n_3 }),
+        .CO({\output_reg[3]_i_1_n_0 ,\output_reg[3]_i_1_n_1 ,\output_reg[3]_i_1_n_2 ,\output_reg[3]_i_1_n_3 }),
         .CYINIT(1'b0),
-        .DI({1'b0,value_reg[14:12]}),
-        .O({\value_reg[12]_i_1_n_4 ,\value_reg[12]_i_1_n_5 ,\value_reg[12]_i_1_n_6 ,\value_reg[12]_i_1_n_7 }),
-        .S({\value[12]_i_2_n_0 ,\value[12]_i_3_n_0 ,\value[12]_i_4_n_0 ,\value[12]_i_5_n_0 }));
-  FDCE \value_reg[13] 
+        .DI({1'b0,1'b0,1'b0,1'b1}),
+        .O({\output_reg[3]_i_1_n_4 ,\output_reg[3]_i_1_n_5 ,\output_reg[3]_i_1_n_6 ,\output_reg[3]_i_1_n_7 }),
+        .S({\output [3:1],\output[3]_i_2_n_0 }));
+  FDCE \output_reg[4] 
        (.C(clk),
-        .CE(\value[0]_i_1_n_0 ),
+        .CE(value),
         .CLR(rst),
-        .D(\value_reg[12]_i_1_n_6 ),
-        .Q(value_reg[13]));
-  FDCE \value_reg[14] 
+        .D(\output_reg[7]_i_1_n_7 ),
+        .Q(\output [4]));
+  FDCE \output_reg[5] 
        (.C(clk),
-        .CE(\value[0]_i_1_n_0 ),
+        .CE(value),
         .CLR(rst),
-        .D(\value_reg[12]_i_1_n_5 ),
-        .Q(value_reg[14]));
-  FDCE \value_reg[15] 
+        .D(\output_reg[7]_i_1_n_6 ),
+        .Q(\output [5]));
+  FDCE \output_reg[6] 
        (.C(clk),
-        .CE(\value[0]_i_1_n_0 ),
+        .CE(value),
         .CLR(rst),
-        .D(\value_reg[12]_i_1_n_4 ),
-        .Q(value_reg[15]));
-  FDCE \value_reg[1] 
+        .D(\output_reg[7]_i_1_n_5 ),
+        .Q(\output [6]));
+  FDCE \output_reg[7] 
        (.C(clk),
-        .CE(\value[0]_i_1_n_0 ),
+        .CE(value),
         .CLR(rst),
-        .D(\value_reg[0]_i_2_n_6 ),
-        .Q(value_reg[1]));
-  FDCE \value_reg[2] 
-       (.C(clk),
-        .CE(\value[0]_i_1_n_0 ),
-        .CLR(rst),
-        .D(\value_reg[0]_i_2_n_5 ),
-        .Q(value_reg[2]));
-  FDCE \value_reg[3] 
-       (.C(clk),
-        .CE(\value[0]_i_1_n_0 ),
-        .CLR(rst),
-        .D(\value_reg[0]_i_2_n_4 ),
-        .Q(value_reg[3]));
-  FDCE \value_reg[4] 
-       (.C(clk),
-        .CE(\value[0]_i_1_n_0 ),
-        .CLR(rst),
-        .D(\value_reg[4]_i_1_n_7 ),
-        .Q(value_reg[4]));
+        .D(\output_reg[7]_i_1_n_4 ),
+        .Q(\output [7]));
   (* ADDER_THRESHOLD = "11" *) 
-  CARRY4 \value_reg[4]_i_1 
-       (.CI(\value_reg[0]_i_2_n_0 ),
-        .CO({\value_reg[4]_i_1_n_0 ,\value_reg[4]_i_1_n_1 ,\value_reg[4]_i_1_n_2 ,\value_reg[4]_i_1_n_3 }),
+  CARRY4 \output_reg[7]_i_1 
+       (.CI(\output_reg[3]_i_1_n_0 ),
+        .CO({\output_reg[7]_i_1_n_0 ,\output_reg[7]_i_1_n_1 ,\output_reg[7]_i_1_n_2 ,\output_reg[7]_i_1_n_3 }),
         .CYINIT(1'b0),
-        .DI(value_reg[7:4]),
-        .O({\value_reg[4]_i_1_n_4 ,\value_reg[4]_i_1_n_5 ,\value_reg[4]_i_1_n_6 ,\value_reg[4]_i_1_n_7 }),
-        .S({\value[4]_i_2_n_0 ,\value[4]_i_3_n_0 ,\value[4]_i_4_n_0 ,\value[4]_i_5_n_0 }));
-  FDCE \value_reg[5] 
+        .DI({1'b0,1'b0,1'b0,1'b0}),
+        .O({\output_reg[7]_i_1_n_4 ,\output_reg[7]_i_1_n_5 ,\output_reg[7]_i_1_n_6 ,\output_reg[7]_i_1_n_7 }),
+        .S(\output [7:4]));
+  FDCE \output_reg[8] 
        (.C(clk),
-        .CE(\value[0]_i_1_n_0 ),
+        .CE(value),
         .CLR(rst),
-        .D(\value_reg[4]_i_1_n_6 ),
-        .Q(value_reg[5]));
-  FDCE \value_reg[6] 
+        .D(\output_reg[11]_i_1_n_7 ),
+        .Q(\output [8]));
+  FDCE \output_reg[9] 
        (.C(clk),
-        .CE(\value[0]_i_1_n_0 ),
+        .CE(value),
         .CLR(rst),
-        .D(\value_reg[4]_i_1_n_5 ),
-        .Q(value_reg[6]));
-  FDCE \value_reg[7] 
-       (.C(clk),
-        .CE(\value[0]_i_1_n_0 ),
-        .CLR(rst),
-        .D(\value_reg[4]_i_1_n_4 ),
-        .Q(value_reg[7]));
-  FDCE \value_reg[8] 
-       (.C(clk),
-        .CE(\value[0]_i_1_n_0 ),
-        .CLR(rst),
-        .D(\value_reg[8]_i_1_n_7 ),
-        .Q(value_reg[8]));
-  (* ADDER_THRESHOLD = "11" *) 
-  CARRY4 \value_reg[8]_i_1 
-       (.CI(\value_reg[4]_i_1_n_0 ),
-        .CO({\value_reg[8]_i_1_n_0 ,\value_reg[8]_i_1_n_1 ,\value_reg[8]_i_1_n_2 ,\value_reg[8]_i_1_n_3 }),
-        .CYINIT(1'b0),
-        .DI(value_reg[11:8]),
-        .O({\value_reg[8]_i_1_n_4 ,\value_reg[8]_i_1_n_5 ,\value_reg[8]_i_1_n_6 ,\value_reg[8]_i_1_n_7 }),
-        .S({\value[8]_i_2_n_0 ,\value[8]_i_3_n_0 ,\value[8]_i_4_n_0 ,\value[8]_i_5_n_0 }));
-  FDCE \value_reg[9] 
-       (.C(clk),
-        .CE(\value[0]_i_1_n_0 ),
-        .CLR(rst),
-        .D(\value_reg[8]_i_1_n_6 ),
-        .Q(value_reg[9]));
+        .D(\output_reg[11]_i_1_n_6 ),
+        .Q(\output [9]));
 endmodule
 `ifndef GLBL
 `define GLBL

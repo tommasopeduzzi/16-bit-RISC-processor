@@ -2,8 +2,8 @@
    "ActiveEmotionalView":"Default View",
    "Addressing View_ScaleFactor":"1.0",
    "Addressing View_TopLeft":"-861,-254",
-   "Default View_ScaleFactor":"0.306261",
-   "Default View_TopLeft":"-1949,-82",
+   "Default View_ScaleFactor":"0.441942",
+   "Default View_TopLeft":"-412,842",
    "ExpandedHierarchyInLayout":"",
    "Interfaces View_ScaleFactor":"1.0",
    "Interfaces View_TopLeft":"-911,-254",
@@ -63,6 +63,15 @@ preplace portBus pc_debug -pg 1 -lvl 9 -x 2780 -y 2830 -defaultsOSRD
 preplace portBus sp_debug -pg 1 -lvl 9 -x 2780 -y 2910 -defaultsOSRD
 preplace portBus memory_debug -pg 1 -lvl 9 -x 2780 -y 2600 -defaultsOSRD
 preplace portBus alu_debug -pg 1 -lvl 9 -x 2780 -y 2010 -defaultsOSRD
+preplace inst lhs -pg 1 -lvl 6 -x 1620 -y 1530 -defaultsOSRD
+preplace inst rhs -pg 1 -lvl 6 -x 1620 -y 1250 -defaultsOSRD
+preplace inst slice -pg 1 -lvl 7 -x 1940 -y 2350 -defaultsOSRD
+preplace inst main_bus -pg 1 -lvl 5 -x 1220 -y 2050 -defaultsOSRD
+preplace inst alu -pg 1 -lvl 8 -x 2230 -y 1440 -defaultsOSRD
+preplace inst address_bus -pg 1 -lvl 5 -x 1220 -y 2540 -defaultsOSRD
+preplace inst we_registers_0 -pg 1 -lvl 3 -x 220 -y 1860 -defaultsOSRD
+preplace inst pc_0 -pg 1 -lvl 3 -x 220 -y 940 -defaultsOSRD
+preplace inst sp_0 -pg 1 -lvl 3 -x 220 -y 1150 -defaultsOSRD
 preplace inst reg_3 -pg 1 -lvl 4 -x 700 -y 1740 -defaultsOSRD
 preplace inst reg_4 -pg 1 -lvl 4 -x 700 -y 1940 -defaultsOSRD
 preplace inst reg_0 -pg 1 -lvl 4 -x 700 -y 1140 -defaultsOSRD
@@ -71,17 +80,8 @@ preplace inst reg_5 -pg 1 -lvl 4 -x 700 -y 2140 -defaultsOSRD
 preplace inst reg_7 -pg 1 -lvl 4 -x 700 -y 2540 -defaultsOSRD
 preplace inst reg_6 -pg 1 -lvl 4 -x 700 -y 2340 -defaultsOSRD
 preplace inst reg_2 -pg 1 -lvl 4 -x 700 -y 1540 -defaultsOSRD
-preplace inst lhs -pg 1 -lvl 6 -x 1620 -y 1530 -defaultsOSRD
-preplace inst rhs -pg 1 -lvl 6 -x 1620 -y 1250 -defaultsOSRD
-preplace inst sp_0 -pg 1 -lvl 3 -x 220 -y 1150 -defaultsOSRD
-preplace inst memory -pg 1 -lvl 8 -x 2230 -y 2600 -defaultsOSRD
-preplace inst slice -pg 1 -lvl 7 -x 1940 -y 2350 -defaultsOSRD
-preplace inst main_bus -pg 1 -lvl 5 -x 1220 -y 2050 -defaultsOSRD
-preplace inst alu -pg 1 -lvl 8 -x 2230 -y 1440 -defaultsOSRD
-preplace inst address_bus -pg 1 -lvl 5 -x 1220 -y 2540 -defaultsOSRD
-preplace inst we_registers_0 -pg 1 -lvl 3 -x 220 -y 1860 -defaultsOSRD
-preplace inst pc_0 -pg 1 -lvl 3 -x 220 -y 940 -defaultsOSRD
 preplace inst control -pg 1 -lvl 3 -x 220 -y 540 -defaultsOSRD
+preplace inst memory -pg 1 -lvl 8 -x 2230 -y 2600 -defaultsOSRD
 preplace netloc address_bus_0_output 1 2 7 20 2760 N 2760 N 2760 1380 2540 N 2540 2070 2510 N
 preplace netloc alu_0_output 1 4 5 1040 2280 1390 2260 N 2260 N 2260 2420
 preplace netloc alu_c 1 2 7 60 820 NJ 820 N 820 N 820 N 820 N 820 2410
@@ -158,9 +158,9 @@ preplace cgraphic comment_0 place right -241 1935 textcolor 4 linecolor 3 linewi
 preplace cgraphic comment_7 place left 702 1057 textcolor 4 linecolor 3 linewidth 2 fillcolor V,6,1
 preplace cgraphic comment_6 place left 659 838 textcolor 4 linecolor 3 linewidth 2 fillcolor V,6,1
 preplace cgraphic comment_5 place right -816 1342 textcolor 4 linecolor 3 linewidth 2 fillcolor V,6,1
-preplace cgraphic comment_4 place left 453 122 textcolor 4 linecolor 3 linewidth 2 fillcolor V,6,1
+preplace cgraphic comment_4 place left 659 233 textcolor 4 linecolor 3 linewidth 2 fillcolor V,6,1
 preplace cgraphic comment_11 place bot 2175 -842 textcolor 4 linecolor 3 linewidth 2 fillcolor V,6,1
-preplace cgraphic comment_10 place bot 1497 -1019 textcolor 4 linecolor 3 linewidth 1 fillcolor V,6,1
+preplace cgraphic comment_10 place bot 1159 -1019 textcolor 4 linecolor 3 linewidth 1 fillcolor V,6,1
 preplace cgraphic comment_9 place top 1538 1569 textcolor 4 linecolor 3 linewidth 1 fillcolor V,6,1
 preplace cgraphic comment_8 place bot 1212 -1543 textcolor 4 linecolor 3 linewidth 2 fillcolor V,6,1
 levelinfo -pg 1 -490 -370 -170 220 700 1220 1620 1940 2230 2780
@@ -170,7 +170,7 @@ pagesize -pg 1 -db -bbox -sgen -580 -470 3020 3350
    "textcolor_comment_3":""
 }
 {
-   """"""""""da_clkrst_cnt"""""""""":"1"
+   """""""""""""""da_clkrst_cnt""""""""""""""":"1"
 }
 {
    "/comment_0":"comment_0",

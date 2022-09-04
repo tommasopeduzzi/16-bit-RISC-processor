@@ -110,7 +110,9 @@ begin
                 end case;
             elsif opcode = nop then     -- nop
                 case step is
-                    when 0 =>   pc_inc <= '1';
+                    when 0 =>   addr_pc_sel <= '1';
+                                opcode <= input(5 downto 0);
+                                pc_inc <= '1';
                     when others =>   
                 end case;
             elsif opcode = load_reg_reg then     -- load reg reg

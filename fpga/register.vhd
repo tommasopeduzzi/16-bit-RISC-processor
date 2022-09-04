@@ -27,20 +27,18 @@ port (
 );
 end reg;
 architecture architecture_reg of reg is
-	signal value : std_logic_vector(input'range);
 begin
     process (clk, rst) begin
         if rst = '1' then
-            value <= (others => '0');
+            output <= (others => '0');
         elsif rising_edge(clk) then
             if we = '1' then
-                value <= input;
+                output <= input;
             elsif we_m = '1' then
-                value(7 downto 0) <= input(7 downto 0);
+                output(7 downto 0) <= input(7 downto 0);
             elsif we_l = '1' then
-                value(15 downto 8) <= input(15 downto 8);
+                output(15 downto 8) <= input(15 downto 8);
             end if;
-            output <= value;
         end if;
     end process;
 end architecture_reg;

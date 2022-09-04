@@ -1,7 +1,7 @@
 --Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2022.1 (lin64) Build 3526262 Mon Apr 18 15:47:01 MDT 2022
---Date        : Wed Aug 24 15:15:28 2022
+--Date        : Mon Aug 29 19:12:55 2022
 --Host        : framework running 64-bit unknown
 --Command     : generate_target tdp11.bd
 --Design      : tdp11
@@ -44,100 +44,12 @@ use UNISIM.VCOMPONENTS.ALL;
     sp_debug : out STD_LOGIC_VECTOR ( 15 downto 0 )
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of tdp11 : entity is "tdp11,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=tdp11,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=19,numReposBlks=19,numNonXlnxBlks=0,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=18,numPkgbdBlks=0,bdsource=USER,""""""""""""""""da_clkrst_cnt""""""""""""""""=1,synth_mode=OOC_per_IP}";
+  attribute CORE_GENERATION_INFO of tdp11 : entity is "tdp11,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=tdp11,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=19,numReposBlks=19,numNonXlnxBlks=0,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=18,numPkgbdBlks=0,bdsource=USER,""""""""""""""""""""""""da_clkrst_cnt""""""""""""""""""""""""=1,synth_mode=OOC_per_IP}";
   attribute HW_HANDOFF : string;
   attribute HW_HANDOFF of tdp11 : entity is "tdp11.hwdef";
 end tdp11;
 
 architecture STRUCTURE of tdp11 is
-  component tdp11_reg_0_0 is
-  port (
-    clk : in STD_LOGIC;
-    rst : in STD_LOGIC;
-    we : in STD_LOGIC;
-    we_m : in STD_LOGIC;
-    we_l : in STD_LOGIC;
-    input : in STD_LOGIC_VECTOR ( 15 downto 0 );
-    output : out STD_LOGIC_VECTOR ( 15 downto 0 )
-  );
-  end component tdp11_reg_0_0;
-  component tdp11_reg_0_1 is
-  port (
-    clk : in STD_LOGIC;
-    rst : in STD_LOGIC;
-    we : in STD_LOGIC;
-    we_m : in STD_LOGIC;
-    we_l : in STD_LOGIC;
-    input : in STD_LOGIC_VECTOR ( 15 downto 0 );
-    output : out STD_LOGIC_VECTOR ( 15 downto 0 )
-  );
-  end component tdp11_reg_0_1;
-  component tdp11_reg_0_2 is
-  port (
-    clk : in STD_LOGIC;
-    rst : in STD_LOGIC;
-    we : in STD_LOGIC;
-    we_m : in STD_LOGIC;
-    we_l : in STD_LOGIC;
-    input : in STD_LOGIC_VECTOR ( 15 downto 0 );
-    output : out STD_LOGIC_VECTOR ( 15 downto 0 )
-  );
-  end component tdp11_reg_0_2;
-  component tdp11_reg_0_3 is
-  port (
-    clk : in STD_LOGIC;
-    rst : in STD_LOGIC;
-    we : in STD_LOGIC;
-    we_m : in STD_LOGIC;
-    we_l : in STD_LOGIC;
-    input : in STD_LOGIC_VECTOR ( 15 downto 0 );
-    output : out STD_LOGIC_VECTOR ( 15 downto 0 )
-  );
-  end component tdp11_reg_0_3;
-  component tdp11_reg_0_4 is
-  port (
-    clk : in STD_LOGIC;
-    rst : in STD_LOGIC;
-    we : in STD_LOGIC;
-    we_m : in STD_LOGIC;
-    we_l : in STD_LOGIC;
-    input : in STD_LOGIC_VECTOR ( 15 downto 0 );
-    output : out STD_LOGIC_VECTOR ( 15 downto 0 )
-  );
-  end component tdp11_reg_0_4;
-  component tdp11_reg_0_5 is
-  port (
-    clk : in STD_LOGIC;
-    rst : in STD_LOGIC;
-    we : in STD_LOGIC;
-    we_m : in STD_LOGIC;
-    we_l : in STD_LOGIC;
-    input : in STD_LOGIC_VECTOR ( 15 downto 0 );
-    output : out STD_LOGIC_VECTOR ( 15 downto 0 )
-  );
-  end component tdp11_reg_0_5;
-  component tdp11_reg_0_6 is
-  port (
-    clk : in STD_LOGIC;
-    rst : in STD_LOGIC;
-    we : in STD_LOGIC;
-    we_m : in STD_LOGIC;
-    we_l : in STD_LOGIC;
-    input : in STD_LOGIC_VECTOR ( 15 downto 0 );
-    output : out STD_LOGIC_VECTOR ( 15 downto 0 )
-  );
-  end component tdp11_reg_0_6;
-  component tdp11_reg_0_7 is
-  port (
-    clk : in STD_LOGIC;
-    rst : in STD_LOGIC;
-    we : in STD_LOGIC;
-    we_m : in STD_LOGIC;
-    we_l : in STD_LOGIC;
-    input : in STD_LOGIC_VECTOR ( 15 downto 0 );
-    output : out STD_LOGIC_VECTOR ( 15 downto 0 )
-  );
-  end component tdp11_reg_0_7;
   component tdp11_alu_bus_0_0 is
   port (
     clk : in STD_LOGIC;
@@ -168,24 +80,6 @@ architecture STRUCTURE of tdp11 is
     output : out STD_LOGIC_VECTOR ( 15 downto 0 )
   );
   end component tdp11_alu_bus_1_0;
-  component tdp11_sp_0_0 is
-  port (
-    clk : in STD_LOGIC;
-    rst : in STD_LOGIC;
-    inc : in STD_LOGIC;
-    decr : in STD_LOGIC;
-    output : out STD_LOGIC_VECTOR ( 15 downto 0 )
-  );
-  end component tdp11_sp_0_0;
-  component tdp11_memory_0_0 is
-  port (
-    clk : in STD_LOGIC;
-    we : in STD_LOGIC;
-    addr : in STD_LOGIC_VECTOR ( 15 downto 0 );
-    data : in STD_LOGIC_VECTOR ( 7 downto 0 );
-    output : out STD_LOGIC_VECTOR ( 7 downto 0 )
-  );
-  end component tdp11_memory_0_0;
   component tdp11_xlslice_0_0 is
   port (
     Din : in STD_LOGIC_VECTOR ( 15 downto 0 );
@@ -291,6 +185,112 @@ architecture STRUCTURE of tdp11 is
     output : out STD_LOGIC_VECTOR ( 15 downto 0 )
   );
   end component tdp11_pc_0_0;
+  component tdp11_sp_0_0 is
+  port (
+    clk : in STD_LOGIC;
+    rst : in STD_LOGIC;
+    inc : in STD_LOGIC;
+    decr : in STD_LOGIC;
+    output : out STD_LOGIC_VECTOR ( 15 downto 0 )
+  );
+  end component tdp11_sp_0_0;
+  component tdp11_reg_0_0 is
+  port (
+    clk : in STD_LOGIC;
+    rst : in STD_LOGIC;
+    we : in STD_LOGIC;
+    we_m : in STD_LOGIC;
+    we_l : in STD_LOGIC;
+    input : in STD_LOGIC_VECTOR ( 15 downto 0 );
+    output : out STD_LOGIC_VECTOR ( 15 downto 0 )
+  );
+  end component tdp11_reg_0_0;
+  component tdp11_reg_0_1 is
+  port (
+    clk : in STD_LOGIC;
+    rst : in STD_LOGIC;
+    we : in STD_LOGIC;
+    we_m : in STD_LOGIC;
+    we_l : in STD_LOGIC;
+    input : in STD_LOGIC_VECTOR ( 15 downto 0 );
+    output : out STD_LOGIC_VECTOR ( 15 downto 0 )
+  );
+  end component tdp11_reg_0_1;
+  component tdp11_reg_0_2 is
+  port (
+    clk : in STD_LOGIC;
+    rst : in STD_LOGIC;
+    we : in STD_LOGIC;
+    we_m : in STD_LOGIC;
+    we_l : in STD_LOGIC;
+    input : in STD_LOGIC_VECTOR ( 15 downto 0 );
+    output : out STD_LOGIC_VECTOR ( 15 downto 0 )
+  );
+  end component tdp11_reg_0_2;
+  component tdp11_reg_0_3 is
+  port (
+    clk : in STD_LOGIC;
+    rst : in STD_LOGIC;
+    we : in STD_LOGIC;
+    we_m : in STD_LOGIC;
+    we_l : in STD_LOGIC;
+    input : in STD_LOGIC_VECTOR ( 15 downto 0 );
+    output : out STD_LOGIC_VECTOR ( 15 downto 0 )
+  );
+  end component tdp11_reg_0_3;
+  component tdp11_reg_0_4 is
+  port (
+    clk : in STD_LOGIC;
+    rst : in STD_LOGIC;
+    we : in STD_LOGIC;
+    we_m : in STD_LOGIC;
+    we_l : in STD_LOGIC;
+    input : in STD_LOGIC_VECTOR ( 15 downto 0 );
+    output : out STD_LOGIC_VECTOR ( 15 downto 0 )
+  );
+  end component tdp11_reg_0_4;
+  component tdp11_reg_0_5 is
+  port (
+    clk : in STD_LOGIC;
+    rst : in STD_LOGIC;
+    we : in STD_LOGIC;
+    we_m : in STD_LOGIC;
+    we_l : in STD_LOGIC;
+    input : in STD_LOGIC_VECTOR ( 15 downto 0 );
+    output : out STD_LOGIC_VECTOR ( 15 downto 0 )
+  );
+  end component tdp11_reg_0_5;
+  component tdp11_reg_0_6 is
+  port (
+    clk : in STD_LOGIC;
+    rst : in STD_LOGIC;
+    we : in STD_LOGIC;
+    we_m : in STD_LOGIC;
+    we_l : in STD_LOGIC;
+    input : in STD_LOGIC_VECTOR ( 15 downto 0 );
+    output : out STD_LOGIC_VECTOR ( 15 downto 0 )
+  );
+  end component tdp11_reg_0_6;
+  component tdp11_reg_0_7 is
+  port (
+    clk : in STD_LOGIC;
+    rst : in STD_LOGIC;
+    we : in STD_LOGIC;
+    we_m : in STD_LOGIC;
+    we_l : in STD_LOGIC;
+    input : in STD_LOGIC_VECTOR ( 15 downto 0 );
+    output : out STD_LOGIC_VECTOR ( 15 downto 0 )
+  );
+  end component tdp11_reg_0_7;
+  component tdp11_memory_0_0 is
+  port (
+    clk : in STD_LOGIC;
+    we : in STD_LOGIC;
+    addr : in STD_LOGIC_VECTOR ( 15 downto 0 );
+    data : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    output : out STD_LOGIC_VECTOR ( 7 downto 0 )
+  );
+  end component tdp11_memory_0_0;
   component tdp11_control_0_0 is
   port (
     clk : in STD_LOGIC;

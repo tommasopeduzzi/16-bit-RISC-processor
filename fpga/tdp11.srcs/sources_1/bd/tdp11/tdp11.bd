@@ -10,6 +10,15 @@
       "tool_version": "2022.1"
     },
     "design_tree": {
+      "lhs": "",
+      "rhs": "",
+      "slice": "",
+      "main_bus": "",
+      "alu": "",
+      "address_bus": "",
+      "we_registers_0": "",
+      "pc_0": "",
+      "sp_0": "",
       "reg_3": "",
       "reg_4": "",
       "reg_0": "",
@@ -18,17 +27,8 @@
       "reg_7": "",
       "reg_6": "",
       "reg_2": "",
-      "lhs": "",
-      "rhs": "",
-      "sp_0": "",
-      "memory": "",
-      "slice": "",
-      "main_bus": "",
-      "alu": "",
-      "address_bus": "",
-      "we_registers_0": "",
-      "pc_0": "",
-      "control": ""
+      "control": "",
+      "memory": ""
     },
     "ports": {
       "rst": {
@@ -109,374 +109,6 @@
       }
     },
     "components": {
-      "reg_3": {
-        "vlnv": "xilinx.com:module_ref:reg:1.0",
-        "xci_name": "tdp11_reg_0_0",
-        "xci_path": "ip/tdp11_reg_0_0/tdp11_reg_0_0.xci",
-        "inst_hier_path": "reg_3",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "reg",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk": {
-            "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "ASSOCIATED_RESET": {
-                "value": "rst",
-                "value_src": "constant"
-              }
-            }
-          },
-          "rst": {
-            "type": "rst",
-            "direction": "I"
-          },
-          "we": {
-            "direction": "I"
-          },
-          "we_m": {
-            "direction": "I"
-          },
-          "we_l": {
-            "direction": "I"
-          },
-          "input": {
-            "direction": "I",
-            "left": "15",
-            "right": "0"
-          },
-          "output": {
-            "direction": "O",
-            "left": "15",
-            "right": "0"
-          }
-        }
-      },
-      "reg_4": {
-        "vlnv": "xilinx.com:module_ref:reg:1.0",
-        "xci_name": "tdp11_reg_0_1",
-        "xci_path": "ip/tdp11_reg_0_1/tdp11_reg_0_1.xci",
-        "inst_hier_path": "reg_4",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "reg",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk": {
-            "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "ASSOCIATED_RESET": {
-                "value": "rst",
-                "value_src": "constant"
-              }
-            }
-          },
-          "rst": {
-            "type": "rst",
-            "direction": "I"
-          },
-          "we": {
-            "direction": "I"
-          },
-          "we_m": {
-            "direction": "I"
-          },
-          "we_l": {
-            "direction": "I"
-          },
-          "input": {
-            "direction": "I",
-            "left": "15",
-            "right": "0"
-          },
-          "output": {
-            "direction": "O",
-            "left": "15",
-            "right": "0"
-          }
-        }
-      },
-      "reg_0": {
-        "vlnv": "xilinx.com:module_ref:reg:1.0",
-        "xci_name": "tdp11_reg_0_2",
-        "xci_path": "ip/tdp11_reg_0_2/tdp11_reg_0_2.xci",
-        "inst_hier_path": "reg_0",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "reg",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk": {
-            "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "ASSOCIATED_RESET": {
-                "value": "rst",
-                "value_src": "constant"
-              }
-            }
-          },
-          "rst": {
-            "type": "rst",
-            "direction": "I"
-          },
-          "we": {
-            "direction": "I"
-          },
-          "we_m": {
-            "direction": "I"
-          },
-          "we_l": {
-            "direction": "I"
-          },
-          "input": {
-            "direction": "I",
-            "left": "15",
-            "right": "0"
-          },
-          "output": {
-            "direction": "O",
-            "left": "15",
-            "right": "0"
-          }
-        }
-      },
-      "reg_1": {
-        "vlnv": "xilinx.com:module_ref:reg:1.0",
-        "xci_name": "tdp11_reg_0_3",
-        "xci_path": "ip/tdp11_reg_0_3/tdp11_reg_0_3.xci",
-        "inst_hier_path": "reg_1",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "reg",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk": {
-            "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "ASSOCIATED_RESET": {
-                "value": "rst",
-                "value_src": "constant"
-              }
-            }
-          },
-          "rst": {
-            "type": "rst",
-            "direction": "I"
-          },
-          "we": {
-            "direction": "I"
-          },
-          "we_m": {
-            "direction": "I"
-          },
-          "we_l": {
-            "direction": "I"
-          },
-          "input": {
-            "direction": "I",
-            "left": "15",
-            "right": "0"
-          },
-          "output": {
-            "direction": "O",
-            "left": "15",
-            "right": "0"
-          }
-        }
-      },
-      "reg_5": {
-        "vlnv": "xilinx.com:module_ref:reg:1.0",
-        "xci_name": "tdp11_reg_0_4",
-        "xci_path": "ip/tdp11_reg_0_4/tdp11_reg_0_4.xci",
-        "inst_hier_path": "reg_5",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "reg",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk": {
-            "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "ASSOCIATED_RESET": {
-                "value": "rst",
-                "value_src": "constant"
-              }
-            }
-          },
-          "rst": {
-            "type": "rst",
-            "direction": "I"
-          },
-          "we": {
-            "direction": "I"
-          },
-          "we_m": {
-            "direction": "I"
-          },
-          "we_l": {
-            "direction": "I"
-          },
-          "input": {
-            "direction": "I",
-            "left": "15",
-            "right": "0"
-          },
-          "output": {
-            "direction": "O",
-            "left": "15",
-            "right": "0"
-          }
-        }
-      },
-      "reg_7": {
-        "vlnv": "xilinx.com:module_ref:reg:1.0",
-        "xci_name": "tdp11_reg_0_5",
-        "xci_path": "ip/tdp11_reg_0_5/tdp11_reg_0_5.xci",
-        "inst_hier_path": "reg_7",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "reg",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk": {
-            "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "ASSOCIATED_RESET": {
-                "value": "rst",
-                "value_src": "constant"
-              }
-            }
-          },
-          "rst": {
-            "type": "rst",
-            "direction": "I"
-          },
-          "we": {
-            "direction": "I"
-          },
-          "we_m": {
-            "direction": "I"
-          },
-          "we_l": {
-            "direction": "I"
-          },
-          "input": {
-            "direction": "I",
-            "left": "15",
-            "right": "0"
-          },
-          "output": {
-            "direction": "O",
-            "left": "15",
-            "right": "0"
-          }
-        }
-      },
-      "reg_6": {
-        "vlnv": "xilinx.com:module_ref:reg:1.0",
-        "xci_name": "tdp11_reg_0_6",
-        "xci_path": "ip/tdp11_reg_0_6/tdp11_reg_0_6.xci",
-        "inst_hier_path": "reg_6",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "reg",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk": {
-            "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "ASSOCIATED_RESET": {
-                "value": "rst",
-                "value_src": "constant"
-              }
-            }
-          },
-          "rst": {
-            "type": "rst",
-            "direction": "I"
-          },
-          "we": {
-            "direction": "I"
-          },
-          "we_m": {
-            "direction": "I"
-          },
-          "we_l": {
-            "direction": "I"
-          },
-          "input": {
-            "direction": "I",
-            "left": "15",
-            "right": "0"
-          },
-          "output": {
-            "direction": "O",
-            "left": "15",
-            "right": "0"
-          }
-        }
-      },
-      "reg_2": {
-        "vlnv": "xilinx.com:module_ref:reg:1.0",
-        "xci_name": "tdp11_reg_0_7",
-        "xci_path": "ip/tdp11_reg_0_7/tdp11_reg_0_7.xci",
-        "inst_hier_path": "reg_2",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "reg",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk": {
-            "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "ASSOCIATED_RESET": {
-                "value": "rst",
-                "value_src": "constant"
-              }
-            }
-          },
-          "rst": {
-            "type": "rst",
-            "direction": "I"
-          },
-          "we": {
-            "direction": "I"
-          },
-          "we_m": {
-            "direction": "I"
-          },
-          "we_l": {
-            "direction": "I"
-          },
-          "input": {
-            "direction": "I",
-            "left": "15",
-            "right": "0"
-          },
-          "output": {
-            "direction": "O",
-            "left": "15",
-            "right": "0"
-          }
-        }
-      },
       "lhs": {
         "vlnv": "xilinx.com:module_ref:alu_bus:1.0",
         "xci_name": "tdp11_alu_bus_0_0",
@@ -607,79 +239,6 @@
           "output": {
             "direction": "O",
             "left": "15",
-            "right": "0"
-          }
-        }
-      },
-      "sp_0": {
-        "vlnv": "xilinx.com:module_ref:sp:1.0",
-        "xci_name": "tdp11_sp_0_0",
-        "xci_path": "ip/tdp11_sp_0_0/tdp11_sp_0_0.xci",
-        "inst_hier_path": "sp_0",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "sp",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk": {
-            "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "ASSOCIATED_RESET": {
-                "value": "rst",
-                "value_src": "constant"
-              }
-            }
-          },
-          "rst": {
-            "type": "rst",
-            "direction": "I"
-          },
-          "inc": {
-            "direction": "I"
-          },
-          "decr": {
-            "direction": "I"
-          },
-          "output": {
-            "direction": "O",
-            "left": "15",
-            "right": "0"
-          }
-        }
-      },
-      "memory": {
-        "vlnv": "xilinx.com:module_ref:memory:1.0",
-        "xci_name": "tdp11_memory_0_0",
-        "xci_path": "ip/tdp11_memory_0_0/tdp11_memory_0_0.xci",
-        "inst_hier_path": "memory",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "memory",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk": {
-            "type": "clk",
-            "direction": "I"
-          },
-          "we": {
-            "direction": "I"
-          },
-          "addr": {
-            "direction": "I",
-            "left": "15",
-            "right": "0"
-          },
-          "data": {
-            "direction": "I",
-            "left": "7",
-            "right": "0"
-          },
-          "output": {
-            "direction": "O",
-            "left": "7",
             "right": "0"
           }
         }
@@ -1089,6 +648,412 @@
           }
         }
       },
+      "sp_0": {
+        "vlnv": "xilinx.com:module_ref:sp:1.0",
+        "xci_name": "tdp11_sp_0_0",
+        "xci_path": "ip/tdp11_sp_0_0/tdp11_sp_0_0.xci",
+        "inst_hier_path": "sp_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "sp",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "rst",
+                "value_src": "constant"
+              }
+            }
+          },
+          "rst": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "inc": {
+            "direction": "I"
+          },
+          "decr": {
+            "direction": "I"
+          },
+          "output": {
+            "direction": "O",
+            "left": "15",
+            "right": "0"
+          }
+        }
+      },
+      "reg_3": {
+        "vlnv": "xilinx.com:module_ref:reg:1.0",
+        "xci_name": "tdp11_reg_0_0",
+        "xci_path": "ip/tdp11_reg_0_0/tdp11_reg_0_0.xci",
+        "inst_hier_path": "reg_3",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "reg",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "rst",
+                "value_src": "constant"
+              }
+            }
+          },
+          "rst": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "we": {
+            "direction": "I"
+          },
+          "we_m": {
+            "direction": "I"
+          },
+          "we_l": {
+            "direction": "I"
+          },
+          "input": {
+            "direction": "I",
+            "left": "15",
+            "right": "0"
+          },
+          "output": {
+            "direction": "O",
+            "left": "15",
+            "right": "0"
+          }
+        }
+      },
+      "reg_4": {
+        "vlnv": "xilinx.com:module_ref:reg:1.0",
+        "xci_name": "tdp11_reg_0_1",
+        "xci_path": "ip/tdp11_reg_0_1/tdp11_reg_0_1.xci",
+        "inst_hier_path": "reg_4",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "reg",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "rst",
+                "value_src": "constant"
+              }
+            }
+          },
+          "rst": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "we": {
+            "direction": "I"
+          },
+          "we_m": {
+            "direction": "I"
+          },
+          "we_l": {
+            "direction": "I"
+          },
+          "input": {
+            "direction": "I",
+            "left": "15",
+            "right": "0"
+          },
+          "output": {
+            "direction": "O",
+            "left": "15",
+            "right": "0"
+          }
+        }
+      },
+      "reg_0": {
+        "vlnv": "xilinx.com:module_ref:reg:1.0",
+        "xci_name": "tdp11_reg_0_2",
+        "xci_path": "ip/tdp11_reg_0_2/tdp11_reg_0_2.xci",
+        "inst_hier_path": "reg_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "reg",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "rst",
+                "value_src": "constant"
+              }
+            }
+          },
+          "rst": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "we": {
+            "direction": "I"
+          },
+          "we_m": {
+            "direction": "I"
+          },
+          "we_l": {
+            "direction": "I"
+          },
+          "input": {
+            "direction": "I",
+            "left": "15",
+            "right": "0"
+          },
+          "output": {
+            "direction": "O",
+            "left": "15",
+            "right": "0"
+          }
+        }
+      },
+      "reg_1": {
+        "vlnv": "xilinx.com:module_ref:reg:1.0",
+        "xci_name": "tdp11_reg_0_3",
+        "xci_path": "ip/tdp11_reg_0_3/tdp11_reg_0_3.xci",
+        "inst_hier_path": "reg_1",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "reg",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "rst",
+                "value_src": "constant"
+              }
+            }
+          },
+          "rst": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "we": {
+            "direction": "I"
+          },
+          "we_m": {
+            "direction": "I"
+          },
+          "we_l": {
+            "direction": "I"
+          },
+          "input": {
+            "direction": "I",
+            "left": "15",
+            "right": "0"
+          },
+          "output": {
+            "direction": "O",
+            "left": "15",
+            "right": "0"
+          }
+        }
+      },
+      "reg_5": {
+        "vlnv": "xilinx.com:module_ref:reg:1.0",
+        "xci_name": "tdp11_reg_0_4",
+        "xci_path": "ip/tdp11_reg_0_4/tdp11_reg_0_4.xci",
+        "inst_hier_path": "reg_5",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "reg",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "rst",
+                "value_src": "constant"
+              }
+            }
+          },
+          "rst": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "we": {
+            "direction": "I"
+          },
+          "we_m": {
+            "direction": "I"
+          },
+          "we_l": {
+            "direction": "I"
+          },
+          "input": {
+            "direction": "I",
+            "left": "15",
+            "right": "0"
+          },
+          "output": {
+            "direction": "O",
+            "left": "15",
+            "right": "0"
+          }
+        }
+      },
+      "reg_7": {
+        "vlnv": "xilinx.com:module_ref:reg:1.0",
+        "xci_name": "tdp11_reg_0_5",
+        "xci_path": "ip/tdp11_reg_0_5/tdp11_reg_0_5.xci",
+        "inst_hier_path": "reg_7",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "reg",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "rst",
+                "value_src": "constant"
+              }
+            }
+          },
+          "rst": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "we": {
+            "direction": "I"
+          },
+          "we_m": {
+            "direction": "I"
+          },
+          "we_l": {
+            "direction": "I"
+          },
+          "input": {
+            "direction": "I",
+            "left": "15",
+            "right": "0"
+          },
+          "output": {
+            "direction": "O",
+            "left": "15",
+            "right": "0"
+          }
+        }
+      },
+      "reg_6": {
+        "vlnv": "xilinx.com:module_ref:reg:1.0",
+        "xci_name": "tdp11_reg_0_6",
+        "xci_path": "ip/tdp11_reg_0_6/tdp11_reg_0_6.xci",
+        "inst_hier_path": "reg_6",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "reg",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "rst",
+                "value_src": "constant"
+              }
+            }
+          },
+          "rst": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "we": {
+            "direction": "I"
+          },
+          "we_m": {
+            "direction": "I"
+          },
+          "we_l": {
+            "direction": "I"
+          },
+          "input": {
+            "direction": "I",
+            "left": "15",
+            "right": "0"
+          },
+          "output": {
+            "direction": "O",
+            "left": "15",
+            "right": "0"
+          }
+        }
+      },
+      "reg_2": {
+        "vlnv": "xilinx.com:module_ref:reg:1.0",
+        "xci_name": "tdp11_reg_0_7",
+        "xci_path": "ip/tdp11_reg_0_7/tdp11_reg_0_7.xci",
+        "inst_hier_path": "reg_2",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "reg",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "rst",
+                "value_src": "constant"
+              }
+            }
+          },
+          "rst": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "we": {
+            "direction": "I"
+          },
+          "we_m": {
+            "direction": "I"
+          },
+          "we_l": {
+            "direction": "I"
+          },
+          "input": {
+            "direction": "I",
+            "left": "15",
+            "right": "0"
+          },
+          "output": {
+            "direction": "O",
+            "left": "15",
+            "right": "0"
+          }
+        }
+      },
       "control": {
         "vlnv": "xilinx.com:module_ref:control:1.0",
         "xci_name": "tdp11_control_0_0",
@@ -1225,15 +1190,50 @@
             "right": "0"
           }
         }
+      },
+      "memory": {
+        "vlnv": "xilinx.com:module_ref:memory:1.0",
+        "xci_name": "tdp11_memory_0_0",
+        "xci_path": "ip/tdp11_memory_0_0/tdp11_memory_0_0.xci",
+        "inst_hier_path": "memory",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "memory",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I"
+          },
+          "we": {
+            "direction": "I"
+          },
+          "addr": {
+            "direction": "I",
+            "left": "15",
+            "right": "0"
+          },
+          "data": {
+            "direction": "I",
+            "left": "7",
+            "right": "0"
+          },
+          "output": {
+            "direction": "O",
+            "left": "7",
+            "right": "0"
+          }
+        }
       }
     },
     "nets": {
       "address_bus_0_output": {
         "ports": [
           "address_bus/output",
-          "memory/addr",
           "address_bus_debug",
-          "pc_0/input"
+          "pc_0/input",
+          "memory/addr"
         ]
       },
       "alu_0_output": {
@@ -1270,24 +1270,24 @@
       "clk_clk_out1": {
         "ports": [
           "clock",
-          "memory/clk",
-          "sp_0/clk",
-          "reg_3/clk",
-          "reg_4/clk",
-          "reg_0/clk",
-          "reg_5/clk",
-          "reg_1/clk",
-          "reg_6/clk",
-          "reg_2/clk",
           "lhs/clk",
-          "reg_7/clk",
           "rhs/clk",
           "main_bus/clk",
           "alu/clk",
           "address_bus/clk",
           "we_registers_0/clk",
           "pc_0/clk",
-          "control/clk"
+          "sp_0/clk",
+          "reg_3/clk",
+          "reg_4/clk",
+          "reg_0/clk",
+          "reg_1/clk",
+          "reg_5/clk",
+          "reg_7/clk",
+          "reg_6/clk",
+          "reg_2/clk",
+          "control/clk",
+          "memory/clk"
         ]
       },
       "control_addr_control_sel": {
@@ -1432,16 +1432,16 @@
       "main_bus_0_output": {
         "ports": [
           "main_bus/output",
-          "reg_2/input",
-          "reg_6/input",
-          "reg_7/input",
-          "reg_5/input",
-          "reg_1/input",
-          "reg_0/input",
-          "reg_4/input",
-          "reg_3/input",
           "slice/Din",
-          "main_bus_debug"
+          "main_bus_debug",
+          "reg_3/input",
+          "reg_4/input",
+          "reg_0/input",
+          "reg_1/input",
+          "reg_5/input",
+          "reg_7/input",
+          "reg_6/input",
+          "reg_2/input"
         ]
       },
       "memory_0_output": {
@@ -1548,16 +1548,16 @@
       "rst_1": {
         "ports": [
           "rst",
+          "pc_0/rst",
+          "sp_0/rst",
+          "reg_3/rst",
           "reg_4/rst",
           "reg_0/rst",
+          "reg_1/rst",
           "reg_5/rst",
           "reg_7/rst",
           "reg_6/rst",
           "reg_2/rst",
-          "reg_1/rst",
-          "reg_3/rst",
-          "sp_0/rst",
-          "pc_0/rst",
           "control/rst"
         ]
       },

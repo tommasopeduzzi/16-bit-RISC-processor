@@ -1,10 +1,10 @@
 // Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2022.1 (lin64) Build 3526262 Mon Apr 18 15:47:01 MDT 2022
-// Date        : Mon Aug 15 20:54:10 2022
+// Date        : Sun Aug 28 19:58:28 2022
 // Host        : framework running 64-bit unknown
-// Command     : write_verilog -force -mode synth_stub
-//               /home/tommasopeduzzi/Documents/16-bit-RISC-processor/fpga/tdp11.gen/sources_1/bd/tdp11/ip/tdp11_reg_0_2/tdp11_reg_0_2_stub.v
+// Command     : write_verilog -force -mode synth_stub -rename_top tdp11_reg_0_2 -prefix
+//               tdp11_reg_0_2_ tdp11_reg_0_2_stub.v
 // Design      : tdp11_reg_0_2
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7a35tcpg236-1
