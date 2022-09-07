@@ -23,7 +23,6 @@ vcom -work xil_defaultlib -64 -93 \
 "../../../bd/tdp11/ip/tdp11_address_bus_0_0/sim/tdp11_address_bus_0_0.vhd" \
 "../../../bd/tdp11/ip/tdp11_we_registers_0_1/sim/tdp11_we_registers_0_1.vhd" \
 "../../../bd/tdp11/ip/tdp11_pc_0_0/sim/tdp11_pc_0_0.vhd" \
-"../../../bd/tdp11/ip/tdp11_control_0_0/sim/tdp11_control_0_0.vhd" \
 "../../../bd/tdp11/ip/tdp11_sp_0_0/sim/tdp11_sp_0_0.vhd" \
 "../../../bd/tdp11/ip/tdp11_reg_0_0/sim/tdp11_reg_0_0.vhd" \
 "../../../bd/tdp11/ip/tdp11_reg_0_1/sim/tdp11_reg_0_1.vhd" \
@@ -34,6 +33,7 @@ vcom -work xil_defaultlib -64 -93 \
 "../../../bd/tdp11/ip/tdp11_reg_0_6/sim/tdp11_reg_0_6.vhd" \
 "../../../bd/tdp11/ip/tdp11_reg_0_7/sim/tdp11_reg_0_7.vhd" \
 "../../../bd/tdp11/ip/tdp11_memory_0_0/sim/tdp11_memory_0_0.vhd" \
+"../../../bd/tdp11/ip/tdp11_control_0_0/sim/tdp11_control_0_0.vhd" \
 "../../../bd/tdp11/sim/tdp11.vhd" \
 
 vlog -work xil_defaultlib \

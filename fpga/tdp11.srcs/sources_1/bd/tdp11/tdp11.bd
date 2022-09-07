@@ -1,13 +1,14 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x317F88B74DF3E913",
+      "boundary_crc": "0xB205D45A2DDFF854",
       "device": "xc7a35tcpg236-1",
       "gen_directory": "../../../../tdp11.gen/sources_1/bd/tdp11",
       "name": "tdp11",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
       "synth_flow_mode": "Hierarchical",
-      "tool_version": "2022.1"
+      "tool_version": "2022.1",
+      "validated": "true"
     },
     "design_tree": {
       "lhs": "",
@@ -40,46 +41,6 @@
         "right": "0"
       },
       "address_bus_debug": {
-        "direction": "O",
-        "left": "15",
-        "right": "0"
-      },
-      "reg_0_debug": {
-        "direction": "O",
-        "left": "15",
-        "right": "0"
-      },
-      "reg_1_debug": {
-        "direction": "O",
-        "left": "15",
-        "right": "0"
-      },
-      "reg_2_debug": {
-        "direction": "O",
-        "left": "15",
-        "right": "0"
-      },
-      "reg_3_debug": {
-        "direction": "O",
-        "left": "15",
-        "right": "0"
-      },
-      "reg_4_debug": {
-        "direction": "O",
-        "left": "15",
-        "right": "0"
-      },
-      "reg_5_debug": {
-        "direction": "O",
-        "left": "15",
-        "right": "0"
-      },
-      "reg_6_debug": {
-        "direction": "O",
-        "left": "15",
-        "right": "0"
-      },
-      "reg_7_debug": {
         "direction": "O",
         "left": "15",
         "right": "0"
@@ -1465,8 +1426,7 @@
           "rhs/r0",
           "lhs/r0",
           "main_bus/r0",
-          "address_bus/r0",
-          "reg_0_debug"
+          "address_bus/r0"
         ]
       },
       "reg_1_output": {
@@ -1475,8 +1435,7 @@
           "rhs/r1",
           "lhs/r1",
           "main_bus/r1",
-          "address_bus/r1",
-          "reg_1_debug"
+          "address_bus/r1"
         ]
       },
       "reg_2_output": {
@@ -1485,8 +1444,7 @@
           "rhs/r2",
           "lhs/r2",
           "main_bus/r2",
-          "address_bus/r2",
-          "reg_2_debug"
+          "address_bus/r2"
         ]
       },
       "reg_3_output": {
@@ -1495,8 +1453,7 @@
           "rhs/r3",
           "lhs/r3",
           "main_bus/r3",
-          "address_bus/r3",
-          "reg_3_debug"
+          "address_bus/r3"
         ]
       },
       "reg_4_output": {
@@ -1505,8 +1462,7 @@
           "rhs/r4",
           "lhs/r4",
           "main_bus/r4",
-          "address_bus/r4",
-          "reg_4_debug"
+          "address_bus/r4"
         ]
       },
       "reg_5_output": {
@@ -1515,8 +1471,7 @@
           "rhs/r5",
           "lhs/r5",
           "main_bus/r5",
-          "address_bus/r5",
-          "reg_5_debug"
+          "address_bus/r5"
         ]
       },
       "reg_6_output": {
@@ -1525,8 +1480,7 @@
           "rhs/r6",
           "lhs/r6",
           "main_bus/r6",
-          "address_bus/r6",
-          "reg_6_debug"
+          "address_bus/r6"
         ]
       },
       "reg_7_output": {
@@ -1535,8 +1489,7 @@
           "rhs/r7",
           "lhs/r7",
           "main_bus/r7",
-          "address_bus/r7",
-          "reg_7_debug"
+          "address_bus/r7"
         ]
       },
       "rhs_output": {

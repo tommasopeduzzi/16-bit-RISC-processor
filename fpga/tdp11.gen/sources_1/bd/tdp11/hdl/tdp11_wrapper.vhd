@@ -1,7 +1,7 @@
 --Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2022.1 (lin64) Build 3526262 Mon Apr 18 15:47:01 MDT 2022
---Date        : Mon Aug 29 19:12:55 2022
+--Date        : Sun Sep  4 19:49:48 2022
 --Host        : framework running 64-bit unknown
 --Command     : generate_target tdp11_wrapper.bd
 --Design      : tdp11_wrapper
@@ -19,14 +19,6 @@ entity tdp11_wrapper is
     main_bus_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
     memory_debug : out STD_LOGIC_VECTOR ( 7 downto 0 );
     pc_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    reg_0_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    reg_1_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    reg_2_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    reg_3_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    reg_4_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    reg_5_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    reg_6_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    reg_7_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
     rst : in STD_LOGIC;
     sp_debug : out STD_LOGIC_VECTOR ( 15 downto 0 )
   );
@@ -38,14 +30,6 @@ architecture STRUCTURE of tdp11_wrapper is
     rst : in STD_LOGIC;
     main_bus_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
     address_bus_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    reg_0_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    reg_1_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    reg_2_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    reg_3_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    reg_4_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    reg_5_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    reg_6_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    reg_7_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
     pc_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
     sp_debug : out STD_LOGIC_VECTOR ( 15 downto 0 );
     memory_debug : out STD_LOGIC_VECTOR ( 7 downto 0 );
@@ -62,14 +46,6 @@ tdp11_i: component tdp11
       main_bus_debug(15 downto 0) => main_bus_debug(15 downto 0),
       memory_debug(7 downto 0) => memory_debug(7 downto 0),
       pc_debug(15 downto 0) => pc_debug(15 downto 0),
-      reg_0_debug(15 downto 0) => reg_0_debug(15 downto 0),
-      reg_1_debug(15 downto 0) => reg_1_debug(15 downto 0),
-      reg_2_debug(15 downto 0) => reg_2_debug(15 downto 0),
-      reg_3_debug(15 downto 0) => reg_3_debug(15 downto 0),
-      reg_4_debug(15 downto 0) => reg_4_debug(15 downto 0),
-      reg_5_debug(15 downto 0) => reg_5_debug(15 downto 0),
-      reg_6_debug(15 downto 0) => reg_6_debug(15 downto 0),
-      reg_7_debug(15 downto 0) => reg_7_debug(15 downto 0),
       rst => rst,
       sp_debug(15 downto 0) => sp_debug(15 downto 0)
     );
