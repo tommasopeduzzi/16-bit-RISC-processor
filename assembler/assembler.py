@@ -2,6 +2,8 @@ from cgitb import small
 from math import ceil
 from textwrap import wrap
 from typing import Dict, List
+
+from numpy import number
 from parser import Data, Instruction, Label, Macro, Operand, OperandType, Parser
 
 operand_types = {
@@ -29,6 +31,7 @@ class Assembler:
 
     def parse_instructions(self, instruction_files: List[str]):
         self.instruction_map = {}
+        number_of_instructions = 0
         for file in instruction_files:
             with open(file, "r") as f:
                 lines = f.readlines()
@@ -50,8 +53,8 @@ class Assembler:
                         except KeyError:
                             raise Exception(
                                 f"Unknown operand type '{part}' in '{line}'.")
-                    self.instruction_map[(mnemonic, tuple(operands))] = len(
-                        self.instruction_map) + 1
+                    number_of_instructions += 1
+                    self.instruction_map[(mnemonic, tuple(operands))] = number_of_instructions
 
     def codegen_macro(self, instruction):
         macro = self.macros[instruction.opcode]

@@ -35,7 +35,7 @@
             "name": "Generate VHDL Constants",
             "type": "python",
             "request": "launch",
-            "program": "./fpga/generate_vhdl_instruction_definitions.py",
+            "program": "./fpga/sources/generate_vhdl_instruction_definitions.py",
             "console": "integratedTerminal",
             "justMyCode": true,
             "args": [""],

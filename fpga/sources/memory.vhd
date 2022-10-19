@@ -45,8 +45,8 @@ BEGIN
             IF i_we = '1' THEN -- write
                 s_ram(to_integer(unsigned(i_addr))) <= to_bitvector(i_data);
             ELSE -- read
-                o_data <= to_stdlogicvector(s_ram(to_integer(unsigned(i_addr))));
-            END IF;
+        END IF;
         END IF;
     END PROCESS;
+    o_data <= to_stdlogicvector(s_ram(to_integer(unsigned(i_addr)))) WHEN (not i_we = '1') ELSE (OTHERS => 'X');
 END ARCHITECTURE_MEMORY;

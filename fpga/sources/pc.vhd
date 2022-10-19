@@ -36,12 +36,11 @@ BEGIN
             o_data <= (OTHERS => '0');
         ELSIF rising_edge(i_clk) THEN
             IF i_inc = '1' THEN
-                o_data <= STD_LOGIC_VECTOR(s_value + 1);
                 s_value <= s_value + 1;
             ELSIF i_load = '1' THEN
                 s_value <= unsigned(i_data);
-                o_data <= STD_LOGIC_VECTOR(s_value);
             END IF;
         END IF;
+    o_data <= std_logic_vector(s_value);
     END PROCESS;
 END ARCHITECTURE_PC;

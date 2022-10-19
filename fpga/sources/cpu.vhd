@@ -178,7 +178,7 @@ BEGIN
         pc_bus WHEN control_addr_pc_sel = '1' ELSE
         control_data WHEN control_addr_control_sel = '1' ELSE
         reg_bus(to_integer(unsigned(control_addr_reg_sel))) WHEN NOT control_addr_reg_sel = "XXX" ELSE
-        (15 DOWNTO 0 => '0');
+        (15 DOWNTO 0 => 'X');
 
     alu_rhs_bus <= reg_bus(to_integer(unsigned(control_alu_rhs_sel))) WHEN NOT control_alu_rhs_sel = "XXX" ELSE
         (15 DOWNTO 0 => '0');

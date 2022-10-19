@@ -72,8 +72,11 @@ ARCHITECTURE ARCHITECTURE_CONTROL OF CONTROL IS
     
     FUNCTION OP_TO_REG(op : IN STD_LOGIC_VECTOR(3 downto 0)) 
         RETURN STD_LOGIC_VECTOR IS
+        VARIABLE value: std_logic_vector(7 downto 0);
     BEGIN
-        RETURN (to_integer(unsigned(op)) => '1', OTHERS => '0');
+        value := (others => '0');
+        value(to_integer(unsigned(op))) := '1';
+        RETURN value;
     END FUNCTION;
 BEGIN
     PROCESS (i_clk, i_rst) BEGIN
@@ -103,7 +106,7 @@ BEGIN
             o_addr_pc_sel <= '0';
             o_addr_sp_sel <= '0';
             o_addr_control_sel <= '0';
-            o_addr_reg_sel <= (OTHERS => 'X');
+            o_addr_reg_sel <= (OTHERS => 'X');  
             o_alu_rhs_sel <= (OTHERS => 'X');
             o_alu_lhs_sel <= (OTHERS => 'X');
             o_data <= (OTHERS => '0');
@@ -134,10 +137,12 @@ BEGIN
                         o_pc_inc <= '1';
                     WHEN 2 => o_addr_pc_sel <= '1';
                         o_pc_inc <= '1';
+                        o_main_mem_sel <= '1';
+                        o_reg_we_l <= OP_TO_REG(s_op1);
                     WHEN 3 => o_addr_pc_sel <= '1';
                         o_pc_inc <= '1';
-                    WHEN 4 => o_main_control_sel <= '1';
-                        o_reg_we <= OP_TO_REG(s_op1);
+                        o_main_mem_sel <= '1';
+                        o_reg_we_m <= OP_TO_REG(s_op1);    
                     WHEN OTHERS =>
                 END CASE;
             END IF;
@@ -158,13 +163,11 @@ BEGIN
                 CASE s_step IS
                     WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
                         s_op2 <= i_memdata(3 DOWNTO 0);
-                    WHEN 2 => s_imm(7 DOWNTO 0) <= i_memdata;
-                    WHEN 3 => s_imm(15 DOWNTO 8) <= i_memdata;
                     WHEN OTHERS =>
                 END CASE;
             END IF;
+            -- increase s_step
+            s_step <= s_step + 1;
         END IF;
-        -- increase s_step
-        s_step <= s_step + 1;
     END PROCESS;
 END ARCHITECTURE_CONTROL;

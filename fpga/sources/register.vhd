@@ -33,10 +33,10 @@ BEGIN
         ELSIF rising_edge(i_clk) THEN
             IF i_we = '1' THEN
                 o_data <= i_data;
-            ELSIF i_we_m = '1' THEN
-                o_data(7 DOWNTO 0) <= i_data(7 DOWNTO 0);
             ELSIF i_we_l = '1' THEN
-                o_data(15 DOWNTO 8) <= i_data(15 DOWNTO 8);
+                o_data(7 DOWNTO 0) <= i_data(7 DOWNTO 0);
+            ELSIF i_we_m = '1' THEN
+                o_data(15 DOWNTO 8) <= i_data(7 DOWNTO 0);
             END IF;
         END IF;
     END PROCESS;
