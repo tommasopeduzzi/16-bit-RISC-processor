@@ -14,7 +14,7 @@ LIBRARY IEEE;
 LIBRARY work;
 
 USE IEEE.std_logic_1164.ALL;
-use ieee.numeric_std.all;
+USE ieee.numeric_std.ALL;
 USE work.instructions.ALL;
 
 ENTITY CONTROL IS
@@ -36,6 +36,7 @@ ENTITY CONTROL IS
         o_sp_decr : OUT STD_LOGIC; -- decrement SP
 
         o_alu_op : OUT STD_LOGIC_VECTOR(3 DOWNTO 0); -- ALU operation
+        o_alu_latch_result : OUT STD_LOGIC; -- ALU latch result 
 
         o_reg_we : OUT STD_LOGIC_VECTOR(7 DOWNTO 0); -- write enable registers
         o_reg_we_l : OUT STD_LOGIC_VECTOR(7 DOWNTO 0); -- write enable LSB registers
@@ -69,13 +70,13 @@ ARCHITECTURE ARCHITECTURE_CONTROL OF CONTROL IS
     SIGNAL s_op1 : STD_LOGIC_VECTOR(3 DOWNTO 0) := (OTHERS => '0');
     SIGNAL s_op2 : STD_LOGIC_VECTOR(3 DOWNTO 0) := (OTHERS => '0');
     SIGNAL s_imm : STD_LOGIC_VECTOR(15 DOWNTO 0) := (OTHERS => '0');
-    
-    FUNCTION OP_TO_REG(op : IN STD_LOGIC_VECTOR(3 downto 0)) 
+
+    FUNCTION OP_TO_REG(op : IN STD_LOGIC_VECTOR(3 DOWNTO 0))
         RETURN STD_LOGIC_VECTOR IS
-        VARIABLE value: std_logic_vector(7 downto 0);
+        VARIABLE value : STD_LOGIC_VECTOR(7 DOWNTO 0);
     BEGIN
-        value := (others => '0');
-        value(to_integer(unsigned(op))) := '1';
+        value := (OTHERS => '0');
+        value(to_integer(unsigned(op(2 downto 0)))) := '1';
         RETURN value;
     END FUNCTION;
 BEGIN
@@ -106,9 +107,10 @@ BEGIN
             o_addr_pc_sel <= '0';
             o_addr_sp_sel <= '0';
             o_addr_control_sel <= '0';
-            o_addr_reg_sel <= (OTHERS => 'X');  
+            o_addr_reg_sel <= (OTHERS => 'X');
             o_alu_rhs_sel <= (OTHERS => 'X');
             o_alu_lhs_sel <= (OTHERS => 'X');
+            o_alu_latch_result <= '0';
             o_data <= (OTHERS => '0');
 
             -- set appropriate control lines
@@ -119,17 +121,9 @@ BEGIN
                 END CASE;
             ELSIF s_opcode = nop THEN -- nop
                 CASE s_step IS
-                    WHEN 0 => o_addr_pc_sel <= '1';
+                    WHEN OTHERS => o_addr_pc_sel <= '1';
                         o_pc_inc <= '1';
-                    WHEN OTHERS =>
-                END CASE;
-            ELSIF s_opcode = load_reg_reg THEN -- load reg reg
-                CASE s_step IS
-                    WHEN 1 => o_addr_pc_sel <= '1';
-                        o_pc_inc <= '1';
-                    WHEN 2 => o_main_reg_sel <= s_op2(2 DOWNTO 0);
-                        o_reg_we <= OP_TO_REG(s_op1);
-                    WHEN OTHERS =>
+
                 END CASE;
             ELSIF s_opcode = loadimm_reg_imm THEN -- load-imm/load-addr reg imm
                 CASE s_step IS
@@ -142,32 +136,44 @@ BEGIN
                     WHEN 3 => o_addr_pc_sel <= '1';
                         o_pc_inc <= '1';
                         o_main_mem_sel <= '1';
-                        o_reg_we_m <= OP_TO_REG(s_op1);    
+                        o_reg_we_m <= OP_TO_REG(s_op1);
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = add_reg_reg THEN
+                CASE s_step IS
+                    WHEN 1 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 2 => o_alu_lhs_sel <= s_op1(2 downto 0);
+                        o_alu_rhs_sel <= s_op2(2 downto 0);
+                        o_alu_latch_result <= '1';
+                        o_alu_op <= "0000";
+                    WHEN 3 => o_main_alu_sel <= '1';
+                        o_reg_we <= OP_TO_REG(s_op1);
                     WHEN OTHERS =>
                 END CASE;
             END IF;
         ELSIF rising_edge(i_clk) THEN
             -- set internal signals
+            s_step <= s_step + 1;
             IF s_opcode = nop THEN
-                CASE s_step IS
-                    WHEN 0 => s_opcode <= i_memdata(5 DOWNTO 0);
-                    WHEN OTHERS =>
-                END CASE;
-            ELSIF s_opcode = load_reg_reg THEN
-                CASE s_step IS
-                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
-                        s_op2 <= i_memdata(3 DOWNTO 0);
-                    WHEN OTHERS =>
-                END CASE;
+                s_opcode <= i_memdata(5 DOWNTO 0);
+                s_step <= 1;
             ELSIF s_opcode = loadimm_reg_imm THEN
                 CASE s_step IS
                     WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
                         s_op2 <= i_memdata(3 DOWNTO 0);
+                    WHEN 3 => s_opcode <= "000000";
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = add_reg_reg THEN
+                CASE s_step IS
+                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
+                        s_op2 <= i_memdata(3 DOWNTO 0);
+                    WHEN 3 => s_opcode <= "000000";
                     WHEN OTHERS =>
                 END CASE;
             END IF;
             -- increase s_step
-            s_step <= s_step + 1;
         END IF;
     END PROCESS;
 END ARCHITECTURE_CONTROL;

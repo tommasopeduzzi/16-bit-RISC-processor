@@ -28,6 +28,7 @@ ARCHITECTURE architecture_cpu OF cpu IS
     SIGNAL control_sp_inc : STD_LOGIC;
     SIGNAL control_sp_decr : STD_LOGIC;
     SIGNAL control_alu_op : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    SIGNAL control_alu_latch_result : STD_LOGIC;
     SIGNAL control_reg_we : STD_LOGIC_VECTOR(7 DOWNTO 0);
     SIGNAL control_reg_we_l : STD_LOGIC_VECTOR(7 DOWNTO 0);
     SIGNAL control_reg_we_m : STD_LOGIC_VECTOR(7 DOWNTO 0);
@@ -74,6 +75,7 @@ ARCHITECTURE architecture_cpu OF cpu IS
             o_sp_decr : OUT STD_LOGIC; -- decrement SP
 
             o_alu_op : OUT STD_LOGIC_VECTOR(3 DOWNTO 0); -- ALU operation
+            o_alu_latch_result : OUT STD_LOGIC; -- ALU latch result 
 
             o_reg_we : OUT STD_LOGIC_VECTOR(7 DOWNTO 0); -- write enable registers
             o_reg_we_l : OUT STD_LOGIC_VECTOR(7 DOWNTO 0); -- write enable LSB registers
@@ -146,6 +148,7 @@ ARCHITECTURE architecture_cpu OF cpu IS
             i_rhs : IN STD_LOGIC_VECTOR(15 DOWNTO 0); -- left hand side operand
             i_lhs : IN STD_LOGIC_VECTOR(15 DOWNTO 0); -- right hand side operand
             i_op : IN STD_LOGIC_VECTOR(3 DOWNTO 0); -- operation
+            i_latch_result : IN STD_LOGIC; -- latch result
             o_result : OUT STD_LOGIC_VECTOR(15 DOWNTO 0); -- o_result
             o_z : OUT STD_LOGIC; -- o_z flag
             o_g : OUT STD_LOGIC; -- o_g flag
@@ -180,10 +183,11 @@ BEGIN
         reg_bus(to_integer(unsigned(control_addr_reg_sel))) WHEN NOT control_addr_reg_sel = "XXX" ELSE
         (15 DOWNTO 0 => 'X');
 
-    alu_rhs_bus <= reg_bus(to_integer(unsigned(control_alu_rhs_sel))) WHEN NOT control_alu_rhs_sel = "XXX" ELSE
-        (15 DOWNTO 0 => '0');
-    alu_lhs_bus <= reg_bus(to_integer(unsigned(control_alu_lhs_sel))) WHEN NOT control_alu_lhs_sel = "XXX" ELSE
-        (15 DOWNTO 0 => '0');
+    alu_rhs_bus <= (15 DOWNTO 0 => 'X') WHEN control_alu_rhs_sel = "XXX" ELSE
+        reg_bus(to_integer(unsigned(control_alu_rhs_sel)));
+    alu_lhs_bus <= (15 DOWNTO 0 => 'X') WHEN control_alu_lhs_sel = "XXX" ELSE
+        reg_bus(to_integer(unsigned(control_alu_lhs_sel)));
+        
     prog_counter : PC PORT MAP(
         i_clk => clk,
         i_rst => rst,
@@ -280,6 +284,7 @@ BEGIN
         i_rhs => alu_rhs_bus,
         i_lhs => alu_lhs_bus,
         i_op => control_alu_op,
+        i_latch_result => control_alu_latch_result,
         o_result => alu_bus,
         o_z => alu_flags_z,
         o_g => alu_flags_g,
@@ -309,6 +314,7 @@ BEGIN
         o_sp_inc => control_sp_inc,
         o_sp_decr => control_sp_decr,
         o_alu_op => control_alu_op,
+        o_alu_latch_result => control_alu_latch_result,
         o_reg_we => control_reg_we,
         o_reg_we_l => control_reg_we_l,
         o_reg_we_m => control_reg_we_m,
