@@ -125,6 +125,8 @@ class Assembler:
             else:
                 if not len(bits) % 8 == 0:
                     bits += "0" * (8 - len(bits) % 8)
+                if operand.value < 0:
+                    operand.value &= 0xFFFF
                 bits += "".join(wrap(bin(int(operand.value))
                                 [2:].zfill(16), 8)[::-1])
         self.binary += bytes([int(byte, 2) for byte in wrap(bits, 8)])

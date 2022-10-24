@@ -72,11 +72,11 @@ class Parser:
             return self.parse(f.read())
     
     def parse_immediate(self, value: str) -> int:
-        if value.startswith('0x'):
+        if re.match(r'-*0x[0-9a-fA-F]+', value):
             return int(value[2:], 16)
-        elif value.startswith('0b'):
+        elif re.match(r'-*0b[01]+', value):
             return int(value[2:], 2)
-        elif re.match(r'^[0-9]+$', value):
+        elif re.match(r'-*[0-9]+', value):
             return int(value)
         else:
             raise Exception("Invalid number: {}".format(value))
@@ -107,7 +107,8 @@ class Parser:
                 return Operand(OperandType.MACRO_ARGUMENT, self.parse_immediate(token.value[1:]))
             case TokenType.IMMEDIATE:
                 immediate = self.parse_immediate(token.value)
-                if immediate < 0 or immediate > 0xFFFF:
+                # check if number is in range of signed 16 bit integer
+                if immediate < -0x8000 or immediate > 0x7FFF:
                     raise Exception("Invalid immediate: {}".format(immediate))
                 return Operand(OperandType.IMMEDIATE, immediate)
 

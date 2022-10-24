@@ -1,5 +1,5 @@
 ; Test program for assembler
 
 load-imm $0 2
-load-imm $1 1
+load-imm $1 -1
 sub $0 $1

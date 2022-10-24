@@ -69,11 +69,11 @@ class Lexer:
                     self.tokens.append(Token(TokenType.LABEL, word))
                 elif re.match(r'[a-zA-Z]+', word):
                     self.tokens.append(Token(TokenType.WORD, word))
-                elif re.match(r'0x[0-9a-fA-F]+', word):
+                elif re.match(r'-*0x[0-9a-fA-F]+', word):
                     self.tokens.append(Token(TokenType.IMMEDIATE, word))
-                elif re.match(r'0b[01]+', word):
+                elif re.match(r'-*0b[01]+', word):
                     self.tokens.append(Token(TokenType.IMMEDIATE, word))
-                elif re.match(r'[0-9]+', word):
+                elif re.match(r'-*[0-9]+', word):
                     self.tokens.append(Token(TokenType.IMMEDIATE, word))
                 elif word.startswith('$'):
                     self.tokens.append(Token(TokenType.REGISTER, word))
