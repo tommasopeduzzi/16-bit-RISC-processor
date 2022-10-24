@@ -48,7 +48,6 @@ ARCHITECTURE architecture_cpu OF cpu IS
 
     SIGNAL alu_flags_c : STD_LOGIC;
     SIGNAL alu_flags_l : STD_LOGIC;
-    SIGNAL alu_flags_g : STD_LOGIC;
     SIGNAL alu_flags_z : STD_LOGIC;
 
     SIGNAL main_bus : STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -62,7 +61,6 @@ ARCHITECTURE architecture_cpu OF cpu IS
             i_rst : IN STD_LOGIC;
             i_memdata : IN STD_LOGIC_VECTOR(7 DOWNTO 0); -- i_memdata data from memory
             i_z : IN STD_LOGIC; -- i_z flag
-            i_g : IN STD_LOGIC; -- i_g flag
             i_l : IN STD_LOGIC; -- n flag
             i_c : IN STD_LOGIC; -- c flag
 
@@ -151,8 +149,7 @@ ARCHITECTURE architecture_cpu OF cpu IS
             i_latch_result : IN STD_LOGIC; -- latch result
             o_result : OUT STD_LOGIC_VECTOR(15 DOWNTO 0); -- o_result
             o_z : OUT STD_LOGIC; -- o_z flag
-            o_g : OUT STD_LOGIC; -- o_g flag
-            o_l : OUT STD_LOGIC; -- n flag
+            o_l : OUT STD_LOGIC; -- o_l flag
             o_c : OUT STD_LOGIC -- o_c flag
         );
     END COMPONENT;
@@ -287,7 +284,6 @@ BEGIN
         i_latch_result => control_alu_latch_result,
         o_result => alu_bus,
         o_z => alu_flags_z,
-        o_g => alu_flags_g,
         o_l => alu_flags_l,
         o_c => alu_flags_c
     );
@@ -305,9 +301,8 @@ BEGIN
         i_rst => rst,
         i_memdata => memdata_bus,
         i_z => alu_flags_z,
-        i_g => alu_flags_g,
-        i_l => alu_flags_g,
-        i_c => alu_flags_g,
+        i_l => alu_flags_l,
+        i_c => alu_flags_c,
         o_mem_we => control_mem_we,
         o_pc_inc => control_pc_inc,
         o_pc_load => control_pc_load,

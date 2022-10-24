@@ -24,8 +24,7 @@ ENTITY ALU IS
         i_latch_result : IN STD_LOGIC; -- latch result
         o_result : OUT STD_LOGIC_VECTOR(15 DOWNTO 0); -- o_result
         o_z : OUT STD_LOGIC; -- o_z flag
-        o_g : OUT STD_LOGIC; -- o_g flag
-        o_l : OUT STD_LOGIC; -- n flag
+        o_l : OUT STD_LOGIC; -- o_l flag
         o_c : OUT STD_LOGIC -- o_c flag
     );
 END ALU;
@@ -38,13 +37,12 @@ BEGIN
                 CASE i_op IS
                     WHEN "0000" => result <= STD_LOGIC_VECTOR(signed(i_lhs) + signed(i_rhs)); -- add
                     WHEN "0001" => result <= STD_LOGIC_VECTOR(signed(i_lhs) - signed(i_rhs)); -- subtract
-                    WHEN "0010" => result <= STD_LOGIC_VECTOR(signed(i_lhs) - signed(i_rhs)); -- compare 
-                    WHEN "0011" => result <= STD_LOGIC_VECTOR(i_lhs AND i_rhs); -- and
-                    WHEN "0100" => result <= STD_LOGIC_VECTOR(i_lhs OR i_rhs); -- or
-                    WHEN "0101" => result <= STD_LOGIC_VECTOR(i_lhs XOR i_rhs); -- xor
-                    WHEN "0110" => result <= i_lhs(14 DOWNTO 0) & '0'; -- shift left
-                    WHEN "0111" => result <= '0' & i_lhs(15 DOWNTO 1); -- shift right
-                    WHEN "1000" => result <= STD_LOGIC_VECTOR(NOT i_lhs); -- not
+                    WHEN "0010" => result <= STD_LOGIC_VECTOR(i_lhs AND i_rhs); -- and
+                    WHEN "0011" => result <= STD_LOGIC_VECTOR(i_lhs OR i_rhs); -- or
+                    WHEN "0100" => result <= STD_LOGIC_VECTOR(i_lhs XOR i_rhs); -- xor
+                    WHEN "0101" => result <= i_lhs(14 DOWNTO 0) & '0'; -- shift left
+                    WHEN "0110" => result <= '0' & i_lhs(15 DOWNTO 1); -- shift right
+                    WHEN "0111" => result <= STD_LOGIC_VECTOR(NOT i_lhs); -- not
                     WHEN OTHERS => result <= (OTHERS => 'X');
                 END CASE;
                 IF signed(result) > 2 ** 15 - 1 OR signed(result) <- 2 ** 15 - 1 THEN
@@ -56,11 +54,6 @@ BEGIN
                     o_z <= '1';
                 ELSE
                     o_z <= '0';
-                END IF;
-                IF signed(result) > 0 THEN
-                    o_g <= '1';
-                ELSE
-                    o_g <= '0';
                 END IF;
                 IF signed(result) < 0 THEN
                     o_l <= '1';

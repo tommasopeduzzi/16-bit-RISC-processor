@@ -23,7 +23,6 @@ ENTITY CONTROL IS
         i_rst : IN STD_LOGIC;
         i_memdata : IN STD_LOGIC_VECTOR(7 DOWNTO 0); -- i_memdata data from memory
         i_z : IN STD_LOGIC; -- i_z flag
-        i_g : IN STD_LOGIC; -- i_g flag
         i_l : IN STD_LOGIC; -- n flag
         i_c : IN STD_LOGIC; -- c flag
 
@@ -76,7 +75,7 @@ ARCHITECTURE ARCHITECTURE_CONTROL OF CONTROL IS
         VARIABLE value : STD_LOGIC_VECTOR(7 DOWNTO 0);
     BEGIN
         value := (OTHERS => '0');
-        value(to_integer(unsigned(op(2 downto 0)))) := '1';
+        value(to_integer(unsigned(op(2 DOWNTO 0)))) := '1';
         RETURN value;
     END FUNCTION;
 BEGIN
@@ -143,10 +142,22 @@ BEGIN
                 CASE s_step IS
                     WHEN 1 => o_addr_pc_sel <= '1';
                         o_pc_inc <= '1';
-                    WHEN 2 => o_alu_lhs_sel <= s_op1(2 downto 0);
-                        o_alu_rhs_sel <= s_op2(2 downto 0);
+                    WHEN 2 => o_alu_lhs_sel <= s_op1(2 DOWNTO 0);
+                        o_alu_rhs_sel <= s_op2(2 DOWNTO 0);
                         o_alu_latch_result <= '1';
                         o_alu_op <= "0000";
+                    WHEN 3 => o_main_alu_sel <= '1';
+                        o_reg_we <= OP_TO_REG(s_op1);
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = sub_reg_reg THEN
+                CASE s_step IS
+                    WHEN 1 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 2 => o_alu_lhs_sel <= s_op1(2 DOWNTO 0);
+                        o_alu_rhs_sel <= s_op2(2 DOWNTO 0);
+                        o_alu_latch_result <= '1';
+                        o_alu_op <= "0001";
                     WHEN 3 => o_main_alu_sel <= '1';
                         o_reg_we <= OP_TO_REG(s_op1);
                     WHEN OTHERS =>
@@ -166,6 +177,13 @@ BEGIN
                     WHEN OTHERS =>
                 END CASE;
             ELSIF s_opcode = add_reg_reg THEN
+                CASE s_step IS
+                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
+                        s_op2 <= i_memdata(3 DOWNTO 0);
+                    WHEN 3 => s_opcode <= "000000";
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = sub_reg_reg THEN
                 CASE s_step IS
                     WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
                         s_op2 <= i_memdata(3 DOWNTO 0);
