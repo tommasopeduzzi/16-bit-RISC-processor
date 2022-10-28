@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="470.211 ns"></ZoomStartTime>
-      <ZoomEndTime time="1,585.958 ns"></ZoomEndTime>
-      <Cursor1Time time="1,400.000 ns"></Cursor1Time>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,352.055 ns"></ZoomEndTime>
+      <Cursor1Time time="0.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="248"></NameColumnWidth>
-      <ValueColumnWidth column_width="84"></ValueColumnWidth>
+      <ValueColumnWidth column_width="80"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="17" />
+   <WVObjectSize size="14" />
    <wvobject type="logic" fp_name="/cpu/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -168,7 +168,6 @@
    <wvobject type="group" fp_name="group130">
       <obj_property name="label">ALU Buses</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject type="array" fp_name="/cpu/alu_rhs_bus">
          <obj_property name="DisplayName">label</obj_property>
          <obj_property name="ElementShortName">alu_rhs_bus[15:0]</obj_property>
@@ -182,24 +181,49 @@
          <obj_property name="label">LHS</obj_property>
       </wvobject>
    </wvobject>
-   <wvobject type="array" fp_name="/cpu/control_unit/s_opcode">
-      <obj_property name="ElementShortName">s_opcode[5:0]</obj_property>
-      <obj_property name="ObjectShortName">s_opcode[5:0]</obj_property>
+   <wvobject type="group" fp_name="group52">
+      <obj_property name="label">ALU Flags</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/cpu/algorithmic_logic_unit/o_z">
+         <obj_property name="ElementShortName">o_z</obj_property>
+         <obj_property name="ObjectShortName">o_z</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu/algorithmic_logic_unit/o_l">
+         <obj_property name="ElementShortName">o_l</obj_property>
+         <obj_property name="ObjectShortName">o_l</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu/algorithmic_logic_unit/o_c">
+         <obj_property name="ElementShortName">o_c</obj_property>
+         <obj_property name="ObjectShortName">o_c</obj_property>
+      </wvobject>
    </wvobject>
-   <wvobject type="array" fp_name="/cpu/control_unit/s_op1">
-      <obj_property name="ElementShortName">s_op1[3:0]</obj_property>
-      <obj_property name="ObjectShortName">s_op1[3:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/cpu/control_unit/s_op2">
-      <obj_property name="ElementShortName">s_op2[3:0]</obj_property>
-      <obj_property name="ObjectShortName">s_op2[3:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/cpu/control_unit/s_imm">
-      <obj_property name="ElementShortName">s_imm[15:0]</obj_property>
-      <obj_property name="ObjectShortName">s_imm[15:0]</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/cpu/control_unit/s_step">
-      <obj_property name="ElementShortName">s_step</obj_property>
-      <obj_property name="ObjectShortName">s_step</obj_property>
+   <wvobject type="group" fp_name="group54">
+      <obj_property name="label">Control unit</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="group" fp_name="group53">
+         <obj_property name="label">Control unit current signals</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject type="array" fp_name="/cpu/control_unit/s_op1">
+            <obj_property name="ElementShortName">s_op1[3:0]</obj_property>
+            <obj_property name="ObjectShortName">s_op1[3:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cpu/control_unit/s_op2">
+            <obj_property name="ElementShortName">s_op2[3:0]</obj_property>
+            <obj_property name="ObjectShortName">s_op2[3:0]</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cpu/control_unit/s_imm">
+            <obj_property name="ElementShortName">s_imm[15:0]</obj_property>
+            <obj_property name="ObjectShortName">s_imm[15:0]</obj_property>
+         </wvobject>
+         <wvobject type="other" fp_name="/cpu/control_unit/s_step">
+            <obj_property name="ElementShortName">s_step</obj_property>
+            <obj_property name="ObjectShortName">s_step</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cpu/control_unit/s_opcode">
+            <obj_property name="ElementShortName">s_opcode[5:0]</obj_property>
+            <obj_property name="ObjectShortName">s_opcode[5:0]</obj_property>
+         </wvobject>
+      </wvobject>
    </wvobject>
 </wave_config>
