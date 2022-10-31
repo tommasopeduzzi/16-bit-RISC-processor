@@ -37,8 +37,7 @@ BEGIN
         '0';
     o_l <= '1' WHEN signed(result) < 0 ELSE
         '0';
-    o_result <= result WHEN i_latch_result = '1' ELSE
-        (OTHERS => '0');
+    o_result <= result;
 
     PROCESS (i_clk) BEGIN
         IF rising_edge(i_clk) and i_latch_result = '1' THEN
