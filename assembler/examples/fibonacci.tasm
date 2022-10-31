@@ -1,0 +1,9 @@
+; Test program for assembler
+
+load-imm $0 1
+load-imm $1 1
+
+loop: 
+add $0 $1
+add $1 $0
+jump @loop
