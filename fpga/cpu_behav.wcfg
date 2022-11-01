@@ -3,227 +3,317 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="cpu_behav.wdb" id="1">
+      <db_ref path="cpu_testbench_behav.wdb" id="1">
          <top_modules>
-            <top_module name="cpu" />
+            <top_module name="cpu_testbench" />
             <top_module name="instructions" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0.000 ns"></ZoomStartTime>
-      <ZoomEndTime time="1,352.055 ns"></ZoomEndTime>
+      <ZoomEndTime time="1,644.919 ns"></ZoomEndTime>
       <Cursor1Time time="0.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="248"></NameColumnWidth>
-      <ValueColumnWidth column_width="80"></ValueColumnWidth>
+      <ValueColumnWidth column_width="76"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="14" />
-   <wvobject type="logic" fp_name="/cpu/clk">
+   <WVObjectSize size="12" />
+   <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/cpu/rst">
+   <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/rst">
       <obj_property name="ElementShortName">rst</obj_property>
       <obj_property name="ObjectShortName">rst</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/cpu/main_bus">
+   <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/control_data">
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">main_bus[15:0]</obj_property>
-      <obj_property name="ObjectShortName">main_bus[15:0]</obj_property>
-      <obj_property name="label">Main Bus</obj_property>
+      <obj_property name="ElementShortName">control_data[15:0]</obj_property>
+      <obj_property name="ObjectShortName">control_data[15:0]</obj_property>
+      <obj_property name="label">Control Immediate</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/cpu/addr_bus">
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">addr_bus[15:0]</obj_property>
-      <obj_property name="ObjectShortName">addr_bus[15:0]</obj_property>
-      <obj_property name="label">Address Bus</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/cpu/pc_bus">
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">pc_bus[15:0]</obj_property>
-      <obj_property name="ObjectShortName">pc_bus[15:0]</obj_property>
-      <obj_property name="label">Program Counter</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/cpu/sp_bus">
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">sp_bus[15:0]</obj_property>
-      <obj_property name="ObjectShortName">sp_bus[15:0]</obj_property>
-      <obj_property name="label">Stack Pointer</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/cpu/reg_bus">
+   <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/reg_bus">
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="ElementShortName">reg_bus[0:7][15:0]</obj_property>
       <obj_property name="ObjectShortName">reg_bus[0:7][15:0]</obj_property>
       <obj_property name="label">Registers</obj_property>
       <obj_property name="isExpanded"></obj_property>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/reg_bus[0]">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">[0][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[0][15:0]</obj_property>
+         <obj_property name="label">Register 0</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/reg_bus[1]">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">[1][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[1][15:0]</obj_property>
+         <obj_property name="label">Register 1</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/reg_bus[2]">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">[2][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[2][15:0]</obj_property>
+         <obj_property name="label">Register 2</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/reg_bus[3]">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">[3][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[3][15:0]</obj_property>
+         <obj_property name="label">Register 3</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/reg_bus[4]">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">[4][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[4][15:0]</obj_property>
+         <obj_property name="label">Register 4</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/reg_bus[5]">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">[5][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[5][15:0]</obj_property>
+         <obj_property name="label">Register 5</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/reg_bus[6]">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">[6][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[6][15:0]</obj_property>
+         <obj_property name="label">Register 6</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/reg_bus[7]">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">[7][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[7][15:0]</obj_property>
+         <obj_property name="label">Register 7</obj_property>
+      </wvobject>
    </wvobject>
-   <wvobject type="array" fp_name="/cpu/control_data">
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">control_data[15:0]</obj_property>
-      <obj_property name="ObjectShortName">control_data[15:0]</obj_property>
-      <obj_property name="label">Control Data Bus</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/cpu/alu_bus">
+   <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/alu_bus">
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="ElementShortName">alu_bus[15:0]</obj_property>
       <obj_property name="ObjectShortName">alu_bus[15:0]</obj_property>
       <obj_property name="label">ALU Result</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/cpu/memdata_bus">
+   <wvobject type="group" fp_name="group64">
+      <obj_property name="label">ALU Flags</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">memdata_bus[7:0]</obj_property>
-      <obj_property name="ObjectShortName">memdata_bus[7:0]</obj_property>
-      <obj_property name="label">Memdata</obj_property>
-   </wvobject>
-   <wvobject type="group" fp_name="group55">
-      <obj_property name="label">Control Lines</obj_property>
-      <obj_property name="DisplayName">label</obj_property>
-      <wvobject type="logic" fp_name="/cpu/control_pc_inc">
-         <obj_property name="ElementShortName">control_pc_inc</obj_property>
-         <obj_property name="ObjectShortName">control_pc_inc</obj_property>
+      <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/alu_flags_c">
+         <obj_property name="ElementShortName">alu_flags_c</obj_property>
+         <obj_property name="ObjectShortName">alu_flags_c</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/cpu/control_mem_we">
-         <obj_property name="ElementShortName">control_mem_we</obj_property>
-         <obj_property name="ObjectShortName">control_mem_we</obj_property>
+      <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/alu_flags_l">
+         <obj_property name="ElementShortName">alu_flags_l</obj_property>
+         <obj_property name="ObjectShortName">alu_flags_l</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/cpu/control_pc_load">
-         <obj_property name="ElementShortName">control_pc_load</obj_property>
-         <obj_property name="ObjectShortName">control_pc_load</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/cpu/control_sp_inc">
-         <obj_property name="ElementShortName">control_sp_inc</obj_property>
-         <obj_property name="ObjectShortName">control_sp_inc</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/cpu/control_sp_decr">
-         <obj_property name="ElementShortName">control_sp_decr</obj_property>
-         <obj_property name="ObjectShortName">control_sp_decr</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/cpu/control_alu_op">
-         <obj_property name="ElementShortName">control_alu_op[3:0]</obj_property>
-         <obj_property name="ObjectShortName">control_alu_op[3:0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/cpu/control_reg_we">
-         <obj_property name="ElementShortName">control_reg_we[7:0]</obj_property>
-         <obj_property name="ObjectShortName">control_reg_we[7:0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/cpu/control_reg_we_l">
-         <obj_property name="ElementShortName">control_reg_we_l[7:0]</obj_property>
-         <obj_property name="ObjectShortName">control_reg_we_l[7:0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/cpu/control_reg_we_m">
-         <obj_property name="ElementShortName">control_reg_we_m[7:0]</obj_property>
-         <obj_property name="ObjectShortName">control_reg_we_m[7:0]</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/cpu/control_main_alu_sel">
-         <obj_property name="ElementShortName">control_main_alu_sel</obj_property>
-         <obj_property name="ObjectShortName">control_main_alu_sel</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/cpu/control_main_mem_sel">
-         <obj_property name="ElementShortName">control_main_mem_sel</obj_property>
-         <obj_property name="ObjectShortName">control_main_mem_sel</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/cpu/control_main_control_sel">
-         <obj_property name="ElementShortName">control_main_control_sel</obj_property>
-         <obj_property name="ObjectShortName">control_main_control_sel</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/cpu/control_main_reg_sel">
-         <obj_property name="ElementShortName">control_main_reg_sel[2:0]</obj_property>
-         <obj_property name="ObjectShortName">control_main_reg_sel[2:0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/cpu/control_main_reg_l_sel">
-         <obj_property name="ElementShortName">control_main_reg_l_sel[2:0]</obj_property>
-         <obj_property name="ObjectShortName">control_main_reg_l_sel[2:0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/cpu/control_main_reg_m_sel">
-         <obj_property name="ElementShortName">control_main_reg_m_sel[2:0]</obj_property>
-         <obj_property name="ObjectShortName">control_main_reg_m_sel[2:0]</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/cpu/control_addr_pc_sel">
-         <obj_property name="ElementShortName">control_addr_pc_sel</obj_property>
-         <obj_property name="ObjectShortName">control_addr_pc_sel</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/cpu/control_addr_sp_sel">
-         <obj_property name="ElementShortName">control_addr_sp_sel</obj_property>
-         <obj_property name="ObjectShortName">control_addr_sp_sel</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/cpu/control_addr_reg_sel">
-         <obj_property name="ElementShortName">control_addr_reg_sel[2:0]</obj_property>
-         <obj_property name="ObjectShortName">control_addr_reg_sel[2:0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/cpu/control_alu_rhs_sel">
-         <obj_property name="ElementShortName">control_alu_rhs_sel[2:0]</obj_property>
-         <obj_property name="ObjectShortName">control_alu_rhs_sel[2:0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/cpu/control_alu_lhs_sel">
-         <obj_property name="ElementShortName">control_alu_lhs_sel[2:0]</obj_property>
-         <obj_property name="ObjectShortName">control_alu_lhs_sel[2:0]</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/cpu/control_alu_latch_result">
-         <obj_property name="ElementShortName">control_alu_latch_result</obj_property>
-         <obj_property name="ObjectShortName">control_alu_latch_result</obj_property>
+      <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/alu_flags_z">
+         <obj_property name="ElementShortName">alu_flags_z</obj_property>
+         <obj_property name="ObjectShortName">alu_flags_z</obj_property>
       </wvobject>
    </wvobject>
-   <wvobject type="group" fp_name="group130">
-      <obj_property name="label">ALU Buses</obj_property>
+   <wvobject type="group" fp_name="group67">
+      <obj_property name="label">ALU Operands</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <wvobject type="array" fp_name="/cpu/alu_rhs_bus">
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/alu_rhs_bus">
          <obj_property name="DisplayName">label</obj_property>
          <obj_property name="ElementShortName">alu_rhs_bus[15:0]</obj_property>
          <obj_property name="ObjectShortName">alu_rhs_bus[15:0]</obj_property>
          <obj_property name="label">RHS</obj_property>
       </wvobject>
-      <wvobject type="array" fp_name="/cpu/alu_lhs_bus">
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/alu_lhs_bus">
          <obj_property name="DisplayName">label</obj_property>
          <obj_property name="ElementShortName">alu_lhs_bus[15:0]</obj_property>
          <obj_property name="ObjectShortName">alu_lhs_bus[15:0]</obj_property>
          <obj_property name="label">LHS</obj_property>
       </wvobject>
    </wvobject>
-   <wvobject type="group" fp_name="group52">
-      <obj_property name="label">ALU Flags</obj_property>
+   <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/memdata_bus">
       <obj_property name="DisplayName">label</obj_property>
-      <wvobject type="logic" fp_name="/cpu/algorithmic_logic_unit/o_z">
-         <obj_property name="ElementShortName">o_z</obj_property>
-         <obj_property name="ObjectShortName">o_z</obj_property>
+      <obj_property name="ElementShortName">memdata_bus[7:0]</obj_property>
+      <obj_property name="ObjectShortName">memdata_bus[7:0]</obj_property>
+      <obj_property name="label">Memdata</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/addr_bus">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">addr_bus[15:0]</obj_property>
+      <obj_property name="ObjectShortName">addr_bus[15:0]</obj_property>
+      <obj_property name="label">Address Bus</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/main_bus">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">main_bus[15:0]</obj_property>
+      <obj_property name="ObjectShortName">main_bus[15:0]</obj_property>
+      <obj_property name="label">Main Bus</obj_property>
+   </wvobject>
+   <wvobject type="group" fp_name="group72">
+      <obj_property name="label">Control lines</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/control_mem_we">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_mem_we</obj_property>
+         <obj_property name="ObjectShortName">control_mem_we</obj_property>
+         <obj_property name="label">Memory WE</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/cpu/algorithmic_logic_unit/o_l">
-         <obj_property name="ElementShortName">o_l</obj_property>
-         <obj_property name="ObjectShortName">o_l</obj_property>
+      <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/control_pc_inc">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_pc_inc</obj_property>
+         <obj_property name="ObjectShortName">control_pc_inc</obj_property>
+         <obj_property name="label">PC Increment</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/cpu/algorithmic_logic_unit/o_c">
-         <obj_property name="ElementShortName">o_c</obj_property>
-         <obj_property name="ObjectShortName">o_c</obj_property>
+      <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/control_pc_load">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_pc_load</obj_property>
+         <obj_property name="ObjectShortName">control_pc_load</obj_property>
+         <obj_property name="label">PC Paralell load</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/control_sp_inc">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_sp_inc</obj_property>
+         <obj_property name="ObjectShortName">control_sp_inc</obj_property>
+         <obj_property name="label">SP Increment</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/control_sp_decr">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_sp_decr</obj_property>
+         <obj_property name="ObjectShortName">control_sp_decr</obj_property>
+         <obj_property name="label">SP Decrement</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/control_alu_op">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_alu_op[3:0]</obj_property>
+         <obj_property name="ObjectShortName">control_alu_op[3:0]</obj_property>
+         <obj_property name="label">ALU Operation</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/control_alu_latch_result">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_alu_latch_result</obj_property>
+         <obj_property name="ObjectShortName">control_alu_latch_result</obj_property>
+         <obj_property name="label">ALU Latch Result</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/control_reg_we">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_reg_we[7:0]</obj_property>
+         <obj_property name="ObjectShortName">control_reg_we[7:0]</obj_property>
+         <obj_property name="label">Registers WE</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/control_reg_we_l">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_reg_we_l[7:0]</obj_property>
+         <obj_property name="ObjectShortName">control_reg_we_l[7:0]</obj_property>
+         <obj_property name="label">Registers LSB WE</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/control_reg_we_m">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_reg_we_m[7:0]</obj_property>
+         <obj_property name="ObjectShortName">control_reg_we_m[7:0]</obj_property>
+         <obj_property name="label">Registers MSB WE</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/control_main_alu_sel">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_main_alu_sel</obj_property>
+         <obj_property name="ObjectShortName">control_main_alu_sel</obj_property>
+         <obj_property name="label">Main Bus ALU Select</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/control_main_mem_sel">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_main_mem_sel</obj_property>
+         <obj_property name="ObjectShortName">control_main_mem_sel</obj_property>
+         <obj_property name="label">Main Bus Memory Select</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/control_main_control_sel">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_main_control_sel</obj_property>
+         <obj_property name="ObjectShortName">control_main_control_sel</obj_property>
+         <obj_property name="label">Main Bus Immediate Select</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/control_main_reg_sel">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_main_reg_sel[2:0]</obj_property>
+         <obj_property name="ObjectShortName">control_main_reg_sel[2:0]</obj_property>
+         <obj_property name="label">Main Bus Register Select</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/control_main_reg_l_sel">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_main_reg_l_sel[2:0]</obj_property>
+         <obj_property name="ObjectShortName">control_main_reg_l_sel[2:0]</obj_property>
+         <obj_property name="label">Main Bus Register LSB Select</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/control_main_reg_m_sel">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_main_reg_m_sel[2:0]</obj_property>
+         <obj_property name="ObjectShortName">control_main_reg_m_sel[2:0]</obj_property>
+         <obj_property name="label">Main Bus Register MSB Select</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/control_addr_pc_sel">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_addr_pc_sel</obj_property>
+         <obj_property name="ObjectShortName">control_addr_pc_sel</obj_property>
+         <obj_property name="label">Address Bus PC Select</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/control_addr_sp_sel">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_addr_sp_sel</obj_property>
+         <obj_property name="ObjectShortName">control_addr_sp_sel</obj_property>
+         <obj_property name="label">Address Bus SP Select</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/control_addr_reg_sel">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_addr_reg_sel[2:0]</obj_property>
+         <obj_property name="ObjectShortName">control_addr_reg_sel[2:0]</obj_property>
+         <obj_property name="label">Address Bus Register Select</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/control_addr_control_sel">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_addr_control_sel</obj_property>
+         <obj_property name="ObjectShortName">control_addr_control_sel</obj_property>
+         <obj_property name="label">Address Bus immediate Select</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/control_alu_rhs_sel">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_alu_rhs_sel[2:0]</obj_property>
+         <obj_property name="ObjectShortName">control_alu_rhs_sel[2:0]</obj_property>
+         <obj_property name="label">ALU RHS Select</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/control_alu_lhs_sel">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">control_alu_lhs_sel[2:0]</obj_property>
+         <obj_property name="ObjectShortName">control_alu_lhs_sel[2:0]</obj_property>
+         <obj_property name="label">ALU LHS Select</obj_property>
       </wvobject>
    </wvobject>
-   <wvobject type="group" fp_name="group54">
-      <obj_property name="label">Control unit</obj_property>
+   <wvobject type="group" fp_name="group146">
+      <obj_property name="label">Control Unit</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <wvobject type="group" fp_name="group53">
-         <obj_property name="label">Control unit current signals</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="other" fp_name="/cpu_testbench/central_processing_unit/control_unit/s_step">
          <obj_property name="DisplayName">label</obj_property>
-         <obj_property name="isExpanded"></obj_property>
-         <wvobject type="array" fp_name="/cpu/control_unit/s_op1">
-            <obj_property name="ElementShortName">s_op1[3:0]</obj_property>
-            <obj_property name="ObjectShortName">s_op1[3:0]</obj_property>
-         </wvobject>
-         <wvobject type="array" fp_name="/cpu/control_unit/s_op2">
-            <obj_property name="ElementShortName">s_op2[3:0]</obj_property>
-            <obj_property name="ObjectShortName">s_op2[3:0]</obj_property>
-         </wvobject>
-         <wvobject type="array" fp_name="/cpu/control_unit/s_imm">
-            <obj_property name="ElementShortName">s_imm[15:0]</obj_property>
-            <obj_property name="ObjectShortName">s_imm[15:0]</obj_property>
-         </wvobject>
-         <wvobject type="other" fp_name="/cpu/control_unit/s_step">
-            <obj_property name="ElementShortName">s_step</obj_property>
-            <obj_property name="ObjectShortName">s_step</obj_property>
-         </wvobject>
-         <wvobject type="array" fp_name="/cpu/control_unit/s_opcode">
-            <obj_property name="ElementShortName">s_opcode[5:0]</obj_property>
-            <obj_property name="ObjectShortName">s_opcode[5:0]</obj_property>
-         </wvobject>
+         <obj_property name="ElementShortName">s_step</obj_property>
+         <obj_property name="ObjectShortName">s_step</obj_property>
+         <obj_property name="label">Current step</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/control_unit/s_opcode">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">s_opcode[5:0]</obj_property>
+         <obj_property name="ObjectShortName">s_opcode[5:0]</obj_property>
+         <obj_property name="label">Current Opcode</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/control_unit/s_op1">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">s_op1[3:0]</obj_property>
+         <obj_property name="ObjectShortName">s_op1[3:0]</obj_property>
+         <obj_property name="label">OP1</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/control_unit/s_op2">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">s_op2[3:0]</obj_property>
+         <obj_property name="ObjectShortName">s_op2[3:0]</obj_property>
+         <obj_property name="label">OP2</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/control_unit/s_imm">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">s_imm[15:0]</obj_property>
+         <obj_property name="ObjectShortName">s_imm[15:0]</obj_property>
+         <obj_property name="label">Immediate</obj_property>
       </wvobject>
    </wvobject>
 </wave_config>
