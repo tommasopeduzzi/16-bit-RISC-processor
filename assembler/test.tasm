@@ -1,9 +1,9 @@
 ; Test program for assembler
 
-load-imm $1 0x7ffe
 load-imm $0 0x7fff
-cmp $0 $1
-jump== @continue
+load-imm $1 0x7fff
+sub $0 $1
+jumpc @continue
 load-imm $1 1
 jump @end
 continue:

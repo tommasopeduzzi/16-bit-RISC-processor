@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="525.720 ns"></ZoomStartTime>
-      <ZoomEndTime time="2,534.857 ns"></ZoomEndTime>
-      <Cursor1Time time="2,200.000 ns"></Cursor1Time>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="2,463.672 ns"></ZoomEndTime>
+      <Cursor1Time time="0.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="248"></NameColumnWidth>
-      <ValueColumnWidth column_width="72"></ValueColumnWidth>
+      <ValueColumnWidth column_width="68"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="12" />
+   <WVObjectSize size="14" />
    <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -85,6 +85,18 @@
       <obj_property name="ElementShortName">memdata_bus[7:0]</obj_property>
       <obj_property name="ObjectShortName">memdata_bus[7:0]</obj_property>
       <obj_property name="label">Memdata</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/pc_bus">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">pc_bus[15:0]</obj_property>
+      <obj_property name="ObjectShortName">pc_bus[15:0]</obj_property>
+      <obj_property name="label">PC</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/sp_bus">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">sp_bus[15:0]</obj_property>
+      <obj_property name="ObjectShortName">sp_bus[15:0]</obj_property>
+      <obj_property name="label">SP</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/addr_bus">
       <obj_property name="DisplayName">label</obj_property>
@@ -237,7 +249,6 @@
    <wvobject type="group" fp_name="group146">
       <obj_property name="label">Control Unit</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject type="other" fp_name="/cpu_testbench/central_processing_unit/control_unit/s_step">
          <obj_property name="DisplayName">label</obj_property>
          <obj_property name="ElementShortName">s_step</obj_property>
