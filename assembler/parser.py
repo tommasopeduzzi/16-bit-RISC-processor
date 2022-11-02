@@ -72,12 +72,16 @@ class Parser:
             return self.parse(f.read())
     
     def parse_immediate(self, value: str) -> int:
-        if re.match(r'-*0x[0-9a-fA-F]+', value):
-            return int(value[2:], 16)
-        elif re.match(r'-*0b[01]+', value):
-            return int(value[2:], 2)
-        elif re.match(r'-*[0-9]+', value):
-            return int(value)
+        coefficent = 1
+        if value.startswith("-"):
+            coefficent = -1
+            value = value[1:]
+        if re.match(r'0x[0-9a-fA-F]+', value):
+            return int(value[2:], 16) * coefficent
+        elif re.match(r'0b[01]+', value):
+            return int(value[2:], 2) * coefficent
+        elif re.match(r'[0-9]+', value):
+            return int(value) * coefficent
         else:
             raise Exception("Invalid number: {}".format(value))
 
