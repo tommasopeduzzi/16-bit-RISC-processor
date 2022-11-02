@@ -171,59 +171,91 @@ BEGIN
                         o_alu_op <= "0001";
                     WHEN OTHERS =>
                 END CASE;
-        ELSIF s_opcode = jump_addr THEN
-            CASE s_step IS
-                WHEN 1 => o_addr_pc_sel <= '1';
-                    o_pc_inc <= '1';
-                WHEN 2 => o_addr_pc_sel <= '1';
-                    o_pc_inc <= '1';
-                WHEN 3 => o_main_control_sel <= '1';
-                    o_pc_load <= '1';
-                WHEN OTHERS =>
-            END CASE;
+            ELSIF s_opcode = jump_addr THEN
+                CASE s_step IS
+                    WHEN 1 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 2 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 3 => o_main_control_sel <= '1';
+                        o_pc_load <= '1';
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = jumpeq_addr THEN
+                IF i_z = '1' THEN
+                    CASE s_step IS
+                        WHEN 1 => o_addr_pc_sel <= '1';
+                            o_pc_inc <= '1';
+                        WHEN 2 => o_addr_pc_sel <= '1';
+                            o_pc_inc <= '1';
+                        WHEN 3 => o_main_control_sel <= '1';
+                            o_pc_load <= '1';
+                        WHEN OTHERS =>
+                    END CASE;
+                ELSE
+                    CASE s_step IS
+                        WHEN 1 => o_pc_inc <= '1';
+                        WHEN 2 => o_pc_inc <= '1';
+                        WHEN OTHERS =>
+                    END CASE;
+                END IF;
+            END IF;
+        ELSIF rising_edge(i_clk) THEN
+            -- set internal signals
+            s_step <= s_step + 1;
+            IF s_opcode = nop THEN
+                s_opcode <= i_memdata(5 DOWNTO 0);
+                s_step <= 1;
+            ELSIF s_opcode = loadimm_reg_imm THEN
+                CASE s_step IS
+                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
+                        s_op2 <= i_memdata(3 DOWNTO 0);
+                    WHEN 3 => s_opcode <= "000000";
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = add_reg_reg THEN
+                CASE s_step IS
+                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
+                        s_op2 <= i_memdata(3 DOWNTO 0);
+                    WHEN 3 => s_opcode <= "000000";
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = sub_reg_reg THEN
+                CASE s_step IS
+                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
+                        s_op2 <= i_memdata(3 DOWNTO 0);
+                    WHEN 3 => s_opcode <= "000000";
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = cmp_reg_reg THEN
+                CASE s_step IS
+                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
+                        s_op2 <= i_memdata(3 DOWNTO 0);
+                    WHEN 2 => s_opcode <= "000000";
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = jump_addr THEN
+                CASE s_step IS
+                    WHEN 1 => o_data(7 DOWNTO 0) <= i_memdata;
+                    WHEN 2 => o_data(15 DOWNTO 8) <= i_memdata;
+                    WHEN 3 => s_opcode <= "000000";
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = jumpeq_addr THEN
+                IF i_z = '1' THEN
+                    CASE s_step IS
+                        WHEN 1 => o_data(7 DOWNTO 0) <= i_memdata;
+                        WHEN 2 => o_data(15 DOWNTO 8) <= i_memdata;
+                        WHEN 3 => s_opcode <= "000000";
+                        WHEN OTHERS =>
+                    END CASE;
+                ELSE
+                    CASE s_step IS
+                        WHEN 2 => s_opcode <= "000000";
+                        WHEN OTHERS =>
+                    END CASE;
+                END IF;
+            END IF;
         END IF;
-    ELSIF rising_edge(i_clk) THEN
-        -- set internal signals
-        s_step <= s_step + 1;
-        IF s_opcode = nop THEN
-            s_opcode <= i_memdata(5 DOWNTO 0);
-            s_step <= 1;
-        ELSIF s_opcode = loadimm_reg_imm THEN
-            CASE s_step IS
-                WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
-                    s_op2 <= i_memdata(3 DOWNTO 0);
-                WHEN 3 => s_opcode <= "000000";
-                WHEN OTHERS =>
-            END CASE;
-        ELSIF s_opcode = add_reg_reg THEN
-            CASE s_step IS
-                WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
-                    s_op2 <= i_memdata(3 DOWNTO 0);
-                WHEN 3 => s_opcode <= "000000";
-                WHEN OTHERS =>
-            END CASE;
-        ELSIF s_opcode = sub_reg_reg THEN
-            CASE s_step IS
-                WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
-                    s_op2 <= i_memdata(3 DOWNTO 0);
-                WHEN 3 => s_opcode <= "000000";
-                WHEN OTHERS =>
-            END CASE;
-        ELSIF s_opcode = cmp_reg_reg THEN
-            CASE s_step IS
-                WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
-                    s_op2 <= i_memdata(3 DOWNTO 0);
-                WHEN 2 => s_opcode <= "000000";
-                WHEN OTHERS =>
-            END CASE;
-        ELSIF s_opcode = jump_addr THEN
-            CASE s_step IS
-                WHEN 1 => o_data(7 DOWNTO 0) <= i_memdata;
-                WHEN 2 => o_data(15 DOWNTO 8) <= i_memdata;
-                WHEN 3 => s_opcode <= "000000";
-                WHEN OTHERS =>
-            END CASE;
-        END IF;
-    END IF;
-END PROCESS;
+    END PROCESS;
 END ARCHITECTURE_CONTROL;
