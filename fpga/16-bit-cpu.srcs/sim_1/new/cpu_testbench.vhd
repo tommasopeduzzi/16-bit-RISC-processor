@@ -18,7 +18,7 @@ architecture tb of cpu_testbench is
     signal clk : std_logic;
     signal rst : std_logic;
 
-    constant period : time := 100 ns; -- EDIT Put right period here
+    constant period : time := 100 ns;
     signal clock : std_logic := '1';
     signal TbSimEnded : std_logic := '0';
 
@@ -33,8 +33,7 @@ begin
 
     clk <= clock;
 
-    stimuli : process
-    begin
+    process begin
         rst <= '1';
         wait for 50 ns;
         rst <= '0';

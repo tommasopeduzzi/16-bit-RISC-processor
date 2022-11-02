@@ -29,30 +29,29 @@ ENTITY ALU IS
     );
 END ALU;
 ARCHITECTURE ARCHITECTURE_ALU OF ALU IS
-    SIGNAL result : STD_LOGIC_VECTOR (15 DOWNTO 0);
+    SIGNAL result : integer range -65355 to 65355 := 0;
 BEGIN
-    o_c <= '1' WHEN signed(result) > 2 ** 15 - 1 OR signed(result) <- 2 ** 15 - 1 ELSE
+    o_c <= '1' WHEN result > 2 ** 15 - 1 OR result <- 2 ** 15 - 1 ELSE
         '0';
-    o_z <= '1' WHEN signed(result) = 0 ELSE
+    o_z <= '1' WHEN result = 0 ELSE
         '0';
-    o_l <= '1' WHEN signed(result) < 0 ELSE
+    o_l <= '1' WHEN result < 0 ELSE
         '0';
-    o_result <= result;
+    o_result <= std_logic_vector(to_signed(result, 16));
 
     PROCESS (i_clk) BEGIN
         IF rising_edge(i_clk) and i_latch_result = '1' THEN
             CASE i_op IS
-                WHEN "0000" => result <= STD_LOGIC_VECTOR(signed(i_lhs) + signed(i_rhs)); -- add
-                WHEN "0001" => result <= STD_LOGIC_VECTOR(signed(i_lhs) - signed(i_rhs)); -- subtract
-                WHEN "0010" => result <= STD_LOGIC_VECTOR(i_lhs AND i_rhs); -- and
-                WHEN "0011" => result <= STD_LOGIC_VECTOR(i_lhs OR i_rhs); -- or
-                WHEN "0100" => result <= STD_LOGIC_VECTOR(i_lhs XOR i_rhs); -- xor
-                WHEN "0101" => result <= i_lhs(14 DOWNTO 0) & '0'; -- shift left
-                WHEN "0110" => result <= '0' & i_lhs(15 DOWNTO 1); -- shift right
-                WHEN "0111" => result <= STD_LOGIC_VECTOR(NOT i_lhs); -- not
-                WHEN OTHERS => result <= (OTHERS => 'X');
+                WHEN "0000" => result <= to_integer(signed(i_lhs)) + to_integer(signed(i_rhs)); -- add
+                WHEN "0001" => result <= to_integer(signed(i_lhs)) - to_integer(signed(i_rhs)); -- subtract
+                WHEN "0010" => result <= to_integer(signed(i_lhs AND i_rhs)); -- and
+                WHEN "0011" => result <= to_integer(signed(i_lhs OR i_rhs)); -- or
+                WHEN "0100" => result <= to_integer(signed(i_lhs XOR i_rhs)); -- xor
+                WHEN "0101" => result <= to_integer(signed(i_lhs(14 DOWNTO 0) & '0')); -- shift left
+                WHEN "0110" => result <= to_integer(signed('0' & i_lhs(15 DOWNTO 1))); -- shift right
+                WHEN "0111" => result <= to_integer(signed(NOT i_lhs)); -- not
+                WHEN OTHERS => result <= 0;
             END CASE;
         END IF;
     END PROCESS;
-    o_result <= result;
 END ARCHITECTURE_ALU;
