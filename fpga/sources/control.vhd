@@ -182,6 +182,28 @@ BEGIN
                         o_reg_we <= OP_TO_REG(s_op1);
                     WHEN OTHERS =>
                 END CASE;
+            ELSIF s_opcode = shiftl_reg THEN
+                CASE s_step IS
+                    WHEN 1 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 2 => o_alu_lhs_sel <= s_op1(2 DOWNTO 0);
+                        o_alu_latch_result <= '1';
+                        o_alu_op <= "0101";
+                    WHEN 3 => o_main_alu_sel <= '1';
+                        o_reg_we <= OP_TO_REG(s_op1);
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = shiftr_reg THEN
+                CASE s_step IS
+                    WHEN 1 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 2 => o_alu_lhs_sel <= s_op1(2 DOWNTO 0);
+                        o_alu_latch_result <= '1';
+                        o_alu_op <= "0110";
+                    WHEN 3 => o_main_alu_sel <= '1';
+                        o_reg_we <= OP_TO_REG(s_op1);
+                    WHEN OTHERS =>
+                END CASE;
             ELSIF s_opcode = jump_addr THEN
                 CASE s_step IS
                     WHEN 1 => o_addr_pc_sel <= '1';
@@ -300,6 +322,20 @@ BEGIN
                     WHEN OTHERS =>
                 END CASE;
             ELSIF s_opcode = not_reg THEN
+                CASE s_step IS
+                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
+                        s_op2 <= (OTHERS => '0');
+                    WHEN 3 => s_opcode <= "000000";
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = shiftl_reg THEN
+                CASE s_step IS
+                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
+                        s_op2 <= (OTHERS => '0');
+                    WHEN 3 => s_opcode <= "000000";
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = shiftr_reg THEN
                 CASE s_step IS
                     WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
                         s_op2 <= (OTHERS => '0');

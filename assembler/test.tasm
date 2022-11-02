@@ -1,4 +1,7 @@
 ; Test program for assembler
 
-load-imm $0 0
-not $0
+load-imm $0 1
+shiftl $0
+shiftl $0
+shiftr $0
+shiftr $0
