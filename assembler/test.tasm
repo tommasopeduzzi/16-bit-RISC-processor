@@ -1,11 +1,4 @@
 ; Test program for assembler
 
-load-imm $0 0x7fff
-load-imm $1 0x7fff
-sub $0 $1
-jumpc @continue
-load-imm $1 1
-jump @end
-continue:
-load-imm $0 1
-end:
+load-imm $0 0
+not $0
