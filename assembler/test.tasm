@@ -1,7 +1,5 @@
 ; Test program for assembler
 
-load-imm $0 1
-shiftl $0
-shiftl $0
-shiftr $0
-shiftr $0
+load-addr $2 @data
+load8 $1 $2
+data: data 0xffff

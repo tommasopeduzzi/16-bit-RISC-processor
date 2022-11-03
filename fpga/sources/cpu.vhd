@@ -169,18 +169,19 @@ BEGIN
     main_bus <= alu_bus WHEN control_main_alu_sel = '1' ELSE
         (7 DOWNTO 0 => '0') & memdata_bus WHEN control_main_mem_sel = '1' ELSE
         control_data WHEN control_main_control_sel = '1' ELSE
-        reg_bus(to_integer(unsigned(control_main_reg_sel))) WHEN NOT control_main_reg_sel = "XXX" ELSE
-        (7 DOWNTO 0 => '0') & reg_bus(to_integer(unsigned(control_main_reg_l_sel)))(7 DOWNTO 0) WHEN NOT control_main_reg_l_sel = "XXX" ELSE
-        (7 DOWNTO 0 => '0') & reg_bus(to_integer(unsigned(control_main_reg_m_sel)))(15 DOWNTO 8) WHEN NOT control_main_reg_m_sel = "XXX" ELSE
+        reg_bus(to_integer(unsigned(control_main_reg_sel))) WHEN NOT (control_main_reg_sel = "XXX") ELSE
+        (7 DOWNTO 0 => '0') & reg_bus(to_integer(unsigned(control_main_reg_l_sel)))(7 DOWNTO 0) WHEN NOT (control_main_reg_l_sel = "XXX") ELSE
+        (7 DOWNTO 0 => '0') & reg_bus(to_integer(unsigned(control_main_reg_m_sel)))(15 DOWNTO 8) WHEN NOT (control_main_reg_m_sel = "XXX") ELSE
         (15 DOWNTO 0 => 'X');
 
     addr_bus <= sp_bus WHEN control_addr_sp_sel = '1' ELSE
         pc_bus WHEN control_addr_pc_sel = '1' ELSE
         control_data WHEN control_addr_control_sel = '1' ELSE
-        reg_bus(to_integer(unsigned(control_addr_reg_sel))) WHEN NOT control_addr_reg_sel = "XXX" ELSE
+        reg_bus(to_integer(unsigned(control_addr_reg_sel))) WHEN NOT (control_addr_reg_sel = "XXX") ELSE
         (15 DOWNTO 0 => 'X');
 
-    alu_rhs_bus <= (15 DOWNTO 0 => 'X') WHEN control_alu_rhs_sel = "XXX" ELSE
+    alu_rhs_bus <= control_rhs_data WHEN control_alu_rhs_control_sel ='1' ELSE 
+        (15 DOWNTO 0 => 'X') WHEN control_alu_rhs_sel = "XXX" ELSE
         reg_bus(to_integer(unsigned(control_alu_rhs_sel)));
     alu_lhs_bus <= (15 DOWNTO 0 => 'X') WHEN control_alu_lhs_sel = "XXX" ELSE
         reg_bus(to_integer(unsigned(control_alu_lhs_sel)));
