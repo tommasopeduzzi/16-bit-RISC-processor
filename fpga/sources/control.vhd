@@ -244,6 +244,50 @@ BEGIN
                         o_mem_we <= '1';
                     WHEN OTHERS =>
                 END CASE;
+            ELSIF s_opcode = storel_reg_addr THEN
+                CASE s_step IS
+                    WHEN 1 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 2 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 3 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 4 => o_main_reg_l_sel <= s_op1(2 DOWNTO 0);
+                        o_addr_control_sel <= '1';
+                        o_mem_we <= '1';
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = storel_reg_reg THEN
+                CASE s_step IS
+                    WHEN 1 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 2 => o_main_reg_l_sel <= s_op1(2 DOWNTO 0);
+                        o_addr_reg_sel <= s_op2(2 DOWNTO 0);
+                        o_mem_we <= '1';
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = storeg_reg_addr THEN
+                CASE s_step IS
+                    WHEN 1 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 2 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 3 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 4 => o_main_reg_m_sel <= s_op1(2 DOWNTO 0);
+                        o_addr_control_sel <= '1';
+                        o_mem_we <= '1';
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = storeg_reg_reg THEN
+                CASE s_step IS
+                    WHEN 1 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 2 => o_main_reg_m_sel <= s_op1(2 DOWNTO 0);
+                        o_addr_reg_sel <= s_op2(2 DOWNTO 0);
+                        o_mem_we <= '1';
+                    WHEN OTHERS =>
+                END CASE;
             ELSIF s_opcode = add_reg_reg THEN
                 CASE s_step IS
                     WHEN 1 => o_addr_pc_sel <= '1';
@@ -474,7 +518,7 @@ BEGIN
                     WHEN 2 => s_opcode <= "000000";
                     WHEN OTHERS =>
                 END CASE;
-            ELSIF s_opcode = load_reg_reg 
+            ELSIF s_opcode = load_reg_reg
                 OR s_opcode = store_reg_reg THEN
                 CASE s_step IS
                     WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
@@ -492,6 +536,26 @@ BEGIN
                     WHEN 3 => o_data(15 DOWNTO 8) <= i_memdata;
                         o_lhs_alu_imm(15 DOWNTO 8) <= i_memdata;
                     WHEN 5 => s_opcode <= "000000";
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = storel_reg_reg
+                OR s_opcode = storeg_reg_reg THEN
+                CASE s_step IS
+                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
+                        s_op2 <= i_memdata(3 DOWNTO 0);
+                    WHEN 2 => s_opcode <= "000000";
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = storel_reg_addr
+                OR s_opcode = storeg_reg_addr THEN
+                CASE s_step IS
+                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
+                        s_op2 <= i_memdata(3 DOWNTO 0);
+                    WHEN 2 => o_data(7 DOWNTO 0) <= i_memdata;
+                        o_lhs_alu_imm(7 DOWNTO 0) <= i_memdata;
+                    WHEN 3 => o_data(15 DOWNTO 8) <= i_memdata;
+                        o_lhs_alu_imm(15 DOWNTO 8) <= i_memdata;
+                    WHEN 4 => s_opcode <= "000000";
                     WHEN OTHERS =>
                 END CASE;
             ELSIF s_opcode = not_reg

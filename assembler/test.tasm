@@ -1,6 +1,9 @@
 ; Test program for assembler
 
-load-imm $0 0
+load-imm $0 0x7fff
+store< $0 @data
 load-addr $1 @data
-store $0 $1
-data: data 0xffff 0xffff
+load-imm $2 1
+add $1 $2
+store> $0 $1
+data: 
