@@ -288,6 +288,34 @@ BEGIN
                         o_mem_we <= '1';
                     WHEN OTHERS =>
                 END CASE;
+            ELSIF s_opcode = push_reg THEN
+                CASE s_step IS
+                    WHEN 1 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 2 => o_addr_sp_sel <= '1';
+                        o_sp_decr <= '1';
+                        o_mem_we <= '1';
+                        o_main_reg_l_sel <= s_op1(2 DOWNTO 0);
+                    WHEN 3 => o_addr_sp_sel <= '1';
+                        o_sp_decr <= '1';
+                        o_mem_we <= '1';
+                        o_main_reg_m_sel <= s_op1(2 DOWNTO 0);
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = pop_reg THEN
+                CASE s_step IS
+                    WHEN 1 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                        o_sp_inc <= '1';
+                    WHEN 2 => o_addr_sp_sel <= '1';
+                        o_main_mem_sel <= '1';
+                        o_sp_inc <= '1';
+                        o_reg_we_m <= OP_TO_REG(s_op1);
+                    WHEN 3 => o_addr_sp_sel <= '1';
+                        o_main_mem_sel <= '1';
+                        o_reg_we_l <= OP_TO_REG(s_op1);
+                    WHEN OTHERS =>
+                END CASE;
             ELSIF s_opcode = add_reg_reg THEN
                 CASE s_step IS
                     WHEN 1 => o_addr_pc_sel <= '1';
@@ -556,6 +584,14 @@ BEGIN
                     WHEN 3 => o_data(15 DOWNTO 8) <= i_memdata;
                         o_lhs_alu_imm(15 DOWNTO 8) <= i_memdata;
                     WHEN 4 => s_opcode <= "000000";
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = push_reg
+                OR s_opcode = pop_reg THEN
+                CASE s_step IS
+                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
+                        s_op2 <= i_memdata(3 DOWNTO 0);
+                    WHEN 3 => s_opcode <= "000000";
                     WHEN OTHERS =>
                 END CASE;
             ELSIF s_opcode = not_reg

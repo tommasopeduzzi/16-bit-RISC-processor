@@ -25,19 +25,17 @@ ENTITY SP IS
     );
 END SP;
 ARCHITECTURE ARCHITECTURE_SP OF SP IS
-    SIGNAL s_value : unsigned(15 DOWNTO 0);
+    SIGNAL s_value : unsigned(15 DOWNTO 0) := (OTHERS => '1');
 BEGIN
+    o_data <= STD_LOGIC_VECTOR(s_value);
     PROCESS (i_clk, i_rst) BEGIN
         IF i_rst = '1' THEN
-            o_data <= (OTHERS => '0');
-            s_value <= to_unsigned(0, 16);
+            s_value <= (OTHERS => '1');
         ELSIF rising_edge(i_clk) THEN
             IF i_inc = '1' THEN
-                o_data <= STD_LOGIC_VECTOR(s_value + 1);
                 s_value <= s_value + 1;
             ELSIF i_decr = '1' THEN
-                o_data <= STD_LOGIC_VECTOR(s_value + 1);
-                s_value <= s_value + 1;
+                s_value <= s_value - 1;
             END IF;
         END IF;
     END PROCESS;
