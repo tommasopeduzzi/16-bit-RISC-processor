@@ -204,6 +204,28 @@ BEGIN
                         o_reg_we_m <= OP_TO_REG(s_op1);
                     WHEN OTHERS =>
                 END CASE;
+            ELSIF s_opcode = store_reg_addr THEN
+                CASE s_step IS
+                    WHEN 1 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 2 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 3 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 4 => o_main_reg_l_sel <= s_op1(2 downto 0);
+                        o_addr_control_sel <= '1';
+                        o_mem_we <= '1';
+                            ----- calculate new adress
+                        o_alu_latch_result <= '1';
+                        o_rhs_alu_imm <= (0 => '1', OTHERS => '0');
+                        o_alu_rhs_control_sel <= '1';
+                        o_alu_lhs_control_sel <= '1';
+                        o_alu_op <= "0000";
+                    WHEN 5 => o_addr_alu_sel <= '1';
+                        o_main_reg_m_sel <= s_op1(2 downto 0);
+                        o_mem_we <= '1';
+                    WHEN OTHERS =>
+                END CASE;
             ELSIF s_opcode = add_reg_reg THEN
                 CASE s_step IS
                     WHEN 1 => o_addr_pc_sel <= '1';
@@ -441,32 +463,21 @@ BEGIN
                     WHEN 3 => s_opcode <= "000000";
                     WHEN OTHERS =>
                 END CASE;
-            ELSIF s_opcode = load_reg_addr THEN
+            ELSIF s_opcode = load_reg_addr 
+                OR s_opcode = store_reg_addr THEN
                 CASE s_step IS
                     WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
                         s_op2 <= i_memdata(3 DOWNTO 0);
-                    WHEN 2 => o_data(7 downto 0) <= i_memdata;
+                    WHEN 2 => o_data(7 DOWNTO 0) <= i_memdata;
                         o_lhs_alu_imm(7 DOWNTO 0) <= i_memdata;
-                    WHEN 3 => o_data(15 downto 8) <= i_memdata;
+                    WHEN 3 => o_data(15 DOWNTO 8) <= i_memdata;
                         o_lhs_alu_imm(15 DOWNTO 8) <= i_memdata;
                     WHEN 5 => s_opcode <= "000000";
                     WHEN OTHERS =>
                 END CASE;
-            ELSIF s_opcode = not_reg THEN
-                CASE s_step IS
-                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
-                        s_op2 <= (OTHERS => '0');
-                    WHEN 3 => s_opcode <= "000000";
-                    WHEN OTHERS =>
-                END CASE;
-            ELSIF s_opcode = shiftl_reg THEN
-                CASE s_step IS
-                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
-                        s_op2 <= (OTHERS => '0');
-                    WHEN 3 => s_opcode <= "000000";
-                    WHEN OTHERS =>
-                END CASE;
-            ELSIF s_opcode = shiftr_reg THEN
+            ELSIF s_opcode = not_reg
+                OR s_opcode = shiftl_reg
+                OR s_opcode = shiftr_reg THEN
                 CASE s_step IS
                     WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
                         s_op2 <= (OTHERS => '0');
