@@ -12,12 +12,12 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0.000 ns"></ZoomStartTime>
-      <ZoomEndTime time="2,463.672 ns"></ZoomEndTime>
-      <Cursor1Time time="0.000 ns"></Cursor1Time>
+      <ZoomEndTime time="3,032.896 ns"></ZoomEndTime>
+      <Cursor1Time time="1,000.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="248"></NameColumnWidth>
-      <ValueColumnWidth column_width="68"></ValueColumnWidth>
+      <NameColumnWidth column_width="246"></NameColumnWidth>
+      <ValueColumnWidth column_width="66"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="14" />
    <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/clk">
@@ -50,7 +50,6 @@
    <wvobject type="group" fp_name="group64">
       <obj_property name="label">ALU Flags</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/alu_flags_c">
          <obj_property name="ElementShortName">alu_flags_c</obj_property>
          <obj_property name="ObjectShortName">alu_flags_c</obj_property>

@@ -54,13 +54,18 @@ ENTITY CONTROL IS
         o_addr_sp_sel : OUT STD_LOGIC; -- SP select
         o_addr_reg_sel : OUT STD_LOGIC_VECTOR(2 DOWNTO 0); -- register select
         o_addr_control_sel : OUT STD_LOGIC; -- control select
+        o_addr_alu_sel : OUT STD_LOGIC; -- ALU select
 
         -- alu operand bus
         o_alu_rhs_sel : OUT STD_LOGIC_VECTOR(2 DOWNTO 0); -- rhs select
+        o_alu_rhs_control_sel : OUT STD_LOGIC; -- rhs control
         o_alu_lhs_sel : OUT STD_LOGIC_VECTOR(2 DOWNTO 0); -- lhs select
+        o_alu_lhs_control_sel : OUT STD_LOGIC; -- rhs control
 
         -- immediate output
-        o_data : OUT STD_LOGIC_VECTOR(15 DOWNTO 0) -- immediate output
+        o_data : OUT STD_LOGIC_VECTOR(15 DOWNTO 0); -- immediate output
+        o_rhs_alu_imm : OUT STD_LOGIC_VECTOR(15 DOWNTO 0); -- rhs output
+        o_lhs_alu_imm : OUT STD_LOGIC_VECTOR(15 DOWNTO 0) -- rhs output
     );
 END CONTROL;
 ARCHITECTURE ARCHITECTURE_CONTROL OF CONTROL IS
@@ -109,6 +114,8 @@ BEGIN
             o_addr_reg_sel <= (OTHERS => 'X');
             o_alu_rhs_sel <= (OTHERS => 'X');
             o_alu_lhs_sel <= (OTHERS => 'X');
+            o_alu_rhs_control_sel <= '0';
+            o_alu_lhs_control_sel <= '0';
             o_alu_latch_result <= '0';
 
             -- set appropriate control lines
@@ -155,6 +162,25 @@ BEGIN
                     WHEN 2 => o_addr_reg_sel <= s_op2(2 DOWNTO 0);
                         o_main_mem_sel <= '1';
                         o_reg_we_l <= OP_TO_REG(s_op1);
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = load_reg_reg THEN
+                CASE s_step IS
+                    WHEN 1 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 2 => o_addr_reg_sel <= s_op2(2 DOWNTO 0);
+                        o_main_mem_sel <= '1';
+                        o_reg_we_l <= OP_TO_REG(s_op1);
+                        
+                        ----- calculate new adress
+                        o_alu_latch_result <= '1';
+                        o_alu_lhs_sel <= s_op2(2 DOWNTO 0);
+                        o_rhs_alu_imm <= (0 => '1', OTHERS => '0');
+                        o_alu_rhs_control_sel <= '1';
+                        o_alu_op <= "0000";
+                    WHEN 3 => o_addr_alu_sel <= '1';
+                        o_main_mem_sel <= '1';
+                        o_reg_we_m <= OP_TO_REG(s_op1);
                     WHEN OTHERS =>
                 END CASE;
             ELSIF s_opcode = add_reg_reg THEN
@@ -385,6 +411,13 @@ BEGIN
                     WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
                         s_op2 <= i_memdata(3 DOWNTO 0);
                     WHEN 2 => s_opcode <= "000000";
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = load_reg_reg THEN
+                CASE s_step IS
+                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
+                        s_op2 <= i_memdata(3 DOWNTO 0);
+                    WHEN 3 => s_opcode <= "000000";
                     WHEN OTHERS =>
                 END CASE;
             ELSIF s_opcode = not_reg THEN

@@ -42,9 +42,14 @@ ARCHITECTURE architecture_cpu OF cpu IS
     SIGNAL control_addr_sp_sel : STD_LOGIC;
     SIGNAL control_addr_reg_sel : STD_LOGIC_VECTOR(2 DOWNTO 0);
     SIGNAL control_addr_control_sel : STD_LOGIC;
+    SIGNAL control_addr_alu_sel : STD_LOGIC; -- ALU select
     SIGNAL control_alu_rhs_sel : STD_LOGIC_VECTOR(2 DOWNTO 0);
+    SIGNAL control_alu_rhs_control_sel : STD_LOGIC;
     SIGNAL control_alu_lhs_sel : STD_LOGIC_VECTOR(2 DOWNTO 0);
+    SIGNAL control_alu_lhs_control_sel : STD_LOGIC;
     SIGNAL control_data : STD_LOGIC_VECTOR(15 DOWNTO 0);
+    SIGNAL control_rhs_data : STD_LOGIC_VECTOR(15 downto 0);
+    SIGNAL control_lhs_data : STD_LOGIC_VECTOR(15 downto 0);
 
     SIGNAL alu_flags_c : STD_LOGIC;
     SIGNAL alu_flags_l : STD_LOGIC;
@@ -92,13 +97,18 @@ ARCHITECTURE architecture_cpu OF cpu IS
             o_addr_sp_sel : OUT STD_LOGIC; -- SP select
             o_addr_reg_sel : OUT STD_LOGIC_VECTOR(2 DOWNTO 0); -- register select
             o_addr_control_sel : OUT STD_LOGIC; -- control select
+            o_addr_alu_sel : OUT STD_LOGIC; -- ALU select
 
             -- alu operand bus
             o_alu_rhs_sel : OUT STD_LOGIC_VECTOR(2 DOWNTO 0); -- rhs select
+            o_alu_rhs_control_sel : OUT STD_LOGIC; -- rhs control
             o_alu_lhs_sel : OUT STD_LOGIC_VECTOR(2 DOWNTO 0); -- lhs select
+            o_alu_lhs_control_sel : OUT STD_LOGIC; -- rhs control
 
             -- immediate output
-            o_data : OUT STD_LOGIC_VECTOR(15 DOWNTO 0) -- immediate output
+            o_data : OUT STD_LOGIC_VECTOR(15 DOWNTO 0); -- immediate output
+            o_rhs_alu_imm : OUT STD_LOGIC_VECTOR(15 downto 0); -- rhs output
+            o_lhs_alu_imm : OUT STD_LOGIC_VECTOR(15 downto 0) -- rhs output
         );
     END COMPONENT;
 
@@ -176,7 +186,8 @@ BEGIN
 
     addr_bus <= sp_bus WHEN control_addr_sp_sel = '1' ELSE
         pc_bus WHEN control_addr_pc_sel = '1' ELSE
-        control_data WHEN control_addr_control_sel = '1' ELSE
+        control_data WHEN control_addr_control_sel = '1' else
+        alu_bus WHEN control_addr_alu_sel = '1' ELSE
         reg_bus(to_integer(unsigned(control_addr_reg_sel))) WHEN NOT (control_addr_reg_sel = "XXX") ELSE
         (15 DOWNTO 0 => 'X');
 
@@ -324,8 +335,13 @@ BEGIN
         o_addr_sp_sel => control_addr_sp_sel,
         o_addr_reg_sel => control_addr_reg_sel,
         o_addr_control_sel => control_addr_control_sel,
+        o_addr_alu_sel => control_addr_alu_sel,
         o_alu_rhs_sel => control_alu_rhs_sel,
+        o_alu_rhs_control_sel => control_alu_rhs_control_sel,
         o_alu_lhs_sel => control_alu_lhs_sel,
-        o_data => control_data
+        o_alu_lhs_control_sel => control_alu_lhs_control_sel,
+        o_data => control_data,
+        o_rhs_alu_imm => control_rhs_data,
+        o_lhs_alu_imm => control_lhs_data
     );
 END architecture_cpu;

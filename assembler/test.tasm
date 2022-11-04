@@ -1,5 +1,5 @@
 ; Test program for assembler
 
 load-addr $2 @data
-load8 $1 $2
+load $1 $2
 data: data 0xffff
