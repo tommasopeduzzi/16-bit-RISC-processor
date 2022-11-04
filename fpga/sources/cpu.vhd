@@ -192,10 +192,11 @@ BEGIN
         (15 DOWNTO 0 => 'X');
 
     alu_rhs_bus <= control_rhs_data WHEN control_alu_rhs_control_sel ='1' ELSE 
-        (15 DOWNTO 0 => 'X') WHEN control_alu_rhs_sel = "XXX" ELSE
-        reg_bus(to_integer(unsigned(control_alu_rhs_sel)));
-    alu_lhs_bus <= (15 DOWNTO 0 => 'X') WHEN control_alu_lhs_sel = "XXX" ELSE
-        reg_bus(to_integer(unsigned(control_alu_lhs_sel)));
+        reg_bus(to_integer(unsigned(control_alu_rhs_sel))) WHEN (control_alu_rhs_sel = "XXX") ELSE
+        (15 DOWNTO 0 => 'X');
+    alu_lhs_bus <= control_lhs_data WHEN control_alu_lhs_control_sel ='1' ELSE
+        reg_bus(to_integer(unsigned(control_alu_lhs_sel))) WHEN NOT (control_alu_lhs_sel = "XXX") ELSE
+        (15 DOWNTO 0 => 'X');
         
     prog_counter : PC PORT MAP(
         i_clk => clk,
