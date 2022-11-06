@@ -2,42 +2,39 @@
 -- at https://vhdl.lapinoo.net
 -- Generation date : 1.11.2022 10:14:00 UTC
 
-library ieee;
-use ieee.std_logic_1164.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
 
-entity cpu_testbench is
-end cpu_testbench;
+ENTITY cpu_testbench IS
+END cpu_testbench;
 
-architecture tb of cpu_testbench is
+ARCHITECTURE tb OF cpu_testbench IS
 
-    component cpu
-        port (clk : in std_logic;
-              rst : in std_logic);
-    end component;
+    COMPONENT cpu
+        PORT (
+            i_clk : IN STD_LOGIC;
+            i_rst : IN STD_LOGIC);
+    END COMPONENT;
 
-    signal clk : std_logic;
-    signal rst : std_logic;
-
-    constant period : time := 100 ns;
-    signal clock : std_logic := '1';
-    signal TbSimEnded : std_logic := '0';
-
-begin
+    SIGNAL clk : STD_LOGIC := '0';
+    SIGNAL rst : STD_LOGIC;
+    CONSTANT period : TIME := 100 ns;
+BEGIN
 
     central_processing_unit : cpu
-    port map (clk => clk,
-              rst => rst);
+    PORT MAP(
+        i_clk => clk,
+        i_rst => rst
+    );
 
     -- Clock generation
-    clock <= not clock after period/2;
+    clk <=  NOT clk AFTER period/2;
 
-    clk <= clock;
-
-    process begin
+    PROCESS BEGIN
         rst <= '1';
-        wait for 50 ns;
+        WAIT FOR 50 ns;
         rst <= '0';
-        wait;
-    end process;
+        WAIT;
+    END PROCESS;
 
-end tb;
+END tb;

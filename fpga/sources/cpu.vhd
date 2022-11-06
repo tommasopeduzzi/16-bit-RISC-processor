@@ -16,8 +16,8 @@ USE IEEE.numeric_std.ALL;
 
 ENTITY cpu IS
     PORT (
-        clk : IN STD_LOGIC;
-        rst : IN STD_LOGIC
+        i_clk : IN STD_LOGIC;
+        i_rst : IN STD_LOGIC;
     );
 END cpu;
 
@@ -48,8 +48,8 @@ ARCHITECTURE architecture_cpu OF cpu IS
     SIGNAL control_alu_lhs_sel : STD_LOGIC_VECTOR(2 DOWNTO 0);
     SIGNAL control_alu_lhs_control_sel : STD_LOGIC;
     SIGNAL control_data : STD_LOGIC_VECTOR(15 DOWNTO 0);
-    SIGNAL control_rhs_data : STD_LOGIC_VECTOR(15 downto 0);
-    SIGNAL control_lhs_data : STD_LOGIC_VECTOR(15 downto 0);
+    SIGNAL control_rhs_data : STD_LOGIC_VECTOR(15 DOWNTO 0);
+    SIGNAL control_lhs_data : STD_LOGIC_VECTOR(15 DOWNTO 0);
 
     SIGNAL alu_flags_c : STD_LOGIC;
     SIGNAL alu_flags_l : STD_LOGIC;
@@ -107,8 +107,8 @@ ARCHITECTURE architecture_cpu OF cpu IS
 
             -- immediate output
             o_data : OUT STD_LOGIC_VECTOR(15 DOWNTO 0); -- immediate output
-            o_rhs_alu_imm : OUT STD_LOGIC_VECTOR(15 downto 0); -- rhs output
-            o_lhs_alu_imm : OUT STD_LOGIC_VECTOR(15 downto 0) -- rhs output
+            o_rhs_alu_imm : OUT STD_LOGIC_VECTOR(15 DOWNTO 0); -- rhs output
+            o_lhs_alu_imm : OUT STD_LOGIC_VECTOR(15 DOWNTO 0); -- rhs output
         );
     END COMPONENT;
 
@@ -186,21 +186,21 @@ BEGIN
 
     addr_bus <= sp_bus WHEN control_addr_sp_sel = '1' ELSE
         pc_bus WHEN control_addr_pc_sel = '1' ELSE
-        control_data WHEN control_addr_control_sel = '1' else
+        control_data WHEN control_addr_control_sel = '1' ELSE
         alu_bus WHEN control_addr_alu_sel = '1' ELSE
         reg_bus(to_integer(unsigned(control_addr_reg_sel))) WHEN NOT (control_addr_reg_sel = "XXX") ELSE
         (15 DOWNTO 0 => 'X');
 
-    alu_rhs_bus <= control_rhs_data WHEN control_alu_rhs_control_sel ='1' ELSE 
+    alu_rhs_bus <= control_rhs_data WHEN control_alu_rhs_control_sel = '1' ELSE
         reg_bus(to_integer(unsigned(control_alu_rhs_sel))) WHEN NOT (control_alu_rhs_sel = "XXX") ELSE
         (15 DOWNTO 0 => 'X');
-    alu_lhs_bus <= control_lhs_data WHEN control_alu_lhs_control_sel ='1' ELSE
+    alu_lhs_bus <= control_lhs_data WHEN control_alu_lhs_control_sel = '1' ELSE
         reg_bus(to_integer(unsigned(control_alu_lhs_sel))) WHEN NOT (control_alu_lhs_sel = "XXX") ELSE
         (15 DOWNTO 0 => 'X');
         
     prog_counter : PC PORT MAP(
-        i_clk => clk,
-        i_rst => rst,
+        i_clk => i_clk,
+        i_rst => i_rst,
         i_inc => control_pc_inc,
         i_load => control_pc_load,
         i_data => main_bus,
@@ -208,8 +208,8 @@ BEGIN
     );
 
     stack_pointer : SP PORT MAP(
-        i_clk => clk,
-        i_rst => rst,
+        i_clk => i_clk,
+        i_rst => i_rst,
         i_inc => control_sp_inc,
         i_decr => control_sp_decr,
         o_data => sp_bus
@@ -217,8 +217,8 @@ BEGIN
 
     -- TODO: Clean this code up (macro maybe?)
     register0 : REG PORT MAP(
-        i_clk => clk,
-        i_rst => rst,
+        i_clk => i_clk,
+        i_rst => i_rst,
         i_we => control_reg_we(0),
         i_we_m => control_reg_we_m(0),
         i_we_l => control_reg_we_l(0),
@@ -226,8 +226,8 @@ BEGIN
         o_data => reg_bus(0)
     );
     register1 : REG PORT MAP(
-        i_clk => clk,
-        i_rst => rst,
+        i_clk => i_clk,
+        i_rst => i_rst,
         i_we => control_reg_we(1),
         i_we_m => control_reg_we_m(1),
         i_we_l => control_reg_we_l(1),
@@ -235,8 +235,8 @@ BEGIN
         o_data => reg_bus(1)
     );
     register2 : REG PORT MAP(
-        i_clk => clk,
-        i_rst => rst,
+        i_clk => i_clk,
+        i_rst => i_rst,
         i_we => control_reg_we(2),
         i_we_m => control_reg_we_m(2),
         i_we_l => control_reg_we_l(2),
@@ -244,8 +244,8 @@ BEGIN
         o_data => reg_bus(2)
     );
     register3 : REG PORT MAP(
-        i_clk => clk,
-        i_rst => rst,
+        i_clk => i_clk,
+        i_rst => i_rst,
         i_we => control_reg_we(3),
         i_we_m => control_reg_we_m(3),
         i_we_l => control_reg_we_l(3),
@@ -253,8 +253,8 @@ BEGIN
         o_data => reg_bus(3)
     );
     register4 : REG PORT MAP(
-        i_clk => clk,
-        i_rst => rst,
+        i_clk => i_clk,
+        i_rst => i_rst,
         i_we => control_reg_we(4),
         i_we_m => control_reg_we_m(4),
         i_we_l => control_reg_we_l(4),
@@ -262,8 +262,8 @@ BEGIN
         o_data => reg_bus(4)
     );
     register5 : REG PORT MAP(
-        i_clk => clk,
-        i_rst => rst,
+        i_clk => i_clk,
+        i_rst => i_rst,
         i_we => control_reg_we(5),
         i_we_m => control_reg_we_m(5),
         i_we_l => control_reg_we_l(5),
@@ -271,8 +271,8 @@ BEGIN
         o_data => reg_bus(5)
     );
     register6 : REG PORT MAP(
-        i_clk => clk,
-        i_rst => rst,
+        i_clk => i_clk,
+        i_rst => i_rst,
         i_we => control_reg_we(6),
         i_we_m => control_reg_we_m(6),
         i_we_l => control_reg_we_l(6),
@@ -280,8 +280,8 @@ BEGIN
         o_data => reg_bus(6)
     );
     register7 : REG PORT MAP(
-        i_clk => clk,
-        i_rst => rst,
+        i_clk => i_clk,
+        i_rst => i_rst,
         i_we => control_reg_we(7),
         i_we_m => control_reg_we_m(7),
         i_we_l => control_reg_we_l(7),
@@ -290,7 +290,7 @@ BEGIN
     );
 
     algorithmic_logic_unit : ALU PORT MAP(
-        i_clk => clk,
+        i_clk => i_clk,
         i_rhs => alu_rhs_bus,
         i_lhs => alu_lhs_bus,
         i_op => control_alu_op,
@@ -302,7 +302,7 @@ BEGIN
     );
 
     main_memory : MEMORY PORT MAP(
-        i_clk => clk,
+        i_clk => i_clk,
         i_we => control_mem_we,
         i_addr => addr_bus,
         i_data => main_bus(7 DOWNTO 0),
@@ -310,8 +310,8 @@ BEGIN
     );
 
     control_unit : CONTROL PORT MAP(
-        i_clk => clk,
-        i_rst => rst,
+        i_clk => i_clk,
+        i_rst => i_rst,
         i_memdata => memdata_bus,
         i_z => alu_flags_z,
         i_l => alu_flags_l,
