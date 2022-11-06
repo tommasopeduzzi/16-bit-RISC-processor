@@ -86,6 +86,9 @@ Store the bottom 8 bits of register $O_0$ at the address in register $O_1$ or at
 #### **Store most significant byte**
 Store the top 8 bits of register $O_0$ at the address in register $O_1$ or at address $O_1$. The mnemonic and arguments are **store> *register* *register***.
 
+#### **Copy**
+Copy contents of register $O_1$ into register $O_0$. 
+
 ### **Stack Manipulation Instructions**
 #### **Push**
 Stores contents of register $O_0$ at location of the stack pointer and decreases stack pointer by 2. The mnemonic and arguments are **push *register***.

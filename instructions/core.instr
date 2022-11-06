@@ -12,7 +12,8 @@ store<         reg reg
 store>         reg reg  
 store          reg addr   
 store<         reg addr   
-store>         reg addr   
+store>         reg addr
+copy           reg reg   
 # Stack manipulation instructions
 push           reg                   
 pop            reg                   

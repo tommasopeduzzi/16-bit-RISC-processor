@@ -126,6 +126,9 @@ class CPU:
             case "store> reg addr":      # store>
                 value = self.registers[registers[0]].get() >> 8
                 self.memory.set(immediate, value)
+            case "copy reg reg": 
+                value = self.registers[registers[1]].get()
+                self.registers[registers[0]].set(value)
             case "push reg":      # push
                 value = self.registers[registers[0]].get()
                 self.memory.set(self.sp-1, value & 0xFF)
@@ -210,6 +213,7 @@ class CPU:
 
     def parse_instruction_definitions(self, files: list[str]):
         self.instruction_definitions = {}
+        number_of_instructions = 0
         for file in files:
             with open(file, "r") as f:
                 lines = f.readlines()
@@ -224,4 +228,5 @@ class CPU:
                         self.instruction_definitions[0b111111] = "halt"
                         continue
                     instruction = " ".join(parts)
-                    self.instruction_definitions[len(self.instruction_definitions)+1] = instruction
+                    number_of_instructions += 1
+                    self.instruction_definitions[number_of_instructions] = instruction

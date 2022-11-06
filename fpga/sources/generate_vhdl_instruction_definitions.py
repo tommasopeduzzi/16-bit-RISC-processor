@@ -1,6 +1,6 @@
 files = ["instructions/core.instr"]
 
-vhdl_file = open("fpga/instructions.vhd", "w")
+vhdl_file = open("fpga/sources/instructions.vhd", "w")
 number_of_instructions = 0
 
 

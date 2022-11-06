@@ -294,6 +294,14 @@ BEGIN
                         o_mem_we <= '1';
                     WHEN OTHERS =>
                 END CASE;
+            ELSIF s_opcode = copy_reg_reg THEN
+                CASE s_step IS
+                    WHEN 1 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 2 => o_main_reg_sel <= s_op2(2 DOWNTO 0);
+                        o_reg_we <= OP_TO_REG(s_op1);
+                    WHEN OTHERS =>
+                END CASE;
             ELSIF s_opcode = push_reg THEN
                 CASE s_step IS
                     WHEN 1 => o_addr_pc_sel <= '1';
@@ -513,7 +521,7 @@ BEGIN
                         o_pc_inc <= '1';
                     WHEN 2 => o_device_write <= s_op2;
                         o_reg_we <= OP_TO_REG(s_op1);
-                    WHEN OTHERS => 
+                    WHEN OTHERS =>
                 END CASE;
             ELSIF s_opcode = out_reg_dev THEN
                 CASE s_step IS
@@ -527,10 +535,13 @@ BEGIN
         ELSIF rising_edge(i_clk) THEN
             -- set internal signals
             s_step <= s_step + 1;
+
+            -- TODO: Clean this up, group them more efficiently
             IF s_opcode = nop THEN
                 s_opcode <= i_memdata(5 DOWNTO 0);
                 s_step <= 1;
-            ELSIF s_opcode = cmp_reg_reg THEN
+            ELSIF s_opcode = cmp_reg_reg
+                OR s_opcode = copy_reg_reg THEN
                 CASE s_step IS
                     WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
                         s_op2 <= i_memdata(3 DOWNTO 0);
