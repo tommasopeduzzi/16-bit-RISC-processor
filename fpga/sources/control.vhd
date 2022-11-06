@@ -65,7 +65,11 @@ ENTITY CONTROL IS
         -- immediate output
         o_data : OUT STD_LOGIC_VECTOR(15 DOWNTO 0); -- immediate output
         o_rhs_alu_imm : OUT STD_LOGIC_VECTOR(15 DOWNTO 0); -- rhs output
-        o_lhs_alu_imm : OUT STD_LOGIC_VECTOR(15 DOWNTO 0) -- rhs output
+        o_lhs_alu_imm : OUT STD_LOGIC_VECTOR(15 DOWNTO 0); -- rhs output
+
+        -- device outputs
+        o_device_read : OUT STD_LOGIC_VECTOR(3 DOWNTO 0); -- device read output
+        o_device_write : OUT STD_LOGIC_VECTOR(3 DOWNTO 0) -- device write output
     );
 END CONTROL;
 ARCHITECTURE ARCHITECTURE_CONTROL OF CONTROL IS
@@ -117,6 +121,8 @@ BEGIN
             o_alu_rhs_control_sel <= '0';
             o_alu_lhs_control_sel <= '0';
             o_alu_latch_result <= '0';
+            o_device_write <= (OTHERS => 'X');
+            o_device_read <= (OTHERS => 'X');
 
             -- set appropriate control lines
             IF s_opcode = "111111" THEN -- halt

@@ -13,22 +13,29 @@ ARCHITECTURE tb OF cpu_testbench IS
     COMPONENT cpu
         PORT (
             i_clk : IN STD_LOGIC;
-            i_rst : IN STD_LOGIC);
+            i_rst : IN STD_LOGIC;
+            i_device_main_bus : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+            o_device_read : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+            o_device_write : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+            o_main_bus : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+        );
     END COMPONENT;
 
     SIGNAL clk : STD_LOGIC := '0';
     SIGNAL rst : STD_LOGIC;
     CONSTANT period : TIME := 100 ns;
+    SIGNAL device_bus : STD_LOGIC_VECTOR(15 DOWNTO 0) := (OTHERS => 'X');
 BEGIN
 
     central_processing_unit : cpu
     PORT MAP(
         i_clk => clk,
-        i_rst => rst
+        i_rst => rst,
+        i_device_main_bus => device_bus
     );
 
     -- Clock generation
-    clk <=  NOT clk AFTER period/2;
+    clk <= NOT clk AFTER period/2;
 
     PROCESS BEGIN
         rst <= '1';

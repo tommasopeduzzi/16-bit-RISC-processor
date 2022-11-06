@@ -18,6 +18,10 @@ ENTITY cpu IS
     PORT (
         i_clk : IN STD_LOGIC;
         i_rst : IN STD_LOGIC;
+        i_device_main_bus : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+        o_device_read : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+        o_device_write : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+        o_main_bus : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
     );
 END cpu;
 
@@ -59,6 +63,20 @@ ARCHITECTURE architecture_cpu OF cpu IS
     SIGNAL addr_bus : STD_LOGIC_VECTOR(15 DOWNTO 0);
     SIGNAL alu_rhs_bus : STD_LOGIC_VECTOR(15 DOWNTO 0);
     SIGNAL alu_lhs_bus : STD_LOGIC_VECTOR(15 DOWNTO 0);
+
+    SIGNAL device_write : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    SIGNAL device_read : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    FUNCTION DEMULTIPLEX_DEVICE_SIGNALS(op : IN STD_LOGIC_VECTOR(3 DOWNTO 0))
+        RETURN STD_LOGIC_VECTOR IS
+        VARIABLE value : STD_LOGIC_VECTOR(15 DOWNTO 0);
+    BEGIN
+        IF op = (3 DOWNTO 0 => 'X') THEN
+            RETURN (15 DOWNTO 0 => 'X');
+        END IF;
+        value := (OTHERS => '0');
+        value(to_integer(unsigned(op))) := '1';
+        RETURN value;
+    END FUNCTION;
 
     COMPONENT CONTROL IS
         PORT (
@@ -109,6 +127,10 @@ ARCHITECTURE architecture_cpu OF cpu IS
             o_data : OUT STD_LOGIC_VECTOR(15 DOWNTO 0); -- immediate output
             o_rhs_alu_imm : OUT STD_LOGIC_VECTOR(15 DOWNTO 0); -- rhs output
             o_lhs_alu_imm : OUT STD_LOGIC_VECTOR(15 DOWNTO 0); -- rhs output
+
+            -- device outputs
+            o_device_read : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+            o_device_write : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
         );
     END COMPONENT;
 
@@ -182,7 +204,9 @@ BEGIN
         reg_bus(to_integer(unsigned(control_main_reg_sel))) WHEN NOT (control_main_reg_sel = "XXX") ELSE
         (7 DOWNTO 0 => '0') & reg_bus(to_integer(unsigned(control_main_reg_l_sel)))(7 DOWNTO 0) WHEN NOT (control_main_reg_l_sel = "XXX") ELSE
         (7 DOWNTO 0 => '0') & reg_bus(to_integer(unsigned(control_main_reg_m_sel)))(15 DOWNTO 8) WHEN NOT (control_main_reg_m_sel = "XXX") ELSE
+        i_device_main_bus WHEN NOT (device_write = (3 DOWNTO 0 => 'X')) ELSE
         (15 DOWNTO 0 => 'X');
+    o_main_bus <= main_bus;
 
     addr_bus <= sp_bus WHEN control_addr_sp_sel = '1' ELSE
         pc_bus WHEN control_addr_pc_sel = '1' ELSE
@@ -197,7 +221,10 @@ BEGIN
     alu_lhs_bus <= control_lhs_data WHEN control_alu_lhs_control_sel = '1' ELSE
         reg_bus(to_integer(unsigned(control_alu_lhs_sel))) WHEN NOT (control_alu_lhs_sel = "XXX") ELSE
         (15 DOWNTO 0 => 'X');
-        
+
+    o_device_write <= DEMULTIPLEX_DEVICE_SIGNALS(device_write);
+    o_device_read <= DEMULTIPLEX_DEVICE_SIGNALS(device_read);
+
     prog_counter : PC PORT MAP(
         i_clk => i_clk,
         i_rst => i_rst,
@@ -343,6 +370,8 @@ BEGIN
         o_alu_lhs_control_sel => control_alu_lhs_control_sel,
         o_data => control_data,
         o_rhs_alu_imm => control_rhs_data,
-        o_lhs_alu_imm => control_lhs_data
+        o_lhs_alu_imm => control_lhs_data,
+        o_device_read => device_read,
+        o_device_write => device_write
     );
 END architecture_cpu;
