@@ -507,6 +507,22 @@ BEGIN
                         WHEN OTHERS =>
                     END CASE;
                 END IF;
+            ELSIF s_opcode = in_reg_dev THEN
+                CASE s_step IS
+                    WHEN 1 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 2 => o_device_write <= s_op2;
+                        o_reg_we <= OP_TO_REG(s_op1);
+                    WHEN OTHERS => 
+                END CASE;
+            ELSIF s_opcode = out_reg_dev THEN
+                CASE s_step IS
+                    WHEN 1 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 2 => o_device_read <= s_op2;
+                        o_main_reg_sel <= s_op1(2 DOWNTO 0);
+                    WHEN OTHERS =>
+                END CASE;
             END IF;
         ELSIF rising_edge(i_clk) THEN
             -- set internal signals
@@ -672,6 +688,14 @@ BEGIN
                         WHEN OTHERS =>
                     END CASE;
                 END IF;
+            ELSIF s_opcode = in_reg_dev
+                OR s_opcode = out_reg_dev THEN
+                CASE s_step IS
+                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
+                        s_op2 <= i_memdata(3 DOWNTO 0);
+                    WHEN 2 => s_opcode <= "000000";
+                    WHEN OTHERS =>
+                END CASE;
             END IF;
         END IF;
     END PROCESS;
