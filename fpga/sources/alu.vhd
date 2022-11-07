@@ -47,6 +47,7 @@ BEGIN
                 WHEN "0010" => result <= to_integer(signed(i_lhs AND i_rhs)); -- and
                 WHEN "0011" => result <= to_integer(signed(i_lhs OR i_rhs)); -- or
                 WHEN "0100" => result <= to_integer(signed(i_lhs XOR i_rhs)); -- xor
+                -- TODO: Consider and set flag for both shift instructions as specified in design 
                 WHEN "0101" => result <= to_integer(signed(i_lhs(14 DOWNTO 0) & '0')); -- shift left
                 WHEN "0110" => result <= to_integer(signed('0' & i_lhs(15 DOWNTO 1))); -- shift right
                 WHEN "0111" => result <= to_integer(signed(NOT i_lhs)); -- not

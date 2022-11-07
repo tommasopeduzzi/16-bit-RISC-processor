@@ -7,14 +7,14 @@ package instructions is
 	constant load_reg_addr : std_logic_vector(5 downto 0) := "000010";
 	constant load8_reg_reg : std_logic_vector(5 downto 0) := "000011";
 	constant load8_reg_addr : std_logic_vector(5 downto 0) := "000100";
-	constant loadimm_reg_im : std_logic_vector(5 downto 0) := "000101";
+	constant loadimm_reg_imm : std_logic_vector(5 downto 0) := "000101";
 	constant loadaddr_reg_addr : std_logic_vector(5 downto 0) := "000110";
 	constant store_reg_reg : std_logic_vector(5 downto 0) := "000111";
 	constant storel_reg_reg : std_logic_vector(5 downto 0) := "001000";
 	constant storeg_reg_reg : std_logic_vector(5 downto 0) := "001001";
 	constant store_reg_addr : std_logic_vector(5 downto 0) := "001010";
 	constant storel_reg_addr : std_logic_vector(5 downto 0) := "001011";
-	constant storeg_reg_add : std_logic_vector(5 downto 0) := "001100";
+	constant storeg_reg_addr : std_logic_vector(5 downto 0) := "001100";
 	constant copy_reg_reg : std_logic_vector(5 downto 0) := "001101";
 	constant push_reg : std_logic_vector(5 downto 0) := "001110";
 	constant pop_reg : std_logic_vector(5 downto 0) := "001111";

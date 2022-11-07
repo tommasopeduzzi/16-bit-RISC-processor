@@ -1,5 +1,10 @@
 ; Test program for assembler
 
-load-imm $0 0x7fff
-copy $1 $0
-halt
+load-addr $0 @continue
+load-imm $1 100
+cmp $1 100
+jump== $0
+load-imm $1 2
+
+continue:
+    load-imm $1 1
