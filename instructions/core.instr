@@ -1,39 +1,50 @@
-halt                                           
-nop                                            
-# Memory instructions
-load           reg reg  
-load8          reg reg  
-load           reg addr   
-load8          reg addr   
+halt
+nop
+# Memory instruction
+load           reg reg
+load           reg addr
+load8          reg reg
+load8          reg addr
 load-imm       reg imm
-load-addr      reg addr   
-store          reg reg  
-store<         reg reg  
-store>         reg reg  
-store          reg addr   
-store<         reg addr   
+load-addr      reg addr
+store          reg reg
+store<         reg reg
+store>         reg reg
+store          reg addr
+store<         reg addr
 store>         reg addr
-copy           reg reg   
-# Stack manipulation instructions
-push           reg                   
-pop            reg                   
-# Arithmetic instructions
-add            reg reg  
-sub            reg reg  
-cmp            reg reg  
-# Bitwise instructions
-not            reg                   
-shiftl         reg                   
-shiftr         reg                   
-and            reg reg  
-or             reg reg  
-xor            reg reg  
-# Control flow instructions
-jump           addr                       
-jump==         addr                       
-jump<          addr                       
-jump>          addr                       
-jumpc          addr                       
-# IO instructions
-in             reg dev    
-out            reg dev    
+copy           reg reg
+# Stack manipulation instruction
+push           reg
+pop            reg
+# Arithmetic instruction
+add            reg reg
+add            reg imm
+sub            reg reg
+sub            reg imm
+cmp            reg reg
+cmp            reg imm
+# Bitwise instruction
+not            reg
+shiftl         reg
+shiftr         reg
+and            reg reg
+and            reg imm
+or             reg reg
+or             reg imm
+xor            reg reg
+xor            reg imm
+# Control flow instruction
+jump           addr
+jump           reg
+jump==         addr
+jump==         reg
+jump<          addr
+jump<          reg
+jump>          addr
+jump>          reg
+jumpc          addr
+jumpc          reg
+# IO instruction
+in             reg dev
+out            dev reg
