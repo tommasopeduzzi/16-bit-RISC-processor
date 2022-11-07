@@ -527,8 +527,8 @@ BEGIN
                 CASE s_step IS
                     WHEN 1 => o_addr_pc_sel <= '1';
                         o_pc_inc <= '1';
-                    WHEN 2 => o_device_read <= s_op2;
-                        o_main_reg_sel <= s_op1(2 DOWNTO 0);
+                    WHEN 2 => o_device_read <= s_op1;
+                        o_main_reg_sel <= s_op2(2 DOWNTO 0);
                     WHEN OTHERS =>
                 END CASE;
             END IF;
@@ -541,7 +541,12 @@ BEGIN
                 s_opcode <= i_memdata(5 DOWNTO 0);
                 s_step <= 1;
             ELSIF s_opcode = cmp_reg_reg
-                OR s_opcode = copy_reg_reg THEN
+                OR s_opcode = copy_reg_reg
+                OR s_opcode = load8_reg_reg
+                OR s_opcode = storel_reg_reg
+                OR s_opcode = storeg_reg_reg
+                OR s_opcode = in_reg_dev
+                OR s_opcode = out_reg_dev THEN
                 CASE s_step IS
                     WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
                         s_op2 <= i_memdata(3 DOWNTO 0);
@@ -557,34 +562,34 @@ BEGIN
                 OR s_opcode = xor_reg_reg
                 OR s_opcode = not_reg
                 OR s_opcode = shiftl_reg
-                OR s_opcode = shiftr_reg THEN
+                OR s_opcode = shiftr_reg
+                OR s_opcode = load_reg_reg
+                OR s_opcode = store_reg_reg
+                OR s_opcode = not_reg
+                OR s_opcode = shiftl_reg
+                OR s_opcode = shiftr_reg
+                OR s_opcode = storel_reg_reg
+                OR s_opcode = storeg_reg_reg
+                OR s_opcode = push_reg
+                OR s_opcode = pop_reg THEN
                 CASE s_step IS
                     WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
                         s_op2 <= i_memdata(3 DOWNTO 0);
                     WHEN 3 => s_opcode <= "000000";
                     WHEN OTHERS =>
                 END CASE;
-            ELSIF s_opcode = load8_reg_addr THEN
+            ELSIF s_opcode = load8_reg_addr
+                OR s_opcode = storel_reg_addr
+                OR s_opcode = storeg_reg_addr THEN
                 CASE s_step IS
                     WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
                     WHEN 2 => o_data(7 DOWNTO 0) <= i_memdata;
+                        o_lhs_alu_imm(7 DOWNTO 0) <= i_memdata;
+                        o_rhs_alu_imm(7 DOWNTO 0) <= i_memdata;
                     WHEN 3 => o_data(15 DOWNTO 8) <= i_memdata;
+                        o_lhs_alu_imm(15 DOWNTO 8) <= i_memdata;
+                        o_rhs_alu_imm(15 DOWNTO 8) <= i_memdata;
                     WHEN 4 => s_opcode <= (OTHERS => '0');
-                    WHEN OTHERS =>
-                END CASE;
-            ELSIF s_opcode = load8_reg_reg THEN
-                CASE s_step IS
-                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
-                        s_op2 <= i_memdata(3 DOWNTO 0);
-                    WHEN 2 => s_opcode <= "000000";
-                    WHEN OTHERS =>
-                END CASE;
-            ELSIF s_opcode = load_reg_reg
-                OR s_opcode = store_reg_reg THEN
-                CASE s_step IS
-                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
-                        s_op2 <= i_memdata(3 DOWNTO 0);
-                    WHEN 3 => s_opcode <= "000000";
                     WHEN OTHERS =>
                 END CASE;
             ELSIF s_opcode = load_reg_addr
@@ -597,43 +602,6 @@ BEGIN
                     WHEN 3 => o_data(15 DOWNTO 8) <= i_memdata;
                         o_lhs_alu_imm(15 DOWNTO 8) <= i_memdata;
                     WHEN 5 => s_opcode <= "000000";
-                    WHEN OTHERS =>
-                END CASE;
-            ELSIF s_opcode = storel_reg_reg
-                OR s_opcode = storeg_reg_reg THEN
-                CASE s_step IS
-                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
-                        s_op2 <= i_memdata(3 DOWNTO 0);
-                    WHEN 2 => s_opcode <= "000000";
-                    WHEN OTHERS =>
-                END CASE;
-            ELSIF s_opcode = storel_reg_addr
-                OR s_opcode = storeg_reg_addr THEN
-                CASE s_step IS
-                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
-                        s_op2 <= i_memdata(3 DOWNTO 0);
-                    WHEN 2 => o_data(7 DOWNTO 0) <= i_memdata;
-                        o_lhs_alu_imm(7 DOWNTO 0) <= i_memdata;
-                    WHEN 3 => o_data(15 DOWNTO 8) <= i_memdata;
-                        o_lhs_alu_imm(15 DOWNTO 8) <= i_memdata;
-                    WHEN 4 => s_opcode <= "000000";
-                    WHEN OTHERS =>
-                END CASE;
-            ELSIF s_opcode = push_reg
-                OR s_opcode = pop_reg THEN
-                CASE s_step IS
-                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
-                        s_op2 <= i_memdata(3 DOWNTO 0);
-                    WHEN 3 => s_opcode <= "000000";
-                    WHEN OTHERS =>
-                END CASE;
-            ELSIF s_opcode = not_reg
-                OR s_opcode = shiftl_reg
-                OR s_opcode = shiftr_reg THEN
-                CASE s_step IS
-                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
-                        s_op2 <= (OTHERS => '0');
-                    WHEN 3 => s_opcode <= "000000";
                     WHEN OTHERS =>
                 END CASE;
             ELSIF s_opcode = jump_addr THEN
@@ -699,14 +667,8 @@ BEGIN
                         WHEN OTHERS =>
                     END CASE;
                 END IF;
-            ELSIF s_opcode = in_reg_dev
-                OR s_opcode = out_reg_dev THEN
-                CASE s_step IS
-                    WHEN 1 => s_op1 <= i_memdata(7 DOWNTO 4);
-                        s_op2 <= i_memdata(3 DOWNTO 0);
-                    WHEN 2 => s_opcode <= "000000";
-                    WHEN OTHERS =>
-                END CASE;
+            ELSE
+                REPORT "unknown instruction";
             END IF;
         END IF;
     END PROCESS;
