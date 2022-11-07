@@ -29,6 +29,8 @@ ARCHITECTURE architecture_cpu OF cpu IS
     SIGNAL control_mem_we : STD_LOGIC;
     SIGNAL control_pc_inc : STD_LOGIC;
     SIGNAL control_pc_load : STD_LOGIC;
+    SIGNAL control_pc_load_lsb : STD_LOGIC;
+    SIGNAL control_pc_load_msb : STD_LOGIC;
     SIGNAL control_sp_inc : STD_LOGIC;
     SIGNAL control_sp_decr : STD_LOGIC;
     SIGNAL control_alu_op : STD_LOGIC_VECTOR(3 DOWNTO 0);
@@ -39,6 +41,8 @@ ARCHITECTURE architecture_cpu OF cpu IS
     SIGNAL control_main_alu_sel : STD_LOGIC;
     SIGNAL control_main_mem_sel : STD_LOGIC;
     SIGNAL control_main_control_sel : STD_LOGIC;
+    SIGNAL control_main_pc_sel : STD_LOGIC;
+    SIGNAL control_main_pc_msb_sel : STD_LOGIC;
     SIGNAL control_main_reg_sel : STD_LOGIC_VECTOR(2 DOWNTO 0);
     SIGNAL control_main_reg_l_sel : STD_LOGIC_VECTOR(2 DOWNTO 0);
     SIGNAL control_main_reg_m_sel : STD_LOGIC_VECTOR(2 DOWNTO 0);
@@ -91,6 +95,8 @@ ARCHITECTURE architecture_cpu OF cpu IS
 
             o_pc_inc : OUT STD_LOGIC; -- increment PC
             o_pc_load : OUT STD_LOGIC; -- load PC from memory bus
+            o_pc_load_lsb : OUT STD_LOGIC; -- load LSB of PC from main bus
+            o_pc_load_msb : OUT STD_LOGIC; -- load MSB of PC from main bus
 
             o_sp_inc : OUT STD_LOGIC; -- increment SP
             o_sp_decr : OUT STD_LOGIC; -- decrement SP
@@ -106,6 +112,8 @@ ARCHITECTURE architecture_cpu OF cpu IS
             o_main_alu_sel : OUT STD_LOGIC; -- ALU select
             o_main_mem_sel : OUT STD_LOGIC; -- memory select
             o_main_control_sel : OUT STD_LOGIC; -- control select
+            o_main_pc_sel : OUT STD_LOGIC; -- pc select
+            o_main_pc_msb_sel : OUT STD_LOGIC; -- pc select msb
             o_main_reg_sel : OUT STD_LOGIC_VECTOR(2 DOWNTO 0); -- register select
             o_main_reg_l_sel : OUT STD_LOGIC_VECTOR(2 DOWNTO 0); -- register LSB select
             o_main_reg_m_sel : OUT STD_LOGIC_VECTOR(2 DOWNTO 0); -- register MSB select
@@ -141,6 +149,8 @@ ARCHITECTURE architecture_cpu OF cpu IS
             i_rst : IN STD_LOGIC; -- reset
             i_inc : IN STD_LOGIC; -- increase program counter
             i_load : IN STD_LOGIC; -- i_load program counter
+            i_load_lsb : IN STD_LOGIC; -- load lsb
+            i_load_msb : IN STD_LOGIC; -- load msb    
             i_data : IN STD_LOGIC_VECTOR(15 DOWNTO 0); -- i_data address
             o_data : OUT STD_LOGIC_VECTOR(15 DOWNTO 0) -- o_data
         );
@@ -201,6 +211,8 @@ BEGIN
     main_bus <= alu_bus WHEN control_main_alu_sel = '1' ELSE
         (7 DOWNTO 0 => '0') & memdata_bus WHEN control_main_mem_sel = '1' ELSE
         control_data WHEN control_main_control_sel = '1' ELSE
+        pc_bus WHEN control_main_pc_sel = '1' ELSE
+        (7 DOWNTO 0 => '0') & pc_bus(15 DOWNTO 8) WHEN control_main_pc_msb_sel = '1' ELSE
         reg_bus(to_integer(unsigned(control_main_reg_sel))) WHEN NOT (control_main_reg_sel = "XXX") ELSE
         (7 DOWNTO 0 => '0') & reg_bus(to_integer(unsigned(control_main_reg_l_sel)))(7 DOWNTO 0) WHEN NOT (control_main_reg_l_sel = "XXX") ELSE
         (7 DOWNTO 0 => '0') & reg_bus(to_integer(unsigned(control_main_reg_m_sel)))(15 DOWNTO 8) WHEN NOT (control_main_reg_m_sel = "XXX") ELSE
@@ -230,6 +242,8 @@ BEGIN
         i_rst => i_rst,
         i_inc => control_pc_inc,
         i_load => control_pc_load,
+        i_load_lsb => control_pc_load_lsb,
+        i_load_msb => control_pc_load_msb,
         i_data => main_bus,
         o_data => pc_bus
     );
@@ -346,6 +360,8 @@ BEGIN
         o_mem_we => control_mem_we,
         o_pc_inc => control_pc_inc,
         o_pc_load => control_pc_load,
+        o_pc_load_lsb => control_pc_load_lsb,
+        o_pc_load_msb => control_pc_load_msb,
         o_sp_inc => control_sp_inc,
         o_sp_decr => control_sp_decr,
         o_alu_op => control_alu_op,
@@ -356,6 +372,8 @@ BEGIN
         o_main_alu_sel => control_main_alu_sel,
         o_main_mem_sel => control_main_mem_sel,
         o_main_control_sel => control_main_control_sel,
+        o_main_pc_sel => control_main_pc_sel,
+        o_main_pc_msb_sel => control_main_pc_msb_sel,
         o_main_reg_sel => control_main_reg_sel,
         o_main_reg_l_sel => control_main_reg_l_sel,
         o_main_reg_m_sel => control_main_reg_m_sel,

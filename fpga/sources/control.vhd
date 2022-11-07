@@ -29,7 +29,9 @@ ENTITY CONTROL IS
         o_mem_we : OUT STD_LOGIC; -- write enable memory
 
         o_pc_inc : OUT STD_LOGIC; -- increment PC
-        o_pc_load : OUT STD_LOGIC; -- load PC from memory bus
+        o_pc_load : OUT STD_LOGIC; -- load PC from main bus
+        o_pc_load_lsb : OUT STD_LOGIC; -- load LSB of PC from main bus
+        o_pc_load_msb : OUT STD_LOGIC; -- load MSB of PC from main bus
 
         o_sp_inc : OUT STD_LOGIC; -- increment SP
         o_sp_decr : OUT STD_LOGIC; -- decrement SP
@@ -45,6 +47,8 @@ ENTITY CONTROL IS
         o_main_alu_sel : OUT STD_LOGIC; -- ALU select
         o_main_mem_sel : OUT STD_LOGIC; -- memory select
         o_main_control_sel : OUT STD_LOGIC; -- control select
+        o_main_pc_sel : OUT STD_LOGIC; -- pc select
+        o_main_pc_msb_sel : OUT STD_LOGIC; -- pc select msb
         o_main_reg_sel : OUT STD_LOGIC_VECTOR(2 DOWNTO 0); -- register select
         o_main_reg_l_sel : OUT STD_LOGIC_VECTOR(2 DOWNTO 0); -- register LSB select
         o_main_reg_m_sel : OUT STD_LOGIC_VECTOR(2 DOWNTO 0); -- register MSB select
@@ -100,6 +104,8 @@ BEGIN
             o_mem_we <= '0';
             o_pc_inc <= '0';
             o_pc_load <= '0';
+            o_pc_load_lsb <= '0';
+            o_pc_load_msb <= '0';
             o_sp_inc <= '0';
             o_sp_decr <= '0';
             o_alu_op <= (OTHERS => '0');
@@ -109,12 +115,15 @@ BEGIN
             o_main_alu_sel <= '0';
             o_main_mem_sel <= '0';
             o_main_control_sel <= '0';
+            o_main_pc_sel <= '0';
+            o_main_pc_msb_sel <= '0';
             o_main_reg_sel <= (OTHERS => 'X');
             o_main_reg_l_sel <= (OTHERS => 'X');
             o_main_reg_m_sel <= (OTHERS => 'X');
             o_addr_pc_sel <= '0';
             o_addr_sp_sel <= '0';
             o_addr_control_sel <= '0';
+            o_addr_alu_sel <= '1';
             o_addr_reg_sel <= (OTHERS => 'X');
             o_alu_rhs_sel <= (OTHERS => 'X');
             o_alu_lhs_sel <= (OTHERS => 'X');
@@ -309,11 +318,11 @@ BEGIN
                     WHEN 2 => o_addr_sp_sel <= '1';
                         o_sp_decr <= '1';
                         o_mem_we <= '1';
-                        o_main_reg_l_sel <= s_op1(2 DOWNTO 0);
+                        o_main_reg_m_sel <= s_op1(2 DOWNTO 0);
                     WHEN 3 => o_addr_sp_sel <= '1';
                         o_sp_decr <= '1';
                         o_mem_we <= '1';
-                        o_main_reg_m_sel <= s_op1(2 DOWNTO 0);
+                        o_main_reg_l_sel <= s_op1(2 DOWNTO 0);
                     WHEN OTHERS =>
                 END CASE;
             ELSIF s_opcode = pop_reg THEN
@@ -324,10 +333,10 @@ BEGIN
                     WHEN 2 => o_addr_sp_sel <= '1';
                         o_main_mem_sel <= '1';
                         o_sp_inc <= '1';
-                        o_reg_we_m <= OP_TO_REG(s_op1);
+                        o_reg_we_l <= OP_TO_REG(s_op1);
                     WHEN 3 => o_addr_sp_sel <= '1';
                         o_main_mem_sel <= '1';
-                        o_reg_we_l <= OP_TO_REG(s_op1);
+                        o_reg_we_m <= OP_TO_REG(s_op1);
                     WHEN OTHERS =>
                 END CASE;
             ELSIF s_opcode = add_reg_reg THEN
@@ -657,6 +666,36 @@ BEGIN
                         WHEN OTHERS =>
                     END CASE;
                 END IF;
+            ELSIF s_opcode = call_addr THEN
+                CASE s_step IS
+                    WHEN 1 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 2 => o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    WHEN 3 => o_addr_sp_sel <= '1';
+                        o_sp_decr <= '1';
+                        o_mem_we <= '1';
+                        o_main_pc_msb_sel <= '1';
+                    WHEN 4 => o_addr_sp_sel <= '1';
+                        o_sp_decr <= '1';
+                        o_mem_we <= '1';
+                        o_main_pc_sel <= '1';
+                    WHEN 5 => o_main_control_sel <= '1';
+                        o_pc_load <= '1';
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = ret THEN
+                CASE s_step IS
+                    WHEN 1 => o_sp_inc <= '1';
+                    WHEN 2 => o_addr_sp_sel <= '1';
+                        o_main_mem_sel <= '1';
+                        o_sp_inc <= '1';
+                        o_pc_load_lsb <= '1';
+                    WHEN 3 => o_addr_sp_sel <= '1';
+                        o_main_mem_sel <= '1';
+                        o_pc_load_msb <= '1';
+                    WHEN OTHERS =>
+                END CASE;
             ELSIF s_opcode = in_reg_dev THEN
                 CASE s_step IS
                     WHEN 1 => o_addr_pc_sel <= '1';
@@ -857,6 +896,18 @@ BEGIN
                         WHEN OTHERS =>
                     END CASE;
                 END IF;
+            ELSIF s_opcode = call_addr THEN
+                CASE s_step IS
+                    WHEN 1 => o_data(7 DOWNTO 0) <= i_memdata;
+                    WHEN 2 => o_data(15 DOWNTO 8) <= i_memdata;
+                    WHEN 5 => s_opcode <= "000000";
+                    WHEN OTHERS =>
+                END CASE;
+            ELSIF s_opcode = ret THEN
+                CASE s_step IS
+                    WHEN 3 => s_opcode <= "000000";
+                    WHEN OTHERS =>
+                END CASE;
             ELSE
                 REPORT "unknown instruction";
             END IF;

@@ -43,6 +43,8 @@ package instructions is
 	constant jumpg_reg : std_logic_vector(5 downto 0) := "100110";
 	constant jumpc_addr : std_logic_vector(5 downto 0) := "100111";
 	constant jumpc_reg : std_logic_vector(5 downto 0) := "101000";
-	constant in_reg_dev : std_logic_vector(5 downto 0) := "101001";
-	constant out_dev_reg : std_logic_vector(5 downto 0) := "101010";
+	constant call_addr : std_logic_vector(5 downto 0) := "101001";
+	constant ret : std_logic_vector(5 downto 0) := "101010";
+	constant in_reg_dev : std_logic_vector(5 downto 0) := "101011";
+	constant out_dev_reg : std_logic_vector(5 downto 0) := "101100";
 end package instructions;

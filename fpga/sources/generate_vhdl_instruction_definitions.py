@@ -11,7 +11,7 @@ use IEEE.std_logic_1164.all;\n"""
 vhdl_file.write("package instructions is\n")
 
 def write_vhdl_constant(mnemonic: str, opcode: int):
-    mnemonic = mnemonic.replace("<", "l").replace(">", "g").replace("-", "").replace("==", "eq")
+    mnemonic = mnemonic.replace("<", "l").replace(">", "g").replace("-", "").replace("==", "eq").replace("return", "ret")
     vhdl_file.write(f"\tconstant {mnemonic} : std_logic_vector(5 downto 0) := \"{bin(opcode)[2:].zfill(6)}\";\n")
 
 for file in files:

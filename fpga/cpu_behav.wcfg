@@ -11,12 +11,12 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
-      <ZoomEndTime time="8.562411 us"></ZoomEndTime>
-      <Cursor1Time time="4.000000 us"></Cursor1Time>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="525.501 ns"></ZoomEndTime>
+      <Cursor1Time time="0.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="226"></NameColumnWidth>
+      <NameColumnWidth column_width="218"></NameColumnWidth>
       <ValueColumnWidth column_width="66"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="15" />
@@ -32,18 +32,23 @@
       <obj_property name="ObjectShortName">i_rst</obj_property>
       <obj_property name="label">Reset</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/control_data">
+   <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/main_bus">
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">control_data[15:0]</obj_property>
-      <obj_property name="ObjectShortName">control_data[15:0]</obj_property>
-      <obj_property name="label">Control Immediate</obj_property>
+      <obj_property name="ElementShortName">main_bus[15:0]</obj_property>
+      <obj_property name="ObjectShortName">main_bus[15:0]</obj_property>
+      <obj_property name="label">Main Bus</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/addr_bus">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">addr_bus[15:0]</obj_property>
+      <obj_property name="ObjectShortName">addr_bus[15:0]</obj_property>
+      <obj_property name="label">Address Bus</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/reg_bus">
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="ElementShortName">reg_bus[0:7][15:0]</obj_property>
       <obj_property name="ObjectShortName">reg_bus[0:7][15:0]</obj_property>
       <obj_property name="label">Registers</obj_property>
-      <obj_property name="isExpanded"></obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/alu_bus">
       <obj_property name="DisplayName">label</obj_property>
@@ -101,18 +106,6 @@
       <obj_property name="ObjectShortName">sp_bus[15:0]</obj_property>
       <obj_property name="label">SP</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/addr_bus">
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">addr_bus[15:0]</obj_property>
-      <obj_property name="ObjectShortName">addr_bus[15:0]</obj_property>
-      <obj_property name="label">Address Bus</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/main_bus">
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">main_bus[15:0]</obj_property>
-      <obj_property name="ObjectShortName">main_bus[15:0]</obj_property>
-      <obj_property name="label">Main Bus</obj_property>
-   </wvobject>
    <wvobject type="group" fp_name="group72">
       <obj_property name="label">Control lines</obj_property>
       <obj_property name="DisplayName">label</obj_property>
@@ -133,6 +126,18 @@
          <obj_property name="ElementShortName">control_pc_load</obj_property>
          <obj_property name="ObjectShortName">control_pc_load</obj_property>
          <obj_property name="label">PC Paralell load</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/control_unit/o_pc_load_lsb">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">o_pc_load_lsb</obj_property>
+         <obj_property name="ObjectShortName">o_pc_load_lsb</obj_property>
+         <obj_property name="label">PC Load LSB</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/control_unit/o_pc_load_msb">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">o_pc_load_msb</obj_property>
+         <obj_property name="ObjectShortName">o_pc_load_msb</obj_property>
+         <obj_property name="label">PC Load MSB</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/control_sp_inc">
          <obj_property name="DisplayName">label</obj_property>
@@ -236,11 +241,29 @@
          <obj_property name="ObjectShortName">control_addr_control_sel</obj_property>
          <obj_property name="label">Address Bus immediate Select</obj_property>
       </wvobject>
+      <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/control_unit/o_addr_alu_sel">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">o_addr_alu_sel</obj_property>
+         <obj_property name="ObjectShortName">o_addr_alu_sel</obj_property>
+         <obj_property name="label">Address Bus ALU Select</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/control_unit/o_alu_rhs_control_sel">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">o_alu_rhs_control_sel</obj_property>
+         <obj_property name="ObjectShortName">o_alu_rhs_control_sel</obj_property>
+         <obj_property name="label">ALU RHS Control Select</obj_property>
+      </wvobject>
       <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/control_alu_rhs_sel">
          <obj_property name="DisplayName">label</obj_property>
          <obj_property name="ElementShortName">control_alu_rhs_sel[2:0]</obj_property>
          <obj_property name="ObjectShortName">control_alu_rhs_sel[2:0]</obj_property>
          <obj_property name="label">ALU RHS Select</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/cpu_testbench/central_processing_unit/control_unit/o_alu_lhs_control_sel">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">o_alu_lhs_control_sel</obj_property>
+         <obj_property name="ObjectShortName">o_alu_lhs_control_sel</obj_property>
+         <obj_property name="label">ALU LHS Control Select</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/control_alu_lhs_sel">
          <obj_property name="DisplayName">label</obj_property>
@@ -249,9 +272,16 @@
          <obj_property name="label">ALU LHS Select</obj_property>
       </wvobject>
    </wvobject>
+   <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/control_data">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">control_data[15:0]</obj_property>
+      <obj_property name="ObjectShortName">control_data[15:0]</obj_property>
+      <obj_property name="label">Control Immediate</obj_property>
+   </wvobject>
    <wvobject type="group" fp_name="group146">
       <obj_property name="label">Control Unit</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject type="other" fp_name="/cpu_testbench/central_processing_unit/control_unit/s_step">
          <obj_property name="DisplayName">label</obj_property>
          <obj_property name="ElementShortName">s_step</obj_property>
@@ -281,6 +311,18 @@
          <obj_property name="ElementShortName">s_imm[15:0]</obj_property>
          <obj_property name="ObjectShortName">s_imm[15:0]</obj_property>
          <obj_property name="label">Immediate</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/control_unit/o_rhs_alu_imm">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">o_rhs_alu_imm[15:0]</obj_property>
+         <obj_property name="ObjectShortName">o_rhs_alu_imm[15:0]</obj_property>
+         <obj_property name="label">RHS Immediate</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cpu_testbench/central_processing_unit/control_unit/o_lhs_alu_imm">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">o_lhs_alu_imm[15:0]</obj_property>
+         <obj_property name="ObjectShortName">o_lhs_alu_imm[15:0]</obj_property>
+         <obj_property name="label">LHS Immediate</obj_property>
       </wvobject>
    </wvobject>
    <wvobject type="group" fp_name="group167">
