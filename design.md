@@ -104,7 +104,7 @@ Copy $r[O_1]$ into register $O_0$.
 Stores LSB of $r[O_0]$ at $SP$, MSB of $r[O_0]$ at $SP-1$ and decreases SP by 2. The mnemonic and arguments are **push *register***.
 
 #### **Pop**
-Sets MSB of register $O_0$ to data stored at address $SP+1$, sets LSB of register $O_0$ to data stored at $SP+2$ and increases SP by 2. The mnemonic and arguments are **pop *register***.
+Sets LSB of register $O_0$ to data stored at address $SP+1$, sets MSB of register $O_0$ to data stored at $SP+2$ and increases SP by 2. The mnemonic and arguments are **pop *register***.
 
 ### **Arithmetic Instructions**
 
@@ -189,6 +189,12 @@ Sets PC to address $O_0$ if the $Z$- and the $L$-flag are not set. The mnemonic 
 Sets PC to address $r[O_0]$ if $C$-flag is set. The mnemonic and arguments are **jumpc *register***.
 
 Sets PC to address $O_0$ if $C$-flag is set. The mnemonic and arguments are **jumpc *address***.
+
+#### **Call**
+Sets Stores MSB of PC at $SP$, LSB of PC at $SP-1$, decreases SP by 2 and sets PC to $O_1$. The mnemonic and arguments are **call *addr***.
+
+#### **Return**
+Sets LSB of PC to data stored at address $SP+1$, sets MSB of PC to data stored at $SP+2$ and increases SP by 2. The mnemonic and arguments are **return**.
 
 ### **IO Instructions**
 

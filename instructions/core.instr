@@ -45,6 +45,8 @@ jump>          addr
 jump>          reg
 jumpc          addr
 jumpc          reg
+call           addr
+return         
 # IO instruction
 in             reg dev
 out            dev reg
