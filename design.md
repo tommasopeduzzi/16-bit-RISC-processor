@@ -11,7 +11,7 @@
 
 ## **Registers and Flags**
 
-The CPU has 8 general purpose registers numbered 0-7. Additionally, it has the stack pointer (SP), the program counter (PC).
+The CPU has 8 general purpose registers numbered 0-7. The value of the $i$th register is referred to as $r[i]$.  Additionally, it has the stack pointer (SP), the program counter (PC).
 
 The CPU has these flags:
 
@@ -69,94 +69,126 @@ Does nothing. The mnemonic is **nop**.
 
 #### **Load 16 bits**
 
-Loads value stored at address in register $O_1$ or at address $0_1$ in memory to less significant byte of register $O_0$ and value stored at address $O_1 + 1$ to the most signifcant byte of register $0_0$. The mnemonic and arguments are **load *register* *register*** or **load *register* *address***.
+Sets LSB of register $O_0$ to value stored at address $r[O_1]$ and MSB of register $O_0$  to value stored at address $r[O_1] + 1$. The mnemonic and arguments are **load *register* *register***.
+
+Sets LSB of register $O_0$ to value stored at address $O_1$ and MSB of register $O_0$  to value stored at address $O_1 + 1$. The mnemonic and arguments are **load *register* *address***.
 
 #### **Load into less significant byte**
-Loads byte stored at address in register $O_1$ or at address $0_1$ in memory to less significant byte of the register $O_0$. The mnemonic and arguments are **load8 *register* *register***
+Sets LSB of the register $O_0$ to byte stored at address $r[O_1]$. The mnemonic and arguments are **load8 *register* *register***.
+
+Sets LSB of the register $O_0$ to byte stored at address $O_1$. The mnemonic and arguments are **load8 *register* *address***.
 
 #### **Load 16-bit Immediate**
-Loads 16-bit Immediate $O_2$ into register in the register register. The mnemonic and arguments are **load-imm *register* *immediate*** or **load-addr *register* *address***.
+Sets register $O_0$ to $O_1$. The mnemonic and arguments are **load-imm *register* *immediate*** or **load-addr *register* *address***.
 
 #### **Store 16 bits**
-Store the least significant of register $O_0$ at the address in register $O_1$ or at address $O_1$ and most significant byte of register $O_0$ at address in register $O_1+1$ or at address $O_1+1 $. The mnemonic and arguments are **store *register* *register***.
+Store LSB of $r[O_0]$ at the address $r[O_1]$ and MSB of $r[O_0]$ at address $r[O_1] +1$. The mnemonic and arguments are **store *register* *register***.
+
+Store LSB of $r[O_0]$ at the address $O_1$ and MSB of $r[O_0]$ at address $O_1+1$ . The mnemonic and arguments are **store *register* *address***.
 
 #### **Store less significant byte**
-Store the bottom 8 bits of register $O_0$ at the address in register $O_1$ or at address $O_1$. The mnemonic and arguments are **store< *register* *register***.
+Store the LSB of $r[O_0]$ at the address $r[O_1]$. The mnemonic and arguments are **store< *register* *register***.
+
+Store LSB of $r[O_0]$ at the address $O_1$. The mnemonic and arguments are **store< *register* *address***.
 
 #### **Store most significant byte**
-Store the top 8 bits of register $O_0$ at the address in register $O_1$ or at address $O_1$. The mnemonic and arguments are **store> *register* *register***.
+Store the MSB of $r[O_0]$ at address $r[O_1]$. The mnemonic and arguments are **store> *register* *register***.
+
+Store the MSB of $r[O_0]$ at address $O_1$. The mnemonic and arguments are **store> *register* *address***.
 
 #### **Copy**
-Copy contents of register $O_1$ into register $O_0$. 
+Copy $r[O_1]$ into register $O_0$. 
 
 ### **Stack Manipulation Instructions**
 #### **Push**
-Stores contents of register $O_0$ at location of the stack pointer and decreases stack pointer by 2. The mnemonic and arguments are **push *register***.
+Stores LSB of $r[O_0]$ at $SP$, MSB of $r[O_0]$ at $SP-1$ and decreases SP by 2. The mnemonic and arguments are **push *register***.
 
 #### **Pop**
-Loads contents in memory location of the stack pointer into register $O_0$ and increases stack pointer by 2. The mnemonic and arguments are **pop *register***.
+Sets MSB of register $O_0$ to data stored at address $SP+1$, sets LSB of register $O_0$ to data stored at $SP+2$ and increases SP by 2. The mnemonic and arguments are **pop *register***.
 
 ### **Arithmetic Instructions**
 
 #### **Addition**
 
-Adds contents of register $O_0$ and contents of register $O_1$ and stores them into register $O_0$. The mnemonic and arguments are **add *register* *register***.
+Adds $r[O_0]$ to $r[O_1]$ and stores them into register $O_0$. The mnemonic and arguments are **add *register* *register***.
+
+Adds $r[O_0]$ to $O_1$ and stores the result into register $O_0$. The mnemonic and arguments are **sub *register* *immediate***.
 
 #### **Subtraction**
 
-Subtracts contents of register $O_1$ from contents of register $O_0$ and stores them into register $O_0$. The mnemonic and arguments are **sub *register* *register***.
+Subtracts $r[O_1]$ from $r[O_0]$ and stores the result into register $O_0$. The mnemonic and arguments are **sub *register* *register***.
+
+Subtracts $O_1$ from $r[O_0]$ and stores the result into register $O_0$. The mnemonic and arguments are **sub *register* *immediate***.
 
 #### **Compare**
 
-Subtracts contents from registers $O_1$ from contents and discards the result, effectively just setting the flags. The mnemonic and arguments are **cmp *register* *register***.
+Subtracts $r[O_1]$ from $r[O_0]$ and discards the result, effectively just setting the flags. The mnemonic and arguments are **cmp *register* *register***.
+
+Subtracts $O_1$ from $r[O_0]$, sets the flags , effectively just setting the flags. The mnemonic and arguments are **cmp *register* *immediate***.
 
 ### **Logical Instructions**
 
 #### **NOT**
 
-Performs NOT operation on contents of register $O_0$ and stores results into $O_0$. The mnemonic and arguments are **not *register***.
+Performs NOT operation on $r[O_0]$ and stores results into register $O_0$. The mnemonic and arguments are **not *register***.
 
 #### **Shift left**
 
-Shifts value of register $O_0$ left by one bit, stores overflown bit in $C$-Flag and stores result back into $O_0$. The mnemonic and arguments are **shiftl *register***.
+Shifts $r[O_0]$ left by one bit, stores overflown bit in $C$-Flag and stores result back into register $O_0$. The mnemonic and arguments are **shiftl *register***.
 
 #### **Shift right**
 
-Shifts value of register $O_0$ right by one bit, stores overflown bit in $C$-Flag and stores result back into $O_0$. The mnemonic and arguments are **shiftr *register***.
+Shifts $r[O_0]$ right by one bit, stores overflown bit in $C$-Flag and stores result back into $O_0$. The mnemonic and arguments are **shiftr *register***.
 
 #### **AND**
 
-Performs AND operation on contents of register $O_0$ and register $O_1$ and stores result into $0_0$. The mnemonic and arguments are **and *register* *register***.
+Performs AND operation on $r[O_0]$ and $r[O_1]$ and stores result into register $0_0$. The mnemonic and arguments are **and *register* *register***.
+
+Performs AND operation on $r[O_0]$ and $O_1$ and stores the result into register $O_0$. The mnemonic and arguments are **xor *register* *immediate***.
 
 #### **OR**
 
-Performs OR operation on contents of register $O_0$ and register $O_1$ and stores result into $0_0$. The mnemonic and arguments are **or *register* *register***.
+Performs OR operation on $r[O_0]$ and $r[O_1]$ and stores result into reguster $0_0$. The mnemonic and arguments are **or *register* *register***.
+
+Performs OR operation on $r[O_0]$ and $O_1$ and stores the result into register $O_0$. The mnemonic and arguments are **or *register* *immediate***.
 
 #### **XOR**
 
-Performs XOR operation on contents of register $O_0$ and register $O_1$ and stores result into $0_0$. The mnemonic and arguments are **xor *register* *register***.
+Performs XOR operation on $r[O_0]$ and $r[O_1]$ and stores result into register $0_0$. The mnemonic and arguments are **xor *register* *register***.
+
+Performs XOR operation on $r[O_0]$ and  $O_1$ and stores the result into register $O_0$. The mnemonic and arguments are **xor *register* *immediate***.
 
 ### **Control flow Instructions**
 
 #### **Jump**
 
-Sets the program counter to address $O_0$. The mnemonic and arguments are **jump *address***.
+Sets PC to address $r[O_0]$. The mnemonic and arguments are **jump *register***.
+
+Sets PC to address $O_0$. The mnemonic and arguments are **jump *adress***.
 
 #### **Jump If Zero**
 
-Sets the program counter to address $O_0$ if $Z$-flag is. The mnemonic and arguments are **jump== *address***.
+Sets PC to address $r[O_0]$ if $Z$-flag is. The mnemonic and arguments are **jump== *register***.
+
+Sets PC to address $O_0$ if $Z$-flag is. The mnemonic and arguments are **jump== *address***.
 
 #### **Jump If Less Than Zero**
 
-Sets the program counter to address $O_0$ if $L$-flag is set. The mnemonic and arguments are **jump< *address***.
+Sets PC to address $r[O_0]$ if $L$-flag is set. The mnemonic and arguments are **jump< *register***.
+
+Sets PC to address $O_0$ if $L$-flag is set. The mnemonic and arguments are **jump< *address***.
 
 #### **Jump If Greater Than Zero**
 
-Sets the program counter to address $O_0$ if the $Z$- and the $L$-flag are not set. The mnemonic and arguments are **jump> *address***.
+Sets PC to address $r[O_0]$ if the $Z$- and the $L$-flag are not set. The mnemonic and arguments are **jump> *register***.
+
+Sets PC to address $O_0$ if the $Z$- and the $L$-flag are not set. The mnemonic and arguments are **jump> *address***.
 
 #### **Jump If Carry**
 
-Sets the program counter to address $O_0$ if $C$-flag is set. The mnemonic and arguments are **jumpc *address***.
+Sets PC to address $r[O_0]$ if $C$-flag is set. The mnemonic and arguments are **jumpc *register***.
+
+Sets PC to address $O_0$ if $C$-flag is set. The mnemonic and arguments are **jumpc *address***.
 
 ### **IO Instructions**
 
@@ -164,4 +196,4 @@ Sets the program counter to address $O_0$ if $C$-flag is set. The mnemonic and a
 Notifies device to output to the main bus and reads from the main bus and stores contents into register $0_0$. The mnemonic and arguments are **in *register* *device***.
 
 #### **OUT**
-Outputs contents of register $O_0$ onto the main bus and the device $O_1$ is notified to read from the main bus. The mnemonic and arguments are **out *register* *device***.
+Outputs $r[O_1]$ onto the main bus and the device $O_0$ is notified to read from the main bus. The mnemonic and arguments are **out *device* *register***.
