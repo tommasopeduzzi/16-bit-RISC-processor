@@ -27,15 +27,15 @@ The system has 64kB of RAM. The first 32 kB are ROM, while the second 32 kB are 
 
 | Range | What |
 |-------|------|
-| 0x0000 - 0x001F | Interrupt Vector Table (in total 16 possible interrupts) |
-| 0x0010 - 0x7FFF | Code and constant data ROM |
+| 0x0000 - 0x7FDF | Code and constant data ROM |
+| 0x7FE0 - 0x7FFF | Interrupt table |
 | 0x8000 - 0xFFFF | General purpose RAM, with stack at the top growing downwards. |
 
 ## **IO**
 Devices are connected to the main data bus. Using the IO-instructions they can be told to assert to and to read from the bus.
 
 ## **Interrupts**
-Devices can also be connected to the interrupt bus. The control logic will halt the processor, store the state and the return address to the stack and jump to the interrupt on the interrupt bus using the interrupt table at the beginning of memory. The interrupt bus has a width of 6 bits (1 bit for busy, which inhibits devices from requesting an interrupt, 1 bit of data to request an interrupt, and 4 bits for the number of the interrupt).
+Devices can also be connected to the interrupt bus. The control logic will halt the processor and store the current PC to the stack and jump to the interrupt location. The interrupt location is stored in the interrupt table at the top of ROM, where the LSB is stored at $0b011111111\text{I}_3\text{I}_2\text{I}_1\text{I}_00$ and the MSB is stored at $0b011111111\text{I}_3\text{I}_2\text{I}_1\text{I}_01$ in memory, where $\text I _n$ is the nth bit of the interrupt bus. The interrupt bus has a width of 5 bits (1 bit to request an interrupt, and 4 bits for the number of the interrupt).
 
 ## **Instructions**
 
