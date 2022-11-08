@@ -4,7 +4,7 @@ from textwrap import wrap
 from typing import Dict, List
 
 from numpy import number
-from parser import Data, Instruction, Label, Macro, Operand, OperandType, Parser
+from parser import Data, Instruction, Label, Macro, Operand, OperandType, Parser, Interrupt
 
 operand_types = {
     "reg": OperandType.REGISTER,
@@ -23,6 +23,7 @@ class Assembler:
         self.binary = bytearray()
         self.operations: List[Instruction] = []
         self.labels: Dict[Label] = {}
+        self.interrupts: List[Label] = [0 for i in range(16)]
         self.macros: Dict[Macro] = {}
 
     def assemble(self, file):
@@ -54,7 +55,8 @@ class Assembler:
                             raise Exception(
                                 f"Unknown operand type '{part}' in '{line}'.")
                     number_of_instructions += 1
-                    self.instruction_map[(mnemonic, tuple(operands))] = number_of_instructions
+                    self.instruction_map[(mnemonic, tuple(
+                        operands))] = number_of_instructions
 
     def codegen_macro(self, instruction):
         macro = self.macros[instruction.opcode]
@@ -165,6 +167,8 @@ class Assembler:
         for item in self.stream:  # Collect label addresses
             if isinstance(item, Label):
                 self.labels[item.name] = self.address
+            if isinstance(item, Interrupt):
+                self.interrupts[item.number] = self.address
             elif isinstance(item, Data):
                 self.address += 2*len(item.operands)
                 self.operations.append(item)
@@ -177,3 +181,9 @@ class Assembler:
                 self.codegen_instruction(operation)
             elif isinstance(operation, Data):
                 self.codegen_data(operation)
+
+        self.binary += bytearray([0] * (2**15-32-len(self.binary)))
+        for i in range(16):
+            numbers = [int(byte, 2) for byte in wrap(
+                bin(self.interrupts[i])[2:].zfill(16), 8)]
+            self.binary += bytes(numbers[::-1])

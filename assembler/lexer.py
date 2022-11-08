@@ -18,6 +18,7 @@ class TokenType(Enum):
     DATA = 10
     INCLUDE = 11
     STRING = 12
+    INTERRUPT = 13
 
 @dataclass
 class Token:
@@ -65,6 +66,8 @@ class Lexer:
                     self.tokens.append(Token(TokenType.DATA, word))
                 elif word == "include":
                     self.tokens.append(Token(TokenType.INCLUDE, word))
+                elif word == "interrupt": 
+                    self.tokens.append(Token(TokenType.INTERRUPT, word))
                 elif re.match(r'[a-zA-Z]+:', word):
                     self.tokens.append(Token(TokenType.LABEL, word))
                 elif re.match(r'[a-zA-Z]+', word):

@@ -5,6 +5,7 @@ load-imm $1 2
 
 halt
 
+interrupt 0
 continue:
     load-imm $1 1
     return

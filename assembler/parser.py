@@ -48,6 +48,10 @@ class Label():
     name: str
 
 @dataclass
+class Interrupt():
+    number: int
+
+@dataclass
 class Macro():
     name: str
     argument_types: List[OperandType]
@@ -176,6 +180,17 @@ class Parser:
 
         return Data(operands)
 
+    def parse_interrupt(self) -> Interrupt:
+        self.tokens.pop(0)
+        if not self.tokens[0].type == TokenType.IMMEDIATE:
+            raise Exception("Expected Immediate after 'interrupt'")
+        number = self.parse_immediate(self.tokens[0].value)
+        self.tokens.pop(0)
+        if number >= 0 and number <= 16:
+            return Interrupt(number)
+        else: 
+            raise Exception("Interrupt number must be between 0 and 16")
+
     def parse(self, contents) -> List[Instruction | Label | Macro | Data]:
         self.instructions: List[Instruction] = []
         self.stream: List [Label | Instruction | Macro] = []
@@ -194,6 +209,9 @@ class Parser:
                 case TokenType.DATA:
                     data: Data = self.parse_data()
                     self.stream.append(data)
+                case TokenType.INTERRUPT:
+                    interrupt: Interrupt = self.parse_interrupt()
+                    self.stream.append(interrupt)
                 case TokenType.INCLUDE:
                     self.tokens.pop(0)
                     if not self.tokens[0].type == TokenType.WORD:
