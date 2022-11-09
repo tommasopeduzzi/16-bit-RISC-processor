@@ -14,6 +14,8 @@ ARCHITECTURE tb OF cpu_testbench IS
         PORT (
             i_clk : IN STD_LOGIC;
             i_rst : IN STD_LOGIC;
+            i_interrupt_request : IN STD_LOGIC; -- interrupt request
+            i_interrupt_bus : STD_LOGIC_VECTOR(3 DOWNTO 0); -- interrupt bus
             i_device_main_bus : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
             o_device_read : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
             o_device_write : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -23,6 +25,8 @@ ARCHITECTURE tb OF cpu_testbench IS
 
     SIGNAL clk : STD_LOGIC := '0';
     SIGNAL rst : STD_LOGIC;
+    SIGNAL interrupt_request : STD_LOGIC := '0';
+    SIGNAL interrupt_bus : STD_LOGIC_VECTOR(3 downto 0) := "0000";
     CONSTANT period : TIME := 100 ns;
     SIGNAL device_bus : STD_LOGIC_VECTOR(15 DOWNTO 0) := (OTHERS => 'X');
 BEGIN
@@ -31,7 +35,9 @@ BEGIN
     PORT MAP(
         i_clk => clk,
         i_rst => rst,
-        i_device_main_bus => device_bus
+        i_device_main_bus => device_bus,
+        i_interrupt_request => interrupt_request,
+        i_interrupt_bus => interrupt_bus
     );
 
     -- Clock generation

@@ -1,11 +1,9 @@
 ; Test program for assembler
 
-call @continue
-load-imm $1 2
+test:
+    jump @test
 
-halt
-
-interrupt 0
+interrupt 2
 continue:
     load-imm $1 1
     return

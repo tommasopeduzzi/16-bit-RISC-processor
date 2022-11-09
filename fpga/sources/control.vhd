@@ -26,6 +26,9 @@ ENTITY CONTROL IS
         i_l : IN STD_LOGIC; -- n flag
         i_c : IN STD_LOGIC; -- c flag
 
+        i_interrupt_request : IN STD_LOGIC; -- interrupt request
+        i_interrupt_bus : STD_LOGIC_VECTOR(3 DOWNTO 0); -- interrupt bus
+
         o_mem_we : OUT STD_LOGIC; -- write enable memory
 
         o_pc_inc : OUT STD_LOGIC; -- increment PC
@@ -82,6 +85,8 @@ ARCHITECTURE ARCHITECTURE_CONTROL OF CONTROL IS
     SIGNAL s_op1 : STD_LOGIC_VECTOR(3 DOWNTO 0) := (OTHERS => '0');
     SIGNAL s_op2 : STD_LOGIC_VECTOR(3 DOWNTO 0) := (OTHERS => '0');
     SIGNAL s_imm : STD_LOGIC_VECTOR(15 DOWNTO 0) := (OTHERS => '0');
+    SIGNAL s_interrupt_request : STD_LOGIC := '0';
+    SIGNAL s_interrupt : STD_LOGIC := '0';
 
     FUNCTION OP_TO_REG(op : IN STD_LOGIC_VECTOR(3 DOWNTO 0))
         RETURN STD_LOGIC_VECTOR IS
@@ -92,6 +97,10 @@ ARCHITECTURE ARCHITECTURE_CONTROL OF CONTROL IS
         RETURN value;
     END FUNCTION;
 BEGIN
+
+    s_interrupt_request <= '1' WHEN rising_edge(i_interrupt_request) ELSE
+        '0' WHEN rising_edge(s_interrupt);
+
     PROCESS (i_clk, i_rst) BEGIN
         IF i_rst = '1' THEN
             s_step <= 0;
@@ -140,8 +149,32 @@ BEGIN
                     WHEN OTHERS =>
                 END CASE;
             ELSIF s_opcode = nop THEN -- nop
-                o_addr_pc_sel <= '1';
-                o_pc_inc <= '1';
+                IF s_interrupt = '0' THEN
+                    IF s_interrupt_request = '1' THEN
+                        o_data <= "01111111111" & i_interrupt_bus & "0";
+                        o_addr_control_sel <= '1';
+                    ELSE
+                        o_addr_pc_sel <= '1';
+                        o_pc_inc <= '1';
+                    END IF;
+                ELSE
+                    CASE s_step IS
+                        WHEN 1 => o_data <= "01111111111" & i_interrupt_bus & "1";
+                            o_addr_control_sel <= '1';
+                        WHEN 2 => o_addr_sp_sel <= '1';
+                            o_sp_decr <= '1';
+                            o_mem_we <= '1';
+                            o_main_pc_msb_sel <= '1';
+                        WHEN 3 => o_addr_sp_sel <= '1';
+                            o_sp_decr <= '1';
+                            o_mem_we <= '1';
+                            o_main_pc_sel <= '1';
+                        WHEN 4 => o_data <= s_imm;
+                            o_main_control_sel <= '1';
+                            o_pc_load <= '1';
+                        WHEN OTHERS =>
+                    END CASE;
+                END IF;
             ELSIF s_opcode = loadimm_reg_imm
                 OR s_opcode = loadaddr_reg_addr THEN -- load-imm/load-addr reg imm
                 CASE s_step IS
@@ -718,8 +751,22 @@ BEGIN
             s_step <= s_step + 1;
 
             IF s_opcode = nop THEN
-                s_opcode <= i_memdata(5 DOWNTO 0);
-                s_step <= 1;
+                IF s_interrupt = '0' THEN
+                    s_step <= 1;
+                    IF s_interrupt_request = '1' THEN
+                        s_interrupt <= '1';
+                        s_imm(7 DOWNTO 0) <= i_memdata;
+                    ELSE
+                        s_opcode <= i_memdata(5 DOWNTO 0);
+                    END IF;
+                ELSE
+                    CASE s_step IS
+                        WHEN 1 => s_imm(15 DOWNTO 8) <= i_memdata;
+                        WHEN 4 => s_opcode <= "000000";
+                            s_interrupt <= '0';
+                        WHEN OTHERS =>
+                    END CASE;
+                END IF;
             ELSIF s_opcode = cmp_reg_reg
                 OR s_opcode = copy_reg_reg
                 OR s_opcode = load8_reg_reg

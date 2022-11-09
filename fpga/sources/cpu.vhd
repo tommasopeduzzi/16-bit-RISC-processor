@@ -18,6 +18,8 @@ ENTITY cpu IS
     PORT (
         i_clk : IN STD_LOGIC;
         i_rst : IN STD_LOGIC;
+        i_interrupt_request : IN STD_LOGIC; -- interrupt request
+        i_interrupt_bus : STD_LOGIC_VECTOR(3 DOWNTO 0); -- interrupt bus
         i_device_main_bus : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
         o_device_read : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
         o_device_write : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -90,6 +92,9 @@ ARCHITECTURE architecture_cpu OF cpu IS
             i_z : IN STD_LOGIC; -- i_z flag
             i_l : IN STD_LOGIC; -- n flag
             i_c : IN STD_LOGIC; -- c flag
+
+            i_interrupt_request : IN STD_LOGIC; -- interrupt request
+            i_interrupt_bus : STD_LOGIC_VECTOR(3 DOWNTO 0); -- interrupt bus
 
             o_mem_we : OUT STD_LOGIC; -- write enable memory
 
@@ -357,6 +362,8 @@ BEGIN
         i_z => alu_flags_z,
         i_l => alu_flags_l,
         i_c => alu_flags_c,
+        i_interrupt_request => i_interrupt_request,
+        i_interrupt_bus => i_interrupt_bus,
         o_mem_we => control_mem_we,
         o_pc_inc => control_pc_inc,
         o_pc_load => control_pc_load,
