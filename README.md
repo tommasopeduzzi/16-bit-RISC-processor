@@ -6,6 +6,6 @@ Here is a rough roadmap for the project:
 - [x] Research and design specification 
 - [x] Make an emulator for the architecture
 - [x] Make an assembler for the architecture
-- [ ] Program the design into an FPGA
+- [X] Program the design into an FPGA
 - [ ] (Create a schematic for assembly)
 - [ ] (Order and assemble the processor)
