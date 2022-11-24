@@ -175,8 +175,8 @@ BEGIN
                         WHEN OTHERS =>
                     END CASE;
                 END IF;
-            ELSIF s_opcode = loadimm_reg_imm
-                OR s_opcode = loadaddr_reg_addr THEN -- load-imm/load-addr reg imm
+            ELSIF s_opcode = set_reg_imm
+                OR s_opcode = set_reg_addr THEN -- load-imm/load-addr reg imm
                 CASE s_step IS
                     WHEN 1 => o_addr_pc_sel <= '1';
                         o_pc_inc <= '1';

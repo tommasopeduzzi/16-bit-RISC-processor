@@ -100,9 +100,7 @@ class CPU:
             case "load reg addr":      # load8
                 value = self.memory.get(immediate)
                 self.registers[registers[0]].set(value)
-            case "load-imm reg imm":      # load-imm or load-addr
-                self.registers[registers[0]].set(immediate)
-            case "load-addr reg addr":
+            case "set reg imm" | "set reg addr":      # set
                 self.registers[registers[0]].set(immediate)
             case "store reg reg":      # store
                 value = self.registers[registers[0]].get()

@@ -5,8 +5,8 @@ load           reg reg
 load           reg addr
 load8          reg reg
 load8          reg addr
-load-imm       reg imm
-load-addr      reg addr
+set            reg imm
+set            reg addr
 store          reg reg
 store<         reg reg
 store>         reg reg
