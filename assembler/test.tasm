@@ -5,5 +5,8 @@ test:
 
 interrupt 2
 continue:
-    load-imm $1 1
+    set $1, -(1 + 2)
+    out ?0, $1
     return
+
+data "Hello, world!"
