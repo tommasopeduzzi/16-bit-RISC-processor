@@ -264,7 +264,6 @@ class Parser:
     def parse_interrupt(self) -> Interrupt:
         self.consume_token()
         number = self.parse_expression()
-        self.consume_token()
         if number >= 0 and number <= 16:
             return Interrupt(number)
         else:
