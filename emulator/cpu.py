@@ -198,11 +198,23 @@ class CPU:
             case "out reg dev":      # out
                 value = self.registers[registers[0]].get()
                 self.devices[registers[1]].read_bus(value)
+            case "call addr":
+                self.memory.set(self.sp-1, self.pc & 0xFF)
+                self.memory.set(self.sp-2, self.pc >> 8)
+                self.sp -= 2
+                self.pc = immediate
+            case "return":
+                self.pc = self.memory.get(self.sp) << 8 | self.memory.get(self.sp+1)
+                self.sp += 2
+            case _:
+                print(f"Unknown instruction: {mnemonic}")
 
     def dump(self):
         print("Final state of CPU: ")
         for i, register in enumerate(self.registers):
-            print("Register", i, ": \t", register.get())
+            binary = bin(register.get())[2:].zfill(16)
+            value = str(register.get()) + ("/-" + str(int(''.join('1' if x == '0' else '0' for x in binary), 2)) if binary[0] == '1' else "")
+            print("Register", i, ": \t", value)
         print("PC: \t\t", self.pc)
         print("SP: \t\t", self.sp)
         print("\nFinal state of devices: ")
