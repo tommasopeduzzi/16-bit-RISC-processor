@@ -780,8 +780,8 @@ BEGIN
                     WHEN 2 => s_opcode <= "000000";
                     WHEN OTHERS =>
                 END CASE;
-            ELSIF s_opcode = loadimm_reg_imm
-                OR s_opcode = loadaddr_reg_addr
+            ELSIF s_opcode = set_reg_imm
+                OR s_opcode = set_reg_addr
                 OR s_opcode = add_reg_reg
                 OR s_opcode = sub_reg_reg
                 OR s_opcode = and_reg_reg
